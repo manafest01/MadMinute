@@ -20,5 +20,12 @@ Placement test, ranks (Trainee → Master Tech), progress timeline, and a sample
 
 Training content only. Always follow the manufacturer's service procedure and your employer's safety program.
 
+## Also here: Mad Minute Biology
+One-minute drills for a college freshman General Biology course — 12 topics, 637 questions, from chemistry of life through ecology.
+
+**Open it:** https://manafest01.github.io/MadMinute/biology/
+
+Add it to a phone's home screen the same way (it gets its own **BIO** icon). Its progress is kept separate from the Auto demo.
+
 ---
 © 2026 Mana Industries LLC. All rights reserved. This demo is provided for evaluation only. No part of it may be copied, modified, redistributed, or resold without written permission.
