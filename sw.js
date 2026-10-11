@@ -1,6 +1,6 @@
 // Mad Minute Auto demo service worker: keeps the app working with no signal.
 // Bump VERSION whenever index.html changes so phones pick up the new copy.
-const VERSION = "mm-auto-v6";
+const VERSION = "mm-auto-v7";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
@@ -21,6 +21,8 @@ self.addEventListener("fetch", e => {
   const url = new URL(req.url);
   // Other Mad Minute apps (like /biology/) live under this folder with their own offline cache. Leave them alone.
   if (url.origin === location.origin && url.pathname.startsWith(new URL("biology/", self.registration.scope).pathname)) return;
+  // ManaFlow (the DJ library app) also lives here and handles its own loading.
+  if (url.origin === location.origin && url.pathname.startsWith(new URL("manaflow/", self.registration.scope).pathname)) return;
   // The app page: try the network first so updates show up, fall back to the cached copy offline.
   if (req.mode === "navigate") {
     e.respondWith(
