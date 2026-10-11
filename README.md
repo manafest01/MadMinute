@@ -11,10 +11,11 @@ One-minute automotive knowledge drills from **Mana Industries LLC**.
 3. Open it once from the new **AUTO** icon. After that it works with **no internet**.
 
 ## What's inside
-- **Automotive Technician** — 9 topics, 285 questions
-- **12 V Auto Electrical** (incl. 48 V mild hybrid) — 6 topics, 186 questions
-- **CAN Bus** — 4 topics, 79 questions
-- **High Voltage & Vehicle Ethernet** — 4 topics, 64 questions
+Four subjects, 600 questions each, every question reviewed for accuracy:
+- **Automotive Technician**: 9 topics
+- **12 V & 48 V Electrical**: batteries, starting & charging, wiring, sensors & actuators, test tools, and 48 V mid-voltage systems
+- **Vehicle Networks**: CAN, LIN and other networks, OBD-II & UDS, automotive Ethernet, and DoIP
+- **High Voltage**: HV safety & PPE, isolation, HVIL & interlocks, contactors & shutdown, HV battery & BMS, and inverter, motor & charging
 
 Placement test, ranks (Trainee → Master Tech), progress timeline, and a sample manager crew view. Progress is saved only on your device. No account, no Claude, no internet needed after the first open.
 
