@@ -1,7 +1,7 @@
 {
   "name": "Mad Minute Auto (Demo)",
   "short_name": "MM Auto",
-  "description": "One-minute automotive, 12 V, CAN bus and high-voltage drills. A Mana Industries demo.",
+  "description": "One-minute automotive, maintenance, 12 V, CAN bus and high-voltage drills. A Mana Industries demo.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

@@ -11,11 +11,14 @@ One-minute automotive knowledge drills from **Mana Industries LLC**.
 3. Open it once from the new **AUTO** icon. After that it works with **no internet**.
 
 ## What's inside
-Four subjects, 600 questions each, every question reviewed for accuracy:
-- **Automotive Technician**: 9 topics
+Five subjects, 600 questions each:
+- **Automotive Technician**: 9 topics, ordered easy to hard (Shop Safety → Tires & Wheels → Brakes → Steering & Suspension → Engine → Drivetrain → Heating & A/C)
+- **Basic Maintenance**: oil & filter service, fluids & levels, belts/hoses/filters, battery/lights/wipers, under-car checks, and inspections & intervals
 - **12 V & 48 V Electrical**: batteries, starting & charging, wiring, sensors & actuators, test tools, and 48 V mid-voltage systems
 - **Vehicle Networks**: CAN, LIN and other networks, OBD-II & UDS, automotive Ethernet, and DoIP
 - **High Voltage**: HV safety & PPE, isolation, HVIL & interlocks, contactors & shutdown, HV battery & BMS, and inverter, motor & charging
+
+A **Shop Path** card on the home screen walks a new tech through all five subjects in order: Shop Safety → Basic Maintenance → Tires & Wheels → Brakes → Steering → 12 V & 48 V → Engine → Drivetrain → Vehicle Networks → High Voltage. Tap any step to jump to it.
 
 Placement test, ranks (Trainee → Master Tech), progress timeline, and a sample manager crew view. Progress is saved only on your device. No account, no Claude, no internet needed after the first open.
 
