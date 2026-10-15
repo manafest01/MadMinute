@@ -186,6 +186,11 @@
   .path-steps .now b { background: var(--amber); color: var(--amber-ink); }
   .path-steps .here { border-color: var(--teal); }
 
+  .topics-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; }
+  .seg-sm { margin: 0 0 10px; }
+  .seg.seg-sm button { padding: 5px 10px; font-size: 12px; }
+  .next-card { box-shadow: inset 0 0 0 1.5px var(--amber); }
+  .next-badge { align-self: flex-start; font-size: 11px; font-weight: 600; color: var(--amber-ink); background: var(--amber); padding: 2px 8px; border-radius: 999px; }
   .section-title { font-size: 13px; color: var(--text-dim); margin: 26px 0 10px; font-weight: 500; }
 
   .topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -632,7 +637,13 @@
       </div>
     </div>
 
-    <div class="section-title">Topics</div>
+    <div class="topics-head">
+      <div class="section-title">Topics</div>
+      <div class="seg seg-sm" role="group" aria-label="How topics open">
+        <button id="pathFree" onclick="setPathMode('free')">Free choice</button>
+        <button id="pathGuided" onclick="setPathMode('guided')">Guided</button>
+      </div>
+    </div>
     <div class="topics-grid" id="topicsGrid"></div>
     <div class="section-title" id="growTitle" hidden>Grow this subject</div>
     <div class="card stack" id="growCard" hidden>
@@ -4083,7 +4094,19 @@ function rankInfo() {
 /* ---------- learning path ---------- */
 const UNLOCK_AT = 2;            // reach this level in a topic to open the next one
 const PLACE_PER_LEVEL = 2;      // placement: questions per level, all must be right
+// "free": every topic is open and the ladder is a suggestion. "guided": each topic opens once the one before it reaches UNLOCK_AT.
+function pathMode() { try { return localStorage.getItem("mmauto_path_mode") === "guided" ? "guided" : "free"; } catch (e) { return "free"; } }
+function setPathMode(m) {
+  try { localStorage.setItem("mmauto_path_mode", m); } catch (e) {}
+  showToast(m === "guided" ? "Guided: topics open one at a time" : "Free choice: every topic is open");
+  renderHome();
+}
+// the next topic on the easy-to-hard ladder that isn't at UNLOCK_AT yet
+function suggestedTopic() {
+  return CORE_TOPICS.find(t => levelOf(t) < UNLOCK_AT && allQuestions().some(q => q.t === t)) || null;
+}
 function isUnlocked(t) {
+  if (pathMode() === "free") return true;
   const i = CORE_TOPICS.indexOf(t);
   if (i <= 0) return true;                     // first topic, or a topic you added yourself
   return levelOf(CORE_TOPICS[i - 1]) >= UNLOCK_AT || levelOf(t) >= 1;
@@ -4247,6 +4270,11 @@ function renderShopPath() {
   if (now) requestAnimationFrame(() => { list.scrollLeft = Math.max(0, now.offsetLeft - 12); });
 }
 function renderTopicsGrid() {
+  const free = pathMode() === "free";
+  document.getElementById("pathFree").classList.toggle("on", free);
+  document.getElementById("pathGuided").classList.toggle("on", !free);
+  document.getElementById("pathFree").setAttribute("aria-pressed", free);
+  document.getElementById("pathGuided").setAttribute("aria-pressed", !free);
   const grid = document.getElementById("topicsGrid");
   grid.innerHTML = "";
   const seen = state.seen || {};
@@ -4268,7 +4296,10 @@ function renderTopicsGrid() {
       grid.appendChild(card);
       return;
     }
+    const isNext = pathMode() === "free" && t === suggestedTopic();
+    if (isNext) card.classList.add("next-card");
     card.innerHTML = `
+      ${isNext ? '<div class="next-badge">Suggested next</div>' : ""}
       <div class="topic-name">${escapeHtml(t)}</div>
       ${pipsHTML(l)}
       <div class="topic-lv">${l ? LV_NAME[l] : (state.placed ? "Starting out" : "Not rated")}${acc !== null ? " · " + acc + "% right" : ""}</div>
@@ -4472,8 +4503,8 @@ function renderQuizTimer() {
 function settleTopic(t, level) {
   quiz.results[t] = Math.max(0, level);
   quiz.asked = 0; quiz.right = 0; quiz.lv = 1;
-  if (quiz.results[t] >= UNLOCK_AT) quiz.ti++;
-  else { quiz.stoppedAt = t; quiz.ti = quiz.topics.length; }   // next topic stays locked
+  if (quiz.results[t] >= UNLOCK_AT || pathMode() === "free") quiz.ti++;
+  else { quiz.stoppedAt = t; quiz.ti = quiz.topics.length; }   // guided: next topic stays locked
 }
 function pickPlacementQuestion() {
   while (quiz.ti < quiz.topics.length) {
@@ -4699,7 +4730,7 @@ function showResults(Q, ups, rankAfter) {
   document.getElementById("resScore").textContent = placement ? rankAfter.name : (total ? Math.round(c / total * 100) + "%" : "—");
   const openCount = CORE_TOPICS.filter(isUnlocked).length;
   document.getElementById("resSub").textContent = placement
-    ? `Your starting rank · ${c} of ${total} correct · ${openCount} of ${CORE_TOPICS.length} topics unlocked` +
+    ? `Your starting rank · ${c} of ${total} correct` + (pathMode() === "free" ? (suggestedTopic() ? ` · Suggested start: ${suggestedTopic()}` : "") : ` · ${openCount} of ${CORE_TOPICS.length} topics unlocked`) +
       (Q.stoppedAt && CORE_TOPICS.indexOf(Q.stoppedAt) < CORE_TOPICS.length - 1 ? `. Reach level ${UNLOCK_AT} in ${Q.stoppedAt} to open ${CORE_TOPICS[CORE_TOPICS.indexOf(Q.stoppedAt) + 1]}.` : "")
     : `${Q.label} · ${c} of ${total} correct`;
 
