@@ -1,6 +1,6 @@
 // Mad Minute Music service worker: keeps the app working with no signal.
 // Bump VERSION whenever index.html changes so phones pick up the new copy.
-const VERSION = "mm-mus-v1";
+const VERSION = "mm-mus-v2";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 
 self.addEventListener("install", e => {

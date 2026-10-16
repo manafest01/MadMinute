@@ -31,5 +31,15 @@ One-minute drills for a college freshman General Biology course — 12 topics, 6
 
 Add it to a phone's home screen the same way (it gets its own **BIO** icon). Its progress is kept separate from the Auto demo.
 
+## Also here: Mad Minute Music
+One-minute drills for college music majors — 7 subjects, 300+ questions each (2,114 total):
+Applied Lessons, Harmony & Theory, Aural Skills (ear training with real sound), Sight Reading & Sight Singing (real staff notation), Keyboard Skills (drawn piano keyboard), Music History, and Music Composition.
+
+A **Music Path** card walks through all seven subjects in 24 steps, easy to hard.
+
+**Open it:** https://manafest01.github.io/MadMinute/music/
+
+Add it to a phone's home screen the same way (it gets its own **MUS** icon). Sound plays on the device, so ear training works offline too. Its progress is kept separate from the other apps.
+
 ---
 © 2026 Mana Industries LLC. All rights reserved. This demo is provided for evaluation only. No part of it may be copied, modified, redistributed, or resold without written permission.
