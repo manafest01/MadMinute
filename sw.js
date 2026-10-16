@@ -1,6 +1,6 @@
 // Mad Minute Auto demo service worker: keeps the app working with no signal.
 // Bump VERSION whenever index.html changes so phones pick up the new copy.
-const VERSION = "mm-auto-v11";
+const VERSION = "mm-auto-v12";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
@@ -19,8 +19,8 @@ self.addEventListener("fetch", e => {
   const req = e.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
-  // Other Mad Minute apps (like /biology/) live under this folder with their own offline cache. Leave them alone.
-  if (url.origin === location.origin && url.pathname.startsWith(new URL("biology/", self.registration.scope).pathname)) return;
+  // Other Mad Minute apps (like /biology/ and /music/) live under this folder with their own offline cache. Leave them alone.
+  if (url.origin === location.origin && ["biology/", "music/"].some(d => url.pathname.startsWith(new URL(d, self.registration.scope).pathname))) return;
   // The app page: try the network first so updates show up, fall back to the cached copy offline.
   if (req.mode === "navigate") {
     e.respondWith(
