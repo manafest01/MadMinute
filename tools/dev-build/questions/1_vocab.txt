@@ -1,0 +1,1054 @@
+@pack vocab
+
+# C 1
+Q: A named place in a program that holds a value is a:
+A: Variable
+W: Function
+W: Loop
+W: Comment
+E: A variable is a label for a stored value, like a box with a name on it. Functions do work, loops repeat work.
+
+Q: A reusable block of code that you call by name is a:
+A: Function
+W: Variable
+W: Library
+W: Constant
+E: A function bundles steps so you can run them again by calling its name, often with inputs (arguments).
+
+Q: Text in code that the computer ignores, written for humans, is a:
+A: Comment
+W: String
+W: Variable
+W: Syntax error
+E: Comments explain intent to other people (and future you). In JavaScript they start with // and in Python with #.
+
+Q: A piece of text data, like "hello", is called a:
+A: String
+W: Boolean
+W: Integer
+W: Array
+E: Strings are text. They are usually wrapped in quotes so the computer knows they are data, not code.
+
+Q: A value that can only be true or false is a:
+A: Boolean
+W: String
+W: Float
+W: Null
+E: Booleans drive decisions: if something is true, do this; otherwise do that.
+
+Q: An ordered list of values, like [3, 7, 9], is called an:
+A: Array (a list)
+W: Object
+W: Loop
+W: Index
+E: JavaScript calls it an array; Python calls it a list. Items are kept in order and found by position.
+
+Q: Code that repeats a set of steps is a:
+A: Loop
+W: Condition
+W: Return
+W: Bug
+E: Loops (for, while) run the same steps many times, for example once per item in a list.
+
+Q: A mistake in code that makes it behave wrongly is called a:
+A: Bug
+W: Patch
+W: Feature
+W: Build
+E: A bug is any defect. Finding and fixing bugs is debugging.
+
+# C 2
+Q: The rules for how code must be written so the language can read it are its:
+A: Syntax
+W: Semantics
+W: Runtime
+W: Compiler
+E: Syntax is grammar: brackets, colons, quotes. A syntax error means the code can't even be read.
+
+Q: The values you pass into a function when you call it are:
+A: Arguments
+W: Returns
+W: Variables in another file
+W: Comments
+E: Parameters are the names in the function definition; arguments are the actual values you pass in when calling it.
+
+Q: What a function hands back to the code that called it is its:
+A: Return value
+W: Argument
+W: Parameter
+W: Callback
+E: `return x` ends the function and gives x back to the caller.
+
+Q: Where a variable can be seen and used in the code is called its:
+A: Scope
+W: Type
+W: Index
+W: Syntax
+E: A variable made inside a function usually only exists inside that function. That boundary is its scope.
+
+Q: The position number of an item in an array is its:
+A: Index
+W: Key
+W: Length
+W: Value
+E: Most languages start counting at 0, so the first item is at index 0.
+
+Q: A value that represents "nothing here on purpose" is:
+A: null (None in Python)
+W: 0
+W: false
+W: An empty string
+E: null means intentionally empty. 0 and "" are real values; false is a Boolean.
+
+Q: Grouped data stored as name–value pairs, like {name: "Tom", age: 40}, is an:
+A: Object (a dictionary in Python)
+W: Array
+W: Loop
+W: String
+E: Objects store data by key (name) instead of by position. Python calls this a dict.
+
+# C 3
+Q: Code written by others that you import to save work is a:
+A: Library (package)
+W: Framework you must write from scratch
+W: Compiler
+W: Runtime error
+E: Libraries are installed with tools like npm or pip and then imported into your code.
+
+Q: An error that happens while the program is running, not when it's read, is a:
+A: Runtime error
+W: Syntax error
+W: Linting warning
+W: Merge conflict
+E: The code was valid, but something went wrong during execution, like reading a property of undefined.
+
+Q: Changing code's structure to be cleaner without changing what it does is:
+A: Refactoring
+W: Debugging
+W: Deploying
+W: Forking
+E: Refactoring improves readability and design. Tests help prove behavior didn't change.
+
+Q: A value that can't be changed after it's created is called:
+A: Immutable
+W: Mutable
+W: Dynamic
+W: Global
+E: Strings in JS and Python are immutable. Arrays and objects are mutable unless you freeze or copy them.
+
+Q: A function passed into another function to be called later is a:
+A: Callback
+W: Constructor
+W: Return value
+W: Loop
+E: Example: `button.onclick = handleClick`. The browser calls handleClick later, when the click happens.
+
+Q: A tool that checks code for style problems and likely bugs without running it is a:
+A: Linter
+W: Debugger
+W: Compiler
+W: Bundler
+E: ESLint (JavaScript) and Ruff or Pylint (Python) are linters. They catch mistakes before you run anything.
+
+# C 4
+Q: A function that always gives the same output for the same input and changes nothing outside itself is:
+A: A pure function
+W: A recursive function
+W: An async function
+W: A global function
+E: Pure functions are easy to test and reason about, because nothing hidden affects them.
+
+Q: A function that calls itself to solve smaller pieces of a problem is:
+A: Recursive
+W: Pure
+W: Asynchronous
+W: Immutable
+E: Recursion needs a base case to stop, or it runs until the call stack overflows.
+
+Q: "Technical debt" means:
+A: Shortcuts in code that make future changes slower and riskier
+W: Money owed for software licenses
+W: Bugs reported by users
+W: Unpaid cloud hosting bills
+E: Like financial debt, it charges interest: every future change costs more until you pay it down by cleaning up.
+
+Q: Big-O notation, like O(n), describes:
+A: How an algorithm's work grows as the input gets bigger
+W: The exact runtime in seconds
+W: How many lines of code a function has
+W: How much a server costs
+E: O(n) grows in step with input size; O(n²) grows much faster. It compares approaches, not exact timings.
+
+Q: "Idempotent" means an operation:
+A: Gives the same result whether you run it once or many times
+W: Can never fail
+W: Runs in parallel
+W: Can't be undone
+E: Setting a value to 5 is idempotent; adding 5 is not. It matters for retries in APIs and deployments.
+
+Q: Code that is hard to change because everything depends on everything else is:
+A: Tightly coupled
+W: Loosely coupled
+W: Highly cohesive
+W: Well encapsulated
+E: Loose coupling means parts talk through small, clear interfaces, so you can change one without breaking the others.
+
+# W 1
+Q: The language that gives a web page its structure (headings, paragraphs, buttons) is:
+A: HTML
+W: CSS
+W: SQL
+W: JSON
+E: HTML is structure, CSS is style, JavaScript is behavior.
+
+Q: The language that controls how a web page looks (colors, layout, fonts) is:
+A: CSS
+W: HTML
+W: Python
+W: HTTP
+E: CSS (Cascading Style Sheets) styles the HTML.
+
+Q: The program you use to view websites, like Chrome or Safari, is the:
+A: Browser (the client)
+W: Server
+W: Database
+W: Compiler
+E: The browser is a client: it asks servers for pages and shows them.
+
+Q: A computer that waits for requests and sends back pages or data is a:
+A: Server
+W: Browser
+W: Router
+W: Client
+E: Clients ask, servers answer. One machine can be both in different situations.
+
+Q: A web address like https://example.com/page is a:
+A: URL
+W: IP address
+W: DNS record
+W: Cookie
+E: URL = Uniform Resource Locator, the full address of a resource.
+
+Q: "Front-end" refers to:
+A: The part of an app users see and interact with
+W: The database
+W: The server's operating system
+W: The deployment pipeline
+E: Front-end runs in the browser or on the phone. Back-end runs on servers.
+
+# W 2
+Q: The protocol browsers and servers use to send requests and responses on the web is:
+A: HTTP (HTTPS when encrypted)
+W: SQL
+W: SSH
+W: FTP only
+E: HTTPS is HTTP wrapped in TLS encryption, so others on the network can't read or change the traffic.
+
+Q: An API is:
+A: A defined way for one program to ask another for data or actions
+W: A type of database
+W: A web browser plugin
+W: A programming language
+E: API = Application Programming Interface. A weather API lets your app ask for the forecast in a set format.
+
+Q: The system that turns a name like google.com into a numeric address is:
+A: DNS
+W: HTTP
+W: CSS
+W: JSON
+E: DNS is the internet's phone book: names to IP addresses.
+
+Q: JSON is:
+A: A text format for sending structured data, like {"name": "Tom"}
+W: A JavaScript library
+W: A database server
+W: A type of web server
+E: JSON (JavaScript Object Notation) is the most common data format for web APIs.
+
+Q: An "endpoint" in a web API is:
+A: A specific URL the API answers at, like /api/users
+W: The last line of a program
+W: A server's power switch
+W: A type of database index
+E: Each endpoint does one job, such as listing users or creating an order.
+
+Q: A small piece of data a website stores in your browser, often to remember you are logged in, is a:
+A: Cookie
+W: Cache line
+W: Token ring
+W: Session server
+E: Cookies are sent back to the site with each request. They're often used for login sessions.
+
+# W 3
+Q: A status code of 404 means:
+A: The requested resource was not found
+W: The server crashed
+W: You are not logged in
+W: The request worked
+E: 2xx = success, 3xx = redirect, 4xx = client problem (404 not found, 401 unauthorized), 5xx = server problem.
+
+Q: A status code in the 500s means:
+A: Something failed on the server
+W: The user typed the wrong URL
+W: The request succeeded
+W: The page moved
+E: 5xx errors are the server's fault: a crash, a bug, or a dependency down.
+
+Q: REST describes:
+A: A style of API built around resources and standard HTTP methods
+W: A database engine
+W: A JavaScript framework
+W: A way to put a server to sleep
+E: In REST, GET /users lists users, POST /users creates one, and so on.
+
+Q: CORS is:
+A: A browser rule controlling which other websites a page's scripts may request data from
+W: A CSS layout system
+W: A type of database join
+W: A compression format
+E: Cross-Origin Resource Sharing. Servers send headers saying which origins are allowed. It's a common "why won't my fetch work" error.
+
+Q: "Latency" is:
+A: The delay before data starts arriving
+W: How much data can flow per second
+W: Server storage space
+W: A security flaw
+E: Latency is waiting time; bandwidth is pipe size. A fat pipe can still have high latency.
+
+Q: A "webhook" is:
+A: A URL one service calls to notify another when something happens
+W: A browser extension
+W: A CSS animation
+W: A database backup
+E: Instead of you asking "anything new?" over and over, the other service calls you when there is.
+
+# W 4
+Q: A CDN is:
+A: Servers around the world that keep copies of files close to users
+W: A code editor
+W: A kind of database lock
+W: A login system
+E: Content Delivery Networks cut latency by serving images and scripts from a nearby location.
+
+Q: GraphQL differs from typical REST because:
+A: The client asks for exactly the fields it wants from one endpoint
+W: It doesn't use HTTP at all
+W: It only works with SQL databases
+W: It can't send JSON
+E: GraphQL avoids over-fetching and under-fetching but adds complexity on the server.
+
+Q: A WebSocket is used to:
+A: Keep a two-way connection open for real-time messages
+W: Store files in the browser
+W: Encrypt passwords
+W: Style web pages
+E: Chat apps and live dashboards use WebSockets so the server can push updates without being asked.
+
+Q: "Rate limiting" an API means:
+A: Capping how many requests a client can make in a time window
+W: Making the API slower on purpose for everyone
+W: Charging per request
+W: Compressing responses
+E: It protects the server from abuse and overload. Clients usually get a 429 Too Many Requests.
+
+Q: A "reverse proxy" like Nginx sits:
+A: In front of servers, receiving requests and forwarding them
+W: Inside the browser
+W: Between the CPU and RAM
+W: Inside the database
+E: It handles TLS, load balancing, caching, and routing before requests reach your app.
+
+Q: TLS provides:
+A: Encryption and identity checks for network connections
+W: Faster DNS lookups
+W: Database replication
+W: Image compression
+E: TLS is the "S" in HTTPS. Certificates prove the server is who it says it is.
+
+# D 1
+Q: An organized place where an app stores data so it lasts after the app closes is a:
+A: Database
+W: Variable
+W: Browser tab
+W: Function
+E: Variables vanish when a program stops; databases keep data.
+
+Q: In a spreadsheet-like database table, one record is a:
+A: Row
+W: Column
+W: Schema
+W: Index
+E: Each row is one item (one user, one order). Each column is one property (name, email).
+
+Q: In a database table, one property shared by every record, like "email", is a:
+A: Column (field)
+W: Row
+W: Query
+W: Key
+E: Columns define what each row stores.
+
+Q: SQL is:
+A: A language for asking relational databases for data
+W: A JavaScript library
+W: A web server
+W: A file format for images
+E: Structured Query Language. Example: SELECT name FROM users;
+
+Q: CRUD stands for:
+A: Create, Read, Update, Delete
+W: Copy, Run, Upload, Deploy
+W: Code, Review, Update, Debug
+W: Cache, Route, Use, Display
+E: Almost every app is CRUD on some data: posts, orders, questions, scores.
+
+Q: A "query" is:
+A: A request for data from a database
+W: A type of error
+W: A database backup
+W: A server restart
+E: Queries read or change data, usually written in SQL.
+
+# D 2
+Q: A column that uniquely identifies each row, like user_id, is the:
+A: Primary key
+W: Foreign key
+W: Index name
+W: Schema
+E: No two rows share a primary key value.
+
+Q: A column that points to a row in another table is a:
+A: Foreign key
+W: Primary key
+W: Unique constraint
+W: View
+E: orders.user_id pointing to users.id is a foreign key. It links tables together.
+
+Q: The design of a database—its tables, columns and types—is its:
+A: Schema
+W: Query
+W: Index
+W: Cache
+E: The schema is the blueprint. Changing it later is a migration.
+
+Q: A "NoSQL" database like MongoDB typically stores data as:
+A: Flexible documents, like JSON objects
+W: Only plain text files
+W: Spreadsheets
+W: Images
+E: Document databases don't force every record into the same columns, which is flexible but needs discipline.
+
+Q: localStorage in a browser is:
+A: A small key–value store kept on that one device and browser
+W: A cloud database shared by all users
+W: The computer's hard drive folder
+W: A server cache
+E: Mad Minute keeps progress in localStorage. It's per device, which is why sync needs something extra.
+
+Q: Saving a copy of the data so you can restore it later is a:
+A: Backup
+W: Migration
+W: Index
+W: Join
+E: Backups only count if you've tested restoring them.
+
+# D 3
+Q: A database "index" exists to:
+A: Speed up finding rows, like an index in a book
+W: Count how many rows exist
+W: Encrypt the data
+W: Store backups
+E: Indexes make reads faster but slightly slow down writes and use space.
+
+Q: A SQL JOIN:
+A: Combines rows from two tables based on a related column
+W: Deletes duplicate rows
+W: Adds a new column
+W: Merges two databases into one file
+E: Example: join orders to users on orders.user_id = users.id to show who placed each order.
+
+Q: A "migration" is:
+A: A versioned script that changes the database schema
+W: Moving a server to another building
+W: A slow query
+W: A backup file
+E: Migrations let every copy of the database (yours, the server's) change the same way, in order.
+
+Q: A "transaction" in a database:
+A: Groups several changes so they all succeed or all fail together
+W: Is a payment record only
+W: Is a read-only query
+W: Is a database backup
+E: Moving money: subtract from A and add to B must both happen, or neither.
+
+Q: "Normalization" means:
+A: Organizing tables so each fact is stored in one place
+W: Making all values lowercase
+W: Deleting old data
+W: Compressing the database
+E: Store a customer's address once in a customers table, not copied into every order.
+
+Q: An ORM is:
+A: A library that lets you work with database rows as code objects
+W: An operating system
+W: A type of index
+W: A backup tool
+E: Examples: Prisma, SQLAlchemy, Django ORM. Handy, but you still need to understand the SQL it makes.
+
+# D 4
+Q: "ACID" describes database transactions that are:
+A: Atomic, Consistent, Isolated, Durable
+W: Automatic, Cached, Indexed, Distributed
+W: Available, Concurrent, Immutable, Defined
+W: Async, Compiled, Isolated, Deployed
+E: These guarantees are why relational databases are trusted for money and orders.
+
+Q: "Eventual consistency" means:
+A: Copies of data may differ briefly but will match given time
+W: Data is never consistent
+W: Data is always instantly identical everywhere
+W: Only backups are consistent
+E: Many distributed systems accept short delays in exchange for speed and uptime. Offline sync works this way too.
+
+Q: "Sharding" a database means:
+A: Splitting data across several machines by some key
+W: Encrypting each row
+W: Deleting old records
+W: Making a backup
+E: Users A–M on one server, N–Z on another. It scales writes but makes cross-shard queries harder.
+
+Q: The "N+1 query problem" is:
+A: Running one query for a list, then one more query per item
+W: A query that returns one extra row
+W: An off-by-one error in SQL
+W: A database with N+1 tables
+E: 100 items becomes 101 queries. Fix with a JOIN or batch loading.
+
+Q: A "read replica" is:
+A: A copy of the database that handles read traffic
+W: A backup stored on tape
+W: A cache in the browser
+W: A second primary that accepts writes
+E: Replicas spread out reads. They can lag slightly behind the primary.
+
+Q: "Denormalization" is done to:
+A: Speed up reads by storing some data in more than one place
+W: Remove all duplicate data
+W: Encrypt the database
+W: Reduce the number of tables to one
+E: It's a deliberate trade: faster reads, but you must keep the copies in sync.
+
+# T 1
+Q: A program for writing code, like VS Code, is a:
+A: Code editor (or IDE)
+W: Compiler
+W: Browser
+W: Server
+E: IDE = Integrated Development Environment: editor plus tools like a debugger and terminal.
+
+Q: The text window where you type commands to the computer is the:
+A: Terminal (command line)
+W: Browser
+W: Debugger
+W: Database
+E: Also called the shell or console. Developers use it to run, install, and manage code.
+
+Q: Git is:
+A: A version control system that tracks changes to files
+W: A website for hosting code
+W: A programming language
+W: A text editor
+E: Git is the tool. GitHub is a website that hosts Git repositories.
+
+Q: GitHub is:
+A: A website that hosts Git repositories and helps teams collaborate
+W: The same thing as Git
+W: A programming language
+W: A code editor
+E: Your Mad Minute apps live in a GitHub repository, and GitHub Pages serves them as websites.
+
+Q: A "repository" (repo) is:
+A: A project folder tracked by Git, with its full history
+W: A database server
+W: A backup drive
+W: A list of bugs
+E: The repo holds every file and every saved change (commit).
+
+Q: npm and pip are:
+A: Package managers that install libraries
+W: Web browsers
+W: Databases
+W: Programming languages
+E: npm is for JavaScript, pip for Python. They download code others have published.
+
+# T 2
+Q: A "commit" in Git is:
+A: A saved snapshot of changes with a message
+W: Uploading files to GitHub
+W: Deleting a branch
+W: A merge conflict
+E: Commits are local save points. Pushing sends them to GitHub.
+
+Q: A "branch" in Git is:
+A: A separate line of work you can change without touching the main version
+W: A copy of the whole computer
+W: A backup on GitHub
+W: A type of commit message
+E: Try ideas on a branch; merge it into main when it works.
+
+Q: "Deploying" means:
+A: Putting a new version of an app where users can reach it
+W: Writing tests
+W: Deleting old code
+W: Installing an editor
+E: Pushing Mad Minute to GitHub Pages is a deploy.
+
+Q: A "debugger" lets you:
+A: Pause running code and inspect values step by step
+W: Automatically fix all bugs
+W: Write code faster with templates
+W: Upload code to a server
+E: Breakpoints stop the code at a line so you can see what each variable holds.
+
+Q: "Open source" software is:
+A: Software whose code is published for anyone to read and, under its license, use
+W: Free software with no license
+W: Software that runs only in a browser
+W: Unfinished software
+E: Open source still has a license with rules. Read it before using the code in a product.
+
+Q: An "environment variable" is:
+A: A setting passed to a program from outside its code, like an API key
+W: A variable inside a loop
+W: A CSS color
+W: A variable that changes the weather
+E: Keeps secrets and settings out of the code, so the same code can run in dev and production.
+
+# T 3
+Q: A "pull request" (PR) is:
+A: A request to merge a branch, where others can review the changes
+W: Downloading the latest code
+W: A request for a new feature from users
+W: A type of merge conflict
+E: PRs are where code review happens before changes reach main.
+
+Q: CI (continuous integration) means:
+A: Automatically building and testing code every time changes are pushed
+W: Writing all code in one file
+W: Deploying once a year
+W: Merging without review
+E: CI catches broken code within minutes of a push, instead of days later.
+
+Q: "Unit tests" check:
+A: Small pieces of code, like one function, on their own
+W: The whole app through a browser
+W: How many users the server can handle
+W: That the server is turned on
+E: Unit tests are fast and pinpoint where a break is.
+
+Q: A "dependency" is:
+A: Outside code your project needs in order to run
+W: A bug that depends on another bug
+W: A team member
+W: A Git branch
+E: package.json and requirements.txt list dependencies. Each one is code you trust but didn't write.
+
+Q: Semantic versioning, like 2.4.1, means:
+A: Major.Minor.Patch — a major bump can break things
+W: Year.Month.Day
+W: Commits.Branches.Tags
+W: Random build numbers
+E: 2.4.1 → 2.4.2 is a fix; → 2.5.0 adds features; → 3.0.0 may break your code.
+
+Q: "Staging" (the environment) is:
+A: A near-copy of production used for final testing
+W: The developer's laptop
+W: The live site customers use
+W: A Git command
+E: Dev → staging → production. Staging catches problems before real users do.
+
+# T 4
+Q: A "monorepo" is:
+A: One repository holding several related projects
+W: A repository with only one file
+W: A repository with one contributor
+W: A read-only repository
+E: Your MadMinute repo with Auto, Biology and Music is a small monorepo. Shared code is easier; boundaries need care.
+
+Q: "Feature flags" let a team:
+A: Turn features on or off without redeploying
+W: Mark bugs in the tracker
+W: Lock a branch
+W: Flag questions as wrong
+E: Ship code dark, turn it on for a few users, and roll back by flipping the flag.
+
+Q: A "lockfile" (package-lock.json, poetry.lock) exists to:
+A: Pin exact dependency versions so every install is identical
+W: Stop others from editing the code
+W: Encrypt the project
+W: Prevent Git commits
+E: Without it, two installs a month apart may pull different versions and behave differently.
+
+Q: "Trunk-based development" means:
+A: Everyone merges small changes into main often, behind flags if needed
+W: Long-lived branches merged once a quarter
+W: Only one developer may commit
+W: Working without Git
+E: Small, frequent merges mean small, easy conflicts.
+
+Q: A "postmortem" is:
+A: A blameless write-up of what went wrong in an incident and how to prevent it
+W: Deleting a failed project
+W: A final code review
+W: A crash log file
+E: Blameless means focusing on the system and process, not punishing a person.
+
+Q: "Observability" means:
+A: Being able to understand a system's inner state from its logs, metrics and traces
+W: Watching users through their cameras
+W: Code that is easy to read
+W: Monitoring only CPU usage
+E: Good observability answers "what's broken and why" without adding new code during an outage.
+
+# A 1
+Q: An "app" that runs inside a web browser is a:
+A: Web app
+W: Native app
+W: Desktop driver
+W: Database
+E: Web apps need no install. Native apps are built for one platform like iOS or Android.
+
+Q: A "native app" is:
+A: Built for a specific platform, like iPhone or Android, and installed from a store
+W: Any app written in JavaScript
+W: An app that runs only on servers
+W: A web page
+E: Native apps can use more device features but need a build per platform.
+
+Q: The "back-end" of an app is:
+A: The server, database and logic users don't see
+W: The buttons on the screen
+W: The CSS file
+W: The app's icon
+E: The back-end stores data, enforces rules and talks to other services.
+
+Q: "Full stack" developer means someone who:
+A: Works on both front-end and back-end
+W: Only writes databases
+W: Builds hardware
+W: Only designs logos
+E: The "stack" is all the layers: UI, server, database, deployment.
+
+Q: A "framework" like React or Django is:
+A: A structure of code that shapes how you build your app
+W: A single function
+W: A type of database
+W: A web browser
+E: With a library you call it; with a framework, it calls your code (inversion of control).
+
+Q: A "PWA" (progressive web app) is:
+A: A web app that can be installed and work offline
+W: A paid web app
+W: A web app with no JavaScript
+W: An app for Windows only
+E: Mad Minute is a PWA: a manifest gives it an icon and a service worker keeps it working with no signal.
+
+# A 2
+Q: A "service worker" in a web app:
+A: Runs in the background to cache files and enable offline use
+W: Is a server employee
+W: Draws the page
+W: Stores the database
+E: Your apps' sw.js file is a service worker. It saves the page so it opens with no internet.
+
+Q: "Modular" code means:
+A: Split into separate pieces, each with one clear job
+W: Written in one giant file
+W: Copied in many places
+W: Written in several languages
+E: Modules can be understood, tested and replaced one at a time.
+
+Q: The "client–server model" means:
+A: Clients send requests; servers process them and respond
+W: Every device is a server
+W: The client stores all the data
+W: Servers send requests to clients first
+E: Your phone (client) asks a server for data; the server answers.
+
+Q: "Separation of concerns" means:
+A: Each part of the code handles one kind of job
+W: Developers work in different rooms
+W: Each file uses a different language
+W: Code has no comments
+E: Keeping data, logic and display separate makes each easier to change.
+
+Q: "DRY" stands for:
+A: Don't Repeat Yourself
+W: Deploy, Run, Yield
+W: Debug Rarely Yet
+W: Data Retrieval Yield
+E: If the same logic lives in three places, a fix must be made three times. Your seven app copies are a DRY problem.
+
+Q: A "prototype" (MVP) is:
+A: A first working version that tests the core idea
+W: The final polished product
+W: A design-only mockup with no code
+W: A security audit
+E: MVP = Minimum Viable Product. Prove people want it before polishing everything.
+
+# A 3
+Q: "Microservices" architecture means:
+A: An app split into many small services that talk over the network
+W: One program containing everything
+W: Very small apps for phones
+W: Code written by many small teams in one file
+E: Microservices scale teams and parts independently but add network and ops complexity.
+
+Q: A "monolith" is:
+A: One application deployed as a single unit
+W: A very large database
+W: A broken app
+W: A tall server rack
+E: Monoliths are simpler to start with. Many good products stay monoliths for years.
+
+Q: "MVC" stands for:
+A: Model, View, Controller
+W: Main, Variable, Class
+W: Module, Version, Commit
+W: Memory, Value, Cache
+E: Model = data, View = display, Controller = handles input and connects them.
+
+Q: An "interface" (in design terms) is:
+A: The agreed way two parts of a system talk to each other
+W: The colors of the app
+W: A database table
+W: A server's power supply
+E: If the interface stays the same, the inside of each part can change freely.
+
+Q: A "single point of failure" is:
+A: One part whose failure takes down the whole system
+W: A bug in one line
+W: A failed unit test
+W: A slow server
+E: Redundancy (two of something) removes single points of failure.
+
+Q: "Caching" means:
+A: Keeping a copy of data closer or faster so you don't fetch it again
+W: Deleting old data
+W: Encrypting data
+W: Compressing images only
+E: Caching speeds things up, but stale caches cause bugs. "There are two hard things: cache invalidation and naming things."
+
+# A 4
+Q: "Event-driven architecture" means:
+A: Parts react to events published by others instead of calling each other directly
+W: The app only runs during events
+W: Every function is a click handler
+W: Code runs in a fixed order every time
+E: Producers publish "order placed"; any number of consumers react. Loose coupling, harder debugging.
+
+Q: A "message queue" (like RabbitMQ or SQS) is used to:
+A: Hold work items so other services can process them later
+W: Show chat messages in an app
+W: Store user passwords
+W: Queue up Git commits
+E: Queues smooth out traffic spikes and let slow work run in the background.
+
+Q: The CAP theorem says that during a network split, a distributed system must choose between:
+A: Consistency and availability
+W: Speed and cost
+W: Security and usability
+W: Caching and indexing
+E: When parts can't talk, you either refuse requests (stay consistent) or answer with possibly stale data (stay available).
+
+Q: "Horizontal scaling" means:
+A: Adding more machines
+W: Buying a bigger machine
+W: Making the screen wider
+W: Adding more columns to a table
+E: Vertical = bigger box; horizontal = more boxes. Horizontal needs stateless apps or shared state.
+
+Q: A "stateless" server:
+A: Keeps no user session in its own memory between requests
+W: Has no database at all
+W: Can't return errors
+W: Runs without an operating system
+E: Any copy can answer any request, which makes scaling and restarts easy.
+
+Q: "Backpressure" in a system is:
+A: Slowing producers down when consumers can't keep up
+W: Pressure from managers to ship
+W: A memory leak
+W: Reverse network traffic
+E: Without it, queues grow until memory runs out.
+
+# O 1
+Q: "The cloud" means:
+A: Using computers in someone else's data center over the internet
+W: Wireless internet
+W: Software that runs only on phones
+W: Weather data
+E: AWS, Google Cloud and Azure rent you servers, storage and services by the hour.
+
+Q: "Hosting" a website means:
+A: Putting its files on a server that's always online
+W: Designing the website
+W: Buying a domain name only
+W: Writing its HTML
+E: GitHub Pages hosts your Mad Minute apps for free.
+
+Q: A "domain name" is:
+A: A human-friendly address like manaindustries.com
+W: A server's password
+W: A type of database
+W: An email account
+E: You rent domain names yearly from a registrar and point them at your host with DNS.
+
+Q: "Uptime" is:
+A: The share of time a service is working and reachable
+W: How fast a page loads
+W: When a server was last restarted
+W: Time spent coding
+E: 99.9% uptime still allows about 8.7 hours of downtime a year.
+
+Q: "Production" (prod) is:
+A: The live environment real users use
+W: The developer's laptop
+W: The test server
+W: The code editor
+E: Mistakes in production affect real people, so changes go through testing first.
+
+Q: Linux is:
+A: An operating system that runs most of the world's servers
+W: A programming language
+W: A cloud company
+W: A database
+E: Most servers, containers and cloud machines run Linux, so basic Linux commands are a core skill.
+
+# O 2
+Q: A "container" (like Docker) packages:
+A: An app together with everything it needs to run
+W: Only the database
+W: A whole physical server
+W: Just the source code
+E: "It works on my machine" goes away when the machine travels with the app.
+
+Q: A "virtual machine" (VM) is:
+A: A full computer simulated in software, with its own operating system
+W: A container
+W: A programming language
+W: A cloud storage bucket
+E: VMs are heavier than containers because each has a whole OS.
+
+Q: "Logs" are:
+A: Time-stamped records of what a program did
+W: Database backups
+W: User passwords
+W: Git commits
+E: When something breaks in production, logs are usually the first place to look.
+
+Q: "DevOps" is:
+A: A way of working where building and running software are shared jobs, heavily automated
+W: A programming language
+W: A job title for testers only
+W: A database
+E: DevOps blends development and operations: automate builds, tests, deploys and monitoring.
+
+Q: An SSH connection lets you:
+A: Securely log into and control a remote computer's terminal
+W: Speed up a website
+W: Send email
+W: Store files in the cloud
+E: Developers SSH into servers to run commands. It uses key pairs instead of (or along with) passwords.
+
+Q: "Scaling" a service means:
+A: Changing its capacity to handle more (or less) load
+W: Changing its colors
+W: Rewriting it in another language
+W: Measuring its size
+E: Scale up for traffic spikes, down to save money.
+
+# O 3
+Q: Kubernetes is:
+A: A system that runs and manages containers across many machines
+W: A container image format
+W: A cloud provider
+W: A programming language
+E: Kubernetes (K8s) schedules containers, restarts failed ones, and scales them up or down.
+
+Q: A "pod" in Kubernetes is:
+A: The smallest deployable unit, wrapping one or more containers
+W: A physical server
+W: A Docker image
+W: A cluster of servers
+E: Containers in one pod share a network address and can share storage.
+
+Q: A "CI/CD pipeline" is:
+A: Automated steps that build, test and deploy code after a change
+W: A water pipe in the data center
+W: A database replication link
+W: A list of developers
+E: Push code → pipeline builds, runs tests, and if green, deploys.
+
+Q: "Infrastructure as code" means:
+A: Defining servers and networks in versioned files instead of clicking in consoles
+W: Writing apps in assembly language
+W: Hardware made of code
+W: Printing code on servers
+E: Terraform and similar tools make infrastructure repeatable and reviewable like any other code.
+
+Q: A "load balancer" does what?
+A: Spreads incoming traffic across several servers
+W: Weighs servers
+W: Balances database tables
+W: Splits code into files
+E: If one server dies, the load balancer sends traffic to the healthy ones.
+
+Q: "Monitoring" a service means:
+A: Continuously measuring its health and alerting when something is wrong
+W: Reading its source code
+W: Restarting it every hour
+W: Watching users type
+E: Metrics plus alerts tell you about problems before users email you.
+
+# O 4
+Q: An SLO (service level objective) is:
+A: A target for reliability, like 99.9% of requests succeed
+W: A legal contract with fines
+W: A server's model number
+W: A load balancer setting
+E: SLO = internal target. SLA = promise to customers, often with penalties. SLI = the measurement.
+
+Q: An "error budget" is:
+A: The amount of failure allowed before the reliability target is missed
+W: Money set aside for bugs
+W: The number of bugs per release
+W: A list of known errors
+E: If 99.9% is the goal, 0.1% is the budget. Spend it on risky launches; when it's gone, slow down.
+
+Q: "Blue-green deployment" means:
+A: Running the new version beside the old one and switching traffic over at once
+W: Painting servers two colors
+W: Deploying only on weekdays
+W: Two teams reviewing code
+E: If the new (green) version misbehaves, switch traffic back to blue instantly.
+
+Q: A "canary release" sends the new version to:
+A: A small slice of users first, watching for problems
+W: Everyone at once
+W: Only the developers
+W: A test bird in the data center
+E: Like the canary in a coal mine: a small group warns you before everyone is affected.
+
+Q: "Immutable infrastructure" means:
+A: Servers are replaced with new ones rather than changed in place
+W: Servers can never be turned off
+W: The code can't be edited
+W: Hardware is bolted down
+E: No drift: every server matches its definition because nobody hand-patches it.
+
+Q: "GitOps" means:
+A: A Git repository is the source of truth, and tools sync the live system to match it
+W: Using GitHub for chat
+W: Deploying by emailing files
+W: Running Git on the server only
+E: Change infrastructure by merging a PR; an agent like Argo CD applies it to the cluster.

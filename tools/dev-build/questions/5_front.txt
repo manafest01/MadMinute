@@ -1,0 +1,1039 @@
+@pack front
+
+# H 1
+Q: Which tag makes the largest heading?
+A: <h1>
+W: <h6>
+W: <head>
+W: <header>
+E: h1 through h6 go from most to least important. <head> holds page info, not visible headings.
+
+Q: Which tag creates a link?
+A: <a href="...">
+W: <link>
+W: <href>
+W: <url>
+E: <link> connects stylesheets in the head; <a> makes clickable links.
+
+Q: Which tag shows an image?
+A: <img src="..." alt="...">
+W: <image>
+W: <pic>
+W: <src>
+E: alt text describes the image for screen readers and when it fails to load.
+
+Q: Which tag makes a paragraph?
+A: <p>
+W: <para>
+W: <text>
+W: <pg>
+E: Block of text with space around it.
+
+Q: Which tag makes a clickable button?
+A: <button>
+W: <click>
+W: <btn>
+W: <input type="click">
+E: Real <button> elements work with keyboard and screen readers automatically.
+
+Q: Where does the visible page content go?
+A: Inside <body>
+W: Inside <head>
+W: Inside <title>
+W: After </html>
+E: <head> holds the title, styles and meta info; <body> holds what people see.
+
+# H 2
+Q: Which is an unordered (bulleted) list?
+A: <ul> with <li> items
+W: <ol> with <li> items
+W: <list> with <item> items
+W: <dl> only
+E: ol is numbered; ul is bulleted.
+
+Q: What does the id attribute do?
+A: Gives one element a unique name for CSS or JavaScript
+W: Sets the element's size
+W: Links to another page
+W: Hides the element
+E: Each id should appear only once per page. Mad Minute finds elements with document.getElementById.
+
+Q: What does the class attribute do?
+A: Labels elements so many can share the same styles
+W: Makes the element unique
+W: Creates a JavaScript class
+W: Sets the font
+E: class="option" on every answer button lets CSS style them all at once.
+
+Q: Which input type shows a checkbox?
+A: <input type="checkbox">
+W: <input type="check">
+W: <checkbox>
+W: <input type="tick">
+E: Other types: text, email, number, password, radio, range, file.
+
+Q: What does <label for="email"> do?
+A: Ties a text label to the input with id="email"
+W: Creates an email link
+W: Validates the email
+W: Hides the input
+E: Clicking the label focuses the input, and screen readers announce the label.
+
+Q: The <meta name="viewport"> tag matters because:
+A: It makes the page size itself correctly on phones
+W: It sets the page title
+W: It loads JavaScript
+W: It adds an icon
+E: Without it, phones show a zoomed-out desktop layout.
+
+# H 3
+Q: "Semantic HTML" means:
+A: Using tags that describe meaning, like <nav>, <main> and <button>
+W: Writing HTML in alphabetical order
+W: Using only <div>
+W: Adding comments to HTML
+E: Meaningful tags help accessibility, SEO and readability.
+
+Q: Why is <div onclick="..."> worse than <button>?
+A: A div isn't keyboard-focusable or announced as a button by default
+W: Divs can't be clicked
+W: It's slower
+W: Buttons can't have styles
+E: You'd have to add role, tabindex and key handling manually. Use the real element.
+
+Q: What does a <form> with a submit button do by default?
+A: Sends the data and reloads or navigates the page
+W: Nothing
+W: Saves to localStorage
+W: Shows an alert
+E: In JavaScript apps, call event.preventDefault() in the submit handler to stop the reload.
+
+Q: The data-* attribute, like data-tab="coachScreen", is for:
+A: Storing custom data on an element for scripts to read
+W: Database connections
+W: Styling only
+W: Hiding the element
+E: Read it with element.dataset.tab. The Mad Minute tab bar uses this.
+
+Q: The hidden attribute on an element:
+A: Hides it from view and from screen readers
+W: Deletes it
+W: Makes it transparent but clickable
+W: Encrypts it
+E: element.hidden = true is how the engine switches screens.
+
+Q: Which goes in the <head>?
+A: <title>, <meta>, <link> to CSS, and the manifest
+W: Visible buttons
+W: The main content
+W: Footer text
+E: Everything about the page rather than in the page.
+
+# H 4
+Q: A web app manifest (manifest.webmanifest) provides:
+A: The app's name, icons and colors for installing it to a home screen
+W: The list of JavaScript files
+W: User data
+W: Server settings
+E: Combined with a service worker, it makes a site installable as a PWA.
+
+Q: <script defer> differs from a plain <script> in that it:
+A: Downloads in parallel and runs after the HTML is parsed
+W: Never runs
+W: Runs before the page loads
+W: Runs only on click
+E: Prevents scripts from blocking the page from showing.
+
+Q: Why put a <script> tag at the end of <body> (or use defer)?
+A: So the elements it uses already exist when it runs
+W: Browsers require it
+W: It makes the script smaller
+W: It hides the script
+E: getElementById returns null if the element hasn't been parsed yet.
+
+Q: What is the shadow DOM used for?
+A: Encapsulating a component's markup and styles from the rest of the page
+W: Dark mode
+W: Hiding passwords
+W: Offline storage
+E: Web components use it so their CSS doesn't leak in or out.
+
+Q: The <template> element holds:
+A: Markup that isn't shown until script clones it
+W: A page template from a server
+W: A CSS template
+W: A database schema
+E: Handy for repeated items like question cards.
+
+Q: What does rel="noopener" on target="_blank" links prevent?
+A: The new page controlling the original page through window.opener
+W: Opening the link
+W: Search engines indexing it
+W: Slow loading
+E: A small security habit for links to other sites.
+
+# C 1
+Q: Which CSS property changes text color?
+A: color
+W: text-color
+W: font-color
+W: background
+E: background-color changes the background.
+
+Q: Which CSS property changes the background color?
+A: background-color
+W: color
+W: bg
+W: fill
+E: background is a shorthand that can set color and images.
+
+Q: How do you select all elements with class="card" in CSS?
+A: .card
+W: #card
+W: card
+W: *card
+E: Dot for class, hash for id, plain name for tags.
+
+Q: How do you select the element with id="quizTimer" in CSS?
+A: #quizTimer
+W: .quizTimer
+W: quizTimer
+W: @quizTimer
+E: # targets an id.
+
+Q: Which property sets space inside an element, between its border and content?
+A: padding
+W: margin
+W: border
+W: gap
+E: Padding is inside; margin is outside.
+
+Q: Which property sets the text size?
+A: font-size
+W: text-size
+W: size
+W: font-weight
+E: font-weight is boldness.
+
+# C 2
+Q: In the CSS box model, from inside out, the layers are:
+A: Content, padding, border, margin
+W: Margin, border, padding, content
+W: Content, margin, border, padding
+W: Border, content, padding, margin
+E: Every element is a box with these layers.
+
+Q: What does box-sizing: border-box do?
+A: Makes width include padding and border
+W: Adds a border
+W: Removes margins
+W: Hides overflow
+E: Without it, width: 100% plus padding overflows the parent.
+
+Q: display: flex on a container lets you:
+A: Lay out its children in a row or column with easy alignment
+W: Make text bold
+W: Hide the children
+W: Animate the element
+E: Flexbox: justify-content aligns along the main axis, align-items across it.
+
+Q: What does a media query like @media (max-width: 600px) do?
+A: Applies styles only on screens 600px wide or less
+W: Plays media
+W: Loads a video
+W: Sets maximum font size
+E: The basis of responsive design for phones.
+
+Q: Which unit is relative to the root font size?
+A: rem
+W: px
+W: em
+W: vh
+E: 1rem = root font size (often 16px). em is relative to the element's own font size.
+
+Q: CSS variables are written like:
+A: --accent: #f5a623; then color: var(--accent);
+W: $accent: #f5a623;
+W: @accent = #f5a623;
+W: var accent = #f5a623;
+E: The engine's light and dark themes swap variable values instead of rewriting every rule.
+
+# C 3
+Q: Which wins when two rules target the same element?
+A: The more specific selector; if equal, the later one
+W: The first one written
+W: The shorter one
+W: The one with more properties
+E: id beats class beats tag. !important overrides, but avoid relying on it.
+
+Q: position: absolute places an element relative to:
+A: Its nearest positioned ancestor
+W: The page always
+W: The previous sibling
+W: The mouse
+E: Set position: relative on the parent you want it anchored to.
+
+Q: CSS Grid is best for:
+A: Two-dimensional layouts with rows and columns
+W: Single lines of text
+W: Animations only
+W: Colors
+E: Flexbox is one direction; Grid handles both at once.
+
+Q: What does @media (prefers-color-scheme: dark) detect?
+A: The user's system dark mode setting
+W: A dark room
+W: Night time
+W: A black background image
+E: The engine's System / Light / Dark theme option builds on this.
+
+Q: position: fixed makes an element:
+A: Stay in place on screen while the page scrolls
+W: Unable to move with CSS
+W: Fixed in size
+W: Positioned after the footer
+E: Used for tab bars, headers and watermarks.
+
+Q: Why use env(safe-area-inset-bottom) on a phone web app?
+A: To keep content clear of the iPhone home indicator and notch
+W: To make it load faster
+W: To enable dark mode
+W: To add a border
+E: Installed web apps go edge to edge, so you must pad for the device's safe areas.
+
+# C 4
+Q: A "stacking context" affects:
+A: How z-index layers elements, scoped to groups
+W: The order of CSS files
+W: Grid rows
+W: Font loading
+E: A z-index of 9999 can still sit behind something if it's in a lower stacking context.
+
+Q: Why prefer animating transform and opacity over top/left/width?
+A: They can be handled by the GPU without re-calculating layout
+W: Other properties can't be animated
+W: They use less code
+W: They work offline
+E: Layout-changing animations cause jank on phones.
+
+Q: prefers-reduced-motion should be respected by:
+A: Turning off or shortening animations for users who ask
+W: Speeding up animations
+W: Adding more motion
+W: Hiding the page
+E: The engine's results screen skips its step animation when this is set.
+
+Q: Container queries (@container) let a component:
+A: Change its layout based on its own container's size, not the screen's
+W: Query a database
+W: Load another page
+W: Hide from screen readers
+E: Components stay responsive wherever they're placed.
+
+Q: "Cumulative Layout Shift" problems are often caused by:
+A: Images or ads without reserved space that push content when they load
+W: Too many CSS variables
+W: Using flexbox
+W: Dark mode
+E: Set width/height or aspect-ratio so space is reserved.
+
+Q: A CSS methodology like BEM (block__element--modifier) helps by:
+A: Making class names predictable and avoiding style clashes
+W: Making CSS run faster
+W: Replacing JavaScript
+W: Compressing images
+E: Large single-file apps benefit from consistent naming.
+
+# D 1
+Q: The DOM is:
+A: The browser's live tree of the page's elements that JavaScript can change
+W: A database
+W: A CSS file
+W: A server
+E: Document Object Model. JavaScript reads and edits it to update the page.
+
+Q: How do you find an element with id="score" in JavaScript?
+A: document.getElementById("score")
+W: document.find("score")
+W: getElement("#score")
+W: window.score.get()
+E: document.querySelector("#score") also works.
+
+Q: How do you change the text inside an element el?
+A: el.textContent = "New text"
+W: el.text("New text")
+W: el.value = "New text" always
+W: el.write("New text")
+E: textContent sets plain text safely.
+
+Q: How do you run code when a button is clicked?
+A: button.addEventListener("click", handler)
+W: button.click = handler()
+W: button.on("press", handler)
+W: handler(button)
+E: The browser calls handler each time a click happens.
+
+Q: How do you read what a user typed into an input?
+A: input.value
+W: input.text
+W: input.innerHTML
+W: input.content
+E: value holds the current text of form fields.
+
+Q: What does console.log do in the browser?
+A: Prints to the developer tools console
+W: Shows an alert to the user
+W: Saves a file
+W: Logs into the website
+E: Users don't see it — it's for developers.
+
+# D 2
+Q: What's the difference between querySelector and querySelectorAll?
+A: The first returns one element; the second returns all matches
+W: They're the same
+W: querySelectorAll returns only the last
+W: querySelector returns an array
+E: querySelectorAll returns a NodeList you can loop with forEach.
+
+Q: How do you create a new element and add it to the page?
+A: document.createElement("div"), then parent.appendChild(el)
+W: new HTML("div")
+W: document.write("<div>")
+W: el = "<div>"; page.add(el)
+E: The engine builds topic cards this way.
+
+Q: How do you add a CSS class to an element?
+A: el.classList.add("active")
+W: el.class = "active" + old
+W: el.style.class("active")
+W: el.addClass("active")
+E: classList also has remove and toggle.
+
+Q: What does event.preventDefault() do?
+A: Stops the browser's built-in action, like a form reload
+W: Stops all JavaScript
+W: Deletes the event
+W: Prevents the user from clicking
+E: Used in form submit handlers and some link clicks.
+
+Q: localStorage.setItem("k", "v") saves:
+A: A string on this device for this site, kept after closing the browser
+W: A file to the Downloads folder
+W: Data to a server
+W: A cookie sent to every server
+E: Use JSON.stringify for objects; read back with getItem and JSON.parse.
+
+Q: Event "bubbling" means:
+A: An event on a child also fires on its parents, up the tree
+W: Events float to the top of the page visually
+W: Events repeat forever
+W: Events happen twice
+E: That's why you can put one listener on a list instead of one per item (event delegation).
+
+# D 3
+Q: Event delegation means:
+A: One listener on a parent handles events for many children
+W: Giving events to another developer
+W: Delaying events
+W: Removing listeners
+E: Works even for children added later. Check event.target to see which one was clicked.
+
+Q: Setting el.innerHTML to user input is dangerous because:
+A: It can run injected scripts (XSS)
+W: It's slower than nothing
+W: It can't hold text
+W: It deletes the element
+E: The engine uses an escapeHtml helper whenever text goes into innerHTML.
+
+Q: What's the difference between event.target and event.currentTarget?
+A: target is what was actually clicked; currentTarget is where the listener is attached
+W: They're always the same
+W: target is the parent
+W: currentTarget is the window
+E: Important with delegation and nested elements.
+
+Q: requestAnimationFrame(fn) runs fn:
+A: Just before the browser's next repaint
+W: After exactly one second
+W: Only once ever
+W: On the server
+E: Used for smooth animations and to measure layout after changes.
+
+Q: Changing the DOM in a loop of 1,000 items is faster if you:
+A: Build the items first (or use a fragment) and insert once
+W: Insert each one with a delay
+W: Use more CSS
+W: Use innerText
+E: Each insertion can trigger layout; batching avoids repeated work.
+
+Q: The visibilitychange event fires when:
+A: The tab or app goes to the background or comes back
+W: An element becomes hidden with CSS
+W: The page scrolls
+W: The network changes
+E: Good moment to pause timers and save state on phones.
+
+# D 4
+Q: "Layout thrashing" happens when code:
+A: Alternates reading layout (like offsetHeight) and writing styles in a loop
+W: Uses too many classes
+W: Animates opacity
+W: Uses CSS Grid
+E: Each read forces the browser to recalculate. Batch reads, then writes.
+
+Q: A MutationObserver lets you:
+A: React when parts of the DOM change
+W: Change other users' screens
+W: Watch network requests
+W: Edit CSS files
+E: Useful for extensions and add-on layers that can't change core code.
+
+Q: The Mad Minute "smart jump" add-on wraps record() from outside. This pattern is called:
+A: Monkey-patching (wrapping an existing function)
+W: Inheritance
+W: Compilation
+W: Recursion
+E: It adds behavior without editing the original — handy, but harder to trace later.
+
+Q: IntersectionObserver is used to:
+A: Know when an element scrolls into view, without scroll listeners
+W: Detect overlapping CSS
+W: Find bugs
+W: Join arrays
+E: Lazy-loading images and infinite scroll use it.
+
+Q: Why remove event listeners when a component is destroyed?
+A: Leftover listeners keep memory alive and can fire on missing elements
+W: Browsers limit listeners to 10
+W: Listeners slow down CSS
+W: It's never needed
+E: Memory leaks and "cannot read property of null" errors follow.
+
+Q: A service worker's fetch handler can:
+A: Intercept page requests and answer from a cache when offline
+W: Change the DOM directly
+W: Read localStorage
+W: Run on the server
+E: Your apps' sw.js uses network-first for the page and cache-first for icons and fonts.
+
+# A 1
+Q: "Asynchronous" code means:
+A: Code that starts a task and continues without waiting for it to finish
+W: Code that runs twice
+W: Code with errors
+W: Code that runs only at night
+E: Network requests are async so the page doesn't freeze while waiting.
+
+Q: fetch("/api/data") is used to:
+A: Request data from a URL
+W: Fetch a file from your desktop
+W: Load CSS
+W: Restart the page
+E: It returns a Promise for the response.
+
+Q: A Promise represents:
+A: A value that will be ready later (or an error)
+W: A guaranteed bug-free result
+W: A type of loop
+W: A contract with users
+E: It's pending, then fulfilled or rejected.
+
+Q: The await keyword:
+A: Pauses an async function until a Promise settles
+W: Waits a fixed number of seconds
+W: Speeds up code
+W: Stops the whole browser
+E: Only usable inside async functions (or at the top level of modules).
+
+Q: Which runs code after 2 seconds?
+A: setTimeout(fn, 2000)
+W: setTimeout(fn, 2)
+W: wait(2)
+W: sleep(2000)
+E: Times are in milliseconds.
+
+Q: Which runs code every second?
+A: setInterval(fn, 1000)
+W: setTimeout(fn, 1000)
+W: repeat(fn, 1)
+W: loop(fn)
+E: Stop it with clearInterval(id). Quiz timers use this.
+
+# A 2
+Q: How do you get JSON data out of a fetch response?
+A: await response.json()
+W: response.data
+W: JSON(response)
+W: response.text
+E: .json() reads and parses the body, and returns a Promise.
+
+Q: How do you catch an error from an awaited fetch?
+A: Wrap it in try { ... } catch (e) { ... }
+W: Use if (error)
+W: It can't fail
+W: Add .error() after await
+E: Network failures throw; also check response.ok for HTTP errors like 404.
+
+Q: Does fetch throw on a 404 response?
+A: No; you must check response.ok or response.status
+W: Yes, always
+W: Only on 500s
+W: Only in Safari
+E: fetch only rejects on network failure. A 404 is still a "successful" response.
+
+Q: Promise.all([a, b, c]) resolves when:
+A: All three succeed (or rejects when any one fails)
+W: The first one finishes
+W: Any one succeeds
+W: Never
+E: Runs requests in parallel instead of one after another.
+
+Q: How do you send JSON to a server with fetch?
+A: method: "POST", headers with Content-Type: application/json, and body: JSON.stringify(data)
+W: fetch(url, data)
+W: fetch.post(url, data)
+W: Put the data in the URL always
+E: The server needs the header to know how to read the body.
+
+Q: navigator.onLine tells you:
+A: Whether the browser thinks it has a network connection
+W: The user's location
+W: The server's status
+W: Whether the user is logged in
+E: It's a hint, not a guarantee — a request can still fail.
+
+# A 3
+Q: What's the problem with this loop?
+```
+for (const id of ids) {
+  await saveScore(id);
+}
+```
+when the saves don't depend on each other.
+A: They run one at a time; Promise.all would run them in parallel
+W: await can't be used in loops
+W: It runs them all at once already
+W: There's no problem
+E: Sequential is right when order matters; otherwise parallel is faster.
+
+Q: An AbortController is used to:
+A: Cancel a fetch that's no longer needed
+W: Stop the browser
+W: Abort a Git merge
+W: Close a tab
+E: Example: user types a new search before the old one finishes.
+
+Q: Debouncing a search box means:
+A: Waiting until typing pauses before sending a request
+W: Sending a request on every key
+W: Removing the search box
+W: Blocking typing
+E: Cuts hundreds of requests down to a few.
+
+Q: A "race condition" in front-end code example:
+A: An older slow response arrives after a newer one and overwrites it
+W: Two CSS animations
+W: A fast computer
+W: A loop that ends early
+E: Track the latest request, or cancel older ones.
+
+Q: Why show a loading state while fetching?
+A: So users know something is happening and don't click again
+W: Browsers require it
+W: It makes fetching faster
+W: It's only decoration
+E: Also handle the error state and the empty state.
+
+Q: Optimistic UI means:
+A: Updating the screen immediately, then rolling back if the server fails
+W: Assuming no errors ever
+W: Showing happy colors
+W: Caching forever
+E: Feels instant. Needs a plan for when the save fails.
+
+# A 4
+Q: Microtasks (promise callbacks) run:
+A: After the current script, before timers and rendering
+W: After all timers
+W: Only on the server
+W: In random order
+E: This explains surprising log orders with setTimeout and promises.
+
+Q: Long-running JavaScript (like scanning 10,000 files) freezes the page because:
+A: JavaScript runs on one main thread that also handles drawing and input
+W: Browsers limit loops
+W: CSS stops working
+W: The network is busy
+E: Break the work into chunks, or move it to a Web Worker.
+
+Q: A Web Worker is used to:
+A: Run heavy JavaScript on a background thread
+W: Employ someone to build the site
+W: Serve files
+W: Store cookies
+E: Workers can't touch the DOM; they send messages back to the page.
+
+Q: Retrying a failed request should use:
+A: Exponential backoff with a limit
+W: Instant endless retries
+W: A fixed 1 ms delay forever
+W: No retries ever
+E: Wait 1s, 2s, 4s... so you don't hammer a struggling server.
+
+Q: Syncing a phone's quiz results to a PC over Wi-Fi when online, and storing them when offline, is a pattern called:
+A: Offline-first with a sync queue
+W: Server-side rendering
+W: Polling only
+W: Hot reloading
+E: Save locally first, queue changes, and send when a connection appears. Conflicts need a rule.
+
+Q: Server-Sent Events (EventSource) differ from WebSockets because they:
+A: Only stream from server to browser, over normal HTTP
+W: Only stream from browser to server
+W: Require a database
+W: Are faster in every case
+E: Simpler for live updates where the client doesn't need to push back.
+
+# R 1
+Q: React is:
+A: A JavaScript library for building user interfaces from components
+W: A database
+W: A CSS framework
+W: A programming language
+E: You describe what the UI should look like for given data; React updates the page.
+
+Q: A "component" in React is:
+A: A reusable piece of UI, written as a function that returns markup
+W: A CSS file
+W: A server
+W: A database row
+E: <QuestionCard /> could show one question anywhere you need it.
+
+Q: JSX is:
+A: HTML-like syntax inside JavaScript
+W: A new language replacing HTML
+W: A JSON format
+W: A server tool
+E: It's compiled into regular function calls.
+
+Q: "Props" are:
+A: Inputs passed from a parent component to a child
+W: Internal data a component changes itself
+W: CSS properties
+W: Database fields
+E: <Badge rank="Junior" /> passes rank as a prop.
+
+Q: "State" in a component is:
+A: Data the component remembers and can change, causing a re-render
+W: The country it runs in
+W: A CSS setting
+W: Props from the parent
+E: const [count, setCount] = useState(0);
+
+Q: Which hook stores state in a function component?
+A: useState
+W: useEffect
+W: useProps
+W: setState()
+E: useState returns the value and a setter.
+
+# R 2
+Q: Why must you call setCount instead of changing count directly?
+A: The setter tells React to re-render with the new value
+W: count is read-only in JavaScript
+W: It's faster
+W: It's only a style rule
+E: Changing the variable directly won't update the screen.
+
+Q: useEffect is used for:
+A: Running side effects like fetching data after render
+W: Styling components
+W: Declaring props
+W: Creating components
+E: The dependency array controls when it runs.
+
+Q: When rendering a list in React, each item needs:
+A: A unique, stable key prop
+W: An index in its name
+W: Its own CSS file
+W: A useEffect
+E: Keys let React track items. Use an id, not the array index, when items can move.
+
+Q: "Lifting state up" means:
+A: Moving shared state to the nearest common parent
+W: Storing state on a server
+W: Making state global always
+W: Deleting state
+E: Two siblings that need the same data get it from their parent.
+
+Q: A "controlled input" is one where:
+A: React state holds the value, and onChange updates it
+W: The browser controls everything
+W: The input is disabled
+W: The input has no value
+E: value={name} onChange={e => setName(e.target.value)}.
+
+Q: Conditional rendering looks like:
+A: {isPlaced ? <Home /> : <Placement />}
+W: if (<Home />)
+W: <if test={isPlaced}>
+W: render(Home) when isPlaced
+E: JSX uses JavaScript expressions for conditions.
+
+# R 3
+Q: Why can't you write state.items.push(x) and expect a re-render?
+A: React compares references; the array is still the same object
+W: push doesn't work in React
+W: Arrays can't be state
+W: It always works
+E: Create a new array: setItems([...items, x]).
+
+Q: Prop drilling is:
+A: Passing props through many layers just to reach a deep child
+W: A performance tool
+W: A testing method
+W: Drilling into the DOM
+E: Context or a state library can help when it gets painful.
+
+Q: The cleanup function returned from useEffect runs:
+A: Before the effect re-runs and when the component unmounts
+W: Never
+W: Only on page reload
+W: Before the first render
+E: Clear intervals and remove listeners there.
+
+Q: useMemo is for:
+A: Remembering an expensive calculated value between renders
+W: Storing state
+W: Memorizing props for tests
+W: Writing notes
+E: Only recalculates when its dependencies change.
+
+Q: A single-page app (SPA) is:
+A: An app that updates views in the browser without full page reloads
+W: An app with one screen only
+W: A static HTML page
+W: A server-only app
+E: Mad Minute is an SPA without a framework: it shows and hides screens.
+
+Q: Why might a beginner choose plain JavaScript over React for a small offline app?
+A: No build step or dependencies, so it's simple to host and keep working
+W: React can't run offline
+W: Plain JS is always faster to write
+W: React is paid software
+E: Frameworks shine as apps and teams grow. Choose by needs, not hype.
+
+# R 4
+Q: A "stale closure" bug in React looks like:
+A: An interval or handler still seeing an old state value
+W: A component that won't mount
+W: CSS that doesn't apply
+W: A missing key
+E: Use the functional updater setCount(c => c + 1) or correct dependencies.
+
+Q: Server-side rendering (SSR) helps by:
+A: Sending ready HTML first for faster first view and better SEO
+W: Removing all JavaScript
+W: Making apps offline
+W: Hiding the code
+E: Frameworks like Next.js render on the server, then "hydrate" in the browser.
+
+Q: Hydration errors happen when:
+A: Server HTML and the first client render don't match
+W: The page has too much water
+W: CSS fails to load
+W: The API is down
+E: Often from dates, random values or browser-only data used during render.
+
+Q: When is global state management (like Redux or Zustand) worth it?
+A: When many distant components read and update the same data
+W: For every app from day one
+W: Never
+W: Only for CSS
+E: Start simple; add it when the pain is real.
+
+Q: Code splitting means:
+A: Loading parts of the app only when they're needed
+W: Splitting a file in half by hand
+W: Separating CSS and HTML
+W: Deleting unused code
+E: Smaller first download, faster start.
+
+Q: A design system in front-end work is:
+A: Shared components, colors, type and rules so the UI stays consistent
+W: A single CSS file
+W: A logo
+W: A database schema
+E: Your Mana_Fest brand colors could become tokens every Mana Industries app uses.
+
+# P 1
+Q: Alt text on an image is for:
+A: People using screen readers, and when the image fails to load
+W: Search engines only
+W: Making the image bigger
+W: Copyright
+E: Describe what the image shows or does. Decorative images get alt="".
+
+Q: Accessibility (a11y) means:
+A: Making apps usable by people with disabilities
+W: Making apps load faster
+W: Making apps secure
+W: Making apps pretty
+E: Vision, hearing, motor and cognitive needs. Often it helps everyone.
+
+Q: Why is good color contrast important?
+A: Low contrast text is hard or impossible for many people to read
+W: It makes the page load faster
+W: It saves battery
+W: It's only for dark mode
+E: Aim for at least 4.5:1 for normal text.
+
+Q: Can a user navigate your app with only a keyboard? Why does it matter?
+A: Many users can't use a mouse or touch; every action should be reachable with Tab and Enter
+W: It doesn't matter on phones
+W: Keyboards are obsolete
+W: Only for gamers
+E: Try it yourself: unplug the mouse and use Tab.
+
+Q: Page speed matters because:
+A: Slow pages lose users, especially on phones and weak signals
+W: Search engines don't care
+W: Users always wait
+W: It only matters for games
+E: Your techs may open the app in a shop with one bar of signal.
+
+Q: Large images slow pages. A simple fix is:
+A: Resize and compress them to the size actually shown
+W: Add more images
+W: Use bigger files
+W: Use only PNG
+E: Modern formats like WebP and AVIF help too.
+
+# P 2
+Q: What is a "screen reader"?
+A: Software that reads the screen aloud for blind or low-vision users
+W: A device that measures screen size
+W: A browser extension for ads
+W: A bug tracker
+E: VoiceOver (Apple) and TalkBack (Android) are built in. Try them on your own apps.
+
+Q: aria-label is used to:
+A: Give an element an accessible name when there's no visible text
+W: Style an element
+W: Hide an element
+W: Label a database
+E: An icon-only button like "＋" needs aria-label="Add question".
+
+Q: Why shouldn't color alone show right and wrong answers?
+A: Color-blind users may not see the difference
+W: Colors are slow
+W: Red is not allowed
+W: It doesn't matter
+E: Add an icon, text or pattern too.
+
+Q: The browser's Lighthouse tool checks:
+A: Performance, accessibility, best practices and SEO
+W: Only spelling
+W: Server uptime
+W: Git history
+E: Run it from DevTools for a quick report with fixes.
+
+Q: Loading a 900 KB HTML file on a slow phone connection mainly costs:
+A: Download and parse time before anything appears
+W: Nothing, HTML is free
+W: Only server money
+W: Battery only
+E: Caching with a service worker means it's paid once; splitting data helps the first load.
+
+Q: Focus outlines (the ring around a focused element) should:
+A: Stay visible, or be replaced with an equally clear style
+W: Always be removed for looks
+W: Only show on mouse click
+W: Be red
+E: Keyboard users need to see where they are.
+
+# P 3
+Q: A modal dialog is accessible when it:
+A: Moves focus into it, traps Tab inside, and returns focus on close
+W: Appears instantly
+W: Has a dark background
+W: Can't be closed
+E: The native <dialog> element handles much of this.
+
+Q: "Core Web Vitals" measure:
+A: Loading speed, responsiveness and visual stability
+W: Code quality
+W: Server cost
+W: Number of users
+E: LCP (largest content shown), INP (response to input), CLS (layout shifts).
+
+Q: Lazy loading images (loading="lazy") means:
+A: Images below the fold load only when the user scrolls near them
+W: Images never load
+W: Images load slowly on purpose
+W: Images are compressed
+E: Faster first load for long pages.
+
+Q: An aria-live region is used to:
+A: Announce changing content, like a score or timer, to screen readers
+W: Make content move
+W: Play audio
+W: Refresh the page
+E: Use politely; announcing every second is noisy.
+
+Q: Touch targets on phones should be at least about:
+A: 44 × 44 points
+W: 10 × 10 pixels
+W: 200 × 200 pixels
+W: Any size
+E: Small buttons cause mis-taps, especially in gloves or on the shop floor.
+
+Q: Why test on a real low-end phone?
+A: Your fast PC hides slowness that real users feel
+W: Emulators are illegal
+W: High-end phones don't run web apps
+W: It isn't useful
+E: DevTools can also throttle CPU and network.
+
+# P 4
+Q: The "critical rendering path" is:
+A: The steps from receiving HTML to drawing the first pixels
+W: The fastest network route
+W: The most important function
+W: A Git branch
+E: Blocking CSS and scripts delay it; inline critical CSS and defer the rest.
+
+Q: Tree shaking in a build tool:
+A: Removes code from libraries that your app never uses
+W: Deletes old commits
+W: Shuffles the DOM tree
+W: Compresses images
+E: Import only what you need so the bundle stays small.
+
+Q: Caching headers like Cache-Control: max-age=31536000, immutable are best for:
+A: Files with a version or hash in their name
+W: The main HTML page
+W: API responses with live data
+W: Login pages
+E: The name changes when the content changes, so caching forever is safe.
+
+Q: Accessibility testing should include:
+A: Automated checks plus manual keyboard and screen reader testing
+W: Only automated tools
+W: Only looking at it
+W: Nothing until users complain
+E: Tools catch maybe a third of issues.
+
+Q: A web font can delay text from showing. font-display: swap:
+A: Shows a fallback font first, then swaps when the web font loads
+W: Hides text until the font loads
+W: Never loads the font
+W: Converts fonts to images
+E: Avoids invisible text on slow connections.
+
+Q: Performance budgets mean:
+A: Setting limits like "under 200 KB of JavaScript" and failing builds that exceed them
+W: Money for faster servers
+W: Fewer developers
+W: Testing only once
+E: Keeps speed from slowly getting worse with each feature.

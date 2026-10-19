@@ -41,5 +41,20 @@ A **Music Path** card walks through all seven subjects in 24 steps, easy to hard
 
 Add it to a phone's home screen the same way (it gets its own **MUS** icon). Sound plays on the device, so ear training works offline too. Its progress is kept separate from the other apps.
 
+## Also here: Mad Minute Dev
+One-minute drills from first line of code to junior full-stack and DevOps — 8 subjects, 1,205 questions, levels Beginner → Junior → Intermediate → Senior:
+Dev Vocabulary, Programming Fundamentals, Read & Debug (predict the output, spot the bug, reading errors, working with AI code), Git & Version Control, Front-End, Back-End, Full Stack & Architecture, and DevOps & Kubernetes.
+
+- **Dev Path**: 32 steps, easy to hard, across all 8 subjects.
+- **Recall first**: answer from memory before the choices appear (active recall).
+- **Skills checkup + Roadmap**: one test across everything, then a map of your gaps and your next 3 moves.
+- Code questions show real, scrollable code.
+
+**Open it:** https://manafest01.github.io/MadMinute/dev/
+
+Add it to a phone's home screen the same way (it gets its own **DEV** icon). Its progress is kept separate from the other apps.
+
+How the engine got here, stage by stage: [ENGINE_HISTORY.md](ENGINE_HISTORY.md)
+
 ---
 © 2026 Mana Industries LLC. All rights reserved. This demo is provided for evaluation only. No part of it may be copied, modified, redistributed, or resold without written permission.

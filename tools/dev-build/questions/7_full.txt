@@ -1,0 +1,1033 @@
+@pack full
+
+# C 1
+Q: In a typical web app, what are the three main layers?
+A: Front-end (UI), back-end (server/API), and database
+W: HTML, CSS and fonts
+W: Git, GitHub and Pages
+W: Phone, tablet and PC
+E: Data flows: UI → API → database, and back.
+
+Q: When you tap "Save" in a web app with a server, what usually happens?
+A: The front-end sends a request to the API, which saves to the database
+W: The browser writes directly to the server's disk
+W: The page reloads and nothing is sent
+W: The database calls the button
+E: The API sits between the user and the data, enforcing rules.
+
+Q: Mad Minute saves progress without a server. Where does it go?
+A: The browser's localStorage on that device
+W: GitHub
+W: A database in the cloud
+W: The service worker file
+E: Simple and private, but each device has its own copy.
+
+Q: A "full stack" feature, like a manager crew view across phones, needs:
+A: A way for data to leave each device and be collected in one place
+W: Only new CSS
+W: Only a new button
+W: Nothing beyond the front-end
+E: Sharing data between devices requires a server, a sync service, or a peer connection.
+
+Q: The front-end and back-end usually talk using:
+A: HTTP requests with JSON data
+W: Shared variables
+W: Email
+W: CSS
+E: A clear API contract lets each side change independently.
+
+Q: Which part should enforce "only managers can see crew data"?
+A: The back-end
+W: The CSS
+W: The HTML
+W: The browser cache
+E: Front-ends can be bypassed. Rules live on the server.
+
+# C 2
+Q: A static site host like GitHub Pages can't:
+A: Run your own server code or database
+W: Serve HTML
+W: Serve JavaScript
+W: Use HTTPS
+E: To share data between users you need a back-end service or a hosted database.
+
+Q: "Backend as a Service" (like Supabase or Firebase) provides:
+A: Ready-made database, auth and APIs so you write less server code
+W: Free front-end design
+W: A code editor
+W: Phone hardware
+E: Fast way to add accounts and syncing to a static front-end.
+
+Q: Where should the logic that scores a quiz live if scores affect pay or certification?
+A: On the server, so users can't fake results
+W: Only in the browser
+W: In CSS
+W: In localStorage
+E: Anything with real stakes must be verified server-side.
+
+Q: An API "contract" is:
+A: The agreed shape of requests and responses between front-end and back-end
+W: A legal document
+W: A database
+W: A Git branch
+E: Change it carefully and version it.
+
+Q: The same JSON format for questions on the device and on a server helps because:
+A: You can move data between them without converting
+W: It's required by browsers
+W: JSON is the only format
+W: It encrypts the data
+E: One data shape, many places.
+
+Q: A Python back-end (ManaFlow Studio) and a web front-end can communicate by:
+A: The Python app serving an HTTP API the web page calls
+W: Sharing a CSS file
+W: Importing each other's code
+W: Email
+E: Python serves JSON at /api/..., and the page fetches it.
+
+# C 3
+Q: A request from the front-end fails. What's the right order to investigate?
+A: Browser Network tab → server logs → database
+W: Database first, always
+W: Rewrite the front-end
+W: Restart everything
+E: Follow the data along its path until you find where it breaks.
+
+Q: "Single source of truth" means:
+A: Each piece of data has one authoritative home; everything else reads from it
+W: One developer knows the truth
+W: Only one database exists in the world
+W: The UI is always right
+E: When the phone, PC and server disagree, which one wins? Decide up front.
+
+Q: Why keep business rules (like UNLOCK_AT = 2) in one place?
+A: So front-end and back-end can't disagree about them
+W: To make the code longer
+W: Because constants are faster
+W: To hide them
+E: Duplicate rules drift apart and cause "it says unlocked here but locked there" bugs.
+
+Q: CORS errors appear when:
+A: A page on one origin calls an API on another without permission
+W: CSS is missing
+W: The database is full
+W: The user is offline
+E: Fix on the server by allowing that origin, or serve both from the same origin.
+
+Q: An app serving 10 users vs 10,000 users mostly changes:
+A: Where state lives, how it's cached, and how many servers run
+W: The button colors
+W: The programming language, always
+W: Nothing
+E: Design simple first; scale when real usage shows the need.
+
+Q: Why is "works offline" harder in a full-stack app?
+A: Changes made offline must be queued and reconciled with the server later
+W: Servers don't support offline
+W: HTML can't load offline
+W: It's not harder
+E: Conflict rules and sync status become part of the design.
+
+# C 4
+Q: The "Backend for Frontend" (BFF) pattern means:
+A: A small server tailored to one front-end, combining calls to other services
+W: The front-end has no back-end
+W: Two front-ends share one database directly
+W: A CSS framework
+E: Keeps the client simple and hides internal services.
+
+Q: Choosing between REST, GraphQL and RPC should depend on:
+A: Who calls the API, how varied their data needs are, and team experience
+W: Which is newest
+W: Which has the best logo
+W: Random choice
+E: Every option trades simplicity, flexibility and tooling.
+
+Q: End-to-end type safety (like TypeScript types shared with the API) helps by:
+A: Catching mismatched data shapes at build time instead of in production
+W: Making the app faster
+W: Replacing tests entirely
+W: Encrypting data
+E: tRPC, OpenAPI codegen and shared schemas are common approaches.
+
+Q: When the front-end and back-end are deployed separately, a breaking API change should be:
+A: Added alongside the old one, migrated, then the old one removed
+W: Deployed all at once
+W: Done on Fridays
+W: Never planned
+E: Expand → migrate → contract. Old app versions keep working during the switch.
+
+Q: A team splits a monolith into services too early. The usual result is:
+A: More network calls, harder debugging, and slower changes
+W: Instant speed gains
+W: Fewer bugs automatically
+W: Nothing changes
+E: Split when a real boundary and real need exist.
+
+Q: For a business selling the Mad Minute engine to companies, the architecture question that matters most early is:
+A: How each company's content and data stay separate while sharing one engine
+W: Which font to use
+W: Which emoji for ranks
+W: Whether to use tabs
+E: That's multi-tenancy — it shapes storage, auth and pricing.
+
+# F 1
+Q: "State" in an app means:
+A: The data the app remembers right now, like score and level
+W: The country the user lives in
+W: The CSS
+W: The server's location
+E: The UI is a picture of the current state.
+
+Q: When state changes, the screen should:
+A: Update to match
+W: Stay the same
+W: Reload completely
+W: Turn off
+E: In Mad Minute, renderHome() redraws the home screen from state.
+
+Q: Saving state means:
+A: Writing it somewhere it lasts, like localStorage or a server
+W: Printing it
+W: Deleting it
+W: Emailing it
+E: Otherwise it's lost when the page closes.
+
+Q: "Loading," "error" and "empty" are:
+A: States every data-driven screen should handle
+W: Server names
+W: CSS classes only
+W: Git branches
+E: Ask: what does the user see while waiting, when it fails, when there's nothing?
+
+Q: Which is the better pattern?
+A: Change state, then call one render function that draws from it
+W: Change the screen in many places by hand and also change state
+W: Never store state
+W: Store state only in HTML
+E: State → render keeps the screen and data from drifting apart.
+
+Q: Data that's calculated from other data (like a rank from levels) should usually be:
+A: Calculated when needed, not stored separately
+W: Stored and updated by hand everywhere
+W: Ignored
+W: Hard-coded
+E: Mad Minute's rankInfo() computes the rank from topic levels every time.
+
+# F 2
+Q: "Derived state" stored separately can cause:
+A: Bugs where it falls out of sync with its source
+W: Faster loading always
+W: Nothing
+W: Smaller files
+E: Store the source; derive the rest.
+
+Q: Unidirectional data flow means:
+A: Data flows down to the UI; events flow up to change state
+W: Data only moves to the server
+W: The UI changes state directly anywhere
+W: One user at a time
+E: Easier to trace why something changed.
+
+Q: Global variables for all app state can be a problem because:
+A: Any code can change them, so tracking down changes is hard
+W: Globals are slow
+W: Browsers block globals
+W: They can't hold objects
+E: Funnel changes through a few functions (like saveState) to keep control.
+
+Q: A "single state object" saved as JSON (like Mad Minute's state) makes it easy to:
+A: Save, load, export and sync everything at once
+W: Run faster
+W: Hide data
+W: Avoid bugs entirely
+E: It's also easy to break all at once, so validate and version it.
+
+Q: Switching subjects in the engine loads a different state. This works because:
+A: Each pack has its own storage key, and loadState reads the right one
+W: The page reloads
+W: There's only one subject
+W: State is on a server
+E: Clear state boundaries make features like separate ranks simple.
+
+Q: The URL can hold state like ?topic=brakes so that:
+A: Links and the back button reproduce what the user saw
+W: It's encrypted
+W: It saves battery
+W: It replaces the database
+E: Shareable, bookmarkable views.
+
+# F 3
+Q: Two parts of the UI show the same score but disagree. The root cause is usually:
+A: The score is stored in two places
+W: The CSS is wrong
+W: The browser is buggy
+W: The font is different
+E: Make one source and have both read it.
+
+Q: State that only one component uses should live:
+A: In that component, not global
+W: In a global store always
+W: On the server always
+W: In CSS
+E: Keep state as close as possible to where it's used.
+
+Q: Server state (data from an API) is different from UI state because it:
+A: Can change elsewhere, goes stale, and must be refetched or synced
+W: Never changes
+W: Is always faster
+W: Can't be cached
+E: Libraries like TanStack Query handle caching and refetching server state.
+
+Q: A state machine for the quiz (idle → asking → answered → results) helps by:
+A: Making impossible states impossible, like answering after results
+W: Making it slower
+W: Adding animations
+W: Removing the need for state
+E: Many timer bugs come from states that should never overlap.
+
+Q: Undo is easier to build when:
+A: State changes are recorded as steps or snapshots
+W: State is scattered in the DOM
+W: There is no state
+W: You use CSS
+E: Immutable updates make snapshots cheap.
+
+Q: The engine's "paused" flag stops the clock while you read an explanation. If a new feature forgets to unpause, the result is:
+A: A frozen timer — a state bug
+W: Faster questions
+W: Nothing
+W: Lost progress
+E: Every state change needs a matching exit path.
+
+# F 4
+Q: Normalizing front-end state (storing items by id) helps because:
+A: Updates touch one place and lookups are fast
+W: It looks nicer
+W: Arrays are forbidden
+W: It's required by JSON
+E: { questions: { byId: {...}, allIds: [...] } } is a common shape.
+
+Q: Optimistic updates require:
+A: A way to roll back if the server rejects the change
+W: No server
+W: A slow network
+W: No error handling
+E: Keep the previous state until the server confirms.
+
+Q: Cross-tab sync of localStorage state can use:
+A: The storage event, fired in other tabs when a value changes
+W: Nothing; it's impossible
+W: CSS
+W: Cookies only
+E: Otherwise two open tabs can overwrite each other's progress.
+
+Q: Choosing where truth lives in a phone + PC + server setup is fundamentally about:
+A: Who wins in a conflict, and how changes are merged
+W: Which device is newest
+W: Screen size
+W: Battery level
+E: Decide per data type: settings, progress, content may each have different rules.
+
+Q: Event logs (append-only) are attractive for progress data because:
+A: Merging from many devices is just combining events, then recalculating
+W: They're smaller than any other format
+W: They never need ids
+W: They can't have bugs
+E: Two phones' answer logs merge cleanly; computed levels don't.
+
+Q: A selector function (like getRecommendedTopic(state)) is useful because:
+A: It centralizes how derived data is computed from state
+W: It selects CSS
+W: It picks a random value
+W: It saves to the server
+E: One function, one answer, testable in isolation.
+
+# P 1
+Q: Before building a feature, what should you write down first?
+A: What problem it solves and how you'll know it works
+W: The variable names
+W: The CSS colors
+W: The deploy schedule
+E: A short goal and a "done when" checklist prevent rebuilds.
+
+Q: An MVP (minimum viable product) is:
+A: The smallest version that tests whether people want it
+W: The most valuable player
+W: The final version
+W: A mockup only
+E: Ship the core, learn, then add.
+
+Q: "Scope creep" is:
+A: A project growing with extra features until it never finishes
+W: A slow computer
+W: A bug in a loop
+W: A type of CSS
+E: Write new ideas on a "later" list instead of adding them now.
+
+Q: Breaking a big feature into small tasks helps because:
+A: Each piece can be finished, tested and shipped on its own
+W: It makes the work longer
+W: Big tasks are easier
+W: It's required by Git
+E: Small steps give progress you can see and roll back.
+
+Q: A user story looks like:
+A: "As a tech, I want to see which questions I keep missing, so I can study them"
+W: "Make it better"
+W: "Add a button"
+W: "Use React"
+E: Who, what, and why — the why guides decisions.
+
+Q: Why decide what's NOT in the first version?
+A: It protects the timeline and keeps focus on the core
+W: To make users unhappy
+W: It's not useful
+W: To save disk space
+E: "Not now" is a decision, not a failure.
+
+# P 2
+Q: A phased plan with a "quick win" first helps because:
+A: You get something working early and learn before committing to the rest
+W: Quick wins are always the hardest part
+W: It's required by GitHub
+W: It hides problems
+E: Early feedback changes later phases for the better.
+
+Q: Acceptance criteria are:
+A: Specific conditions that must be true for a feature to be done
+W: The price of the feature
+W: The developer's opinion
+W: Code comments
+E: "Placement test asks 2 questions per level and stops on a miss" is testable.
+
+Q: Estimating work is easier when:
+A: Tasks are small and similar to things you've done before
+W: Tasks are huge
+W: You never break work down
+W: You guess randomly
+E: Track actual time vs estimate to get better.
+
+Q: A mockup or wireframe before coding helps:
+A: Agree on what the screen should do before writing code
+W: Make the code faster
+W: Replace the code
+W: Hide bugs
+E: Cheaper to change a drawing than an app.
+
+Q: Feature requests from users should be:
+A: Collected, grouped, and prioritized by impact and effort
+W: All built immediately
+W: Ignored
+W: Built in the order received
+E: An impact/effort grid helps pick the next thing.
+
+Q: Keeping many separate copies of an app (one per subject) creates:
+A: Repeated work: every fix must be made in each copy
+W: Less work
+W: Better performance
+W: Nothing special
+E: One engine + data packs keeps changes in one place.
+
+# P 3
+Q: A "spike" in planning is:
+A: A short, time-boxed experiment to answer a technical question
+W: A sudden traffic increase
+W: A bug
+W: A long-term project
+E: "Can the phone talk to the PC over Wi-Fi?" — a one-day spike before committing.
+
+Q: Prioritizing with "must, should, could, won't" (MoSCoW) helps:
+A: Separate what's essential from what's nice to have
+W: Pick colors
+W: Name variables
+W: Choose a database
+E: Ship the musts first.
+
+Q: Technical debt should be:
+A: Tracked and paid down deliberately, not ignored
+W: Never taken on
+W: Ignored forever
+W: Paid all at once at the end
+E: Some debt is a smart trade for speed; just keep a list.
+
+Q: A risky part of a plan (like syncing devices) should usually be:
+A: Tackled early, so surprises come while there's time to adjust
+W: Saved for last
+W: Skipped
+W: Hidden from the plan
+E: Retire the biggest unknowns first.
+
+Q: A project changed direction four times without matching its design. The planning lesson is:
+A: Lock down requirements and a design before building, and check against them each phase
+W: Start coding faster
+W: Never use a design
+W: Build everything at once
+E: A short PRD plus phase reviews keeps rebuilds from repeating.
+
+Q: A PRD (product requirements document) mainly answers:
+A: What we're building, for whom, why, and what done looks like
+W: How every function is coded
+W: What the server costs
+W: Who gets credit
+E: It's the yardstick each build is checked against.
+
+# P 4
+Q: When a deadline is fixed and work is too much, the best lever is usually:
+A: Reducing scope
+W: Adding people at the last minute
+W: Skipping testing
+W: Working without sleep
+E: Adding people late often slows things down (Brooks's law).
+
+Q: "Build vs buy" for a feature like user accounts often favors buying when:
+A: It's not your core value and mature services exist
+W: You enjoy reinventing things
+W: It's your main product
+W: Never
+E: Focus your effort on what makes your product different — for you, the learning engine.
+
+Q: A good roadmap shows:
+A: Goals and outcomes over time, flexible on exact features
+W: Every task with exact dates for a year
+W: Only finished work
+W: Code
+E: Plans change; outcomes guide the changes.
+
+Q: Measuring whether a feature worked means deciding beforehand:
+A: What metric should move, like weekly active learners or levels gained
+W: Nothing
+W: How many lines of code it took
+W: Which developer built it
+E: Otherwise "it feels better" is the only evidence.
+
+Q: When should a solo developer refactor the shared engine?
+A: When the same change keeps being needed in several places
+W: Never
+W: Every day
+W: Only before vacation
+E: The "rule of three": the third repeat signals it's time.
+
+Q: A good sign a plan is too big is:
+A: You can't describe the first shippable step in one sentence
+W: It has a name
+W: It has phases
+W: It has tests
+E: Shrink until step one is clear and small.
+
+# A 1
+Q: Why reuse one engine for many subjects?
+A: Fix or improve it once, and every subject benefits
+W: Engines are cheaper to host
+W: Subjects can't share code
+W: It's required by browsers
+E: The engine is the product; subjects are content.
+
+Q: Separating data (questions) from code (the engine) means:
+A: New subjects can be added without changing the code
+W: Data and code are in different languages
+W: The code can't read the data
+W: It's slower
+E: Mad Minute subject packs are data the engine reads.
+
+Q: A configuration value like QUESTION_SECONDS = 10 at the top of the file is good because:
+A: It's easy to find and change in one place
+W: It runs faster
+W: It's required
+W: It hides the value
+E: Named settings beat numbers scattered in the code.
+
+Q: A "plugin" or "add-on layer" lets you:
+A: Add features without changing the core code
+W: Charge more money
+W: Make the app slower
+W: Replace the engine
+E: The engine's smart jump and standalone layers are add-ons in separate script blocks.
+
+Q: Which is easier to maintain?
+A: One shared engine with subject data packs
+W: Seven copies of the full app, each slightly edited
+W: One file per question
+W: All code in the HTML attributes
+E: Copies drift apart and multiply every fix.
+
+Q: Naming things clearly at the architecture level (like "packs", "topics", "levels") helps:
+A: Everyone talk about the system the same way
+W: The code compile
+W: Search engines
+W: Nothing
+E: Shared vocabulary is part of good architecture.
+
+# A 2
+Q: "Layers" in architecture (UI, logic, data) help because:
+A: Each can change without rewriting the others
+W: They make the code longer
+W: They're required
+W: They hide bugs
+E: Swapping localStorage for a server should only touch the data layer.
+
+Q: A "storage adapter" with save() and load() functions lets you:
+A: Switch where data is stored without changing the rest of the app
+W: Store more data
+W: Encrypt data automatically
+W: Skip saving
+E: localStorage today, a sync server tomorrow — same calls.
+
+Q: The "open/closed principle" says code should be:
+A: Open to extension, closed to modification
+W: Open source and closed source
+W: Open on weekdays
+W: Closed to all changes
+E: Add new subject packs without editing engine internals.
+
+Q: Wrapping a core function from outside (like hooking record()) is useful but risky because:
+A: Behavior becomes hard to trace when many layers wrap the same function
+W: It can't work
+W: It's slower
+W: It's illegal
+E: Prefer explicit hooks or events in the core once add-ons multiply.
+
+Q: An event bus (publish/subscribe) inside an app lets features:
+A: React to things like "answered" without the core knowing about them
+W: Ride a bus
+W: Talk to the server only
+W: Replace functions
+E: The core emits events; add-ons subscribe. Cleaner than monkey-patching.
+
+Q: The engine is one 900 KB HTML file. A sensible next architectural step is:
+A: Split engine code from subject data into separate files that load as needed
+W: Make it bigger
+W: Copy it again
+W: Remove the service worker
+E: Smaller first load, and one engine file shared by every app.
+
+# A 3
+Q: "Feature toggles" in the engine (like smart jump on/off) help with:
+A: Shipping features safely and letting users or admins control them
+W: Hiding bugs
+W: Making the code shorter
+W: Nothing
+E: Also lets one engine serve different products with different features.
+
+Q: A plugin API should be:
+A: Small, stable and documented
+W: Large and changing weekly
+W: Undocumented
+W: Secret
+E: Every change to it can break plugins.
+
+Q: Coupling between the quiz engine and one subject (like hardcoded "Shop Safety") is a problem because:
+A: The engine stops being reusable for other subjects
+W: It makes the code faster
+W: It's required
+W: It isn't a problem
+E: Move subject-specific rules into the subject's data.
+
+Q: Domain-driven design encourages:
+A: Code organized around the business's real concepts and language
+W: Organizing by file type only
+W: One giant file
+W: Random folders
+E: Packs, topics, levels, ranks and crew are your domain language.
+
+Q: When adding a feature that touches many parts, a senior approach is:
+A: Add a seam (an interface or hook) once, then build on it
+W: Edit every place by hand
+W: Copy the feature into each file
+W: Skip the feature
+E: Seams make the next similar feature cheap.
+
+Q: Hexagonal architecture (ports and adapters) keeps:
+A: Core logic independent of outside tools like databases or UIs
+W: The UI in hexagon shapes
+W: Six servers running
+W: Code in six files
+E: Swap adapters without touching the core.
+
+# A 4
+Q: Choosing a monolith first for a small team is usually wise because:
+A: It's simpler to build, deploy and debug until boundaries are clear
+W: Microservices are illegal
+W: Monoliths scale infinitely
+W: It's never wise
+E: Many successful products start and stay as well-structured monoliths.
+
+Q: Conway's law says:
+A: Systems tend to mirror the communication structure of the teams that build them
+W: Code doubles every year
+W: Bugs grow with lines
+W: Servers fail at night
+E: Plan architecture and teams together.
+
+Q: An architecture decision record helps future maintainers by explaining:
+A: The context, options considered, and why one was chosen
+W: Only the code
+W: The build steps
+W: The color scheme
+E: Without it, people re-argue settled decisions or undo good ones.
+
+Q: The biggest long-term cost in most software is:
+A: Maintenance and change, not the first build
+W: Writing the first version
+W: Buying servers
+W: Picking a logo
+E: Design for change: clear boundaries, tests and docs.
+
+Q: Designing the engine for a white-label business (each customer's brand) suggests:
+A: Branding, content and features as configuration, not code edits
+W: A separate codebase per customer
+W: Hardcoding each customer's colors
+W: One brand for all
+E: Configuration scales; forks don't.
+
+Q: A senior engineer evaluating an architecture asks first:
+A: What are the requirements and constraints, and what trade-offs does this make?
+W: Which framework is trending?
+W: How many files does it have?
+W: Is it written in the newest language?
+E: There's no best architecture, only fits to requirements.
+
+# O 1
+Q: A PWA can work offline because of:
+A: A service worker that caches the app's files
+W: A special Wi-Fi setting
+W: GitHub Pages
+W: The manifest's colors
+E: Your apps' sw.js caches the page after the first visit.
+
+Q: The web app manifest gives an installed app:
+A: Its name, icon and how it opens (like full screen)
+W: Offline support
+W: A database
+W: Push notifications automatically
+E: Manifest = install identity; service worker = offline behavior.
+
+Q: "Add to Home Screen" on an iPhone is done from:
+A: Safari's Share menu
+W: The App Store
+W: Settings → Wi-Fi
+W: A QR code only
+E: Android Chrome offers "Install app" from its menu.
+
+Q: Data saved in localStorage on a phone:
+A: Stays on that phone and that browser only
+W: Syncs to all devices automatically
+W: Goes to GitHub
+W: Is deleted every night
+E: That's why syncing to a manager needs extra work.
+
+Q: "Offline-first" means:
+A: The app works without a connection and syncs when one is available
+W: The app only works offline
+W: The app loads slower
+W: The app has no server
+E: Great for techs in shops with weak signal.
+
+Q: When you update index.html, phones get the new version because:
+A: The service worker checks the network first for the page, then falls back to cache
+W: Phones reinstall the app daily
+W: GitHub sends a push
+W: They don't
+E: Bumping the cache VERSION also clears old cached files.
+
+# O 2
+Q: Why bump the VERSION in sw.js after changing the app?
+A: So old caches are cleared and the new files are stored
+W: To change the icon
+W: To make it faster
+W: GitHub requires it
+E: Stale caches are the classic PWA "why didn't my update show up" bug.
+
+Q: Cache-first vs network-first: which suits icons and fonts?
+A: Cache-first — they rarely change
+W: Network-first
+W: Neither
+W: Always no cache
+E: Network-first suits the main page so updates arrive.
+
+Q: Two phones and a PC on the same Wi-Fi need to share quiz results. A simple approach is:
+A: The PC runs a small server; phones send results to it when on that network
+W: Bluetooth only
+W: Email each result
+W: localStorage sharing
+E: Phones can't see each other's storage; something must collect the data.
+
+Q: A sync queue stores:
+A: Changes made offline, waiting to be sent when back online
+W: Users waiting in line
+W: Old versions of the app
+W: CSS files
+E: Each item needs an id so it isn't sent twice.
+
+Q: The IndexedDB browser storage is better than localStorage for:
+A: Larger and structured data, with async access
+W: Tiny settings only
+W: Cookies
+W: CSS
+E: localStorage is small and synchronous; IndexedDB scales further.
+
+Q: Storage on iPhone web apps can be cleared by the system when:
+A: The app isn't used for a while or the device needs space
+W: Never
+W: Every hour
+W: When it rains
+E: Offer export/backup or sync for important progress.
+
+# O 3
+Q: To sync without double-counting, each result record needs:
+A: A unique id the server can use to ignore duplicates
+W: A large font
+W: Only a timestamp
+W: The phone's battery level
+E: Resending is normal on flaky networks; the server must be idempotent.
+
+Q: Merging progress from two devices is easier if you sync:
+A: Raw answer events, then recalculate levels
+W: Final levels only
+W: Screenshots
+W: Nothing
+E: Levels computed on each device may disagree; events merge cleanly.
+
+Q: Background Sync in service workers aims to:
+A: Send queued requests when connectivity returns, even after the page closes
+W: Sync calendars
+W: Download all apps
+W: Update the OS
+E: Support varies by browser — iOS has limits — so keep a manual Sync button too.
+
+Q: A private network like Tailscale for phone ↔ PC access helps because:
+A: Devices reach each other securely without exposing the PC to the internet
+W: It makes Wi-Fi faster
+W: It replaces HTTPS
+W: It stores files
+E: Only your devices can connect.
+
+Q: Showing "Last synced 3 min ago" in the app matters because:
+A: Users can see whether their data is current and trust it
+W: It's required
+W: It speeds up sync
+W: It saves battery
+E: Silent sync failures erode trust.
+
+Q: A peer-to-peer option (WebRTC) for device sync:
+A: Can work without a central server, but needs help to find peers
+W: Requires a database
+W: Only works on PCs
+W: Is just email
+E: Signaling and NAT traversal make it trickier than a small server.
+
+# O 4
+Q: An offline-first app's conflict policy should be decided:
+A: Per type of data, before building sync
+W: After users complain
+W: Randomly
+W: Never
+E: Progress = merge events; settings = last write wins; content = server wins.
+
+Q: A "local-first" app philosophy says:
+A: The user's device holds the primary copy of their data, with sync as a bonus
+W: Only work on localhost
+W: Never use the internet
+W: Store all data on a server
+E: Fast, private and resilient — fits Mad Minute's offline goal.
+
+Q: Encrypting synced data end-to-end means:
+A: Only the user's devices can read it; the server just stores ciphertext
+W: The server encrypts at rest only
+W: HTTPS is enough
+W: Data is compressed
+E: Strong privacy, but the server can't run queries on the content.
+
+Q: Testing sync should include:
+A: Offline edits on two devices, reconnecting in different orders, and duplicates
+W: Only one device online
+W: Only fast Wi-Fi
+W: Nothing special
+E: Sync bugs live in the weird orderings.
+
+Q: A versioned data format for exported progress files allows:
+A: Older files to be imported by newer app versions
+W: Faster export
+W: Smaller files
+W: Encryption
+E: Always include a version field.
+
+Q: Storage quota and eviction on mobile browsers mean critical data should:
+A: Also live somewhere durable, like a sync server or an exported file
+W: Only live in localStorage
+W: Be printed
+W: Not be saved
+E: Call navigator.storage.persist() to request durable storage where supported.
+
+# S 1
+Q: "Shipping" means:
+A: Releasing a version for real users
+W: Mailing a package
+W: Writing code
+W: Testing locally
+E: Code isn't valuable until people use it.
+
+Q: Before shipping, you should at least:
+A: Test the main flow yourself on the devices users have
+W: Change the colors
+W: Delete the tests
+W: Rename the app
+E: A quick checklist catches the embarrassing bugs.
+
+Q: Release notes tell users:
+A: What changed in this version
+W: How the code works
+W: The developer's address
+W: The server's IP
+E: Short and in plain words.
+
+Q: A version number like 1.4.0 helps because:
+A: Everyone can refer to exactly which build has which features
+W: It looks professional only
+W: It's required by browsers
+W: It speeds up the app
+E: Bug reports should always include the version.
+
+Q: A bug reported by a user should be:
+A: Reproduced, fixed, tested, and the user told it's fixed
+W: Ignored if rare
+W: Blamed on the user
+W: Fixed silently without testing
+E: Close the loop — it builds trust.
+
+Q: Keeping a CHANGELOG helps you:
+A: Remember what changed and when, and explain it to others
+W: Run the app
+W: Fix bugs automatically
+W: Hide changes
+E: Your engine history file is exactly this.
+
+# S 2
+Q: "Continuous delivery" means:
+A: Every change that passes tests is ready to release at any time
+W: Releasing once a year
+W: Delivering pizza
+W: Never testing
+E: Releases become routine instead of scary.
+
+Q: Monitoring after release lets you:
+A: Spot errors and slowdowns real users hit
+W: Watch users type
+W: Skip testing
+W: Delete logs
+E: Error tracking tools report crashes with stack traces.
+
+Q: A rollback plan means:
+A: Knowing exactly how to return to the last good version fast
+W: Rolling the server rack
+W: Deleting the app
+W: Never releasing
+E: With Git and Pages, it's revert and push.
+
+Q: Documentation that lives next to the code (README, docs folder) is useful because:
+A: It's versioned with the code and easy to find
+W: It's faster
+W: It replaces tests
+W: It's required by law
+E: Docs in a separate place go stale faster.
+
+Q: Dependency updates should be:
+A: Done regularly in small steps, with tests
+W: Never done
+W: Done all at once every few years
+W: Done directly in production
+E: Small updates are easy; big jumps break things.
+
+Q: Analytics in a learning app should focus on:
+A: Whether people learn and come back, not just clicks
+W: Every keystroke
+W: Personal data
+W: Nothing
+E: Measure outcomes (levels gained, retention) with respect for privacy.
+
+# S 3
+Q: A "staged rollout" means:
+A: Releasing to a small group first, then everyone
+W: Releasing on a stage
+W: Releasing in 3 parts of the code
+W: Releasing only to developers forever
+E: Problems hit a few users, not all.
+
+Q: Support requests are valuable product feedback because:
+A: They show where users struggle in real use
+W: They're always wrong
+W: They should be deleted
+W: They make the app faster
+E: Group them; frequent issues become priorities.
+
+Q: The bus factor of a project is:
+A: How many people could disappear before nobody understands it
+W: The number of servers
+W: How fast it runs
+W: The commute time
+E: For a solo founder it's 1 — good docs raise it.
+
+Q: Copyright and license notices in an app protect:
+A: Your rights over the code and content
+W: The app from bugs
+W: Users' passwords
+W: Server uptime
+E: Your apps include an all-rights-reserved notice; registration is a separate legal step.
+
+Q: When maintaining old versions for customers, you need:
+A: Clear version tracking and a policy for how long each is supported
+W: Nothing
+W: To support every version forever
+W: To delete old versions without notice
+E: Customers on old versions still need fixes for serious bugs.
+
+Q: Uptime monitoring for a static site on GitHub Pages is mostly about:
+A: Checking the site loads and DNS/HTTPS are healthy
+W: Server CPU
+W: Database load
+W: Nothing
+E: Simple external checks are enough.
+
+# S 4
+Q: Before selling software to companies, buyers often expect:
+A: Security practices, data handling answers, support terms and reliability
+W: Only a nice logo
+W: Free source code
+W: Nothing
+E: Questionnaires on privacy and security are normal for business sales.
+
+Q: Error budgets help a team decide:
+A: When to slow feature work and focus on reliability
+W: How much to pay for bugs
+W: Which bugs to hide
+W: Nothing
+E: Spend the budget on risk; when it's gone, stabilize.
+
+Q: A good on-call or incident process for a small product includes:
+A: Alerts that matter, a runbook, and a calm postmortem afterward
+W: Ignoring alerts at night
+W: Blaming the newest developer
+W: No documentation
+E: Even solo, write down what happened and what changed.
+
+Q: Long-term maintainability depends most on:
+A: Simple design, tests, docs and consistent conventions
+W: Using the newest framework
+W: Clever one-liners
+W: More comments than code
+E: Boring, clear code ages well.
+
+Q: Sunsetting a feature responsibly means:
+A: Announcing it, giving users time and an export, then removing it
+W: Deleting it overnight
+W: Hiding it
+W: Never removing anything
+E: Respect users' data and habits.
+
+Q: The engine changelog you keep becomes most valuable when:
+A: Each entry says what changed, why, and where to look
+W: It only lists dates
+W: It's never updated
+W: It's kept in your head
+E: A breadcrumb trail lets you or a teammate trace any behavior back to its decision.

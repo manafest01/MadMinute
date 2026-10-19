@@ -1,0 +1,1033 @@
+@pack back
+
+# H 1
+Q: Which HTTP method is used to read data?
+A: GET
+W: POST
+W: DELETE
+W: PUT
+E: GET asks for something without changing it.
+
+Q: Which HTTP method usually creates something new?
+A: POST
+W: GET
+W: HEAD
+W: OPTIONS
+E: POST /questions with the new question in the body.
+
+Q: Which HTTP method removes something?
+A: DELETE
+W: REMOVE
+W: POST
+W: GET
+E: DELETE /questions/42.
+
+Q: An HTTP request is made of:
+A: A method, a URL, headers and sometimes a body
+W: Only a URL
+W: HTML and CSS
+W: A database query
+E: The response comes back with a status code, headers and a body.
+
+Q: Status code 200 means:
+A: OK — the request worked
+W: Not found
+W: Server error
+W: Redirect
+E: 2xx codes mean success.
+
+Q: Status code 404 means:
+A: Not found
+W: OK
+W: Forbidden
+W: Server error
+E: The URL doesn't match anything on the server.
+
+# H 2
+Q: Status code 201 means:
+A: Created — a new resource was made
+W: OK, nothing changed
+W: Not found
+W: Unauthorized
+E: Typical response to a successful POST.
+
+Q: Status code 401 vs 403:
+A: 401 = not logged in; 403 = logged in but not allowed
+W: They're the same
+W: 401 = server down; 403 = not found
+W: 403 = not logged in; 401 = not allowed
+E: 401 Unauthorized really means "unauthenticated." 403 Forbidden means no permission.
+
+Q: Status code 400 means:
+A: Bad request — the client sent something invalid
+W: Server crashed
+W: Request worked
+W: Page moved
+E: Like missing fields or broken JSON.
+
+Q: What's the difference between PUT and PATCH?
+A: PUT replaces the whole resource; PATCH changes part of it
+W: They're identical
+W: PATCH deletes
+W: PUT reads
+E: PATCH /users/1 {"city": "Eustis"} updates only the city.
+
+Q: A query string like /questions?topic=brakes&level=2 is used to:
+A: Pass filters or options in the URL
+W: Run SQL in the browser
+W: Log in
+W: Upload files
+E: Good for GET requests that filter or sort.
+
+Q: The Content-Type: application/json header tells the receiver:
+A: The body is JSON
+W: The user is logged in
+W: To cache the response
+W: The server's language
+E: Without it, servers may not parse the body.
+
+# H 3
+Q: In a REST API, which URL best represents "question 42"?
+A: /questions/42
+W: /getQuestion?id=42&action=read
+W: /question-reader/42/fetch
+W: /api/doQuestion42
+E: REST names resources with nouns; the HTTP method says what to do.
+
+Q: Status code 429 means:
+A: Too many requests — you're being rate-limited
+W: Not found
+W: Created
+W: Conflict
+E: Back off and retry later. Retry-After headers tell you how long.
+
+Q: Why version an API, like /api/v1/questions?
+A: So you can change it later without breaking existing apps
+W: It's required by HTTP
+W: It makes it faster
+W: To hide it
+E: Old phones running old app versions still call v1.
+
+Q: Pagination in an API means:
+A: Returning results in pages, like 50 at a time
+W: Numbering HTML pages
+W: Printing results
+W: Splitting the database
+E: Never return 600,000 rows at once. Use limit/offset or cursors.
+
+Q: Which methods should be idempotent (same result if repeated)?
+A: GET, PUT and DELETE
+W: Only POST
+W: None
+W: Only PATCH
+E: That's why retries of PUT are safer than retries of POST.
+
+Q: A 302 response tells the browser:
+A: Go to a different URL given in the Location header
+W: The page is broken
+W: Retry in 302 seconds
+W: Log in again
+E: 301 is a permanent move; 302/307 temporary.
+
+# H 4
+Q: An "idempotency key" header on a POST is used to:
+A: Let the server ignore a duplicate of the same request
+W: Encrypt the body
+W: Speed up the request
+W: Identify the user
+E: Payments use this so a retry doesn't charge twice.
+
+Q: ETag and If-None-Match headers let a server:
+A: Reply 304 Not Modified when the client's copy is still current
+W: Encrypt responses
+W: Block requests
+W: Track users
+E: Saves bandwidth for data that rarely changes.
+
+Q: Cursor-based pagination is better than offset for large changing data because:
+A: It doesn't skip or repeat rows when items are added while paging
+W: It's shorter to type
+W: Offsets are illegal
+W: Cursors are always faster to write
+E: "Give me 50 after id 1043" stays stable.
+
+Q: A well-designed error response from an API includes:
+A: The right status code plus a clear message and error code in the body
+W: Always status 200 with "error" in the text
+W: Only a stack trace
+W: Nothing
+E: Clients can handle it programmatically and humans can read it. Never leak internals.
+
+Q: gRPC differs from REST mainly by:
+A: Using defined contracts (protobuf) and binary messages, often for service-to-service calls
+W: Only working in browsers
+W: Not using a network
+W: Being a database
+E: Faster and strongly typed, but less browser-friendly.
+
+Q: An API gateway sits in front of services to:
+A: Handle routing, auth, rate limits and logging in one place
+W: Store data
+W: Render HTML
+W: Compile code
+E: Services behind it can stay simpler.
+
+# S 1
+Q: Node.js lets you:
+A: Run JavaScript on a server, outside the browser
+W: Write CSS
+W: Run Python in the browser
+W: Design databases
+E: Same language front and back.
+
+Q: Express is:
+A: A small Node.js framework for building web servers and APIs
+W: A database
+W: A front-end library
+W: A shipping company
+E: app.get("/hello", (req, res) => res.send("hi")).
+
+Q: Flask and FastAPI are:
+A: Python frameworks for building web servers and APIs
+W: JavaScript libraries
+W: Databases
+W: Cloud providers
+E: ManaFlow's Python side could expose an API with one of these.
+
+Q: A "route" on a server is:
+A: A URL path and method mapped to code that handles it
+W: A network cable
+W: A database table
+W: A CSS rule
+E: GET /api/questions → the function that returns questions.
+
+Q: localhost means:
+A: Your own computer
+W: The nearest server
+W: GitHub
+W: A local network printer
+E: localhost:3000 is a server running on your machine at port 3000.
+
+Q: A "port" number, like 3000 or 8080, identifies:
+A: Which program on a computer gets the network traffic
+W: The country of the server
+W: The server's speed
+W: The number of users
+E: One machine can run many servers on different ports.
+
+# S 2
+Q: In Express, req and res stand for:
+A: The request coming in and the response going out
+W: Required and result
+W: Read and resolve
+W: Request and restart
+E: Read input from req, send output with res.
+
+Q: A route parameter like /questions/:id lets you:
+A: Read part of the URL, such as the id, in your handler
+W: Change the port
+W: Add CSS
+W: Skip authentication
+E: In Express it's req.params.id.
+
+Q: "Middleware" in a server framework is:
+A: Code that runs on requests before (or after) the main handler
+W: A database
+W: A middle-tier server room
+W: A front-end library
+E: Logging, auth checks and JSON parsing are typical middleware.
+
+Q: Why should a server validate input from requests?
+A: Clients can send anything, including bad or malicious data
+W: Browsers always send correct data
+W: It makes it faster
+W: It's optional
+E: Never trust the client — check types, required fields and limits on the server.
+
+Q: Environment variables like PORT and DATABASE_URL are used so:
+A: The same code runs in different places with different settings
+W: The code runs faster
+W: Users can change them
+W: Git can track them
+E: Development and production get different values without code changes.
+
+Q: A Python virtual environment (venv) is for:
+A: Keeping each project's installed packages separate
+W: Running Python in a VM
+W: Hiding code
+W: Speeding up Python
+E: Avoids version clashes between projects. Activate it before pip install.
+
+# S 3
+Q: Why shouldn't a web server do slow work (like analyzing 5,000 audio files) inside the request?
+A: The request times out and the server can't serve others well
+W: Servers can't do slow work
+W: It's illegal
+W: It makes HTML larger
+E: Hand it to a background job queue and let the client check progress.
+
+Q: A "background job" or worker is:
+A: A separate process that does slow tasks outside of web requests
+W: A hidden web page
+W: A server crash
+W: A CSS animation
+E: Email sending, file processing, reports.
+
+Q: Logging requests on a server helps you:
+A: See what happened when something goes wrong
+W: Speed up responses
+W: Hide errors
+W: Test the front-end
+E: Include time, method, path, status and duration. Never log passwords.
+
+Q: Graceful shutdown means a server:
+A: Finishes in-progress requests before stopping
+W: Shuts down instantly
+W: Never shuts down
+W: Asks users permission
+E: Important for deploys so users don't get cut off mid-request.
+
+Q: Serving a static site (HTML/CSS/JS files only) vs running an app server:
+A: Static needs no server code running, so it's cheaper and simpler
+W: Static sites can't use JavaScript
+W: App servers are always better
+W: They're the same
+E: Mad Minute is static on GitHub Pages. Server needs come with sync and accounts.
+
+Q: Health check endpoints like /health exist so:
+A: Load balancers and orchestrators can tell if the server is alive
+W: Doctors can use the app
+W: Users can check their health
+W: Tests run faster
+E: Kubernetes probes call them to decide whether to restart or route traffic.
+
+# S 4
+Q: Node.js handles many connections with one thread by:
+A: Using non-blocking I/O and an event loop
+W: Creating a thread per user
+W: Refusing extra users
+W: Running on the GPU
+E: Great for I/O-heavy APIs; CPU-heavy work blocks everything.
+
+Q: Horizontal scaling a server app requires that:
+A: No user session lives only in one server's memory
+W: The servers are identical in color
+W: The database runs on each server
+W: Only one user connects
+E: Store sessions in a database or cache like Redis, or use stateless tokens.
+
+Q: Timeouts on outgoing calls to other services prevent:
+A: One slow dependency from tying up all your server's workers
+W: Users from logging in
+W: Caching
+W: Logging
+E: Plus retries with backoff and circuit breakers for resilience.
+
+Q: A circuit breaker pattern:
+A: Stops calling a failing service for a while, failing fast instead
+W: Turns off the power
+W: Breaks the code on purpose
+W: Restarts the server every hour
+E: Gives the failing service time to recover.
+
+Q: Twelve-Factor App principles recommend storing config in:
+A: Environment variables
+W: The source code
+W: The database only
+W: A text file in Git
+E: Keeps secrets out of code and the same build deployable anywhere.
+
+Q: When the PC running ManaFlow Studio serves files to a phone, security should rely on:
+A: A private network like Tailscale plus authentication, not an open port
+W: Hoping nobody finds the IP
+W: A long URL
+W: Turning off the firewall
+E: "Security through obscurity" fails. Keep the server unreachable from the open internet.
+
+# Q 1
+Q: Which SQL keyword reads data?
+A: SELECT
+W: GET
+W: READ
+W: FETCH
+E: SELECT name FROM users;
+
+Q: Which SQL clause filters rows?
+A: WHERE
+W: FILTER
+W: IF
+W: HAVING only
+E: SELECT * FROM questions WHERE level = 2;
+
+Q: What does SELECT * mean?
+A: Select all columns
+W: Select all tables
+W: Multiply values
+W: Select nothing
+E: Handy for exploring; name columns in real code.
+
+Q: Which keyword adds a new row?
+A: INSERT INTO
+W: ADD ROW
+W: CREATE ROW
+W: PUT
+E: INSERT INTO users (name) VALUES ('Tom');
+
+Q: Which keyword changes existing rows?
+A: UPDATE
+W: CHANGE
+W: MODIFY ROW
+W: SET ONLY
+E: UPDATE users SET city = 'Eustis' WHERE id = 1;
+
+Q: Which keyword removes rows?
+A: DELETE
+W: REMOVE
+W: DROP ROW
+W: ERASE
+E: DELETE FROM users WHERE id = 1; — never forget the WHERE.
+
+# Q 2
+Q: What happens if you run UPDATE users SET city = 'X'; with no WHERE?
+A: Every row's city becomes X
+W: Nothing
+W: Only the first row changes
+W: It's a syntax error
+E: Always write the WHERE first, and test with a SELECT using the same WHERE.
+
+Q: ORDER BY score DESC does what?
+A: Sorts results from highest to lowest score
+W: Deletes low scores
+W: Groups by score
+W: Shows only the top score
+E: ASC is lowest first (the default).
+
+Q: COUNT(*) returns:
+A: The number of rows
+W: The total of a column
+W: The largest value
+W: All rows
+E: SELECT COUNT(*) FROM questions WHERE topic = 'Brakes';
+
+Q: LIMIT 10 does what?
+A: Returns at most 10 rows
+W: Waits 10 seconds
+W: Deletes 10 rows
+W: Limits columns to 10
+E: Paired with ORDER BY for "top 10."
+
+Q: SQLite is:
+A: A small database stored in a single file, no server needed
+W: A cloud-only database
+W: A JavaScript framework
+W: A light version of SQL syntax
+E: Great for local apps like ManaFlow's library index.
+
+Q: GROUP BY topic with COUNT(*) gives:
+A: The number of rows for each topic
+W: All rows sorted by topic
+W: Only unique rows
+W: A list of topics only, no counts
+E: Aggregates summarize groups.
+
+# Q 3
+Q: An INNER JOIN returns:
+A: Only rows with a match in both tables
+W: All rows from both tables
+W: Rows from the left table only
+W: Rows with no match
+E: Users with no orders won't appear in an inner join to orders.
+
+Q: A LEFT JOIN returns:
+A: All rows from the left table, plus matches from the right (or NULL)
+W: Only matching rows
+W: All rows from the right table
+W: Nothing if any row fails
+E: Use it to include users who have no orders yet.
+
+Q: HAVING differs from WHERE because:
+A: HAVING filters after grouping; WHERE filters rows before
+W: They're identical
+W: HAVING only works on text
+W: WHERE can't use numbers
+E: ... GROUP BY topic HAVING COUNT(*) < 10 finds thin topics.
+
+Q: A parameterized query (prepared statement) prevents:
+A: SQL injection, by sending values separately from the SQL
+W: Slow queries
+W: Typos
+W: Large results
+E: db.query("SELECT * FROM users WHERE id = ?", [id]).
+
+Q: Why add an index on a column you often search by?
+A: So the database finds rows without scanning the whole table
+W: To sort the table permanently
+W: To encrypt it
+W: To make inserts faster
+E: Indexes speed reads but cost some write speed and space.
+
+Q: NULL in SQL means:
+A: Unknown or missing — and NULL = NULL isn't true
+W: Zero
+W: An empty string
+W: False
+E: Use IS NULL / IS NOT NULL to check.
+
+# Q 4
+Q: EXPLAIN in front of a query shows:
+A: How the database plans to run it, like which indexes it uses
+W: A plain-English description for users
+W: The table's history
+W: The query's author
+E: Find full table scans that need an index.
+
+Q: A transaction's isolation level controls:
+A: What concurrent transactions can see of each other's changes
+W: Who can log in
+W: How big the database is
+W: Network speed
+E: Higher isolation prevents odd reads but can reduce throughput.
+
+Q: A "deadlock" in a database is:
+A: Two transactions each waiting for a lock the other holds
+W: A locked user account
+W: A crashed server
+W: A query with no WHERE
+E: The database kills one; your code should retry.
+
+Q: A composite index on (topic, level) helps queries that filter by:
+A: topic, or topic and level together
+W: level alone, always
+W: Neither
+W: Only by id
+E: Column order matters: it works left to right.
+
+Q: Window functions like ROW_NUMBER() OVER (PARTITION BY user ORDER BY time) let you:
+A: Rank or number rows within groups without collapsing them
+W: Open windows in the app
+W: Delete duplicates automatically
+W: Join tables
+E: "Each tech's 3 most recent sessions" is a window function query.
+
+Q: Postgres vs SQLite for a multi-user web app with many writers:
+A: Postgres handles concurrent writes and network clients better
+W: SQLite is always better
+W: They're the same
+W: Postgres can't run on Linux
+E: SQLite shines for local and single-writer apps; Postgres for shared servers.
+
+# M 1
+Q: Data modeling means:
+A: Deciding what data you store and how pieces relate
+W: Making 3D models
+W: Picking colors
+W: Writing CSS
+E: Get it right early: everything else is built on it.
+
+Q: For a quiz app, which is a sensible "thing" (entity) to store?
+A: A question, with text, options, answer and topic
+W: A button color
+W: The font
+W: A screen size
+E: Entities are the nouns of your app: users, questions, attempts.
+
+Q: Each question should have an id because:
+A: Other data, like missed answers, needs a stable way to point to it
+W: Ids make text shorter
+W: It's decoration
+W: Databases forbid text
+E: Mad Minute tracks missed questions by id.
+
+Q: Storing a user's age instead of birth date is a problem because:
+A: Age goes stale; birth date lets you calculate age any time
+W: Ages are too big
+W: Databases can't store numbers
+W: It's not a problem
+E: Store facts, derive the rest.
+
+Q: "One-to-many" means, for example:
+A: One user has many quiz attempts
+W: One question has one answer
+W: Many apps share one icon
+W: One server runs one app
+E: The "many" side stores a reference (user_id) to the "one."
+
+Q: A timestamp on each record is useful because:
+A: You can sort, sync and see when things changed
+W: It makes records smaller
+W: It's required by SQL
+W: It encrypts data
+E: created_at and updated_at are cheap and very handy.
+
+# M 2
+Q: Many-to-many (students and courses) is usually stored with:
+A: A join table holding pairs of ids
+W: A comma-separated list in one column
+W: Duplicated rows
+W: Two databases
+E: enrollments(student_id, course_id).
+
+Q: Storing a list as "brakes,engine,hv" in one text column is a problem because:
+A: You can't easily query, index or validate items
+W: Commas are illegal
+W: It uses too little space
+W: It's never a problem
+E: Use a separate table (or a proper array/JSON type where it fits).
+
+Q: Why give each subject pack in Mad Minute its own storage key?
+A: So one subject's progress can't overwrite another's
+W: Browsers need many keys
+W: It's faster to type
+W: To hide data
+E: Clear boundaries in data make features like separate ranks simple.
+
+Q: A "schema version" number in saved data lets you:
+A: Detect old formats and upgrade them on load
+W: Make data smaller
+W: Encrypt it
+W: Delete old saves
+E: Mad Minute state has v: 2 and carries over v1 custom questions.
+
+Q: Soft delete means:
+A: Marking a row as deleted instead of removing it
+W: Deleting slowly
+W: Deleting with a soft keyboard
+W: Removing the table
+E: Keeps history and allows undo, but every query must filter deleted rows.
+
+Q: Which is better for a question's level: a number 1–4 or text like "kinda hard"?
+A: A number with a fixed meaning
+W: Free text
+W: An emoji
+W: A color
+E: Constrained values can be sorted, compared and validated.
+
+# M 3
+Q: Normalizing data means:
+A: Storing each fact once and linking with keys
+W: Making everything lowercase
+W: Removing all tables
+W: Compressing JSON
+E: Avoids copies that drift out of sync.
+
+Q: Syncing quiz results from several phones to one PC needs each result to have:
+A: A globally unique id and a timestamp, so duplicates and order can be handled
+W: Only the score
+W: The phone's color
+W: Nothing special
+E: UUIDs avoid collisions between devices; timestamps help order and merge.
+
+Q: Event sourcing stores:
+A: Every change as an event, rebuilding current state from them
+W: Only the latest state
+W: Calendar events
+W: Logs only
+E: A full history is powerful for audits and timelines, at the cost of complexity.
+
+Q: Before adding a new field to saved data, plan for:
+A: Old records that don't have it yet
+W: Nothing
+W: Deleting all old data
+W: Renaming the app
+E: Default values and migrations prevent crashes on old saves.
+
+Q: A "lookup table" (like topics with id and name) helps because:
+A: Renaming a topic changes one row, not thousands
+W: It makes queries slower
+W: It's required
+W: It hides topics
+E: Mad Minute progress is stored by topic name — renaming a topic would orphan progress. Ids avoid that.
+
+Q: JSON columns in Postgres are a good fit when:
+A: Data is flexible and you rarely need to query inside it
+W: You need strict relationships
+W: You need fast joins on every field
+W: Never
+E: Mix structured columns with JSON for the flexible parts.
+
+# M 4
+Q: Conflict resolution "last write wins" can lose data when:
+A: Two devices edit the same record offline and the later sync overwrites the other
+W: Only one device is used
+W: The network is fast
+W: Never
+E: Alternatives: merge fields, keep both versions, or use CRDTs for collaborative data.
+
+Q: CRDTs are data structures that:
+A: Merge changes from many devices automatically without conflicts
+W: Compress data
+W: Encrypt data
+W: Only work on servers
+E: Used in collaborative editors and offline-first apps.
+
+Q: When designing for multi-tenant (many companies) data, a key decision is:
+A: How each company's data is kept separate and secure
+W: The font
+W: The number of buttons
+W: The server's color
+E: A tenant_id on every row, separate schemas, or separate databases — each has trade-offs.
+
+Q: Storing money as a floating-point number is risky because:
+A: Rounding errors creep in; store whole cents as integers or use decimal types
+W: Money can't be numbers
+W: It's too precise
+W: It's fine
+E: 0.1 + 0.2 ≠ 0.3 in floating point.
+
+Q: Personally identifiable information (PII) in your data model should be:
+A: Minimized, protected, and only kept as long as needed
+W: Copied everywhere for convenience
+W: Stored in logs
+W: Public by default
+E: Less data = less risk. A crew view needs practice stats, not home addresses.
+
+Q: An "audit log" table records:
+A: Who changed what and when
+W: CSS changes
+W: Every page view
+W: Passwords
+E: Essential for business software where managers and techs share data.
+
+# A 1
+Q: Authentication means:
+A: Checking who someone is
+W: Checking what they're allowed to do
+W: Encrypting data
+W: Logging errors
+E: Logging in is authentication.
+
+Q: Authorization means:
+A: Checking what a logged-in user is allowed to do
+W: Checking who they are
+W: Writing code
+W: Signing a contract
+E: A tech can see their own stats; a manager can see the crew.
+
+Q: Passwords should be stored as:
+A: Salted hashes using a slow algorithm like bcrypt or Argon2
+W: Plain text
+W: Base64
+W: Encrypted with a key in the code
+E: Even you shouldn't be able to read them.
+
+Q: HTTPS protects:
+A: Data traveling between browser and server from being read or changed
+W: The server from all hacking
+W: Passwords stored in the database
+W: The code from bugs
+E: It protects the connection, not everything else.
+
+Q: Multi-factor authentication (MFA) adds:
+A: A second proof, like a code from your phone
+W: A second password that's the same
+W: Faster logins
+W: A captcha only
+E: Stolen passwords alone aren't enough.
+
+Q: Why should API keys never be in front-end code?
+A: Anyone can view the code and copy the key
+W: They make pages slow
+W: Browsers block them
+W: They expire
+E: Keep keys on a server and have the browser call your server.
+
+# A 2
+Q: A session cookie typically stores:
+A: A random session id that the server looks up
+W: The user's password
+W: The whole database
+W: The user's credit card
+E: Mark it HttpOnly and Secure so scripts can't read it and it only goes over HTTPS.
+
+Q: A JWT (JSON Web Token) is:
+A: A signed token carrying claims, like user id, that the server can verify
+W: An encrypted password
+W: A JavaScript library
+W: A cookie banner
+E: Signed, not secret — don't put private data in it.
+
+Q: The "principle of least privilege" means:
+A: Give each user or service only the access it needs
+W: Give admins to everyone for convenience
+W: Make passwords short
+W: Remove all permissions
+E: Limits damage if an account is compromised.
+
+Q: XSS (cross-site scripting) is when:
+A: An attacker gets their script to run in your users' browsers
+W: Two sites share CSS
+W: A server is overloaded
+W: Passwords are weak
+E: Escape output and avoid innerHTML with user content.
+
+Q: CSRF (cross-site request forgery) tricks a logged-in user's browser into:
+A: Sending an unwanted request to your site
+W: Showing ads
+W: Downloading files
+W: Deleting cookies
+E: Defenses: SameSite cookies and CSRF tokens.
+
+Q: Rate limiting login attempts protects against:
+A: Password guessing (brute force)
+W: XSS
+W: Slow pages
+W: Typos
+E: Lock or slow down after several failures.
+
+# A 3
+Q: OAuth lets users:
+A: Log in or grant access using another account, like Google, without sharing their password
+W: Encrypt files
+W: Reset passwords
+W: Skip authorization
+E: "Sign in with Google" is OAuth/OpenID Connect.
+
+Q: Role-based access control (RBAC) means:
+A: Permissions are attached to roles (tech, manager), and users get roles
+W: Every user has unique permissions set by hand
+W: Only one role exists
+W: Roles are for UI colors
+E: Easier to manage as teams grow.
+
+Q: Why check permissions on the server even if the button is hidden in the UI?
+A: Attackers can call the API directly, skipping the UI
+W: Hidden buttons still show
+W: It's slower otherwise
+W: Browsers require it
+E: The UI is a convenience, not a security boundary.
+
+Q: Secrets in production should live in:
+A: A secrets manager or protected environment variables
+W: The Git repository
+W: A shared spreadsheet
+W: The front-end code
+E: Rotate them regularly and limit who can read them.
+
+Q: CORS on your API should allow:
+A: Only the specific origins that need access
+W: Every origin with credentials
+W: No origins ever
+W: Whatever the browser asks
+E: Access-Control-Allow-Origin: * with credentials is a classic mistake.
+
+Q: Dependency vulnerabilities are found with tools like:
+A: npm audit, pip-audit, or Dependabot
+W: Lighthouse
+W: Prettier
+W: git log
+E: Most code you ship is other people's. Keep it updated.
+
+# A 4
+Q: The OWASP Top 10 is:
+A: A widely used list of the most critical web application security risks
+W: The 10 best web frameworks
+W: A coding contest
+W: A list of fast databases
+E: Broken access control and injection consistently rank high.
+
+Q: SSRF (server-side request forgery) is when:
+A: An attacker makes your server fetch URLs it shouldn't, like internal services
+W: The browser fetches too much
+W: A server is too slow
+W: Two servers share a session
+E: Validate and restrict URLs your server will fetch.
+
+Q: "Insecure direct object reference" looks like:
+A: Changing /api/results/123 to /124 shows someone else's data
+W: A missing CSS file
+W: A broken link
+W: A slow query
+E: Always check the record belongs to (or is allowed for) the requesting user.
+
+Q: Refresh tokens exist so:
+A: Access tokens can be short-lived while users stay logged in
+W: Pages reload automatically
+W: Passwords can be shorter
+W: Tokens never expire
+E: Short-lived access tokens limit damage if stolen.
+
+Q: Threat modeling asks:
+A: What are we building, what can go wrong, and what will we do about it?
+W: Who is the fastest coder?
+W: Which color is safest?
+W: How many servers do we need?
+E: Do it early for features handling money, accounts, or private data.
+
+Q: For a crew view that shares techs' practice data with managers, a responsible design includes:
+A: Telling techs what's shared, limiting it to what's needed, and controlling who can see it
+W: Sharing everything silently
+W: Making it public
+W: Storing it in the URL
+E: Trust and privacy are part of the product. The current crew view states this on the Progress screen.
+
+# T 1
+Q: Why write automated tests?
+A: To check code still works after changes, without testing by hand each time
+W: To make code run faster
+W: To replace writing code
+W: Because browsers require them
+E: Tests are a safety net for change.
+
+Q: A "unit test" checks:
+A: One small piece, like a single function
+W: The whole app in a browser
+W: Server uptime
+W: The design
+E: Fast and precise about where a break is.
+
+Q: In a test, an "assertion" is:
+A: A check that a value equals what you expect
+W: A comment
+W: An error message for users
+W: A database query
+E: expect(add(2, 3)).toBe(5);
+
+Q: Jest, Vitest and pytest are:
+A: Testing frameworks
+W: Databases
+W: Web servers
+W: CSS libraries
+E: Jest/Vitest for JavaScript, pytest for Python.
+
+Q: A test that passes when the code is broken is:
+A: Useless or misleading — tests should fail when behavior is wrong
+W: A great test
+W: Required
+W: Faster
+E: Check a new test by breaking the code on purpose and seeing it fail.
+
+Q: Manual testing means:
+A: A person clicks through the app to check it
+W: Testing with a manual
+W: Testing by a robot
+W: Not testing
+E: Still valuable, but slow and easy to skip. Automate the repeated checks.
+
+# T 2
+Q: Test-driven development (TDD) means:
+A: Writing a failing test first, then the code to pass it
+W: Testing only at the end
+W: Developers testing each other
+W: Never refactoring
+E: Red → green → refactor.
+
+Q: A good test name reads like:
+A: "returns 0 when the cart is empty"
+W: "test1"
+W: "works"
+W: "asdf"
+E: When it fails, the name tells you what broke.
+
+Q: An "integration test" checks:
+A: Several parts working together, like API plus database
+W: One function alone
+W: Code formatting
+W: Git history
+E: Slower than unit tests but catches wiring problems.
+
+Q: An end-to-end (E2E) test:
+A: Drives the real app like a user would, through the browser
+W: Tests only the database
+W: Checks one function
+W: Is done by hand only
+E: Tools: Playwright, Cypress. Slowest but closest to reality.
+
+Q: A "mock" in testing is:
+A: A fake stand-in for a real dependency, like the network
+W: A joke test
+W: A copy of the database
+W: A test that always fails
+E: Lets tests run fast and offline with controlled results.
+
+Q: The "testing pyramid" suggests:
+A: Many unit tests, fewer integration tests, and few end-to-end tests
+W: Only E2E tests
+W: Equal numbers of each
+W: No unit tests
+E: Fast tests at the base; slow, broad tests at the top.
+
+# T 3
+Q: Code coverage measures:
+A: Which lines ran during tests — not whether they were checked well
+W: How good the tests are
+W: How many users use the code
+W: Server uptime
+E: 100% coverage can still miss important cases.
+
+Q: A test for the placement logic should include:
+A: Perfect answers, all wrong, a mix, and running out of questions
+W: Only perfect answers
+W: Only one random run
+W: Nothing; it's simple
+E: Edge cases are where logic bugs hide.
+
+Q: Tests that depend on the current date often:
+A: Break on certain days; control the clock in tests
+W: Always pass
+W: Run faster
+W: Need the internet
+E: Inject time or use fake timers.
+
+Q: A regression test is written:
+A: After fixing a bug, to make sure it never comes back
+W: Before any code exists
+W: Only for UI
+W: To test old browsers
+E: Each bug fixed should leave a test behind.
+
+Q: "Arrange, Act, Assert" structures a test as:
+A: Set up data, run the code, check the result
+W: Write, delete, rewrite
+W: Plan, code, ship
+W: Import, export, test
+E: Keeps tests readable.
+
+Q: Snapshot tests are risky when:
+A: People update snapshots without reading what changed
+W: They're used at all
+W: They run fast
+W: They use JSON
+E: A snapshot only helps if diffs are reviewed.
+
+# T 4
+Q: Property-based testing (like Hypothesis or fast-check):
+A: Generates many random inputs to check rules that should always hold
+W: Tests CSS properties
+W: Tests only object properties
+W: Tests performance
+E: "Shuffling never loses an item" — tested on thousands of lists.
+
+Q: Contract testing between a front-end and an API checks:
+A: Both sides agree on request and response shapes
+W: Legal contracts
+W: Database speed
+W: CSS layout
+E: Catches breaking API changes before deploy.
+
+Q: Load testing answers:
+A: How the system behaves under heavy traffic
+W: Whether the code is formatted
+W: How heavy the server is
+W: How many tests exist
+E: Tools like k6 simulate many users.
+
+Q: Mutation testing evaluates tests by:
+A: Making small changes to the code and checking tests catch them
+W: Mutating the database
+W: Random user input
+W: Changing test names
+E: Surviving mutants reveal weak tests.
+
+Q: A test suite that takes 40 minutes usually leads to:
+A: People skipping tests; it's worth speeding up or splitting
+W: Better code
+W: No effect
+W: Faster releases
+E: Fast feedback keeps tests in the habit loop.
+
+Q: For an offline PWA, an important test is:
+A: Load once, go offline, reload, and confirm it still works and saves
+W: Only test online
+W: Test on desktop only
+W: Check the icon color
+E: Service worker caching bugs only show up this way.

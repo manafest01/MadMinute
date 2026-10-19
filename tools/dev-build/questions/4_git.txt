@@ -1,0 +1,1033 @@
+@pack git
+
+# B 1
+Q: Which command starts tracking a folder with Git?
+A: git init
+W: git start
+W: git new
+W: git track
+E: git init creates a hidden .git folder that stores the history.
+
+Q: Which command shows which files changed and what's staged?
+A: git status
+W: git log
+W: git show
+W: git check
+E: Run git status often. It tells you exactly where you stand.
+
+Q: Which command copies an existing repository from GitHub to your computer?
+A: git clone <url>
+W: git copy <url>
+W: git pull <url>
+W: git download <url>
+E: Clone gets the files plus the full history.
+
+Q: Which command marks a file to be included in the next commit?
+A: git add <file>
+W: git commit <file>
+W: git push <file>
+W: git save <file>
+E: add puts changes in the "staging area"; commit saves what's staged.
+
+Q: Which command saves staged changes with a message?
+A: git commit -m "message"
+W: git save "message"
+W: git push -m "message"
+W: git add -m "message"
+E: The message should say what changed and why, in a short line.
+
+Q: Which command sends your commits to GitHub?
+A: git push
+W: git pull
+W: git send
+W: git upload
+E: push uploads; pull downloads.
+
+# B 2
+Q: What is the "staging area"?
+A: A holding spot for changes you've chosen for the next commit
+W: The live website
+W: A backup folder
+W: A branch on GitHub
+E: It lets you commit some changes now and leave others for later.
+
+Q: Which command downloads new commits from GitHub and merges them into your branch?
+A: git pull
+W: git push
+W: git fetch only
+W: git clone
+E: pull = fetch + merge. Do it before starting work so you're up to date.
+
+Q: What does .gitignore do?
+A: Lists files Git should not track, like secrets or build output
+W: Deletes files
+W: Hides commits from GitHub
+W: Ignores merge conflicts
+E: Add things like .env, node_modules and big temporary files.
+
+Q: What does git add . do?
+A: Stages all changed files in the current folder and below
+W: Adds a new branch
+W: Commits everything
+W: Pushes to GitHub
+E: Handy, but check git status first so you don't stage files you didn't mean to.
+
+Q: Which is the best commit message?
+A: Fix timer not stopping when quiz ends early
+W: stuff
+W: update
+W: asdf
+E: Say what changed in plain words. Future you will search for it.
+
+Q: A commit in Git is identified by:
+A: A unique hash, like a3f9c2e
+W: Its date only
+W: Its file names
+W: A sequential number
+E: The hash is a fingerprint of the commit's content and history.
+
+# B 3
+Q: What does git diff show?
+A: Line-by-line changes not yet staged
+W: The list of branches
+W: The commit history
+W: Remote URLs
+E: git diff --staged shows what's staged. Always review before committing, especially AI-made changes.
+
+Q: How often should you commit?
+A: Whenever you reach a small, working step
+W: Once a month
+W: Only when the whole app is finished
+W: Never; just push
+E: Small commits are easy to understand, review and undo.
+
+Q: What does "HEAD" refer to?
+A: The commit you currently have checked out
+W: The first commit ever
+W: The main branch on GitHub
+W: The top of a file
+E: HEAD moves as you commit or switch branches.
+
+Q: Why should a commit contain one logical change?
+A: So it can be understood, reviewed and undone on its own
+W: Git only allows one file per commit
+W: It makes the repository smaller
+W: It's required by GitHub
+E: "Add biology subject" and "fix timer bug" are two commits, not one.
+
+Q: Should you commit a file containing a password or API key?
+A: No; once committed it stays in history even if deleted later
+W: Yes, if the repo is private
+W: Yes, if you delete it next commit
+W: It doesn't matter
+E: Treat a committed secret as leaked: rotate (replace) it, then remove it from history.
+
+Q: What's the difference between Git and GitHub?
+A: Git tracks history on your machine; GitHub hosts repos online for sharing
+W: They're the same
+W: GitHub is the command-line tool
+W: Git is a website
+E: You can use Git without GitHub. GitHub adds pull requests, issues and Pages hosting.
+
+# B 4
+Q: What does git commit --amend do?
+A: Replaces the last commit with a new one including any staged changes or new message
+W: Deletes the last commit
+W: Merges two branches
+W: Pushes the commit
+E: Only amend commits you haven't pushed; otherwise you rewrite history others have.
+
+Q: A large binary file (like a 200 MB audio file) committed to Git causes:
+A: A bloated repository forever, since every clone downloads it
+W: Nothing
+W: Faster clones
+W: Automatic compression to zero
+E: Use Git LFS for big media, or keep it out of the repo. Your music library belongs outside the public repo.
+
+Q: What does git stash do?
+A: Saves uncommitted changes aside so you can get them back later
+W: Deletes changes permanently
+W: Pushes to GitHub
+W: Creates a branch
+E: git stash pop brings them back. Useful when you need to switch tasks quickly.
+
+Q: In a commit message, the convention is:
+A: A short summary line, a blank line, then details if needed
+W: All capital letters
+W: One very long line
+W: Only emoji
+E: Many tools show only the first line, so make it count.
+
+Q: What's a "shallow clone" (git clone --depth 1)?
+A: A clone with only recent history, to save time and space
+W: A clone of only some files
+W: A broken clone
+W: A clone with no files
+E: Fast for big repos when you don't need the full history.
+
+Q: What does .gitattributes control?
+A: How Git treats certain files, like line endings or LFS
+W: Who can push
+W: Which branch is default
+W: Commit message rules
+E: Line ending differences between Windows and Linux are a common source of noisy diffs.
+
+# C 1
+Q: Which command shows the list of past commits?
+A: git log
+W: git status
+W: git history
+W: git list
+E: git log --oneline gives a compact view.
+
+Q: Why is version control useful?
+A: You can see every change and go back to any earlier version
+W: It makes code run faster
+W: It writes code for you
+W: It replaces backups of photos
+E: It's undo for your whole project, plus a record of why things changed.
+
+Q: A commit is like:
+A: A save point in a game
+W: A deleted file
+W: A server
+W: A browser tab
+E: You can always return to it.
+
+Q: What does git show <hash> display?
+A: The changes and message of that commit
+W: All branches
+W: The remote URL
+W: The staging area
+E: Great for seeing exactly what a specific commit did.
+
+Q: What does git log --oneline do?
+A: Shows each commit as one short line
+W: Shows only one commit
+W: Deletes old history
+W: Shows one file
+E: Hash plus summary line — easy to scan.
+
+Q: Who can see your commits before you push?
+A: Only you, on your machine
+W: Everyone on GitHub
+W: Your team automatically
+W: Nobody, not even you
+E: Commits are local until pushed.
+
+# C 2
+Q: What does git blame <file> show?
+A: Who last changed each line, and in which commit
+W: Which bugs are your fault
+W: Errors in the file
+W: Deleted files
+E: Use it to find the commit and reason behind a confusing line, not to blame people.
+
+Q: How do you see what a file looked like in an older commit?
+A: git show <hash>:<path>
+W: git old <file>
+W: git undo <file>
+W: git history <file> --show
+E: You can also check out the file from that commit with git restore --source <hash> <path>.
+
+Q: What does git log -p <file> show?
+A: Every commit that changed the file, with the actual changes
+W: Only the file's name
+W: A picture of the file
+W: The file's size
+E: -p shows patches (diffs) — the full story of a file.
+
+Q: A "tag" in Git is:
+A: A name stuck to a specific commit, often a version like v1.2.0
+W: A branch
+W: A comment in code
+W: A GitHub label for issues
+E: Tags mark releases so you can always find "what shipped as 1.2.0."
+
+Q: What does git diff main..feature show?
+A: The differences between the main and feature branches
+W: Merges the branches
+W: Deletes feature
+W: The log of main
+E: Useful before merging to see what's coming in.
+
+Q: Why write commit messages in the present tense, like "Add placement test"?
+A: It reads as what the commit does when applied
+W: Git requires it
+W: Past tense breaks Git
+W: It's shorter
+E: It's a convention, not a rule — consistency matters most.
+
+# C 3
+Q: What does git revert <hash> do?
+A: Creates a new commit that undoes that commit's changes
+W: Deletes the commit from history
+W: Moves HEAD backward
+W: Undoes unstaged changes
+E: Safe for shared branches because it doesn't rewrite history.
+
+Q: What does git log --grep="timer" do?
+A: Finds commits whose messages mention "timer"
+W: Finds files named timer
+W: Deletes timer commits
+W: Searches code for "timer"
+E: Good messages make this powerful. git log -S "timer" finds commits that changed code containing it.
+
+Q: What's the "reflog"?
+A: A local record of where HEAD has been, including "lost" commits
+W: A list of remote branches
+W: A log of errors
+W: The GitHub activity feed
+E: git reflog is how you rescue work after a bad reset.
+
+Q: What does git cherry-pick <hash> do?
+A: Copies one commit's changes onto your current branch
+W: Deletes a commit
+W: Picks the best branch
+W: Merges all branches
+E: Handy for bringing one fix to another branch.
+
+Q: A "detached HEAD" means:
+A: You've checked out a commit directly, not a branch
+W: Your repository is broken
+W: You've lost all work
+W: GitHub is down
+E: New commits here aren't on a branch. Create one (git switch -c name) to keep them.
+
+Q: Git is called "distributed" because:
+A: Every clone has the full history and can work offline
+W: It runs on many servers at once
+W: It splits files across computers
+W: It needs the internet
+E: There's no single required server; GitHub is just a shared copy.
+
+# C 4
+Q: What's the difference between git reset --soft, --mixed and --hard?
+A: soft keeps changes staged, mixed keeps them unstaged, hard throws them away
+W: They're the same
+W: hard is the safest
+W: soft deletes everything
+E: --hard discards uncommitted work. Use it carefully.
+
+Q: Interactive rebase (git rebase -i) lets you:
+A: Reorder, combine, edit or drop commits before sharing them
+W: Merge with GitHub
+W: Rename the repository
+W: Change user passwords
+E: Clean up messy local history. Never rebase commits others already have.
+
+Q: Why is rewriting history on a shared branch dangerous?
+A: Others' copies no longer match, causing confusing duplicates and lost work
+W: Git doesn't allow it
+W: It deletes the repository
+W: It's not dangerous
+E: Rewrite only your own unpushed (or personal) branches.
+
+Q: "Squash merging" a pull request means:
+A: All its commits are combined into one commit on main
+W: The branch is deleted without merging
+W: Only the first commit is kept
+W: Files are compressed
+E: Keeps main's history clean: one commit per feature.
+
+Q: git log --graph --oneline --all helps you:
+A: See branches and merges as a drawn tree
+W: Draw charts of code size
+W: See only the main branch
+W: Delete old branches
+E: Great for understanding how branches split and joined.
+
+Q: A good commit history for a project like Mad Minute would let you:
+A: Rebuild the story of each feature and find when any behavior changed
+W: Run the app faster
+W: Hide bugs
+W: Avoid testing
+E: That's exactly the breadcrumb trail an engine changelog draws from.
+
+# M 1
+Q: What is a branch for?
+A: Working on changes without affecting the main version
+W: Making a backup on a USB drive
+W: Deleting old code
+W: Speeding up the app
+E: Try a new feature on a branch; main keeps working.
+
+Q: Which command creates and switches to a new branch named feature?
+A: git switch -c feature
+W: git branch delete feature
+W: git new feature
+W: git merge feature
+E: Older form: git checkout -b feature.
+
+Q: Which command lists your branches?
+A: git branch
+W: git list
+W: git log
+W: git status --all
+E: The current one is marked with *.
+
+Q: What does merging do?
+A: Combines changes from one branch into another
+W: Deletes a branch
+W: Copies the repo
+W: Undoes a commit
+E: git switch main, then git merge feature.
+
+Q: The default main branch is usually named:
+A: main (older repos: master)
+W: trunk only
+W: default
+W: home
+E: GitHub uses main for new repos.
+
+Q: How do you switch to an existing branch called dev?
+A: git switch dev
+W: git branch dev
+W: git merge dev
+W: git go dev
+E: git checkout dev also works.
+
+# M 2
+Q: A merge conflict happens when:
+A: Both branches changed the same lines differently
+W: Two people use Git at once
+W: A file is too large
+W: The internet drops
+E: Git can't guess which version is right, so it asks you to choose.
+
+Q: In a conflicted file, what do <<<<<<<, ======= and >>>>>>> mark?
+A: Your version, the divider, and the incoming version
+W: Comments
+W: Syntax errors
+W: Deleted lines
+E: Edit to the correct final text, delete the markers, then add and commit.
+
+Q: After resolving a conflict, you:
+A: git add the file, then finish with git commit (or continue)
+W: Delete the branch
+W: Push immediately without committing
+W: Restart Git
+E: Adding tells Git the conflict is resolved.
+
+Q: Which habit reduces merge conflicts the most?
+A: Merging small changes often
+W: Working alone on a branch for months
+W: Never pulling
+W: Editing every file at once
+E: Small, frequent merges mean small, easy conflicts.
+
+Q: A "fast-forward" merge happens when:
+A: The target branch has no new commits, so Git just moves its pointer ahead
+W: The merge is done quickly by a server
+W: There are conflicts
+W: You skip tests
+E: No merge commit is needed in that case.
+
+Q: How do you delete a merged local branch named feature?
+A: git branch -d feature
+W: git delete feature
+W: git rm feature
+W: git branch --remove-all
+E: -d refuses if unmerged; -D forces it.
+
+# M 3
+Q: What's the difference between merge and rebase?
+A: Merge joins histories with a merge commit; rebase replays your commits on top of the other branch
+W: They're the same
+W: Rebase deletes the other branch
+W: Merge rewrites history
+E: Rebase gives a straight line of history but rewrites your commits.
+
+Q: When should you NOT rebase?
+A: On commits that others already pulled
+W: On your own local branch
+W: Before opening a PR
+W: Ever
+E: The golden rule of rebasing.
+
+Q: You're mid-merge and it's a mess. How do you back out?
+A: git merge --abort
+W: Delete the .git folder
+W: git push --force
+W: Shut down the computer
+E: It returns to the state before the merge started.
+
+Q: Why keep feature branches short-lived?
+A: The longer they live, the further they drift from main and the harder the merge
+W: Git deletes old branches
+W: Long branches use too much disk
+W: It's a GitHub rule
+E: Days, not months.
+
+Q: A conflict appears in a generated file like package-lock.json. A common fix is:
+A: Take one side, then regenerate it with the package manager
+W: Hand-edit hundreds of lines
+W: Delete the project
+W: Ignore it forever
+E: Generated files should be regenerated, not hand-merged.
+
+Q: "Ours" and "theirs" in a merge refer to:
+A: Your current branch and the branch being merged in
+W: Your code and GitHub's code
+W: Old and new files
+W: Two different repositories
+E: During a rebase the meaning flips, which confuses everyone at least once.
+
+# M 4
+Q: A "release branch" strategy is useful when:
+A: You must stabilize and patch a version while new work continues on main
+W: You have one developer
+W: You never release
+W: You deploy every commit
+E: Fixes go to the release branch and get merged back to main.
+
+Q: Your branch has 15 messy "wip" commits. Before merging, a common practice is:
+A: Squash them into a few meaningful commits
+W: Leave them as is always
+W: Delete the branch
+W: Force-push to main
+E: Clean history helps whoever reads it later — including you.
+
+Q: What does git merge --no-ff do?
+A: Always creates a merge commit, even if fast-forward is possible
+W: Disables merging
+W: Skips conflicts
+W: Merges without files
+E: Keeps a visible record that a feature branch existed.
+
+Q: Branch protection rules on GitHub typically:
+A: Require reviews and passing checks before merging into main
+W: Encrypt the branch
+W: Hide the branch
+W: Speed up merges
+E: They stop accidental pushes of broken code to the main branch.
+
+Q: Two features must ship together but are built separately. A good approach is:
+A: Merge each to main behind a feature flag, then turn the flag on together
+W: Keep both on branches for months
+W: Merge them into one giant branch
+W: Ship one and hide the other in comments
+E: Avoids long-lived branches and big-bang merges.
+
+Q: A "rerere" setting in Git helps by:
+A: Remembering how you resolved a conflict and reusing it
+W: Restarting Git
+W: Removing remote branches
+W: Renaming commits
+E: Useful if you rebase the same branch repeatedly.
+
+# R 1
+Q: A "remote" in Git is:
+A: Another copy of the repository, usually on GitHub
+W: A TV remote
+W: A deleted branch
+W: A local folder
+E: The default remote is called origin.
+
+Q: What does "origin" usually mean?
+A: The remote you cloned from
+W: The first commit
+W: The main branch
+W: Your computer
+E: git push origin main pushes your main branch to origin.
+
+Q: GitHub Pages does what?
+A: Hosts a website straight from a repository
+W: Writes your code
+W: Runs a database
+W: Prints pages
+E: Your Mad Minute apps are served by GitHub Pages at manafest01.github.io.
+
+Q: An "issue" on GitHub is:
+A: A tracked bug report, task or idea
+W: A merge conflict
+W: A broken commit
+W: A private message
+E: Issues keep the to-do list next to the code.
+
+Q: A public repository means:
+A: Anyone can see the code
+W: Anyone can push changes
+W: It's free to sell
+W: It has no license
+E: Viewing is public; pushing still needs permission.
+
+Q: A "README" file is:
+A: The front page explaining what the project is and how to use it
+W: A log of errors
+W: A secret file
+W: A Git command
+E: GitHub shows README.md on the repo's main page.
+
+# R 2
+Q: What's the difference between git fetch and git pull?
+A: fetch downloads new commits without merging; pull fetches and merges
+W: They're identical
+W: fetch uploads
+W: pull only works on main
+E: fetch lets you look before you merge.
+
+Q: git push is rejected because the remote has new commits. You should:
+A: Pull (or fetch and merge/rebase) first, then push
+W: Use --force immediately
+W: Delete your work
+W: Make a new repository
+E: Force-pushing would erase the other commits.
+
+Q: A "fork" on GitHub is:
+A: Your own copy of someone else's repository under your account
+W: A branch
+W: A merge conflict
+W: A deleted repo
+E: Forks let you propose changes to projects you can't push to.
+
+Q: A pull request is mainly for:
+A: Proposing changes and getting them reviewed before merging
+W: Downloading code
+W: Deleting a branch
+W: Creating issues
+E: It's where discussion, checks and approval happen.
+
+Q: How do you see which remotes are configured?
+A: git remote -v
+W: git status --remote
+W: git list remotes
+W: git origin
+E: Shows names and URLs for fetch and push.
+
+Q: A LICENSE file in a repo tells people:
+A: What they're allowed to do with the code
+W: Who wrote each line
+W: How to install Git
+W: The app's price
+E: No license means others have no permission to reuse it. Your MadMinute repo has an all-rights-reserved license.
+
+# R 3
+Q: What does git push --force do, and why is it risky?
+A: Overwrites the remote branch with yours, possibly deleting others' commits
+W: Pushes faster
+W: Pushes all branches
+W: It's never risky
+E: If you must, prefer --force-with-lease, which refuses if someone else pushed.
+
+Q: A "draft" pull request means:
+A: It's open for early feedback but not ready to merge
+W: It's deleted
+W: It's merged
+W: It has no code
+E: Share work early so direction problems are caught sooner.
+
+Q: GitHub Actions is:
+A: GitHub's built-in automation for running tests, builds and deploys
+W: A chat feature
+W: A code editor
+W: A paid hosting service only
+E: Workflows in .github/workflows run on events like push or pull request.
+
+Q: A "tracking branch" is:
+A: A local branch linked to a remote branch, so pull and push know where to go
+W: A branch that spies on others
+W: A branch with only logs
+W: A deleted branch
+E: git push -u origin feature sets this up the first time.
+
+Q: How should you handle a pull request comment you disagree with?
+A: Reply with your reasoning and discuss, then agree on a direction
+W: Ignore it
+W: Close the PR
+W: Merge anyway
+E: Reviews are a conversation. Good reasoning wins either way.
+
+Q: Why link a commit or PR to an issue (for example "Fixes #12")?
+A: It connects the change to the reason, and can auto-close the issue
+W: GitHub requires it
+W: It makes the commit smaller
+W: It hides the issue
+E: Traceability: anyone can see why a change was made.
+
+# R 4
+Q: A private repository's token accidentally got pushed. What's the right order of actions?
+A: Revoke and replace the token first, then clean it from history
+W: Delete the commit and hope
+W: Make the repo private and ignore it
+W: Rename the file
+E: Assume it's compromised the moment it was pushed.
+
+Q: CODEOWNERS on GitHub is used to:
+A: Automatically request reviews from the right people for certain files
+W: Transfer ownership of the repo
+W: Lock files from editing
+W: List license holders
+E: Example: anything in /dev/ requests your review.
+
+Q: A "monorepo" with several apps can use path filters in CI so that:
+A: Only the affected app is tested and deployed when its files change
+W: All apps are deleted
+W: Every commit deploys everything forever
+W: Git ignores folders
+E: Keeps builds fast as the repo grows.
+
+Q: Signed commits prove:
+A: The commit really came from the claimed author's key
+W: The code has no bugs
+W: The commit was reviewed
+W: The commit is encrypted
+E: Matters for security-sensitive projects and supply-chain trust.
+
+Q: Why do teams use "conventional commits" like "feat: add placement test"?
+A: Tools can generate changelogs and version numbers from the messages
+W: Git requires it
+W: It's shorter
+W: It hides details
+E: feat, fix, docs, refactor... A structured history writes your release notes for you.
+
+Q: Semantic versioning and Git tags together let you:
+A: Mark releases (v2.1.0) and know if an update might break things
+W: Encrypt releases
+W: Skip testing
+W: Avoid branches
+E: Major.Minor.Patch on a tag gives everyone a shared language for releases.
+
+# F 1
+Q: You changed a file but want to throw away those changes. Which command?
+A: git restore <file>
+W: git delete <file>
+W: git commit <file>
+W: git push <file>
+E: Older form: git checkout -- <file>. This can't be undone, so be sure.
+
+Q: You staged a file by mistake. How do you unstage it?
+A: git restore --staged <file>
+W: git rm <file>
+W: git commit --undo
+W: git push --cancel
+E: The changes stay in the file; they're just no longer staged.
+
+Q: Why is committing often a safety net?
+A: Committed work can almost always be recovered
+W: Commits make the code faster
+W: Git deletes uncommitted work every hour
+W: It isn't a safety net
+E: Uncommitted changes are the easiest to lose.
+
+Q: You deleted a file by accident (not committed yet). You can:
+A: Restore it with git restore <file>
+W: Never get it back
+W: Only get it from email
+W: Pull it from Google
+E: Git still has the last committed version.
+
+Q: Before trying a risky change, a good habit is:
+A: Commit or create a branch first
+W: Turn off Git
+W: Delete old commits
+W: Work directly on GitHub's website
+E: Then you can always go back.
+
+Q: You made a typo in your last commit message (not pushed). Fix it with:
+A: git commit --amend
+W: git revert
+W: git reset --hard
+W: Delete the repo
+E: Amend rewrites only the last commit. Fine before pushing.
+
+# F 2
+Q: You committed to main but meant to use a new branch. A fix is:
+A: Create the branch where you are, then move main back
+W: Delete the repository
+W: Copy files by hand to a new folder
+W: Push and hope nobody notices
+E: git branch feature; git reset --hard HEAD~1 on main (only if main isn't pushed).
+
+Q: Which undo is safe on a branch others have pulled?
+A: git revert
+W: git reset --hard
+W: git rebase -i
+W: git commit --amend
+E: revert adds a new commit instead of rewriting history.
+
+Q: HEAD~1 means:
+A: The commit before the current one
+W: The first commit
+W: The next commit
+W: The main branch
+E: HEAD~2 is two back.
+
+Q: You ran git reset --hard and lost a commit. How can you find it?
+A: git reflog, then reset or branch to that hash
+W: It's gone forever
+W: GitHub Support
+W: git log --deleted
+E: The reflog keeps a local record of recent HEAD positions for weeks.
+
+Q: What does git clean -n do?
+A: Lists untracked files that git clean would delete, without deleting
+W: Deletes all files
+W: Cleans commit messages
+W: Removes branches
+E: -n is a dry run. git clean -f actually deletes untracked files — careful.
+
+Q: You want to undo your last commit but keep the changes to edit. Use:
+A: git reset --soft HEAD~1
+W: git reset --hard HEAD~1
+W: git revert HEAD
+W: git clean -f
+E: The changes come back staged, ready to adjust and recommit.
+
+# F 3
+Q: A bad change was pushed and deployed. The fastest safe rollback is usually:
+A: git revert the commit and push, letting the deploy run again
+W: Force-push an old commit over main
+W: Edit files on the server by hand
+W: Delete the repository
+E: Revert is fast, traceable and doesn't break teammates' copies.
+
+Q: You need one file from three commits ago without changing anything else. Use:
+A: git restore --source HEAD~3 <file>
+W: git reset --hard HEAD~3
+W: git revert HEAD~3
+W: git checkout main
+E: It pulls just that file's old version into your working copy.
+
+Q: What does git stash list show?
+A: All your saved stashes
+W: All commits
+W: All files
+W: All remotes
+E: Stashes are easy to forget. Name them: git stash push -m "timer experiment".
+
+Q: You accidentally committed node_modules (thousands of files). Fix it by:
+A: Adding it to .gitignore and running git rm -r --cached node_modules
+W: Deleting the folder on disk only
+W: Ignoring it
+W: Renaming it
+E: --cached removes it from Git while keeping it on disk.
+
+Q: A teammate force-pushed and your pull now shows strange conflicts. A careful approach is:
+A: Fetch, inspect both histories, then reset or rebase your work onto the new remote
+W: Force-push back
+W: Delete everything
+W: Merge blindly
+E: Talk to them, back up your branch first, then align.
+
+Q: Why is "git reset --hard" called destructive?
+A: It throws away uncommitted changes with no undo
+W: It deletes the repository
+W: It erases GitHub
+W: It's not destructive
+E: Commit or stash before using it.
+
+# F 4
+Q: A password was committed 50 commits ago and pushed. To remove it from history you'd use:
+A: A history-rewriting tool like git filter-repo, then force-push and rotate the password
+W: git revert on the latest commit
+W: Delete the file in a new commit
+W: Rename the repo
+E: A new commit doesn't remove old history. Rotation is still required — assume it was seen.
+
+Q: git bisect finds a bug-introducing commit by:
+A: Binary search between a known good and known bad commit
+W: Checking every commit in order
+W: Reading commit messages
+W: Asking GitHub
+E: 1,000 commits takes about 10 tests.
+
+Q: When might you prefer git revert -m 1 <merge-hash>?
+A: To undo an entire merged feature branch in one go
+W: To revert one line
+W: To delete the branch
+W: To rename a merge
+E: -m 1 tells Git which parent to treat as the mainline.
+
+Q: Your local branch and remote have diverged after a rebase you did. To update the remote safely, use:
+A: git push --force-with-lease
+W: git push --force without checking
+W: git pull --hard
+W: git reset origin
+E: It refuses if the remote changed in ways you haven't seen.
+
+Q: A disaster plan for a solo project's repo should include:
+A: An off-site copy (GitHub is one), plus knowing how to restore and rebuild
+W: Nothing; Git is a backup
+W: Printing the code
+W: Never pushing
+E: Git is history, not a full backup strategy. Test that you can clone and run from scratch.
+
+Q: "Commit early, commit often, perfect later, publish once" means:
+A: Make many small local commits, then clean them up before sharing
+W: Push every keystroke
+W: Never rewrite anything
+W: Only commit finished work
+E: Local history is a scratchpad; shared history should be clean.
+
+# W 1
+Q: Why work on a branch instead of directly on main?
+A: Main stays working while you experiment
+W: Branches are faster
+W: Main can't be edited
+W: GitHub requires branches
+E: If the experiment fails, delete the branch. Main never broke.
+
+Q: Who should review your code in a team?
+A: At least one other developer
+W: Nobody
+W: Only the manager
+W: Only the AI
+E: A second pair of eyes catches what you can't see.
+
+Q: The usual team flow is:
+A: Branch → commit → push → pull request → review → merge
+W: Edit main directly → push
+W: Email files to each other
+W: Merge → branch → review
+E: This is often called the GitHub flow.
+
+Q: Pulling before you start work each day helps because:
+A: You start from the latest version, reducing conflicts
+W: It speeds up your computer
+W: It's required to commit
+W: It deletes old files
+E: Stale starting points cause surprise conflicts later.
+
+Q: A good pull request description includes:
+A: What changed, why, and how to test it
+W: Nothing
+W: Only the branch name
+W: A list of every keystroke
+E: Help the reviewer get context in under a minute.
+
+Q: When should you push your branch?
+A: Regularly, so work is backed up and visible
+W: Only at the end of the project
+W: Never
+W: Only on Fridays
+E: Pushed work survives a lost laptop.
+
+# W 2
+Q: "Continuous integration" in a team means:
+A: Merging small changes often, with automatic tests on each
+W: Working alone for weeks
+W: One big merge at the end
+W: Never testing
+E: Problems are found when they're small.
+
+Q: A green check mark on a pull request means:
+A: The automated checks (tests, lint, build) passed
+W: The code is perfect
+W: A manager approved it
+W: It's already merged
+E: Passing checks are necessary, not sufficient — review still matters.
+
+Q: Who merges the pull request, typically?
+A: The author after approval, or a maintainer
+W: GitHub automatically, always
+W: The first person to see it
+W: Nobody
+E: Teams agree on this. Many require approval plus green checks.
+
+Q: How big should a pull request ideally be?
+A: Small enough to review carefully in one sitting
+W: As big as possible
+W: Exactly one line
+W: Size doesn't matter
+E: Under a few hundred lines gets real review; thousands get rubber-stamped.
+
+Q: A CHANGELOG file records:
+A: Notable changes in each version, for people using the project
+W: Every keystroke
+W: Git internal data
+W: Passwords
+E: Commit logs are for developers; changelogs are for users and future maintainers.
+
+Q: Why use issue templates on GitHub?
+A: They prompt reporters for steps, expected vs actual, and environment
+W: To block issues
+W: To make issues longer
+W: To hide bugs
+E: Better reports, faster fixes.
+
+# W 3
+Q: "Trunk-based development" works best with:
+A: Small changes, strong automated tests, and feature flags
+W: Month-long branches
+W: No tests
+W: One developer only
+E: Everyone integrates into main daily without breaking it.
+
+Q: "Git flow" (develop, feature, release, hotfix branches) suits:
+A: Projects with scheduled releases that need parallel maintenance
+W: Every small web app
+W: Projects without releases
+W: Solo scripts
+E: For continuously deployed web apps, simpler flows usually win.
+
+Q: A "hotfix" is:
+A: An urgent fix applied to production outside the normal schedule
+W: A feature
+W: A failing test
+W: A warm server
+E: Hotfixes still go through version control, ideally with a quick review.
+
+Q: Pair programming means:
+A: Two developers working on the same code together at once
+W: Two computers running the same code
+W: Merging two branches
+W: Reviewing code a week later
+E: One drives, one navigates. Great for learning and hard problems.
+
+Q: Why automate formatting (like Prettier or Black) in a team?
+A: It ends style debates and keeps diffs focused on real changes
+W: It fixes logic bugs
+W: It makes code run faster
+W: It's required by Git
+E: Reviews then focus on what matters: correctness and design.
+
+Q: "Definition of done" for a team usually includes:
+A: Code reviewed, tests passing, docs updated, and deployed or ready to deploy
+W: Code typed
+W: Code pushed to a branch
+W: The developer feels done
+E: A shared checklist prevents half-finished work from piling up.
+
+# W 4
+Q: A team keeps breaking main. Which change helps most?
+A: Required checks and reviews before merge, plus small PRs
+W: More meetings
+W: Longer branches
+W: Fewer tests
+E: Make the safe path the easy path.
+
+Q: "Inner source" means:
+A: Using open-source practices (PRs, docs, reviews) inside a company
+W: Keeping code secret from teammates
+W: Code written by interns
+W: Source code inside a binary
+E: Teams can contribute to each other's code with clear guidelines.
+
+Q: An "ADR" (architecture decision record) is:
+A: A short doc recording a design decision, its context and trade-offs
+W: An automated deploy rule
+W: A type of branch
+W: A Git command
+E: Future you will ask "why did we do it this way?" — the ADR answers.
+
+Q: Release notes are best written from:
+A: Merged PRs and conventional commit messages, grouped for users
+W: Memory at the end of the year
+W: Random commits
+W: The README
+E: Good habits during development make release notes nearly automatic.
+
+Q: For a solo developer, which team practice still pays off most?
+A: Small commits with clear messages and self-review of diffs
+W: Daily standup meetings
+W: Code owners
+W: Release managers
+E: You are your own future teammate.
+
+Q: Before merging an AI-generated pull request, a senior developer would insist on:
+A: A human review of the diff, passing tests, and a clear description of what changed
+W: Merging fast since AI is reliable
+W: Skipping review for small changes
+W: Only checking the PR title
+E: Same bar as any code: understood, tested, and reversible.

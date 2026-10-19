@@ -1,0 +1,1249 @@
+@pack fund
+
+# V 1
+Q: In JavaScript, which keyword makes a variable whose value you plan to change?
+A: let
+W: const
+W: fixed
+W: static
+E: Use let when the value will change. Use const when it won't be reassigned.
+
+Q: In JavaScript, which keyword makes a variable that can't be reassigned?
+A: const
+W: let
+W: var
+W: final
+E: const blocks reassignment. (An array or object stored in a const can still have its contents changed.)
+
+Q: What is the type of the value 42?
+A: Number
+W: String
+W: Boolean
+W: Object
+E: 42 is a number. "42" in quotes would be a string.
+
+Q: What is the type of the value "42"?
+A: String
+W: Number
+W: Boolean
+W: Integer
+E: The quotes make it text. "42" + 1 gives "421" in JavaScript, not 43.
+
+Q: In Python, how do you create a variable named score set to 10?
+A: score = 10
+W: let score = 10
+W: var score := 10
+W: int score == 10
+E: Python needs no keyword: just name = value.
+
+Q: Which symbol is used to assign a value to a variable in most languages?
+A: =
+W: ==
+W: ===
+W: :=
+E: A single = assigns. == and === compare.
+
+Q: What does this print?
+```
+let x = 5;
+x = x + 2;
+console.log(x);
+```
+A: 7
+W: 5
+W: 52
+W: x + 2
+E: x starts at 5, then becomes 5 + 2 = 7.
+
+# V 2
+Q: What does this print?
+```
+console.log("5" + 3);
+```
+A: 53
+W: 8
+W: Error
+W: "8"
+E: When one side is a string, + joins text. "5" + 3 becomes "53".
+
+Q: What does this print?
+```
+console.log("5" * 3);
+```
+A: 15
+W: 555
+W: "53"
+W: Error
+E: * only works on numbers, so JavaScript converts "5" to 5. Mixing types like this is a common source of bugs.
+
+Q: What is the difference between == and === in JavaScript?
+A: === also checks the type; == converts types first
+W: They are identical
+W: == is for strings, === for numbers
+W: === assigns a value
+E: 5 == "5" is true, but 5 === "5" is false. Prefer === to avoid surprises.
+
+Q: In JavaScript, what does typeof [] return?
+A: "object"
+W: "array"
+W: "list"
+W: "undefined"
+E: Arrays are a kind of object in JS. Use Array.isArray(x) to check for arrays.
+
+Q: What is the value of a declared JavaScript variable that was never given a value?
+A: undefined
+W: null
+W: 0
+W: ""
+E: let x; leaves x as undefined. null is something you set on purpose.
+
+Q: Which of these is a valid variable name in JavaScript?
+A: totalScore
+W: 2ndPlace
+W: total-score
+W: let
+E: Names can't start with a digit, can't contain a dash, and can't be reserved words like let.
+
+Q: In Python, what is int("7") + 1?
+A: 8
+W: "71"
+W: Error
+W: 71
+E: int() converts the text "7" to the number 7, so the result is 8.
+
+# V 3
+Q: What does this print?
+```
+const nums = [1, 2];
+nums.push(3);
+console.log(nums.length);
+```
+A: 3
+W: 2
+W: Error: nums is const
+W: undefined
+E: const stops reassigning nums to a new array, but you can still change the array's contents.
+
+Q: Which values are "falsy" in JavaScript?
+A: 0, "", null, undefined, NaN and false
+W: Only false
+W: false and null only
+W: Any negative number
+E: Everything else is truthy, including "0", [] and {}. This trips up a lot of if statements.
+
+Q: What does this print?
+```
+console.log(0.1 + 0.2 === 0.3);
+```
+A: false
+W: true
+W: Error
+W: undefined
+E: Decimal fractions are stored in binary and lose a tiny bit of precision: 0.1 + 0.2 is 0.30000000000000004. Compare with a small tolerance, or work in whole cents.
+
+Q: What does Number("abc") return in JavaScript?
+A: NaN
+W: 0
+W: "abc"
+W: undefined
+E: NaN means "Not a Number." It's still of type number, and NaN === NaN is false. Use Number.isNaN().
+
+Q: What does this Python code print?
+```
+a = [1, 2]
+b = a
+b.append(3)
+print(a)
+```
+A: [1, 2, 3]
+W: [1, 2]
+W: [3]
+W: Error
+E: b = a doesn't copy the list. Both names point to the same list, so changing b changes a.
+
+Q: What's the difference between a shallow copy and a deep copy?
+A: A shallow copy shares nested objects; a deep copy duplicates everything
+W: A shallow copy is faster to type
+W: A deep copy only copies the first level
+W: There is no difference
+E: {...obj} is shallow. structuredClone(obj) makes a deep copy.
+
+# V 4
+Q: Why does this throw an error?
+```
+console.log(total);
+let total = 5;
+```
+A: let variables can't be used before their declaration line runs
+W: console.log can't print numbers
+W: total is a reserved word
+W: It doesn't throw an error
+E: This window is called the temporal dead zone. var would print undefined instead, which hides the bug.
+
+Q: What does this print?
+```
+const a = { n: 1 };
+const b = { n: 1 };
+console.log(a === b);
+```
+A: false
+W: true
+W: Error
+W: undefined
+E: Objects are compared by reference (which object), not by contents. Two separate objects are never ===.
+
+Q: In JavaScript, what is the main risk of using var instead of let?
+A: var is function-scoped and hoisted, so it leaks out of blocks like loops
+W: var is slower
+W: var can't hold strings
+W: var is not allowed in browsers
+E: A var inside a for loop is visible after the loop, which causes subtle bugs. let stays in its block.
+
+Q: What does this print?
+```
+console.log(typeof null);
+```
+A: "object"
+W: "null"
+W: "undefined"
+W: Error
+E: A famous early bug in JavaScript kept for compatibility. Check for null with x === null.
+
+Q: What does ?? do in JavaScript, as in name ?? "Guest"?
+A: Uses the right side only if the left is null or undefined
+W: Uses the right side if the left is any falsy value
+W: Checks if both sides are equal
+W: Throws an error if the left is null
+E: Unlike ||, ?? keeps 0 and "". score || 10 turns a real 0 into 10; score ?? 10 keeps the 0.
+
+Q: What does the optional chaining in user?.address?.city do?
+A: Returns undefined instead of crashing if user or address is missing
+W: Makes the properties optional in the database
+W: Creates the missing objects
+W: Throws a clearer error
+E: Without ?. you'd get "Cannot read properties of undefined."
+
+# L 1
+Q: Which statement runs code only when a condition is true?
+A: if
+W: for
+W: return
+W: function
+E: if (condition) { ... } runs the block only when the condition is truthy.
+
+Q: What does this print?
+```
+let age = 20;
+if (age >= 18) {
+  console.log("adult");
+} else {
+  console.log("minor");
+}
+```
+A: adult
+W: minor
+W: adult minor
+W: Nothing
+E: 20 >= 18 is true, so the first block runs and else is skipped.
+
+Q: How many times does this loop print?
+```
+for (let i = 0; i < 3; i++) {
+  console.log(i);
+}
+```
+A: 3 times (0, 1, 2)
+W: 4 times (0 to 3)
+W: 2 times
+W: Forever
+E: It starts at 0 and stops before 3, so it prints 0, 1, 2.
+
+Q: What does && mean?
+A: AND: both sides must be true
+W: OR: either side can be true
+W: NOT
+W: Assignment
+E: In Python it's the word and. || (or in Python) means OR.
+
+Q: What does ! do in JavaScript, as in !isDone?
+A: Flips true to false and false to true
+W: Makes the value important
+W: Checks for equality
+W: Ends the line
+E: ! is NOT. In Python the word not does the same.
+
+Q: Which loop keeps going as long as a condition is true?
+A: while
+W: if
+W: switch
+W: break
+E: while (condition) { ... } repeats until the condition becomes false.
+
+# L 2
+Q: What does break do inside a loop?
+A: Exits the loop immediately
+W: Skips to the next pass of the loop
+W: Pauses the program
+W: Restarts the loop
+E: continue skips to the next pass; break leaves the loop entirely.
+
+Q: What does this print?
+```
+for (let i = 0; i < 5; i++) {
+  if (i === 2) continue;
+  console.log(i);
+}
+```
+A: 0 1 3 4
+W: 0 1
+W: 0 1 2 3 4
+W: 2
+E: continue skips the rest of that pass when i is 2, then the loop carries on.
+
+Q: Which Python loop prints each item in a list called names?
+A: for name in names: print(name)
+W: for (name of names) print(name)
+W: foreach names as name: print(name)
+W: loop names print(name)
+E: Python's for ... in walks through each item. JavaScript uses for (const name of names).
+
+Q: What's the risk with this loop?
+```
+let i = 0;
+while (i < 10) {
+  console.log(i);
+}
+```
+A: It never ends because i never changes
+W: It prints nothing
+W: It prints 10 numbers then stops
+W: It's a syntax error
+E: An infinite loop. The fix is i++ inside the loop.
+
+Q: What does this print?
+```
+const score = 75;
+if (score > 90) console.log("A");
+else if (score > 70) console.log("C");
+else console.log("F");
+```
+A: C
+W: A
+W: F
+W: C F
+E: Conditions are checked top to bottom; the first true one runs and the rest are skipped.
+
+Q: In JavaScript, for (const x of list) gives you ______, while for (const x in list) gives you ______.
+A: The values; the keys (indexes)
+W: The keys; the values
+W: Both give the values
+W: Both give the keys
+E: Use of for array values. in gives property names, which for arrays are "0", "1", "2" as strings.
+
+# L 3
+Q: What does this print?
+```
+let total = 0;
+for (let i = 1; i <= 4; i++) total += i;
+console.log(total);
+```
+A: 10
+W: 4
+W: 6
+W: 15
+E: 1 + 2 + 3 + 4 = 10. Note <= includes 4.
+
+Q: What's the bug if the goal is to print every item?
+```
+const items = ["a", "b", "c"];
+for (let i = 0; i <= items.length; i++) console.log(items[i]);
+```
+A: <= runs one extra time and prints undefined
+W: i should start at 1
+W: items.length is 2
+W: Nothing is wrong
+E: An off-by-one error. Indexes run 0 to length - 1, so use <.
+
+Q: What does the ternary score >= 60 ? "pass" : "fail" give when score is 60?
+A: "pass"
+W: "fail"
+W: true
+W: An error
+E: condition ? valueIfTrue : valueIfFalse. 60 >= 60 is true.
+
+Q: What does a switch statement do without a break in each case?
+A: Falls through and runs the next cases too
+W: Throws an error
+W: Runs only the default case
+W: Stops automatically
+E: Forgetting break in a switch is a classic bug.
+
+Q: What does this print?
+```
+console.log(true || false && false);
+```
+A: true
+W: false
+W: Error
+W: undefined
+E: && is evaluated before ||, so it's true || (false && false) = true || false = true.
+
+Q: An "early return" (guard clause) improves code by:
+A: Handling bad cases first so the main logic isn't deeply nested
+W: Making the function run faster in all cases
+W: Removing the need for tests
+W: Returning before any code runs
+E: if (!user) return; at the top beats wrapping everything in if (user) { ... }.
+
+# L 4
+Q: Two nested loops each run over a list of n items. Roughly how does the work grow?
+A: n × n (quadratic)
+W: n + n (linear)
+W: It stays the same
+W: log n
+E: 1,000 items means about a million steps. A lookup object or Set often turns this back into one loop.
+
+Q: What does this print?
+```
+const fns = [];
+for (var i = 0; i < 3; i++) fns.push(() => i);
+console.log(fns.map(f => f()));
+```
+A: [3, 3, 3]
+W: [0, 1, 2]
+W: [undefined, undefined, undefined]
+W: Error
+E: var is shared by all three functions and ends at 3. With let, each pass gets its own i and you'd get [0, 1, 2].
+
+Q: Why is it risky to remove items from an array while looping forward over it by index?
+A: Items shift down, so the loop skips the one after each removal
+W: Arrays can't be changed in loops
+W: It makes the array immutable
+W: It's always safe
+E: Loop backwards, or build a new array with filter().
+
+Q: Short-circuit evaluation means that in a && b:
+A: b is never evaluated if a is falsy
+W: Both are always evaluated
+W: b is evaluated first
+W: The result is always a Boolean
+E: That's why user && user.name doesn't crash when user is null.
+
+Q: Which is clearest for "do something to every item and collect the results"?
+A: items.map(fn)
+W: A while loop with a manual counter
+W: items.forEach with a global array
+W: A recursive function
+E: map says exactly what it does: one output per input, as a new array.
+
+Q: When is a while loop a better fit than a for loop?
+A: When you don't know in advance how many passes you'll need
+W: Never; for is always better
+W: When looping over an array's items
+W: When you need the index
+E: Example: keep asking for input until it's valid, or keep retrying until a request succeeds.
+
+# F 1
+Q: How do you call a function named greet?
+A: greet()
+W: call greet
+W: greet;
+W: run(greet)
+E: The parentheses run it. greet without () just refers to the function.
+
+Q: In JavaScript, what does this function return?
+```
+function add(a, b) {
+  return a + b;
+}
+add(2, 3);
+```
+A: 5
+W: 23
+W: undefined
+W: a + b
+E: return sends a + b back to the caller.
+
+Q: In Python, which keyword defines a function?
+A: def
+W: function
+W: func
+W: fn
+E: def greet(name): starts a function in Python.
+
+Q: In function greet(name), what is name?
+A: A parameter
+W: A return value
+W: A global variable
+W: A loop counter
+E: Parameters are the input names. The value passed in when calling is the argument.
+
+Q: What does a function return if it has no return statement (JavaScript)?
+A: undefined
+W: 0
+W: null
+W: An error
+E: Python returns None in the same case.
+
+Q: Why put code in a function instead of copying it?
+A: Write it once, use it many times, fix it in one place
+W: Functions always run faster
+W: Copied code doesn't work
+W: Browsers require functions
+E: Reuse and one place to fix bugs: the DRY principle.
+
+# F 2
+Q: What does this print?
+```
+function double(n) {
+  n * 2;
+}
+console.log(double(4));
+```
+A: undefined
+W: 8
+W: 4
+W: Error
+E: The math happens but nothing is returned. A very common beginner bug: missing return.
+
+Q: Which is an arrow function that adds 1 to x?
+A: const inc = x => x + 1;
+W: const inc = function => x + 1;
+W: const inc(x) = x + 1;
+W: inc => (x) + 1 = const;
+E: Arrow functions with one expression return it automatically.
+
+Q: What's a "default parameter"?
+```
+function greet(name = "friend") { ... }
+```
+A: A value used when no argument is passed
+W: The first parameter of every function
+W: A parameter that can't change
+W: A global constant
+E: greet() uses "friend"; greet("Tom") uses "Tom".
+
+Q: What does this print?
+```
+let count = 0;
+function bump() { count++; }
+bump(); bump();
+console.log(count);
+```
+A: 2
+W: 0
+W: 1
+W: undefined
+E: bump changes the outer count. That's a side effect, which is fine but worth noticing.
+
+Q: A function that changes something outside itself, like a global variable or a file, has:
+A: A side effect
+W: A return value
+W: A syntax error
+W: A parameter
+E: Side effects aren't bad, but they make code harder to test and predict. Keep them obvious.
+
+Q: What does this Python function return for greet("Ana")?
+```
+def greet(name):
+    return "Hi " + name
+```
+A: "Hi Ana"
+W: "Hi name"
+W: None
+W: Error
+E: The parameter name holds "Ana", so it's joined to "Hi ".
+
+# F 3
+Q: What is a closure?
+A: A function that remembers variables from where it was created
+W: A function that closes the program
+W: The last function in a file
+W: A function with no parameters
+E: Example: makeCounter() returns a function that keeps its own private count between calls.
+
+Q: What does this print?
+```
+function makeCounter() {
+  let c = 0;
+  return () => ++c;
+}
+const next = makeCounter();
+next(); next();
+console.log(next());
+```
+A: 3
+W: 1
+W: 0
+W: undefined
+E: The returned function keeps its own c across calls: 1, 2, then 3.
+
+Q: What does this print?
+```
+const nums = [1, 2, 3, 4];
+console.log(nums.filter(n => n % 2 === 0));
+```
+A: [2, 4]
+W: [1, 3]
+W: [false, true, false, true]
+W: 2
+E: filter keeps items where the function returns true. n % 2 === 0 means even.
+
+Q: What does reduce do here?
+```
+[1, 2, 3].reduce((sum, n) => sum + n, 0)
+```
+A: Returns 6, the total
+W: Returns [1, 3, 6]
+W: Returns 3
+W: Removes items from the array
+E: reduce folds a list into one value, starting from 0.
+
+Q: A good function name usually:
+A: Is a verb phrase saying what it does, like calculateTotal
+W: Is short, like f or x
+W: Describes how it's implemented
+W: Includes the date it was written
+E: Code is read far more than written. Clear names are cheap documentation.
+
+Q: A function does five different jobs and is 200 lines long. The usual fix is:
+A: Split it into smaller functions, each with one job
+W: Add more comments
+W: Rename it
+W: Make it a global variable
+E: Small single-purpose functions are easier to name, test and reuse.
+
+# F 4
+Q: Inside arrow, what does this refer to?
+```
+const obj = {
+  name: "Mad Minute",
+  regular() { return this.name; },
+  arrow: () => this.name
+};
+```
+A: The this of the surrounding code, not obj
+W: obj, same as in regular()
+W: The arrow function itself
+W: The name property
+E: Arrow functions don't get their own this, so obj.arrow() won't see obj.name. Use regular methods when you need this.
+
+Q: A "higher-order function" is one that:
+A: Takes a function as an argument or returns one
+W: Is defined at the top of the file
+W: Has more than three parameters
+W: Runs before other functions
+E: map, filter and addEventListener are higher-order functions.
+
+Q: "Memoization" means:
+A: Caching a function's results so repeat calls with the same input are instant
+W: Adding comments to a function
+W: Saving a function to a file
+W: Making a function run in parallel
+E: Works well for pure functions with expensive work.
+
+Q: Why is a function that reads and writes global variables harder to test?
+A: Its result depends on hidden state you must set up and reset
+W: Global variables are slower
+W: Test tools can't see globals
+W: It can't return values
+E: Pass inputs as parameters and return outputs; then a test is just "given this, expect that."
+
+Q: What happens here?
+```
+function f() { return f(); }
+f();
+```
+A: It recurses forever until a "maximum call stack" error
+W: It returns undefined
+W: It runs once and stops
+W: The browser ignores it
+E: Recursion needs a base case. Each call adds to the call stack until it overflows.
+
+Q: "Dependency injection" means:
+A: Passing in what a function needs (like a database) instead of creating it inside
+W: Installing packages with npm
+W: Injecting code into a website
+W: Importing every library at the top
+E: Then a test can pass in a fake database. It's how you make code with side effects testable.
+
+# A 1
+Q: What is the index of "b" in ["a", "b", "c"]?
+A: 1
+W: 2
+W: 0
+W: "b"
+E: Indexing starts at 0: a is 0, b is 1, c is 2.
+
+Q: How do you get the number of items in a JavaScript array named list?
+A: list.length
+W: list.size()
+W: len(list)
+W: list.count
+E: In Python it's len(list).
+
+Q: How do you add "d" to the end of a JavaScript array named letters?
+A: letters.push("d")
+W: letters.add("d")
+W: letters + "d"
+W: letters.append("d")
+E: push adds to the end in JavaScript. append is Python's version.
+
+Q: Given const user = { name: "Tom", age: 40 }, how do you get the name?
+A: user.name
+W: user[0]
+W: user->name
+W: name.user
+E: Dot notation reads a property. user["name"] works too.
+
+Q: What does this print?
+```
+const colors = ["red", "green", "blue"];
+console.log(colors[colors.length - 1]);
+```
+A: blue
+W: red
+W: undefined
+W: 3
+E: length - 1 is always the last index.
+
+Q: In an object like { name: "Tom" }, "name" is called the:
+A: Key
+W: Index
+W: Value
+W: Type
+E: Objects hold key–value pairs. "Tom" is the value.
+
+# A 2
+Q: What does this print?
+```
+const user = { name: "Tom" };
+user.city = "Eustis";
+console.log(Object.keys(user));
+```
+A: ["name", "city"]
+W: ["Tom", "Eustis"]
+W: ["name"]
+W: Error
+E: Assigning a new key adds it. Object.keys lists the key names.
+
+Q: How do you check if an array includes the value 5?
+A: arr.includes(5)
+W: arr.has(5)
+W: arr.contains(5)
+W: 5 in arr
+E: In Python: 5 in arr. (In JS, in checks keys, not values.)
+
+Q: What does this print?
+```
+const q = { text: "2+2?", options: ["3", "4"] };
+console.log(q.options[1]);
+```
+A: 4
+W: 3
+W: ["3", "4"]
+W: undefined
+E: Go into q, then options, then index 1. Reading nested data this way is everyday work.
+
+Q: What does slice return?
+```
+[10, 20, 30, 40].slice(1, 3)
+```
+A: [20, 30]
+W: [10, 20, 30]
+W: [20, 30, 40]
+W: [30]
+E: slice(start, end) includes start but stops before end. It doesn't change the original array.
+
+Q: What's the Python way to get "Tom" from user = {"name": "Tom"}?
+A: user["name"]
+W: user.name
+W: user->name
+W: user(name)
+E: Python dicts use square brackets with the key. (.get("name") also works and won't crash if missing.)
+
+Q: Which data structure fits "look up a question by its id" best?
+A: An object or Map keyed by id
+W: An array you search every time
+W: A string
+W: A Boolean
+E: Lookup by key is instant; searching an array checks every item.
+
+# A 3
+Q: What does this print?
+```
+const a = [1, 2];
+const b = [...a, 3];
+console.log(a, b);
+```
+A: [1, 2] [1, 2, 3]
+W: [1, 2, 3] [1, 2, 3]
+W: [1, 2] [3]
+W: Error
+E: The spread operator copies a's items into a new array, so a is unchanged.
+
+Q: What does destructuring do here?
+```
+const { name, age } = user;
+```
+A: Creates name and age variables from user's properties
+W: Deletes name and age from user
+W: Builds a new user object
+W: Checks user has those keys
+E: Shorthand for const name = user.name; const age = user.age;
+
+Q: What does this print?
+```
+const nums = [3, 1, 10, 2];
+nums.sort();
+console.log(nums);
+```
+A: [1, 10, 2, 3]
+W: [1, 2, 3, 10]
+W: [10, 3, 2, 1]
+W: [3, 1, 10, 2]
+E: sort() compares as text by default. For numbers use nums.sort((a, b) => a - b).
+
+Q: Which method finds the first question with id "x7"?
+A: questions.find(q => q.id === "x7")
+W: questions.filter(q => q.id === "x7")[5]
+W: questions.map(q => q.id === "x7")
+W: questions.indexOf("x7")
+E: find returns the first match (or undefined). filter returns an array of all matches.
+
+Q: What is a Set good for?
+A: Holding unique values and checking membership fast
+W: Storing key–value pairs in order
+W: Sorting numbers
+W: Saving data to disk
+E: new Set(list) removes duplicates. set.has(x) is fast.
+
+Q: Turning an object into a JSON string is done with:
+A: JSON.stringify(obj)
+W: JSON.parse(obj)
+W: obj.toJSON()
+W: String(obj)
+E: stringify for saving or sending; JSON.parse turns the text back into an object. Mad Minute saves progress this way.
+
+# A 4
+Q: What does this print?
+```
+const s1 = { tags: ["a"] };
+const s2 = { ...s1 };
+s2.tags.push("b");
+console.log(s1.tags);
+```
+A: ["a", "b"]
+W: ["a"]
+W: ["b"]
+W: Error
+E: Spread is a shallow copy: the tags array is shared. Use structuredClone for a deep copy.
+
+Q: Why prefer creating a new array over changing the old one in React-style code?
+A: Change detection compares references; a mutated array looks unchanged
+W: New arrays use less memory
+W: Mutation is illegal in JavaScript
+W: It makes code shorter
+E: setItems([...items, x]) triggers a re-render; items.push(x) may not.
+
+Q: You need questions grouped by topic. Which shape is most useful?
+A: An object like { "Brakes": [q1, q2], "Engine": [q3] }
+W: One long string of all questions
+W: An array of topic names only
+W: A separate variable per question
+E: Shaping data to match how you'll read it makes the rest of the code simpler.
+
+Q: JSON.parse(JSON.stringify(obj)) as a deep copy loses:
+A: Dates become strings and functions/undefined disappear
+W: Nothing at all
+W: All nested objects
+W: Numbers become strings
+E: It's a quick hack; structuredClone is the proper tool.
+
+Q: What's the time cost of arr.includes(x) on a 10,000-item array, versus set.has(x)?
+A: includes checks items one by one; has is near-instant
+W: Both are instant
+W: includes is faster
+W: has checks every item too
+E: Inside a loop this difference can turn seconds into milliseconds.
+
+Q: A Map differs from a plain object mainly because a Map:
+A: Can use any value as a key and keeps insertion order with a .size
+W: Can't be looped over
+W: Only stores strings
+W: Is slower in every case
+E: Use objects for fixed records, Maps for dynamic lookups.
+
+# S 1
+Q: How do you join two strings "Mad" and "Minute" in JavaScript?
+A: "Mad" + "Minute"
+W: "Mad" & "Minute"
+W: "Mad".join("Minute")
+W: concat["Mad", "Minute"]
+E: + joins strings. The result is "MadMinute" with no space unless you add one.
+
+Q: What does "hello".toUpperCase() return?
+A: "HELLO"
+W: "Hello"
+W: "hello"
+W: Error
+E: Strings have many built-in methods. They return new strings; the original is unchanged.
+
+Q: What is "Mana".length?
+A: 4
+W: 3
+W: 5
+W: "4"
+E: length counts characters.
+
+Q: In a template literal, how do you insert the variable name?
+```
+`Hi ${name}`
+```
+A: With ${name} inside backticks
+W: With {name} inside double quotes
+W: With %name%
+W: With + name +
+E: Backtick strings can mix text and values cleanly.
+
+Q: In Python, what's the f-string version of "Hi " + name?
+A: f"Hi {name}"
+W: "Hi {name}"
+W: `Hi ${name}`
+W: format("Hi", name)
+E: The f in front makes {name} insert the value.
+
+Q: What does "  hi  ".trim() return?
+A: "hi"
+W: "  hi"
+W: "hi  "
+W: "  hi  "
+E: trim removes spaces from both ends, handy for cleaning user input.
+
+# S 2
+Q: What does "a,b,c".split(",") return?
+A: ["a", "b", "c"]
+W: "abc"
+W: ["a,b,c"]
+W: 3
+E: split breaks a string into an array at each separator.
+
+Q: What does ["a", "b", "c"].join("-") return?
+A: "a-b-c"
+W: ["a-b-c"]
+W: "abc"
+W: "a,b,c"
+E: join is the reverse of split.
+
+Q: What does "Brakes".includes("rake") return?
+A: true
+W: false
+W: 1
+W: "rake"
+E: includes checks for a substring. It's case-sensitive.
+
+Q: What does "Brakes".indexOf("x") return?
+A: -1
+W: 0
+W: undefined
+W: false
+E: -1 means "not found." A common bug is checking if (s.indexOf(x)) which is wrong when x is at index 0.
+
+Q: What does "Brakes"[0] give?
+A: "B"
+W: "s"
+W: "Brakes"
+W: undefined
+E: Strings can be indexed like arrays of characters.
+
+Q: How do you compare two strings ignoring upper/lower case?
+A: a.toLowerCase() === b.toLowerCase()
+W: a === b
+W: a == b
+W: a.equals(b)
+E: Normalize both sides first. Searching ManaFlow tags works best this way.
+
+# S 3
+Q: What does this regular expression test check?
+```
+/^\d{3}$/.test(code)
+```
+A: code is exactly three digits
+W: code contains a 3
+W: code is at least three characters
+W: code starts with "d"
+E: ^ start, \d a digit, {3} exactly three, $ end.
+
+Q: What does "a-b-c".replace("-", "+") return in JavaScript?
+A: "a+b-c"
+W: "a+b+c"
+W: "a-b-c"
+W: Error
+E: replace with a string swaps only the first match. Use replaceAll or a /g regex for all.
+
+Q: Why do file names like "Track 01.mp3" break some command-line scripts?
+A: The space splits it into two arguments unless it's quoted
+W: Numbers aren't allowed in file names
+W: .mp3 is a reserved word
+W: Capital letters break Linux
+E: Quote paths: "Track 01.mp3". Very relevant to scanning a music library.
+
+Q: What is string "escaping," as in "He said \"hi\""?
+A: Marking special characters so they're read as plain text
+W: Removing the string from memory
+W: Encrypting the string
+W: Converting it to a number
+E: \" means a literal quote; \n means a new line.
+
+Q: What does padStart do here?
+```
+String(7).padStart(2, "0")
+```
+A: "07"
+W: "70"
+W: "7"
+W: 7
+E: Useful for timers and dates: 1:07, not 1:7.
+
+Q: Why does text from user input need cleaning before showing it on a web page?
+A: It could contain HTML or script that runs in the page
+W: It's always too long
+W: Browsers can't show user text
+W: It uses too much memory
+E: That's an XSS attack. Use textContent, or escape HTML, never raw innerHTML with user text.
+
+# S 4
+Q: Why might "é" have a length of 2 in JavaScript?
+A: It can be stored as a letter plus a separate accent mark
+W: Accented letters are always 2 bytes in every language
+W: JavaScript counts bytes, not characters
+W: It's a bug in the browser
+E: Unicode allows combined forms. text.normalize() makes comparisons reliable, important for artist names in tags.
+
+Q: Building a long string by doing s += piece thousands of times in a loop is better replaced by:
+A: Collecting pieces in an array and calling join("") once
+W: Using a bigger variable
+W: Converting to numbers
+W: Using a while loop
+E: Many languages copy the whole string each time; join builds it once.
+
+Q: What's the danger of building SQL like this?
+```
+"SELECT * FROM users WHERE name = '" + name + "'"
+```
+A: SQL injection: a crafted name can run its own SQL
+W: It's slower
+W: It only finds one user
+W: Nothing
+E: Always use parameterized queries, where values are passed separately from the SQL.
+
+Q: What does this regex replace do?
+```
+"Track_01__final".replace(/_+/g, " ")
+```
+A: Replaces each run of underscores with one space
+W: Removes all letters
+W: Replaces only the first underscore
+W: Adds underscores
+E: _+ means one or more underscores; g means everywhere.
+
+Q: In Python, what's the difference between "5" and b"5"?
+A: "5" is text; b"5" is raw bytes
+W: They're identical
+W: b"5" is a number
+W: b"5" is bold text
+E: Files and network data arrive as bytes and must be decoded (usually UTF-8) into text.
+
+Q: When parsing an audio file's tags, you get garbled characters like "Ã©". The likely cause is:
+A: Text decoded with the wrong character encoding
+W: The file is corrupted beyond repair
+W: The font is missing
+W: The tag is too long
+E: UTF-8 bytes read as Latin-1 produce this pattern. Decode with the right encoding.
+
+# C 1
+Q: In object-oriented programming, a "class" is:
+A: A blueprint for making objects
+W: A single object
+W: A school lesson
+W: A CSS rule
+E: A Question class could describe what every question has: text, options and an answer.
+
+Q: An "instance" is:
+A: One object made from a class
+W: The class itself
+W: A loop
+W: A database
+E: new Question(...) makes an instance.
+
+Q: In JavaScript, which keyword creates an object from a class?
+A: new
+W: make
+W: create
+W: class
+E: const q = new Question("2+2?");
+
+Q: A function that belongs to an object is called a:
+A: Method
+W: Property
+W: Variable
+W: Module
+E: user.greet() calls the greet method on user.
+
+Q: Data stored on an object, like user.name, is a:
+A: Property (attribute)
+W: Method
+W: Class
+W: Parameter
+E: Properties are data; methods are actions.
+
+Q: What does this create?
+```
+const q = { text: "2+2?", answer: 4 };
+```
+A: An object with two properties
+W: A class
+W: An array
+W: A function
+E: An object literal: curly braces with key: value pairs.
+
+# C 2
+Q: What is the constructor in a class?
+A: A special method that runs when a new instance is created
+W: The class's name
+W: A method that deletes the object
+W: The first property
+E: It usually sets the starting properties.
+
+Q: What does this print?
+```
+class Dog {
+  constructor(name) { this.name = name; }
+  speak() { return this.name + " barks"; }
+}
+console.log(new Dog("Rex").speak());
+```
+A: Rex barks
+W: name barks
+W: undefined barks
+W: Error
+E: this refers to the instance, whose name is "Rex".
+
+Q: In Python, what is self in a method?
+A: The instance the method was called on
+W: The class name
+W: A global variable
+W: A keyword for private data
+E: Python passes the instance as the first parameter; JavaScript uses this instead.
+
+Q: "Inheritance" means:
+A: A class gets properties and methods from a parent class
+W: Copying code into a new file
+W: Importing a library
+W: Two objects sharing a variable
+E: class ElectricQuiz extends Quiz { } gets everything Quiz has and can add more.
+
+Q: "Encapsulation" means:
+A: Keeping an object's internal details hidden behind its methods
+W: Putting all code in one file
+W: Wrapping strings in quotes
+W: Compressing the code
+E: Other code uses the methods and doesn't reach into private data.
+
+Q: A "module" in JavaScript or Python is:
+A: A file whose code can be imported by other files
+W: A class
+W: A type of loop
+W: A database table
+E: import { shuffle } from "./utils.js"; or from utils import shuffle.
+
+# C 3
+Q: What does export do in a JavaScript module?
+A: Makes a function or value available for other files to import
+W: Uploads the file to a server
+W: Saves the file as a PDF
+W: Deletes the file
+E: Only exported names can be imported elsewhere.
+
+Q: "Composition over inheritance" suggests:
+A: Building objects from smaller parts instead of deep class hierarchies
+W: Never using classes
+W: Writing all code in one class
+W: Using only inheritance
+E: A Quiz that has a Timer and a QuestionBank is often easier to change than Quiz extends TimedThing extends Base.
+
+Q: A "getter" like get total() in a class:
+A: Lets you read a computed value like a property
+W: Fetches data from the internet
+W: Deletes a property
+W: Imports a module
+E: obj.total looks like data but runs code each time.
+
+Q: What's "static" on a class method?
+A: It belongs to the class itself, not to instances
+W: It can never change
+W: It runs automatically
+W: It's private
+E: Question.fromRow(row) is a static helper that builds instances.
+
+Q: What's wrong with this Python?
+```
+class Counter:
+    def bump():
+        self.n += 1
+```
+A: bump is missing self as its first parameter
+W: Classes can't have methods
+W: += isn't allowed
+W: Nothing
+E: Python methods must accept self to reach the instance.
+
+Q: Why split a big app into modules?
+A: Each file has one job, so it's easier to find, test and change
+W: Browsers need many files
+W: Modules always run faster
+W: It hides the code from users
+E: A 900 KB single file (like the Mad Minute engine) works, but changes get riskier as it grows.
+
+# C 4
+Q: A "circular dependency" between modules is when:
+A: Module A imports B, and B imports A
+W: A module imports itself on purpose
+W: A loop inside a module
+W: Two modules share a name
+E: It can leave values undefined at load time. Usually fixed by moving shared code into a third module.
+
+Q: The "single responsibility principle" says a class should:
+A: Have one reason to change
+W: Have only one method
+W: Be used only once
+W: Have one property
+E: If a class handles saving, drawing and scoring, three different changes all touch it.
+
+Q: An "interface" or "contract" between modules is valuable because:
+A: You can rewrite one side without breaking the other, as long as the contract holds
+W: It makes the code longer
+W: It hides bugs
+W: It's required by browsers
+E: Mad Minute's subject packs share one row format, so any subject plugs into the same engine.
+
+Q: "Polymorphism" means:
+A: Different types can be used through the same method name
+W: A class with many properties
+W: Changing a variable's type
+W: Copying objects
+E: Every shape has area(); the caller doesn't care which shape it is.
+
+Q: What's the main drawback of a "god object" that knows about everything?
+A: Every change touches it, so it's fragile and hard to test
+W: It uses too little memory
+W: It's too small
+W: It can't have methods
+E: Break it into focused pieces with clear boundaries.
+
+Q: Why do many teams favor plain data plus functions over classes in JavaScript front-ends?
+A: Plain data is easy to copy, compare, save as JSON and test
+W: Classes don't exist in JavaScript
+W: Functions are always faster
+W: Classes can't be imported
+E: State that is just data serializes cleanly, which fits saving progress and syncing devices.

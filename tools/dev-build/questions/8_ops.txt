@@ -1,0 +1,1377 @@
+@pack ops
+
+# L 1
+Q: Which Linux command lists files in a folder?
+A: ls
+W: dir -all
+W: list
+W: show
+E: ls -la shows hidden files and details.
+
+Q: Which command changes into a folder named app?
+A: cd app
+W: go app
+W: open app
+W: ls app
+E: cd .. goes up one level.
+
+Q: Which command shows the folder you're in?
+A: pwd
+W: where
+W: cwd
+W: here
+E: Print working directory.
+
+Q: Which command creates a folder named logs?
+A: mkdir logs
+W: newdir logs
+W: touch logs
+W: make logs
+E: touch creates an empty file instead.
+
+Q: Which command prints a file's contents?
+A: cat file.txt
+W: print file.txt
+W: show file.txt
+W: open file.txt
+E: For long files, less file.txt lets you scroll.
+
+Q: In Linux paths, / at the start means:
+A: The root of the whole file system
+W: The home folder
+W: The current folder
+W: A comment
+E: ~ is your home folder; . is the current folder.
+
+# L 2
+Q: What does sudo do?
+A: Runs a command with administrator (root) rights
+W: Speeds up a command
+W: Undoes a command
+W: Switches users permanently
+E: Use carefully — root can break the system.
+
+Q: Which command searches text inside files?
+A: grep "error" app.log
+W: find "error" app.log
+W: search app.log error
+W: look error
+E: grep -r searches a whole folder.
+
+Q: What does the pipe | do, as in cat app.log | grep error?
+A: Sends one command's output into the next command
+W: Saves to a file
+W: Runs both at the same time
+W: Comments out the second part
+E: Small tools chained together are the heart of the shell.
+
+Q: What does > do, as in echo hi > out.txt?
+A: Writes output to a file, replacing it
+W: Appends to a file
+W: Compares two files
+W: Reads a file
+E: >> appends instead of replacing.
+
+Q: Which command shows the last lines of a log as it grows?
+A: tail -f app.log
+W: head app.log
+W: cat -live app.log
+W: watch app.log
+E: -f follows new lines. Essential when watching a server.
+
+Q: What do the permissions rwx mean on a file?
+A: Read, write, execute
+W: Run, wait, exit
+W: Root, web, extra
+W: Remove, write, export
+E: chmod +x script.sh makes a script runnable.
+
+# L 3
+Q: Which command shows running processes?
+A: ps aux (or top / htop)
+W: ls -p
+W: proc list
+W: jobs -all
+E: top and htop update live, showing CPU and memory.
+
+Q: How do you stop a process with id 1234?
+A: kill 1234
+W: stop 1234
+W: end 1234
+W: rm 1234
+E: kill -9 forces it, but try a normal kill first so it can clean up.
+
+Q: Which command shows disk space usage?
+A: df -h
+W: ls -size
+W: disk
+W: mem -h
+E: du -sh folder shows a folder's size. Full disks crash servers.
+
+Q: An environment variable is read in the shell with:
+A: $NAME (for example echo $PATH)
+W: %NAME% only
+W: env.NAME
+W: @NAME
+E: export NAME=value sets it for the current session.
+
+Q: What is PATH?
+A: The list of folders the shell searches for commands
+W: The current folder
+W: A file path to Python
+W: The home folder
+E: "command not found" often means the program isn't in PATH.
+
+Q: systemctl is used to:
+A: Start, stop and check services on most Linux systems
+W: Change file permissions
+W: Edit text
+W: Install Python
+E: systemctl status nginx shows whether the web server is running.
+
+# L 4
+Q: A shell script starts with #!/bin/bash because:
+A: That line tells the system which interpreter runs the file
+W: It's a comment only
+W: It sets the file name
+W: It makes the file hidden
+E: The "shebang" line.
+
+Q: set -euo pipefail at the top of a bash script:
+A: Makes the script stop on errors, unset variables and failed pipes
+W: Speeds up the script
+W: Prints every line
+W: Disables errors
+E: Without it, scripts keep going after failures and do damage.
+
+Q: Why quote variables, as in rm "$FILE"?
+A: Unquoted values with spaces split into several arguments
+W: Quotes make it faster
+W: Bash requires quotes always
+W: Quotes hide the value
+E: An unquoted path with a space can delete the wrong things.
+
+Q: cron is used to:
+A: Run commands on a schedule
+W: Compile code
+W: Monitor logs
+W: Manage users
+E: "0 2 * * *" runs at 2:00 every day.
+
+Q: journalctl -u myapp shows:
+A: Logs for the systemd service myapp
+W: The app's source code
+W: The app's database
+W: Network traffic
+E: First stop when a service won't start.
+
+Q: File descriptors 0, 1 and 2 are:
+A: Standard input, standard output, standard error
+W: CPU cores
+W: User ids
+W: Disk partitions
+E: 2>&1 sends errors to the same place as normal output.
+
+# N 1
+Q: An IP address is:
+A: A numeric address identifying a device on a network
+W: A web page
+W: A password
+W: An email address
+E: IPv4 looks like 192.168.1.10.
+
+Q: DNS turns:
+A: Domain names into IP addresses
+W: IP addresses into passwords
+W: HTML into CSS
+W: Files into folders
+E: Like a phone book for the internet.
+
+Q: Port 443 is the standard port for:
+A: HTTPS
+W: HTTP
+W: SSH
+W: Email
+E: 80 is HTTP, 22 is SSH.
+
+Q: Port 22 is normally used for:
+A: SSH
+W: HTTPS
+W: DNS
+W: FTP
+E: Remote terminal access.
+
+Q: A router at home:
+A: Connects your local devices to each other and to the internet
+W: Stores websites
+W: Runs your code
+W: Is a type of database
+E: It gives local addresses like 192.168.x.x.
+
+Q: A firewall:
+A: Allows or blocks network traffic by rules
+W: Speeds up Wi-Fi
+W: Prevents overheating
+W: Encrypts files
+E: Only open the ports you need.
+
+# N 2
+Q: Addresses like 192.168.x.x and 10.x.x.x are:
+A: Private addresses used inside local networks
+W: Public internet addresses
+W: Invalid
+W: Reserved for Google
+E: Not reachable from the internet directly.
+
+Q: localhost (127.0.0.1) refers to:
+A: The same machine you're on
+W: The router
+W: The nearest server
+W: GitHub
+E: A server on localhost isn't reachable from your phone; use the PC's LAN address instead.
+
+Q: ping example.com checks:
+A: Whether a host is reachable and how long replies take
+W: The website's HTML
+W: Disk space
+W: DNS ownership
+E: Some hosts block ping, so no reply doesn't always mean down.
+
+Q: curl https://example.com does what?
+A: Makes an HTTP request from the command line and shows the response
+W: Opens a browser
+W: Downloads Git
+W: Pings the server
+E: curl -i shows headers too. A key tool for testing APIs.
+
+Q: TCP vs UDP:
+A: TCP is reliable and ordered; UDP is faster but can lose packets
+W: They're the same
+W: UDP is for web pages only
+W: TCP is wireless only
+E: Web traffic uses TCP; video calls and games often use UDP.
+
+Q: A DNS "A record" points a name to:
+A: An IPv4 address
+W: An email server
+W: Another name
+W: A text note
+E: CNAME points to another name; MX to mail servers.
+
+# N 3
+Q: NAT (network address translation) lets:
+A: Many private devices share one public IP address
+W: Devices talk without IP
+W: DNS resolve faster
+W: Servers encrypt data
+E: It's why devices behind home routers can't be reached directly from outside.
+
+Q: A TLS certificate proves:
+A: A server controls the domain it claims
+W: The website has no bugs
+W: The user is real
+W: The server is fast
+E: Let's Encrypt gives free certificates.
+
+Q: A reverse proxy like Nginx or Caddy commonly:
+A: Terminates HTTPS and forwards requests to app servers
+W: Writes code
+W: Stores the database
+W: Replaces DNS
+E: Also handles caching, compression and routing by path.
+
+Q: dig or nslookup is used to:
+A: Look up DNS records for a domain
+W: Dig into source code
+W: Check disk space
+W: Compress files
+E: First check when "the site isn't found."
+
+Q: A VPN (or mesh network like Tailscale):
+A: Creates a private encrypted network between devices across the internet
+W: Speeds up all websites
+W: Replaces HTTPS
+W: Blocks ads
+E: Lets your phone reach your home PC securely.
+
+Q: CIDR notation 10.0.0.0/24 describes:
+A: A range of 256 addresses, 10.0.0.0 to 10.0.0.255
+W: A single address
+W: 24 servers
+W: Port 24
+E: The /24 means the first 24 bits are the network part.
+
+# N 4
+Q: A load balancer health check that fails causes it to:
+A: Stop sending traffic to that server
+W: Restart the internet
+W: Delete the server
+W: Send more traffic to it
+E: Healthy servers absorb the load.
+
+Q: DNS TTL (time to live) affects:
+A: How long resolvers cache a record before asking again
+W: Server uptime
+W: Password expiry
+W: Packet size
+E: Lower TTL before a migration so changes spread quickly.
+
+Q: "The site works for me but not for others after a DNS change" is often due to:
+A: Cached old DNS records still within their TTL
+W: Broken HTML
+W: Their browsers being old
+W: The firewall on your PC
+E: Wait out the TTL, or check with dig against different resolvers.
+
+Q: Layer 4 vs layer 7 load balancing:
+A: L4 routes by IP/port; L7 understands HTTP and can route by path or header
+W: They're the same
+W: L7 is only for UDP
+W: L4 reads cookies
+E: L7 enables /api to one service and /app to another.
+
+Q: mTLS (mutual TLS) means:
+A: Both client and server present certificates to prove identity
+W: Two TLS connections at once
+W: Faster TLS
+W: TLS without certificates
+E: Common between services in a cluster or service mesh.
+
+Q: MTU problems typically show up as:
+A: Small requests work but large transfers hang
+W: DNS failing always
+W: Wrong colors
+W: Slow typing
+E: Packets too big for a network path get dropped. Tunnels and VPNs are common culprits.
+
+# D 1
+Q: Docker is used to:
+A: Package an app with its dependencies into a container
+W: Write code
+W: Design websites
+W: Store passwords
+E: The container runs the same on any machine with Docker.
+
+Q: A Docker "image" is:
+A: A read-only template used to create containers
+W: A picture file
+W: A running app
+W: A virtual machine
+E: Image = recipe result; container = a running copy.
+
+Q: A Docker "container" is:
+A: A running instance of an image
+W: A shipping box
+W: A source file
+W: A database
+E: You can run many containers from one image.
+
+Q: A Dockerfile contains:
+A: Steps to build an image
+W: The app's database
+W: Logs
+W: Git history
+E: FROM, COPY, RUN, CMD...
+
+Q: Which command lists running containers?
+A: docker ps
+W: docker list
+W: docker images
+W: docker run
+E: docker ps -a shows stopped ones too.
+
+Q: Docker Hub is:
+A: A public registry where images are stored and shared
+W: A code editor
+W: A cloud server
+W: A Git host only
+E: docker pull nginx downloads an image from it.
+
+# D 2
+Q: docker run -p 8080:80 nginx means:
+A: Map port 8080 on your machine to port 80 in the container
+W: Run 8080 copies
+W: Use 80 MB of memory
+W: Wait 80 seconds
+E: Then open localhost:8080.
+
+Q: In a Dockerfile, FROM node:20 does what?
+A: Starts the image from an official Node.js 20 base image
+W: Downloads 20 Node apps
+W: Sets 20 GB of memory
+W: Names the image node
+E: Every image builds on a base.
+
+Q: Why use a .dockerignore file?
+A: To keep files like node_modules and secrets out of the build
+W: To ignore errors
+W: To hide containers
+W: To speed up the network
+E: Smaller, safer images.
+
+Q: Data written inside a container's file system:
+A: Is lost when the container is removed, unless you use a volume
+W: Is always saved forever
+W: Is uploaded to Docker Hub
+W: Is encrypted
+E: Volumes persist data outside the container.
+
+Q: docker logs <container> shows:
+A: The container's standard output and errors
+W: The Dockerfile
+W: Docker's billing
+W: Git commits
+E: Containers should log to stdout so tools can collect it.
+
+Q: docker compose is used to:
+A: Define and run several containers together, like app + database
+W: Write music
+W: Compress images
+W: Build Kubernetes clusters
+E: One YAML file, one command: docker compose up.
+
+# D 3
+Q: Image layers matter because:
+A: Unchanged layers are cached, so ordering steps well speeds up builds
+W: Each layer is a separate app
+W: Layers encrypt data
+W: They don't matter
+E: Copy package.json and install deps before copying the rest of the code.
+
+Q: A multi-stage build is used to:
+A: Build in one image and copy only the result into a small final image
+W: Run multiple apps
+W: Deploy to multiple clouds
+W: Use multiple Dockerfiles at once
+E: Final images skip compilers and dev tools.
+
+Q: Why avoid running containers as root?
+A: If the app is compromised, the attacker gets less power
+W: Root is slower
+W: Docker forbids it
+W: Root can't read files
+E: Add USER in the Dockerfile.
+
+Q: Tagging images as myapp:latest only is risky because:
+A: You can't tell which version is running or roll back reliably
+W: latest is slower
+W: Tags are required to be numbers
+W: Docker deletes latest
+E: Tag with versions or commit hashes.
+
+Q: Environment variables for a container are passed with:
+A: -e NAME=value or an env file
+W: Editing the image
+W: A comment in the Dockerfile
+W: Docker Hub settings
+E: Keep secrets out of the image itself.
+
+Q: Containers vs virtual machines:
+A: Containers share the host's kernel and start much faster
+W: Containers include a full OS
+W: VMs are always lighter
+W: They're identical
+E: VMs give stronger isolation; containers give speed and density.
+
+# D 4
+Q: An image scanner (like Trivy) checks for:
+A: Known vulnerabilities in the image's packages
+W: Code style
+W: Image resolution
+W: Unused CSS
+E: Base images age; rebuild regularly.
+
+Q: Distroless or minimal base images help by:
+A: Shrinking attack surface and size by removing shells and extra tools
+W: Adding more tools
+W: Making debugging easier always
+W: Including a full OS
+E: Trade-off: harder to poke around inside.
+
+Q: A container's PID 1 should handle signals properly so that:
+A: It shuts down gracefully when the orchestrator stops it
+W: It runs faster
+W: Logs are colored
+W: It uses less disk
+E: Otherwise it gets killed hard after a timeout, cutting off requests.
+
+Q: Reproducible builds mean:
+A: Building the same source always produces the same image
+W: Building twice is faster
+W: Images can't change
+W: Docker is reinstalled each time
+E: Pin base image digests and dependency versions.
+
+Q: Resource limits on containers (CPU, memory) prevent:
+A: One container starving others on the same machine
+W: Containers from starting
+W: Networking
+W: Logging
+E: A memory leak then kills one container, not the whole host.
+
+Q: Building images in CI and pushing them to a registry is preferred over building on servers because:
+A: The same tested image is deployed everywhere
+W: Servers can't build
+W: Registries are free
+W: It's required by Docker
+E: Build once, deploy many.
+
+# C 1
+Q: CI stands for:
+A: Continuous integration
+W: Code inspection
+W: Cloud infrastructure
+W: Container image
+E: Automatically build and test every change.
+
+Q: CD stands for:
+A: Continuous delivery or deployment
+W: Code documentation
+W: Container daemon
+W: Cloud data
+E: Delivery: always ready to release. Deployment: releases automatically.
+
+Q: A pipeline is:
+A: A series of automated steps like build → test → deploy
+W: A water pipe
+W: A database
+W: A Git branch
+E: Each step must pass for the next to run.
+
+Q: Why run tests automatically on every push?
+A: Problems are caught minutes after they're made, not weeks later
+W: To slow down development
+W: Because humans can't test
+W: To save disk space
+E: Fast feedback is the whole point.
+
+Q: GitHub Actions workflow files live in:
+A: .github/workflows/ in the repository
+W: The README
+W: Settings → Pages only
+W: The Docker image
+E: YAML files describing jobs and triggers.
+
+Q: A "build" in CI typically means:
+A: Turning source code into something runnable or deployable
+W: Buying servers
+W: Designing the UI
+W: Writing tests
+E: Compiling, bundling, or building a container image.
+
+# C 2
+Q: In a GitHub Actions workflow, on: push means:
+A: Run this workflow whenever code is pushed
+W: Push code automatically
+W: Run only on Fridays
+W: Never run
+E: Other triggers: pull_request, schedule, workflow_dispatch (manual).
+
+Q: Secrets in CI (like a deploy token) should be stored:
+A: In the CI system's encrypted secrets settings
+W: In the workflow YAML file
+W: In the README
+W: In a public gist
+E: Reference them as ${{ secrets.NAME }}.
+
+Q: A failing CI check on a pull request should:
+A: Block merging until it's fixed
+W: Be ignored
+W: Be deleted
+W: Be re-run until it passes by luck
+E: If it's flaky, fix the test, don't retry forever.
+
+Q: Caching dependencies in CI speeds up:
+A: Repeated installs of the same packages between runs
+W: The app for users
+W: Git pushes
+W: DNS
+E: Key the cache on the lockfile so it refreshes when deps change.
+
+Q: A deployment to GitHub Pages can be automated by:
+A: A workflow that builds and publishes on every push to main
+W: Emailing GitHub
+W: Copying files by hand forever
+W: Nothing; it's impossible
+E: Pages can deploy straight from a branch or from an Actions workflow.
+
+Q: Linting in CI catches:
+A: Style issues and likely bugs before review
+W: Server outages
+W: User complaints
+W: Network failures
+E: Cheap, fast checks first in the pipeline.
+
+# C 3
+Q: Why run fast checks (lint, unit tests) before slow ones (E2E)?
+A: Fail fast and save time and compute
+W: Slow ones don't matter
+W: Order doesn't matter
+W: Fast checks can't fail
+E: Developers get feedback sooner.
+
+Q: A matrix build runs:
+A: The same tests across several versions or platforms
+W: Tests in a spreadsheet
+W: Only one test
+W: Tests in random order
+E: e.g., Node 18, 20 and 22 on Linux and Windows.
+
+Q: "Artifacts" in CI are:
+A: Files produced by a job, saved for later steps or download
+W: Bugs
+W: Old commits
+W: Ancient code
+E: Build outputs, test reports, coverage files.
+
+Q: Deploying the exact same artifact to staging and production ensures:
+A: What you tested is what you ship
+W: Faster builds only
+W: Lower costs only
+W: Nothing
+E: Rebuilding for prod can introduce differences.
+
+Q: A manual approval step before production is useful when:
+A: Releases need a human check, like timing or business sign-off
+W: Tests are fast
+W: You deploy to localhost
+W: Never
+E: Environments with protection rules can require approval.
+
+Q: A pipeline that takes 45 minutes encourages people to:
+A: Batch changes and push less often, which raises risk
+W: Push more often
+W: Write more tests
+W: Nothing
+E: Keep pipelines fast; parallelize and cache.
+
+# C 4
+Q: "Shift left" in DevOps means:
+A: Moving testing and security checks earlier in development
+W: Moving servers to the west coast
+W: Deleting older code
+W: Releasing later
+E: Earlier problems are cheaper to fix.
+
+Q: Supply-chain security in CI includes:
+A: Pinning action versions, verifying dependencies and signing artifacts
+W: Faster builds
+W: Using only free tools
+W: Skipping reviews
+E: A compromised third-party action can steal your secrets.
+
+Q: OIDC federation from CI to a cloud provider replaces:
+A: Long-lived cloud keys stored as CI secrets
+W: Unit tests
+W: DNS
+W: Docker
+E: CI gets short-lived credentials per run.
+
+Q: DORA metrics measure delivery performance using:
+A: Deployment frequency, lead time, change failure rate and time to restore
+W: Lines of code and commits
+W: Number of developers
+W: Server count
+E: Elite teams deploy often with low failure rates.
+
+Q: A "monorepo" CI should use change detection so that:
+A: Only affected projects build and test
+W: Everything always rebuilds
+W: Nothing builds
+W: Tests skip
+E: Keeps feedback fast as the repo grows.
+
+Q: Progressive delivery combines:
+A: Canary or staged rollouts with automatic checks and rollback
+W: Releasing to everyone at once
+W: Manual FTP uploads
+W: No monitoring
+E: Tools like Argo Rollouts automate this in Kubernetes.
+
+# K 1
+Q: Kubernetes is used to:
+A: Run and manage containers across a group of machines
+W: Build container images
+W: Write code
+W: Host Git repositories
+E: It schedules, restarts and scales containers for you.
+
+Q: A Kubernetes "cluster" is:
+A: A set of machines (nodes) managed together
+W: One container
+W: A database
+W: A Git branch
+E: A control plane plus worker nodes.
+
+Q: A "node" in Kubernetes is:
+A: A machine (physical or virtual) that runs pods
+W: A JavaScript runtime
+W: A container image
+W: A network cable
+E: Nodes run the kubelet agent and container runtime.
+
+Q: A "pod" is:
+A: The smallest deployable unit, holding one or more containers
+W: A cluster
+W: An image registry
+W: A node
+E: Containers in a pod share an IP and can share volumes.
+
+Q: kubectl is:
+A: The command-line tool for talking to a Kubernetes cluster
+W: A container image
+W: A cloud provider
+W: A YAML editor
+E: kubectl get pods lists pods.
+
+Q: Kubernetes is often shortened to:
+A: K8s
+W: KBS
+W: Kube8
+W: KS
+E: 8 letters between K and s.
+
+# K 2
+Q: A Deployment in Kubernetes:
+A: Keeps a desired number of identical pods running and handles updates
+W: Deploys code to GitHub
+W: Builds images
+W: Stores secrets
+E: If a pod dies, the Deployment makes a new one.
+
+Q: A Service in Kubernetes provides:
+A: A stable address that routes traffic to a changing set of pods
+W: Customer support
+W: A database
+W: A build pipeline
+E: Pods come and go; the Service name stays.
+
+Q: Kubernetes resources are usually described in:
+A: YAML files
+W: CSS files
+W: Excel sheets
+W: Shell history
+E: kubectl apply -f deployment.yaml.
+
+Q: "Desired state" in Kubernetes means:
+A: You declare what you want, and Kubernetes works to make reality match
+W: You run each step by hand
+W: The cluster's mood
+W: The last command typed
+E: Declarative, not imperative.
+
+Q: A namespace in Kubernetes:
+A: Groups resources so teams or environments don't collide
+W: Names a node
+W: Is a DNS server
+W: Is a Git branch
+E: e.g., dev, staging and prod namespaces.
+
+Q: kubectl get pods -n prod shows:
+A: Pods in the prod namespace
+W: All nodes
+W: Images in prod
+W: Logs
+E: -n selects the namespace.
+
+# K 3
+Q: A ConfigMap holds:
+A: Non-secret configuration passed to pods
+W: Passwords
+W: Container images
+W: Node hardware info
+E: Use Secrets for sensitive values.
+
+Q: A Kubernetes Secret:
+A: Stores sensitive data like tokens, base64-encoded (not encrypted by default)
+W: Is fully encrypted always
+W: Is hidden from admins
+W: Is a type of pod
+E: Enable encryption at rest and limit access with RBAC.
+
+Q: An Ingress resource:
+A: Routes outside HTTP traffic to services inside the cluster
+W: Lets pods talk to each other
+W: Stores images
+W: Builds containers
+E: Needs an ingress controller like NGINX or Traefik.
+
+Q: kubectl logs <pod> shows:
+A: The pod's container output
+W: Cluster billing
+W: YAML
+W: Node temperature
+E: Add -f to follow and --previous for the last crashed container.
+
+Q: kubectl describe pod <name> is useful for:
+A: Seeing events like failed pulls, scheduling problems and restarts
+W: Editing the pod
+W: Deleting the pod
+W: Building the image
+E: The Events section at the bottom tells the story.
+
+Q: A rolling update replaces pods:
+A: A few at a time, so the app stays available
+W: All at once
+W: Only at night
+W: Never
+E: kubectl rollout undo goes back if it goes wrong.
+
+# K 4
+Q: The control plane's API server:
+A: Is the front door every kubectl command and controller talks to
+W: Runs your app containers
+W: Stores images
+W: Is a load balancer for users
+E: State is stored in etcd behind it.
+
+Q: etcd in Kubernetes is:
+A: The key–value store holding the cluster's state
+W: A logging tool
+W: A container runtime
+W: A YAML linter
+E: Back it up; losing it loses the cluster's memory.
+
+Q: The scheduler decides:
+A: Which node each new pod runs on
+W: When cron jobs run in your app
+W: Who can log in
+W: Image versions
+E: Based on requests, limits, affinity and taints.
+
+Q: A controller in Kubernetes:
+A: Watches the cluster and makes changes to match desired state
+W: Is a game controller
+W: Is a front-end library
+W: Is the kubectl binary
+E: The reconciliation loop is the core idea of Kubernetes.
+
+Q: Operators extend Kubernetes by:
+A: Encoding app-specific operational knowledge in custom controllers
+W: Hiring operators
+W: Replacing kubectl
+W: Removing YAML
+E: e.g., a Postgres operator handles backups and failover.
+
+Q: Custom Resource Definitions (CRDs) let you:
+A: Add your own resource types to the Kubernetes API
+W: Define CSS
+W: Create container images
+W: Change the scheduler's code
+E: Operators pair CRDs with controllers.
+
+# X 1
+Q: A pod keeps restarting. The first command to run is:
+A: kubectl describe pod and kubectl logs --previous
+W: Delete the cluster
+W: Reinstall Docker
+W: Edit the image by hand
+E: Events and the last crash's logs usually reveal the cause.
+
+Q: CrashLoopBackOff means:
+A: The container keeps crashing and Kubernetes waits longer between restarts
+W: The network is slow
+W: The image is downloading
+W: The pod finished successfully
+E: Check logs for the error that crashes it.
+
+Q: ImagePullBackOff means:
+A: Kubernetes can't download the container image
+W: The app crashed
+W: The pod is healthy
+W: The node is full
+E: Wrong image name or tag, or missing registry credentials.
+
+Q: Pending pods often mean:
+A: No node has enough resources, or scheduling rules can't be met
+W: The app is running
+W: The image is wrong
+W: The logs are full
+E: kubectl describe shows "Insufficient cpu" or similar.
+
+Q: Scaling a deployment to 5 replicas:
+A: kubectl scale deployment myapp --replicas=5
+W: kubectl copy pod x5
+W: docker run x5
+W: Edit the node
+E: Or change replicas in the YAML and apply it.
+
+Q: kubectl apply -f file.yaml:
+A: Creates or updates resources to match the file
+W: Deletes the resources
+W: Validates YAML only
+W: Builds images
+E: Keep these files in Git.
+
+# X 2
+Q: Liveness vs readiness probes:
+A: Liveness restarts a stuck container; readiness controls whether it gets traffic
+W: They're the same
+W: Liveness controls traffic
+W: Readiness restarts pods
+E: A slow-starting app needs a readiness probe so users don't hit it early.
+
+Q: Resource requests and limits:
+A: Requests reserve capacity for scheduling; limits cap usage
+W: Are optional decorations
+W: Set the number of pods
+W: Control networking
+E: Exceeding a memory limit gets the container OOMKilled.
+
+Q: OOMKilled in pod status means:
+A: The container used more memory than its limit and was killed
+W: Out of money
+W: Network failure
+W: The image is missing
+E: Raise the limit or fix the memory usage.
+
+Q: A Horizontal Pod Autoscaler (HPA):
+A: Adds or removes pods based on metrics like CPU
+W: Adds nodes
+W: Changes image versions
+W: Rotates secrets
+E: The Cluster Autoscaler adds nodes when pods can't fit.
+
+Q: Persistent data in Kubernetes uses:
+A: PersistentVolumeClaims backed by storage
+W: The container file system
+W: ConfigMaps
+W: Logs
+E: Pods are disposable; volumes outlive them.
+
+Q: A StatefulSet differs from a Deployment by giving pods:
+A: Stable names and their own persistent storage
+W: More CPU
+W: Random names
+W: No storage
+E: Used for databases and other stateful apps.
+
+# X 3
+Q: Helm is:
+A: A package manager for Kubernetes apps, using templated charts
+W: A container runtime
+W: A monitoring tool
+W: A cloud provider
+E: helm install installs a whole app with configurable values.
+
+Q: GitOps tools like Argo CD or Flux:
+A: Sync the cluster to manifests stored in Git
+W: Replace Git
+W: Build images
+W: Monitor CPU
+E: Change the repo, and the cluster follows. History and rollback come free.
+
+Q: RBAC in Kubernetes controls:
+A: Who can do what to which resources
+W: Pod networking
+W: Image sizes
+W: DNS
+E: Give CI and people the least access they need.
+
+Q: A NetworkPolicy:
+A: Restricts which pods can talk to which
+W: Speeds up networking
+W: Assigns IPs
+W: Blocks the internet for nodes
+E: By default all pods can talk to all pods.
+
+Q: A Job vs CronJob:
+A: A Job runs once to completion; a CronJob runs Jobs on a schedule
+W: They're the same
+W: A Job runs forever
+W: A CronJob is a Deployment
+E: Backups and reports are typical CronJobs.
+
+Q: Pod Disruption Budgets protect:
+A: Availability during voluntary disruptions like node upgrades
+W: Against crashes
+W: Image pulls
+W: Billing
+E: "Keep at least 2 pods running while draining nodes."
+
+# X 4
+Q: Taints and tolerations are used to:
+A: Keep pods off certain nodes unless they explicitly tolerate them
+W: Mark bad images
+W: Encrypt pods
+W: Set log levels
+E: e.g., GPU nodes only for GPU workloads.
+
+Q: Pod affinity / anti-affinity lets you:
+A: Place pods near or away from other pods
+W: Make pods friends
+W: Speed up pulls
+W: Share logs
+E: Anti-affinity spreads replicas across nodes for resilience.
+
+Q: A service mesh (like Istio or Linkerd) adds:
+A: mTLS, retries, traffic splitting and telemetry between services
+W: A new database
+W: A GUI for kubectl
+W: A container runtime
+E: Powerful, but adds complexity — use when the need is real.
+
+Q: Upgrading a Kubernetes cluster safely involves:
+A: Upgrading the control plane, then draining and upgrading nodes one at a time
+W: Deleting everything and reinstalling
+W: Upgrading all nodes at once
+W: Never upgrading
+E: Check deprecated APIs before you upgrade.
+
+Q: For a small static app like Mad Minute, Kubernetes is:
+A: Overkill — a static host or a single small server is simpler
+W: Required
+W: The only option
+W: Cheaper than GitHub Pages
+E: Match the tool to the problem. Learn K8s for jobs that need it.
+
+Q: Multi-cluster setups are chosen mainly for:
+A: Isolation, regional availability and blast-radius reduction
+W: Lower cost always
+W: Simpler operations
+W: Fewer YAML files
+E: More clusters mean more to operate.
+
+# O 1
+Q: Monitoring means:
+A: Tracking a system's health and alerting on problems
+W: Watching users
+W: Reading code
+W: Buying monitors
+E: Know before your users tell you.
+
+Q: The "three pillars" of observability are:
+A: Logs, metrics and traces
+W: CPU, RAM and disk
+W: HTML, CSS and JS
+W: Git, CI and CD
+E: Logs = events, metrics = numbers over time, traces = a request's path.
+
+Q: A metric is:
+A: A number measured over time, like requests per second
+W: A log message
+W: A test result
+W: A user story
+E: Graphs and alerts are built on metrics.
+
+Q: An alert should fire when:
+A: Something needs a human to act
+W: Any number changes
+W: Every log line appears
+W: Never
+E: Too many alerts and people ignore them all.
+
+Q: Uptime monitoring checks:
+A: Whether the service responds from outside
+W: Code quality
+W: Developer hours
+W: Git branches
+E: Simple ping-style checks catch total outages.
+
+Q: Logs should include:
+A: Time, level, a clear message and useful context
+W: Passwords
+W: Random characters
+W: Nothing
+E: Never log secrets or full personal data.
+
+# O 2
+Q: Log levels (debug, info, warn, error) help by:
+A: Letting you filter noise and turn detail up when needed
+W: Making logs colorful only
+W: Encrypting logs
+W: Speeding up apps
+E: Production usually runs at info.
+
+Q: Structured logging means:
+A: Logs as JSON fields that tools can search and filter
+W: Logs in paragraphs
+W: Logs sorted alphabetically
+W: No logs
+E: {"level":"error","user":42,"msg":"save failed"}.
+
+Q: Prometheus is:
+A: A system that collects and stores metrics
+W: A log viewer
+W: A CI tool
+W: A database for users
+E: Often paired with Grafana for dashboards.
+
+Q: Grafana is used for:
+A: Dashboards that visualize metrics and logs
+W: Building images
+W: Writing code
+W: Managing DNS
+E: Turns numbers into charts you can read at a glance.
+
+Q: Latency percentiles like p95 mean:
+A: 95% of requests were faster than this value
+W: The average latency
+W: 95 requests per second
+W: 95% uptime
+E: Averages hide the slow requests users actually feel.
+
+Q: A dashboard is most useful when it shows:
+A: A few key signals tied to user experience
+W: Every metric available
+W: Only CPU
+W: Code coverage
+E: Rate, errors and duration are a good start (the RED method).
+
+# O 3
+Q: Distributed tracing helps you:
+A: Follow one request across many services and see where time goes
+W: Trace user locations
+W: Find Git history
+W: Copy files
+E: OpenTelemetry is the common standard.
+
+Q: An SLI, SLO and SLA are:
+A: A measurement, a target, and a contractual promise
+W: Three types of servers
+W: Three log levels
+W: Three Kubernetes objects
+E: e.g., SLI: success rate; SLO: 99.9%; SLA: refund if below 99.5%.
+
+Q: Alert fatigue happens when:
+A: Too many noisy alerts make people ignore real ones
+W: Alerts are too rare
+W: Alerts are colored
+W: Nobody is on call
+E: Alert on symptoms users feel, not every cause.
+
+Q: A runbook is:
+A: Step-by-step instructions for handling a known problem
+W: A running log file
+W: A marathon schedule
+W: A YAML file
+E: At 3 a.m., nobody should have to think from scratch.
+
+Q: The "golden signals" are:
+A: Latency, traffic, errors and saturation
+W: Red, yellow, green and blue
+W: CPU, RAM, disk and GPU
+W: Logs, metrics, traces and tests
+E: From Google's SRE practices.
+
+Q: Error tracking tools like Sentry help front-end apps by:
+A: Capturing real users' errors with stack traces and context
+W: Blocking all errors
+W: Speeding up pages
+W: Writing tests
+E: You learn about the iPhone-only bug without waiting for an email.
+
+# O 4
+Q: Chaos engineering means:
+A: Deliberately injecting failures to test resilience
+W: Writing messy code
+W: Random deployments
+W: Ignoring errors
+E: Better to find weaknesses on a Tuesday afternoon than during an outage.
+
+Q: A blameless postmortem focuses on:
+A: How the system and process allowed the failure, and what to change
+W: Who to fire
+W: Hiding the incident
+W: Only the timeline
+E: People make mistakes; systems should make them hard to make.
+
+Q: Mean time to recovery (MTTR) improves most with:
+A: Fast detection, clear runbooks and easy rollback
+W: More features
+W: Longer meetings
+W: Fewer logs
+E: Recovery speed often matters more than never failing.
+
+Q: High-cardinality labels in metrics (like user id) cause:
+A: Huge numbers of time series, raising cost and slowing queries
+W: Better dashboards always
+W: Fewer metrics
+W: Nothing
+E: Use logs or traces for per-user detail.
+
+Q: Sampling traces is common because:
+A: Recording every request is expensive at scale
+W: Traces are illegal
+W: Sampling improves accuracy
+W: Tools require it
+E: Keep all errors and a percentage of the rest.
+
+Q: Capacity planning uses:
+A: Usage trends and load tests to predict when you'll need more resources
+W: Guessing
+W: Only CPU at one moment
+W: Code reviews
+E: Plan before saturation, not during it.
+
+# I 1
+Q: Cloud providers like AWS, Azure and Google Cloud rent:
+A: Servers, storage, databases and services on demand
+W: Office space
+W: Laptops
+W: Software licenses only
+E: Pay for what you use.
+
+Q: Object storage (like S3) is used for:
+A: Storing files like images, backups and audio
+W: Running code
+W: DNS
+W: Logging only
+E: Cheap, durable, and accessed by URL or API.
+
+Q: A cloud "region" is:
+A: A geographic area with its own data centers
+W: A type of server
+W: A user group
+W: A pricing plan
+E: Pick regions near your users.
+
+Q: "Serverless" functions (like AWS Lambda) mean:
+A: You upload code and the provider runs it on demand, without managing servers
+W: There are no servers anywhere
+W: Code runs in the browser
+W: Free hosting forever
+E: Servers exist — you just don't manage them.
+
+Q: A managed database service means:
+A: The provider handles backups, patching and failover
+W: You manage the hardware
+W: The database is free
+W: There's no database
+E: Costs more than DIY but saves time and risk.
+
+Q: The cloud's pay-as-you-go model means a forgotten running server:
+A: Keeps charging money until you stop it
+W: Turns off automatically
+W: Is free
+W: Deletes itself
+E: Set budgets and alerts.
+
+# I 2
+Q: Infrastructure as Code means:
+A: Defining servers, networks and services in versioned files
+W: Writing infrastructure in Python only
+W: Hardware made of code
+W: Documenting servers in Word
+E: Repeatable, reviewable, and undoable through Git.
+
+Q: Terraform is:
+A: A tool that creates and updates cloud infrastructure from config files
+W: A Kubernetes replacement
+W: A container runtime
+W: A monitoring tool
+E: terraform plan shows changes; apply makes them.
+
+Q: terraform plan is important because:
+A: It shows what will change before anything is changed
+W: It deletes everything
+W: It's optional decoration
+W: It runs tests
+E: Read the plan — especially anything marked "destroy."
+
+Q: IAM in the cloud controls:
+A: Who and what can access which resources
+W: Image sizes
+W: Network speed
+W: Billing currency
+E: Least privilege applies here too.
+
+Q: Autoscaling groups:
+A: Add or remove servers based on load
+W: Group users by age
+W: Scale images
+W: Compress logs
+E: Pay for capacity only when needed.
+
+Q: A VPC (virtual private cloud) is:
+A: Your own isolated network inside a cloud provider
+W: A VPN app
+W: A video codec
+W: A type of server
+E: Subnets, routes and firewalls define it.
+
+# I 3
+Q: Terraform state files must be:
+A: Stored safely and shared (remote state with locking)
+W: Committed to public repos
+W: Deleted after each run
+W: Edited by hand often
+E: State can contain secrets and is the record of what exists.
+
+Q: Drift means:
+A: Real infrastructure has changed from what the code describes
+W: Servers moving physically
+W: Slow networks
+W: Old Git branches
+E: Usually from manual console edits. Detect and reconcile it.
+
+Q: Tagging cloud resources (owner, project, environment) helps with:
+A: Cost tracking, cleanup and accountability
+W: Speed
+W: Security only
+W: Nothing
+E: Untagged resources become mystery bills.
+
+Q: Separate cloud accounts or projects for dev and prod help by:
+A: Limiting blast radius and access
+W: Making billing harder
+W: Slowing deployments
+W: Nothing
+E: A mistake in dev can't delete prod.
+
+Q: Modules in Terraform are:
+A: Reusable bundles of infrastructure code
+W: Python packages
+W: Kubernetes pods
+W: Git branches
+E: Write "a standard web service" once, use it many times.
+
+Q: Managed Kubernetes (EKS, AKS, GKE) means:
+A: The provider runs the control plane; you manage workloads and often nodes
+W: You get Kubernetes for free
+W: There's no YAML
+W: Kubernetes isn't used
+E: Removes the hardest operational part.
+
+# I 4
+Q: FinOps is:
+A: The practice of managing cloud costs with engineering and finance together
+W: A finance app
+W: A Kubernetes plugin
+W: A type of database
+E: Visibility, ownership, and optimization of spend.
+
+Q: Reserved or committed-use discounts make sense when:
+A: You have steady, predictable usage
+W: Usage is unpredictable
+W: You're just testing
+W: Never
+E: Commit for 1–3 years in exchange for lower prices.
+
+Q: Disaster recovery targets RPO and RTO mean:
+A: How much data you can lose, and how fast you must recover
+W: Two cloud regions
+W: Two backup tools
+W: Rate per operation and time to open
+E: They drive backup frequency and failover design.
+
+Q: Policy as code (like OPA) lets you:
+A: Automatically enforce rules such as "no public storage buckets"
+W: Write legal policies
+W: Speed up servers
+W: Replace IAM
+E: Checks run in CI and in the cluster.
+
+Q: Multi-region active-active setups trade:
+A: Higher availability for more cost and data-consistency complexity
+W: Lower cost for less availability
+W: Nothing
+W: Speed for security
+E: Most apps don't need it.
+
+Q: The most important habit when learning cloud on your own account is:
+A: Set billing alerts and tear down what you create
+W: Use the biggest servers
+W: Share root credentials
+W: Leave everything running
+E: Learning labs can surprise you with a bill otherwise.

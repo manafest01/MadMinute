@@ -1,0 +1,1259 @@
+@pack dbg
+
+# P 1
+Q: What does this print?
+```
+let a = 3;
+let b = a;
+a = 10;
+console.log(b);
+```
+A: 3
+W: 10
+W: 13
+W: undefined
+E: Numbers are copied when assigned. Changing a later doesn't affect b.
+
+Q: What does this print?
+```
+const name = "Ana";
+console.log("Hi, " + name + "!");
+```
+A: Hi, Ana!
+W: Hi, name!
+W: Hi, + name + !
+W: Error
+E: The variable's value is joined into the text.
+
+Q: What does this print?
+```
+let n = 4;
+if (n > 5) console.log("big");
+console.log("done");
+```
+A: done
+W: big done
+W: big
+W: Nothing
+E: The if is false so "big" is skipped, but the next line always runs.
+
+Q: What does this print?
+```
+for (let i = 1; i <= 3; i++) console.log(i * 2);
+```
+A: 2 4 6
+W: 1 2 3
+W: 2 4
+W: 0 2 4
+E: i goes 1, 2, 3 and each is doubled.
+
+Q: What does this Python print?
+```
+x = 7
+if x % 2 == 0:
+    print("even")
+else:
+    print("odd")
+```
+A: odd
+W: even
+W: 7
+W: Error
+E: 7 % 2 is 1 (the remainder), so it's not even.
+
+Q: What does this print?
+```
+const list = ["a", "b", "c"];
+console.log(list.length);
+```
+A: 3
+W: 2
+W: "abc"
+W: c
+E: Three items. The last index is 2, but the length is 3.
+
+# P 2
+Q: What does this print?
+```
+function f(x) {
+  if (x > 0) return "pos";
+  return "not pos";
+}
+console.log(f(0));
+```
+A: not pos
+W: pos
+W: undefined
+W: 0
+E: 0 > 0 is false, so the first return is skipped.
+
+Q: What does this print?
+```
+const arr = [5, 8, 2];
+let max = arr[0];
+for (const n of arr) if (n > max) max = n;
+console.log(max);
+```
+A: 8
+W: 5
+W: 2
+W: 15
+E: A classic "track the biggest so far" loop.
+
+Q: What does this print?
+```
+let s = "";
+for (const c of "abc") s = c + s;
+console.log(s);
+```
+A: cba
+W: abc
+W: a
+W: ""
+E: Each letter goes in front, so the string ends up reversed.
+
+Q: What does this print?
+```
+const user = { name: "Tom", tags: [] };
+user.tags.push("dj");
+console.log(user.tags.length);
+```
+A: 1
+W: 0
+W: undefined
+W: Error
+E: tags started empty and got one item.
+
+Q: What does this Python print?
+```
+nums = [1, 2, 3]
+print([n * n for n in nums])
+```
+A: [1, 4, 9]
+W: [1, 2, 3]
+W: 14
+W: [2, 4, 6]
+E: A list comprehension: one new item per old item, squared.
+
+Q: What does this print?
+```
+let count = 0;
+["a", "b", "a"].forEach(x => { if (x === "a") count++; });
+console.log(count);
+```
+A: 2
+W: 1
+W: 3
+W: 0
+E: Two items equal "a".
+
+# P 3
+Q: What does this print, and in what order?
+```
+console.log("A");
+setTimeout(() => console.log("B"), 0);
+console.log("C");
+```
+A: A C B
+W: A B C
+W: B A C
+W: A C
+E: setTimeout queues B to run after the current code finishes, even with 0 ms.
+
+Q: What does this print?
+```
+async function load() { return 5; }
+console.log(load());
+```
+A: A Promise (not 5)
+W: 5
+W: undefined
+W: Error
+E: Async functions always return a Promise. You need await load() or load().then(...) to get 5.
+
+Q: What does this print?
+```
+const q = { lv: 2 };
+const copy = q;
+copy.lv = 4;
+console.log(q.lv);
+```
+A: 4
+W: 2
+W: undefined
+W: Error
+E: copy and q point to the same object. Assignment doesn't copy objects.
+
+Q: What does this print?
+```
+console.log([1, 2, 3].map(n => { n * 2 }));
+```
+A: [undefined, undefined, undefined]
+W: [2, 4, 6]
+W: [1, 2, 3]
+W: Error
+E: With curly braces an arrow function needs return. Without braces, n => n * 2 returns automatically.
+
+Q: What does this Python print?
+```
+def add(item, bag=[]):
+    bag.append(item)
+    return bag
+add(1)
+print(add(2))
+```
+A: [1, 2]
+W: [2]
+W: [1]
+W: Error
+E: The default list is created once and shared between calls. Use bag=None and create the list inside.
+
+Q: What does this print?
+```
+const s = "5";
+console.log(s + 1, s - 1);
+```
+A: 51 4
+W: 6 4
+W: 51 51
+W: 6 "4"
+E: + joins strings; - forces numbers. Inconsistent type conversion is why === and explicit Number() help.
+
+# P 4
+Q: What does this print, and in what order?
+```
+console.log(1);
+Promise.resolve().then(() => console.log(2));
+setTimeout(() => console.log(3), 0);
+console.log(4);
+```
+A: 1 4 2 3
+W: 1 2 3 4
+W: 1 4 3 2
+W: 1 3 2 4
+E: Sync code first (1, 4), then promise callbacks (microtasks: 2), then timers (3).
+
+Q: What does this print?
+```
+async function a() {
+  await null;
+  console.log("x");
+}
+a();
+console.log("y");
+```
+A: y x
+W: x y
+W: x
+W: y
+E: await pauses the function and lets the caller keep going. "y" prints first.
+
+Q: What does this print?
+```
+const items = [1, 2, 3];
+const out = items.forEach(n => n * 2);
+console.log(out);
+```
+A: undefined
+W: [2, 4, 6]
+W: [1, 2, 3]
+W: 6
+E: forEach always returns undefined. map is the one that returns a new array.
+
+Q: What does this print?
+```
+let x = 1;
+function f() { console.log(x); let x = 2; }
+f();
+```
+A: An error: can't use x before it's declared
+W: 1
+W: 2
+W: undefined
+E: The inner let x shadows the outer one for the whole function, but isn't ready until its line runs.
+
+Q: What does this print?
+```
+const results = [];
+for (const id of [1, 2, 3]) {
+  fetchScore(id).then(s => results.push(s));
+}
+console.log(results.length);
+```
+A: 0
+W: 3
+W: 1
+W: undefined
+E: The fetches haven't finished when console.log runs. Use await Promise.all(...) to wait for all of them.
+
+Q: What does this print?
+```
+console.log([10, 1, 5].sort());
+```
+A: [1, 10, 5]
+W: [1, 5, 10]
+W: [10, 5, 1]
+W: [10, 1, 5]
+E: Default sort compares as text, so "10" comes before "5". Use sort((a, b) => a - b).
+
+# B 1
+Q: What's the bug?
+```
+function greet(name) {
+  console.log("Hi " + Name);
+}
+```
+A: Name is capitalized; the parameter is name
+W: console.log can't print strings
+W: Functions can't have parameters
+W: There's no bug
+E: Names are case-sensitive. Name is a different (undefined) variable.
+
+Q: What's the bug?
+```
+if (score = 100) {
+  console.log("perfect");
+}
+```
+A: = assigns instead of comparing, so it's always true
+W: The braces are wrong
+W: 100 should be in quotes
+W: console.log is misspelled
+E: Use === to compare. = sets score to 100.
+
+Q: What's the bug in this Python?
+```
+def total(a, b):
+return a + b
+```
+A: The return line isn't indented
+W: def should be function
+W: + doesn't work on numbers
+W: The colon is wrong
+E: Python uses indentation to show what's inside a function.
+
+Q: What's the bug?
+```
+const items = ["a", "b"];
+console.log(items[2]);
+```
+A: Index 2 doesn't exist; the last index is 1
+W: const arrays can't be read
+W: items should be in quotes
+W: There is no bug
+E: It prints undefined. Off-by-one indexing is one of the most common bugs.
+
+Q: What's the bug?
+```
+let total = 0;
+for (let i = 0; i < 3; i++)
+  total + i;
+console.log(total);
+```
+A: total + i doesn't save the result; it should be total += i
+W: The loop should start at 1
+W: total should be const
+W: console.log is in the wrong place
+E: The math happens, but nothing stores it, so total stays 0.
+
+Q: What's the bug?
+```
+const msg = "Done;
+console.log(msg);
+```
+A: The string is missing its closing quote
+W: msg can't be const
+W: console.log needs two arguments
+W: Semicolons aren't allowed
+E: A syntax error: the code can't even be read.
+
+# B 2
+Q: What's the bug?
+```
+function isAdult(age) {
+  if (age >= 18) {
+    return true;
+  }
+}
+```
+A: It returns undefined instead of false for under-18
+W: >= should be >
+W: Functions can't return Booleans
+W: There's no bug
+E: Add return false at the end, or just return age >= 18.
+
+Q: What's the bug?
+```
+const total = 0;
+for (const n of [1, 2, 3]) total += n;
+```
+A: total is const, so it can't be changed
+W: for...of doesn't work on arrays
+W: n should be let
+W: There is no bug
+E: TypeError: Assignment to constant variable. Use let for values that change.
+
+Q: The goal is to print each button's number when clicked. What's the bug?
+```
+for (var i = 0; i < 3; i++) {
+  buttons[i].onclick = () => alert(i);
+}
+```
+A: var shares one i, so every button alerts 3
+W: onclick can't use arrow functions
+W: alert needs a string
+W: buttons should be const
+E: Change var to let so each loop pass gets its own i.
+
+Q: What's the bug?
+```
+const data = JSON.parse(localStorage.getItem("state"));
+console.log(data.score);
+```
+A: If nothing is saved yet, data is null and data.score crashes
+W: JSON.parse can't read localStorage
+W: score must be a string
+W: There's no bug
+E: Guard it: const data = JSON.parse(... ) || {}; and wrap in try/catch in case the saved text is broken.
+
+Q: What's the bug in this Python?
+```
+scores = {"tom": 5}
+print(scores["ana"])
+```
+A: The key "ana" doesn't exist, so it raises KeyError
+W: Dicts can't hold numbers
+W: print needs two arguments
+W: Keys must be numbers
+E: Use scores.get("ana", 0) to supply a default.
+
+Q: What's the bug?
+```
+if (answer === "4") score++;
+```
+when answer comes from an option array like [3, 4, 5].
+A: 4 (a number) !== "4" (a string), so it never matches
+W: score++ only works on strings
+W: if needs curly braces
+W: There's no bug
+E: Types must match with ===. Compare like with like, or convert first.
+
+# B 3
+Q: What's the bug?
+```
+async function load() {
+  const res = fetch("/api/questions");
+  const data = await res.json();
+}
+```
+A: fetch isn't awaited, so res is a Promise without .json() ready
+W: async functions can't use fetch
+W: .json() doesn't exist
+W: There's no bug
+E: const res = await fetch(...). Missing await is the #1 async bug.
+
+Q: What's the bug?
+```
+const shuffled = questions.sort(() => Math.random() - 0.5);
+```
+when the original order must be kept.
+A: sort changes the original array in place
+W: Math.random can't be used in sort
+W: sort only works on numbers
+W: There's no bug
+E: Copy first: [...questions].sort(...). (Also, this shuffle is biased; Fisher–Yates is the fair method.)
+
+Q: What's the bug?
+```
+let saved = false;
+button.onclick = () => { saveState(); saved = true; };
+if (saved) showToast("Saved");
+```
+A: The if runs once at load time, before any click happens
+W: onclick can't change variables
+W: showToast is async
+W: There is no bug
+E: Code doesn't wait for clicks. Put showToast inside the click handler.
+
+Q: What's the bug in this Python?
+```
+for i in range(len(items)):
+    if items[i] == "bad":
+        items.remove(items[i])
+```
+A: Removing items while looping by index skips some and can go out of range
+W: range can't take len
+W: == can't compare strings
+W: There's no bug
+E: Build a new list instead: items = [x for x in items if x != "bad"].
+
+Q: What's the bug?
+```
+element.innerHTML = "Welcome " + userInput;
+```
+A: User text can inject HTML or scripts (XSS)
+W: innerHTML is slower than nothing
+W: Strings can't be joined here
+W: There is no bug
+E: Use element.textContent for user text, or escape it.
+
+Q: Two timers update the same counter display; numbers flicker and jump. The likely bug is:
+A: Two intervals were started and never cleared
+W: The CSS is wrong
+W: The counter variable is a const
+W: The browser is too slow
+E: Always clearInterval before starting a new one. Mad Minute's engine does this at the start of every quiz.
+
+# B 4
+Q: What's the bug?
+```
+function getUser(id) {
+  db.find(id).then(user => { return user; });
+}
+const u = getUser(1);
+```
+A: getUser returns nothing; the return is inside the callback
+W: then can't take arrow functions
+W: db.find is synchronous
+W: There's no bug
+E: Return the promise (return db.find(id)) and await it, or make getUser async.
+
+Q: What's the bug?
+```
+useEffect(() => {
+  setCount(count + 1);
+});
+```
+A: With no dependency array it runs after every render, causing an endless loop
+W: setCount doesn't exist
+W: useEffect needs to be async
+W: There's no bug
+E: Pass a dependency array ([] for once) and avoid setting state that triggers the same effect.
+
+Q: What's the bug?
+```
+let cache = {};
+function get(id) {
+  if (cache[id]) return cache[id];
+  return (cache[id] = load(id));
+}
+```
+when load(id) can return 0.
+A: A cached 0 is falsy, so it reloads every time
+W: Objects can't be caches
+W: The assignment in return is illegal
+W: There's no bug
+E: Check if (id in cache) or use a Map with .has() instead of truthiness.
+
+Q: Saving progress sometimes loses the newest answer. The code saves on a 2-second timer and on page close. What's the most likely bug?
+A: The page closes before the pending save runs
+W: localStorage is full
+W: JSON can't store numbers
+W: The timer is too short
+E: Flush pending saves on pagehide/visibilitychange, or save immediately after each answer.
+
+Q: What's the bug?
+```
+const total = prices.reduce((sum, p) => sum + p);
+```
+when prices can be empty.
+A: reduce on an empty array with no starting value throws
+W: reduce can't add numbers
+W: sum must be declared first
+W: There's no bug
+E: Always pass a starting value: reduce((sum, p) => sum + p, 0).
+
+Q: A function works in Chrome on your PC but fails on an iPhone. The best first step is:
+A: Reproduce on the iPhone and read the console error there
+W: Rewrite the function
+W: Assume Apple is wrong and ignore it
+W: Add more console.log on the PC
+E: Safari has its own quirks. Get the real error from the real device (Safari's Web Inspector) before changing code.
+
+# S 1
+Q: Where do you see JavaScript errors in a browser?
+A: The developer tools console (F12)
+W: The address bar
+W: The page title
+W: The bookmarks menu
+E: Open DevTools → Console. Red lines are errors.
+
+Q: "Uncaught ReferenceError: scroe is not defined" most likely means:
+A: A typo: the variable is misspelled
+W: The internet is down
+W: The browser is outdated
+W: The function is too long
+E: Reference errors usually mean a name doesn't exist, often from a typo.
+
+Q: "SyntaxError: Unexpected token" means:
+A: The code breaks the language's grammar near that spot
+W: The server is down
+W: A variable is undefined
+W: A login token expired
+E: Look for a missing bracket, quote or comma at or just before the line shown.
+
+Q: An error message usually tells you:
+A: The type of error, what happened, and the file and line
+W: Exactly how to fix it
+W: Who wrote the code
+W: Nothing useful
+E: Read the whole message before changing code. File and line number tell you where to look.
+
+Q: In Python, "IndentationError" means:
+A: The spacing at the start of a line is wrong
+W: A list index is too big
+W: A file is missing
+W: A number is too large
+E: Python uses indentation to group code, so spacing matters.
+
+Q: "ModuleNotFoundError: No module named 'mutagen'" in Python means:
+A: The library isn't installed in the environment running the code
+W: The code has a typo in a loop
+W: The file is too big
+W: Python is broken
+E: Install it with pip install mutagen, in the same environment (venv) you're running from.
+
+# S 2
+Q: "TypeError: Cannot read properties of undefined (reading 'name')" means:
+A: Something before .name was undefined
+W: name is misspelled in the HTML
+W: The name is too long
+W: The page didn't load CSS
+E: In user.name, user was undefined. Trace back where user should have been set.
+
+Q: "TypeError: x is not a function" usually means:
+A: You called something with () that isn't a function
+W: The function is too slow
+W: You forgot a semicolon
+W: The browser blocked it
+E: Often a typo, a wrong import, or a variable that shadows the function name.
+
+Q: In Python, "TypeError: can only concatenate str (not "int") to str" means:
+A: You tried to + a string and a number
+W: The string is too long
+W: You used the wrong quotes
+W: A list is empty
+E: Convert first: "Score: " + str(score), or use an f-string.
+
+Q: A "stack trace" is:
+A: The list of function calls that led to an error
+W: A log of every user click
+W: A pile of old code
+W: A database backup
+E: Read from the top: it shows where the error happened and how the code got there.
+
+Q: In a JavaScript stack trace, the first line under the error usually shows:
+A: The exact spot where the error was thrown
+W: The first line of the file
+W: The oldest function call
+W: Where the program started
+E: Further down are the callers that led there.
+
+Q: A 404 error in the browser's Network tab for app.js means:
+A: The browser couldn't find app.js at that path
+W: app.js has a bug inside it
+W: The server crashed
+W: The user isn't logged in
+E: Check the file name, case (Linux servers are case-sensitive), and relative path.
+
+# S 3
+Q: In a Python traceback, where is the line that actually failed?
+A: At the bottom, just above the error message
+W: At the top
+W: In the middle
+W: It's never shown
+E: Python lists calls oldest-first, so the failing line is last.
+
+Q: The stack trace shows the error inside a library file, not your code. The usual cause is:
+A: Your code passed the library bad input; find your line further down the trace
+W: The library is broken
+W: The browser is broken
+W: Nothing can be done
+E: Libraries are usually well tested. Follow the trace to the first line in your own files.
+
+Q: "CORS policy: No 'Access-Control-Allow-Origin' header" in the console means:
+A: The server didn't allow requests from your page's origin
+W: Your JavaScript has a syntax error
+W: The internet is down
+W: CSS failed to load
+E: The fix is on the server (allow the origin) or by calling through your own server, not in the front-end code.
+
+Q: "Uncaught (in promise)" before an error means:
+A: A promise failed and nothing caught it
+W: The error is harmless
+W: The code is in an infinite loop
+W: A variable was undefined at load time
+E: Add try/catch around await, or .catch() on the promise.
+
+Q: "Maximum call stack size exceeded" usually means:
+A: Endless recursion: a function keeps calling itself
+W: Too much data in localStorage
+W: The page has too many images
+W: The server is overloaded
+E: Check the base case, or two functions calling each other back and forth.
+
+Q: A 500 Internal Server Error appears in the browser. Where's the real error?
+A: In the server's logs
+W: In the browser console's red line only
+W: In the CSS
+W: In the HTML source
+E: The browser only knows the server failed. The server's own logs say why.
+
+# S 4
+Q: "QuotaExceededError" when saving to localStorage means:
+A: The site's storage space (often ~5 MB) is full
+W: The user denied permission
+W: JSON is invalid
+W: The browser is offline
+E: Store less, trim old history (Mad Minute caps its timeline at 300), or use IndexedDB.
+
+Q: An error happens only in the minified production build, and the stack trace points to "a.js:1:48213". What helps most?
+A: Source maps, which map minified code back to your original files
+W: Reading the minified file by hand
+W: Turning off the server
+W: Ignoring it
+E: Generate and upload source maps so traces show real file names and lines.
+
+Q: The error message is misleading and points to the wrong line. A common reason is:
+A: A missing bracket or quote earlier made the parser misread what follows
+W: The computer is lying
+W: The file is too long
+W: Line numbers are random
+E: Syntax errors are often reported where the parser gave up, not where you made the mistake.
+
+Q: Your Python script crashes with "UnicodeDecodeError" reading tags from some MP3s. The best fix is:
+A: Read with an explicit encoding and handle bad bytes for those files
+W: Delete those MP3s
+W: Rename the files
+W: Switch to JavaScript
+E: Tags come from many tools and encodings; decode carefully and log which files fail.
+
+Q: "ERR_CONNECTION_REFUSED" when opening localhost:3000 means:
+A: Nothing is listening on that port; the server isn't running
+W: The firewall is blocking the internet
+W: The HTML has a bug
+W: The page loaded but is blank
+E: Start the dev server, or check you're using the right port.
+
+Q: A heisenbug is a bug that:
+A: Disappears or changes when you try to observe it
+W: Only happens in physics software
+W: Is caused by heat
+W: Always crashes the program
+E: Often caused by timing (async, race conditions). Logging can change timing enough to hide it.
+
+# M 1
+Q: The first step in fixing a bug is usually:
+A: Reproduce it reliably
+W: Rewrite the whole file
+W: Ask users to stop reporting it
+W: Delete recent changes at random
+E: If you can't make it happen on purpose, you can't confirm you fixed it.
+
+Q: console.log() in debugging is used to:
+A: Print values so you can see what the code is actually doing
+W: Fix the bug automatically
+W: Speed up the code
+W: Hide errors from users
+E: Compare what you expected with what's printed. The gap is where the bug lives.
+
+Q: "Rubber duck debugging" means:
+A: Explaining the code line by line out loud until you spot the mistake
+W: Using a debugger named Duck
+W: Asking a coworker to fix it
+W: Testing on a waterproof phone
+E: Explaining forces you to check each assumption. It's the Feynman method for code.
+
+Q: Before changing code to fix a bug, you should:
+A: Form a guess about the cause and check it
+W: Change several things at once
+W: Delete the function
+W: Restart the computer
+E: Change one thing at a time so you know what fixed it.
+
+Q: When a bug appeared right after a change, the fastest lead is:
+A: Look at what changed
+W: Review the oldest code first
+W: Reinstall the operating system
+W: Rename all variables
+E: Recent changes are the most likely cause. Git's diff shows exactly what changed.
+
+Q: A "breakpoint" does what?
+A: Pauses code at a line so you can inspect values
+W: Breaks the program on purpose
+W: Ends a loop
+W: Deletes a line
+E: Set one in DevTools (Sources tab) or with the debugger; statement.
+
+# M 2
+Q: What's the advantage of a debugger over console.log?
+A: You can pause, step line by line, and inspect any variable without editing code
+W: It fixes bugs for you
+W: It works without running the code
+W: It makes the code faster
+E: console.log is quick; the debugger is better when you don't know where to look.
+
+Q: "Step over" in a debugger means:
+A: Run the current line, including any function it calls, then pause on the next line
+W: Skip the line without running it
+W: Jump into the function being called
+W: End the program
+E: "Step into" goes inside the called function instead.
+
+Q: To narrow down which half of the code has a bug, you:
+A: Check values at the midpoint, then keep halving
+W: Read every line from the top
+W: Rewrite both halves
+W: Guess randomly
+E: Binary search for bugs. It finds the spot in a few steps instead of many.
+
+Q: "Works on my machine" usually points to:
+A: A difference in environment: versions, data, settings or files
+W: The other machine being broken
+W: Random cosmic rays
+W: The code being perfect
+E: List what differs between the two setups and test each difference.
+
+Q: You fixed a bug. What should you do next?
+A: Add a test or check that would catch it if it came back
+W: Delete the error message
+W: Tell no one
+W: Move on immediately
+E: A bug that returns later is a regression. A test prevents that.
+
+Q: The Network tab in DevTools helps you:
+A: See every request the page made, with status, timing and response
+W: Change the Wi-Fi network
+W: Edit CSS
+W: Count lines of code
+E: When data is missing, check whether the request happened and what came back.
+
+# M 3
+Q: "git bisect" helps you:
+A: Find the exact commit that introduced a bug by testing halfway points
+W: Split a file in two
+W: Merge two branches
+W: Delete old commits
+E: Mark one good and one bad commit; Git walks you through the middle ones.
+
+Q: A "minimal reproduction" is:
+A: The smallest code or steps that still trigger the bug
+W: A shorter version of the app for users
+W: A screenshot
+W: A one-word bug report
+E: Cutting away everything unrelated often reveals the cause, and makes it easy for others to help.
+
+Q: A conditional breakpoint is useful when:
+A: The bug only appears on, say, the 500th loop pass
+W: The code has no loops
+W: You want to stop on every line
+W: The bug is in CSS
+E: Pause only when i === 500 or when value is undefined.
+
+Q: When logging to debug, which is most useful?
+A: console.log("score before save:", score)
+W: console.log("here")
+W: console.log("aaa")
+W: console.log(1)
+E: Label what and where, so logs make sense later. Remove or downgrade them when done.
+
+Q: You've been stuck on a bug for 45 minutes. A good move is:
+A: Write down what you know and have ruled out, then take a short break or ask someone
+W: Keep changing random lines
+W: Rewrite the app in a new language
+W: Delete the feature
+E: Writing it down often reveals the gap; fresh eyes catch what tired ones don't.
+
+Q: Why should a bug report include "expected vs actual"?
+A: It defines the bug precisely so anyone can check a fix
+W: It's required by law
+W: It makes the report longer
+W: It helps assign blame
+E: Steps to reproduce + expected + actual + environment = a report someone can act on.
+
+# M 4
+Q: A bug only happens under heavy load and timing. The most likely category is:
+A: A race condition
+W: A syntax error
+W: A CSS bug
+W: A typo
+E: Two operations touch shared state and the order varies. Add logging with timestamps and look for overlaps.
+
+Q: In production you can't attach a debugger. What do you rely on?
+A: Structured logs, error tracking, metrics and traces
+W: Guessing
+W: Asking users to describe the code
+W: Restarting until it works
+E: Observability is debugging production. Tools like Sentry capture errors with stack traces and context.
+
+Q: A memory leak in a web app is often caused by:
+A: Event listeners or timers that are never removed
+W: Using const
+W: Too many comments
+W: Short variable names
+E: Each leftover listener keeps objects alive. Check DevTools Memory for growing heaps.
+
+Q: Why fix the root cause instead of adding a special-case patch?
+A: Patches pile up, hide the real problem, and break in new cases
+W: Root causes are always easy
+W: Patches are illegal
+W: It's never better
+E: Ask "why" until you reach the cause. "Five whys" is a common technique.
+
+Q: A flaky test passes sometimes and fails sometimes. The usual cause is:
+A: Dependence on timing, order, randomness or outside services
+W: The test framework is random
+W: The computer is broken
+W: The test is too short
+E: Control time and randomness in tests and avoid shared state between them.
+
+Q: Logging every value at maximum detail in production is a problem because:
+A: It's costly, noisy, and can leak private data like passwords
+W: Logs can't hold numbers
+W: It makes the code faster
+W: It's never a problem
+E: Use log levels (debug, info, warn, error) and never log secrets.
+
+# R 1
+Q: The best first step when reading code you didn't write is:
+A: Figure out what it's supposed to do before reading the details
+W: Start editing right away
+W: Read the last line first
+W: Count the lines
+E: Know the goal, then find the entry point (what runs first) and follow the flow.
+
+Q: Good variable names help reading code because they:
+A: Say what the value means, so you don't have to work it out
+W: Make the code run faster
+W: Are required by browsers
+W: Hide the logic
+E: questionsMissed tells a story; qm or arr2 don't.
+
+Q: A comment that says WHY code does something is useful because:
+A: The code shows what it does, but not the reason behind it
+W: Comments make code run
+W: It replaces tests
+W: It hides bugs
+E: "// pause the clock so the explanation can sink in" explains intent the code alone can't.
+
+Q: When reading a function, a good habit is to identify:
+A: Its inputs, its output, and anything it changes outside itself
+W: Only its name
+W: How many lines it has
+W: Who wrote it
+E: Inputs, outputs and side effects tell you how it fits into the rest.
+
+Q: Where does a web page's JavaScript usually start running?
+A: In script tags, top to bottom, plus any functions hooked to events
+W: At a function called start, always
+W: At the bottom of the CSS
+W: At random
+E: Look for code that runs on load (often an init function) and what events it sets up.
+
+Q: Searching the whole project for a function name helps you:
+A: See where it's defined and everywhere it's used
+W: Delete it faster
+W: Rename the project
+W: Compile the code
+E: In VS Code: right-click → Find All References, or Ctrl+Shift+F.
+
+# R 2
+Q: To understand an unfamiliar function quickly, a strong method is:
+A: Trace it by hand with one small, real input
+W: Read it once quickly
+W: Rewrite it from memory
+W: Delete it and see what breaks in production
+E: Walking through with a real value shows what each line actually does.
+
+Q: Reading "git log" and commit messages helps you:
+A: Understand why code changed and in what order
+W: Make the code faster
+W: Find unused CSS
+W: Install packages
+E: Good commit messages are a history of decisions. git blame shows who changed each line and when.
+
+Q: In a code review, the most valuable thing to check first is:
+A: Does it do what it should, and could it break something else?
+W: Spacing and commas
+W: The author's name
+W: Whether it uses tabs or spaces
+E: Correctness and risk first; style is best left to automatic formatters.
+
+Q: A "magic number" like if (x > 37) is a problem because:
+A: Nobody knows what 37 means or where else it's used
+W: Numbers aren't allowed in if
+W: 37 is too big
+W: It runs slower
+E: Name it: const UNLOCK_LEVEL = 2. Mad Minute's engine names its rules at the top for this reason.
+
+Q: You see the same 20 lines copied in three places. The review comment should suggest:
+A: Moving it into one shared function
+W: Adding a comment to each
+W: Deleting two of them without checking
+W: Nothing
+E: One place to fix and test. Check the copies are truly the same first.
+
+Q: When reviewing, a deeply nested if inside an if inside a loop is a sign to:
+A: Simplify with early returns or smaller functions
+W: Add more nesting
+W: Remove the loop
+W: Approve immediately
+E: Flat code is easier to read and test.
+
+# R 3
+Q: Before approving a change, why run the code instead of only reading it?
+A: Reading misses things running reveals, like edge cases and real data
+W: Running is always faster
+W: You can't read code
+W: It's not necessary
+E: Check the happy path and at least one edge case: empty list, missing data, slow network.
+
+Q: An "edge case" is:
+A: An unusual input at the limits, like empty, zero, huge or missing
+W: The last line of a file
+W: A border in CSS
+W: A rare user name
+E: Many bugs live at edges: first item, last item, no items.
+
+Q: Code review comments work best when they are:
+A: Specific, explain why, and separate must-fix from suggestions
+W: Short and vague, like "fix this"
+W: Only praise
+W: Only about the author
+E: "This crashes when data is null (line 42) — must fix" beats "looks off."
+
+Q: Reading a large single-file app, the fastest way to get a map is:
+A: Skim section headers and list the main functions and data shapes
+W: Read every line in order
+W: Start in the middle
+W: Read only the CSS
+E: Mad Minute's engine has comment headers like "quiz engine" and "storage" — that's your table of contents.
+
+Q: When you see try { ... } catch (e) {} with an empty catch, it's risky because:
+A: Errors are silently swallowed, hiding real problems
+W: catch blocks must be long
+W: try is deprecated
+W: It's always fine
+E: At least log it. Silent catches turn bugs into mysteries. (The engine uses some on purpose for storage that may be blocked — that's a judgment call worth a comment.)
+
+Q: The most reliable way to confirm you understand a piece of code is:
+A: Predict what a change will do, then make it and see if you were right
+W: Read it twice
+W: Ask an AI and accept the answer
+W: Count its functions
+E: Prediction is active recall for code. Wrong predictions point exactly to what you don't understand yet.
+
+# R 4
+Q: When reviewing a pull request that touches saving user data, what deserves extra scrutiny?
+A: Data loss, migration of old saved data, and error handling
+W: Variable name length
+W: Indentation
+W: Comment spelling
+E: Old saved progress must still load after the change. Mad Minute's loadState carries over v1 data for this reason.
+
+Q: "Chesterton's fence" in code means:
+A: Don't remove odd-looking code until you know why it's there
+W: Always add fences (guards) to code
+W: Delete anything confusing
+W: Put code behind a firewall
+E: That strange line may fix a real bug. Check git blame and history first.
+
+Q: A reviewer asks "what happens if this runs twice?" They're checking:
+A: Idempotency and duplicate effects, like double saving or double charging
+W: Performance only
+W: Code style
+W: Spelling
+E: Retries, double-clicks and reconnects all make things run twice.
+
+Q: Which signal best suggests code is hard to maintain?
+A: Small changes regularly break unrelated features
+W: It has comments
+W: It uses functions
+W: It has tests
+E: That's coupling. The fix is clearer boundaries between parts.
+
+Q: A large change is hard to review. The best way to help reviewers is:
+A: Split it into smaller, focused pull requests with clear descriptions
+W: Send it all at once to save time
+W: Remove the description
+W: Merge without review
+E: Small PRs get better reviews and are easier to undo.
+
+Q: You inherit code with no tests and must change it. A safe first move is:
+A: Write tests that pin down current behavior before changing it
+W: Rewrite it from scratch
+W: Change it and hope
+W: Delete unused-looking parts
+E: "Characterization tests" record what it does now, so you'll notice if you break it.
+
+# A 1
+Q: Claude writes a function for you. Before using it, you should:
+A: Read it and be able to explain what each part does
+W: Paste it in and ship it
+W: Assume it's perfect
+W: Ask for a longer version
+E: You're responsible for code you ship, whoever wrote it. Explaining it back is the check.
+
+Q: The clearest kind of request to an AI for code includes:
+A: The goal, the inputs and outputs, and any limits like "no internet"
+W: Just "make it work"
+W: Only the file name
+W: As few words as possible
+E: Clear specs get clear code. Mad Minute's notes on "offline once downloaded" are this kind of requirement.
+
+Q: AI-written code can be wrong because:
+A: It predicts likely code and can invent functions or miss your context
+W: It never makes mistakes
+W: It always copies from the internet
+W: It only writes CSS
+E: Test it, read it, and check any library calls actually exist.
+
+Q: If an AI explanation uses a word you don't know, the best move is:
+A: Ask it to explain that term in plain words with an example
+W: Ignore it
+W: Pretend you know it
+W: Start over
+E: Unknown words stack up. Clearing them one at a time builds real understanding.
+
+Q: A good way to learn from AI-generated code is:
+A: Ask it to explain the code, then explain it back in your own words
+W: Copy it without reading
+W: Only ask for finished apps
+W: Never look at the code
+E: Feynman method: if you can teach it, you understand it.
+
+Q: When an AI fixes a bug for you, ask it to also tell you:
+A: What caused the bug and how the fix works
+W: Nothing else
+W: A joke
+W: Its favorite language
+E: Knowing the cause means you can spot the same bug yourself next time.
+
+# A 2
+Q: You ask an AI for "a few changes" and it rewrites the whole file. The risk is:
+A: Unrelated things quietly change or break
+W: The file gets faster
+W: Nothing
+W: Your computer slows down
+E: Ask for small, specific changes and review the diff (what changed) before accepting.
+
+Q: The best way to check an AI's change did only what you asked is:
+A: Look at the diff in Git before committing
+W: Trust the summary it gives
+W: Count the lines
+W: Re-run it until it looks right
+E: A diff shows every added and removed line, so surprises are visible.
+
+Q: An AI says "use the library function fastTags.cleanAll()". Before relying on it, you should:
+A: Check the library's docs to confirm it exists and does that
+W: Use it immediately
+W: Assume it's real because it sounds right
+W: Write your own library with that name
+E: Invented ("hallucinated") functions are a known AI failure. Docs are the source of truth.
+
+Q: Why commit your work before asking an AI for a big change?
+A: So you can easily roll back if the change breaks things
+W: AI requires a commit first
+W: It makes the AI smarter
+W: It's not useful
+E: A commit is a save point. Git makes AI-assisted building much safer.
+
+Q: You keep asking an AI for fixes and it keeps going in circles. A good move is:
+A: Stop, reproduce the bug simply, and describe expected vs actual with the exact error
+W: Keep repeating "it still doesn't work"
+W: Start a new app
+W: Ask for the whole app again
+E: Precise input gets precise answers. Paste the exact error message and steps.
+
+Q: Which request will teach you the most?
+A: "Give me the bug; let me find it, then check my answer"
+W: "Fix it for me"
+W: "Make it better"
+W: "Write the whole app"
+E: Doing the hard part yourself builds the skill; the AI becomes your tutor and checker.
+
+# A 3
+Q: When an AI gives you a 400-line file, a smart review strategy is:
+A: Ask for a short map of its sections, then review the riskiest parts closely
+W: Read only the first 20 lines
+W: Approve it based on the summary
+W: Ask for it to be longer
+E: Focus on data saving, security, money and anything users can't undo.
+
+Q: An AI's code passes your one manual test. What's still missing?
+A: Edge cases: empty data, bad input, offline, slow network, a second device
+W: Nothing
+W: More comments
+W: A new color scheme
+E: One happy path doesn't prove much. List the edge cases and try a few.
+
+Q: Keeping one shared engine instead of asking the AI to copy it into each new app helps because:
+A: Fixes and features land everywhere at once
+W: AI can't copy files
+W: Copies run faster
+W: It uses more storage
+E: Seven copies means seven places to fix every bug.
+
+Q: Asking an AI to "write tests for this function" is useful mainly because:
+A: Tests lock in behavior and catch it if later changes break it
+W: Tests make code run faster
+W: Tests replace reading the code
+W: It's a way to make files bigger
+E: Then review the tests: do they cover edge cases, or only the easy path?
+
+Q: You don't understand why an AI chose a certain approach. Best next step:
+A: Ask it for two or three alternatives and the trade-offs of each
+W: Accept it anyway
+W: Delete it
+W: Ask for the same answer again
+E: Comparing options is how design judgment grows.
+
+Q: Which is the strongest sign you've actually learned from AI-written code?
+A: You can change or extend it yourself without asking
+W: You've read it once
+W: It runs
+W: You saved the file
+E: Being able to modify it on your own is the real test.
+
+# A 4
+Q: An AI-generated app stores an API key in the front-end JavaScript. The problem is:
+A: Anyone can open the page source and steal the key
+W: Keys can't be in JavaScript
+W: It makes the page slower
+W: Nothing
+E: Secrets belong on a server or in environment variables, never in code users download.
+
+Q: Why write a short spec (requirements doc) before asking an AI to build a feature?
+A: It forces decisions up front and gives you something to check the result against
+W: AI can't read short messages
+W: It's required by GitHub
+W: It makes the code longer
+E: Without a spec, you discover requirements by rebuilding. ManaFlow's four versions are an example.
+
+Q: The best division of labor with an AI coding assistant is usually:
+A: You own goals, design decisions and review; the AI drafts and explains
+W: The AI owns everything
+W: You type everything and the AI watches
+W: The AI decides what to build
+E: Your judgment about what's right is the part that can't be delegated.
+
+Q: Before accepting an AI's database or saved-data change, you should check:
+A: That existing users' saved data still loads (migration)
+W: Only that new data saves
+W: The variable names
+W: Nothing
+E: Breaking old saves loses people's progress — the worst kind of bug for a learning app.
+
+Q: An AI says a change is "fully tested" but you see no tests. You should:
+A: Treat it as untested until you see and run the tests
+W: Trust it
+W: Ship it
+W: Ask it to say it again
+E: Claims are not evidence. Verify.
+
+Q: To grow from AI-assisted builder to developer, which habit matters most?
+A: Regularly predicting, explaining and modifying code without AI help
+W: Asking for bigger apps
+W: Using more AI tools
+W: Never reading code
+E: Like any skill, it grows from effortful practice — active recall applied to code.

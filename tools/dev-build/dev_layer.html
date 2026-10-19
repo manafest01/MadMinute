@@ -1,0 +1,478 @@
+<style>
+/* ===== Dev layer styles: code blocks, recall first, skills checkup + roadmap ===== */
+.question-text > span { display: block; }
+.question-text:has(pre.code) { font-size: 17px; }
+pre.code {
+  margin: 12px 0 4px; padding: 12px 14px; background: var(--panel-2); border: 1px solid var(--line);
+  border-radius: 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; text-align: left;
+  font: 500 13.5px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-wrap-style: initial; white-space: pre;
+}
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92em; background: var(--panel-2); padding: 1px 5px; border-radius: 5px; }
+pre.code code { background: none; padding: 0; font-size: inherit; }
+.miss .q pre.code { font-size: 12.5px; }
+.option code { background: var(--panel-2); }
+
+.recall-box { display: flex; flex-direction: column; gap: 10px; }
+.recall-box .recall-hint { font-size: 13.5px; color: var(--text-dim); line-height: 1.45; }
+.recall-box textarea {
+  width: 100%; min-height: 76px; resize: vertical; box-sizing: border-box; padding: 12px 14px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--panel); color: var(--text); font: 15px/1.4 inherit; font-family: inherit;
+}
+.recall-box textarea:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
+.recall-you { margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: var(--panel-2); color: var(--text); font-size: 13.5px; }
+.recall-you b { color: var(--text-dim); font-weight: 600; margin-right: 4px; }
+.recall-row { margin-top: 10px; }
+.recall-row .seg { width: 100%; }
+.recall-note { margin-top: 6px; font-size: 12.5px; color: var(--text-dim); line-height: 1.4; }
+
+.ck-home { text-align: left; cursor: pointer; color: var(--text); font: inherit; box-shadow: inset 0 0 0 1.5px var(--teal); background: linear-gradient(135deg, var(--teal-soft), var(--panel)); }
+.ck-home .ck-meta { font-size: 13px; color: var(--text-dim); }
+.ck-bar { height: 6px; border-radius: 99px; background: var(--panel-2); overflow: hidden; }
+.ck-bar i { display: block; height: 100%; background: var(--teal); border-radius: 99px; }
+
+.rm-big { font-size: 26px; font-weight: 700; font-family: "Space Grotesk", sans-serif; }
+.rm-moves { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.rm-move { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; background: var(--panel-2); }
+.rm-move .rm-num { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--amber); color: var(--amber-ink); font-weight: 700; font-size: 13px; flex-shrink: 0; }
+.rm-move .rm-txt { flex: 1; min-width: 0; }
+.rm-move .rm-name { font-weight: 600; font-size: 15px; }
+.rm-move .rm-why { font-size: 12.5px; color: var(--text-dim); margin-top: 2px; }
+.rm-move .btn { padding: 8px 14px; }
+.rm-subject { display: flex; flex-direction: column; gap: 8px; }
+.rm-subject-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.rm-subject-head b { font-size: 15px; }
+.rm-subject-head span { font-size: 12.5px; color: var(--text-dim); }
+.rm-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 6px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
+.rm-row:first-of-type { border-top: none; }
+.rm-tag { font-size: 11.5px; font-weight: 600; padding: 3px 8px; border-radius: 99px; white-space: nowrap; }
+.rm-tag.gap { background: var(--red-soft); color: var(--red); }
+.rm-tag.shaky { background: rgba(242,167,59,.16); color: var(--amber); }
+.rm-tag.ok { background: var(--teal-soft); color: var(--teal); }
+.rm-tag.strong { background: var(--teal); color: var(--teal-ink); }
+.rm-tag.none { background: var(--panel-2); color: var(--text-dim); }
+.rm-legend { display: flex; flex-wrap: wrap; gap: 6px; }
+.rm-strengths { display: flex; flex-wrap: wrap; gap: 6px; }
+</style>
+
+<script>
+/* ===== Dev layer (Mad Minute Dev) =====
+   Three add-ons for the engine, kept in this one block so the core stays the same as the other apps:
+   1) Recall first: hides the answer choices until you've thought of (or typed) your answer.
+      That's active recall, which builds memory far better than recognizing a right answer.
+   2) Skills checkup: one adaptive test across every subject, in Dev Path order. About two questions
+      per topic. Results are saved topic by topic, so you can stop and pick up later.
+   3) Roadmap: what you have, what's missing, and your next three moves, built from the checkup
+      plus everything you practice afterwards.
+   Hooks renderQuestion(), answer(), record(), beginQuiz(), endQuiz() and renderHome() from outside. */
+(function () {
+  var RECALL_KEY = "mmdev_recall", CK_KEY = "mmdev_checkup";
+  var JUNIOR = UNLOCK_AT;                         // level 2: the bar for "done" on the Dev Path
+
+  function packById(id) { return BUILTIN_PACKS.find(function (p) { return p.id === id; }); }
+  function orderOf(p) { return (p.order || Object.keys(p.topics)).filter(function (k) { return p.topics[k]; }); }
+
+  /* ---------- 1) recall first ---------- */
+  function recallOn() { try { return localStorage.getItem(RECALL_KEY) !== "off"; } catch (e) { return true; } }
+  function setRecall(on) {
+    try { localStorage.setItem(RECALL_KEY, on ? "on" : "off"); } catch (e) {}
+    renderRecallToggle();
+    showToast(on ? "Recall first: on" : "Recall first: off");
+  }
+  function renderRecallToggle() {
+    var a = document.getElementById("recallOnBtn"), b = document.getElementById("recallOffBtn");
+    if (!a) return;
+    var on = recallOn();
+    a.classList.toggle("on", on); b.classList.toggle("on", !on);
+    a.setAttribute("aria-pressed", on); b.setAttribute("aria-pressed", !on);
+  }
+  // toggle under the round-type switch on Home
+  var modeWrap = document.getElementById("modeWrap");
+  if (modeWrap) {
+    var row = document.createElement("div");
+    row.className = "recall-row";
+    row.innerHTML =
+      '<div class="seg" role="group" aria-label="How answers appear">' +
+      '<button id="recallOnBtn">Recall first</button><button id="recallOffBtn">Show choices</button></div>' +
+      '<div class="recall-note">Recall first hides the choices until you’ve pulled the answer from memory. Slower, but it sticks.</div>';
+    modeWrap.appendChild(row);
+    document.getElementById("recallOnBtn").onclick = function () { setRecall(true); };
+    document.getElementById("recallOffBtn").onclick = function () { setRecall(false); };
+    renderRecallToggle();
+  }
+  // the recall panel inside the question box
+  var opts = document.getElementById("quizOptions");
+  var box = document.createElement("div");
+  box.className = "recall-box"; box.id = "recallBox"; box.hidden = true;
+  box.innerHTML =
+    '<div class="recall-hint">Answer it in your head first. Typing it is optional, but it makes you commit.</div>' +
+    '<textarea id="recallText" rows="2" placeholder="Your answer (optional)" aria-label="Your answer"></textarea>' +
+    '<button class="btn btn-teal btn-block" id="recallReveal">Show choices</button>';
+  opts.parentNode.insertBefore(box, opts);
+  var ta = document.getElementById("recallText");
+  document.getElementById("recallReveal").onclick = reveal;
+  ta.addEventListener("keydown", function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); reveal(); } });
+
+  function startRecall() {
+    var use = quiz && quiz.cur && quiz.mode !== "placement" && quiz.mode !== "checkup" && recallOn();
+    box.hidden = !use; opts.hidden = !!use;
+    if (!use) return;
+    quiz.cur.recalling = true;
+    quiz.paused = true;                       // both clocks stop while you think
+    ta.value = "";
+  }
+  function reveal() {
+    if (!quiz || !quiz.cur || !quiz.cur.recalling) return;
+    quiz.cur.recalling = false;
+    quiz.cur.recallText = ta.value.trim();
+    quiz.recalls = (quiz.recalls || 0) + 1;
+    quiz.paused = false;
+    quiz.questionStart = performance.now();   // answer time counts from when the choices appear
+    box.hidden = true; opts.hidden = false;
+    ta.blur();
+    var first = opts.querySelector(".option");
+    if (first && !("ontouchstart" in window)) first.focus();
+  }
+
+  /* ---------- 2) skills checkup ---------- */
+  function ckLoad() {
+    try { var d = JSON.parse(localStorage.getItem(CK_KEY) || "null"); if (d && d.results) return d; } catch (e) {}
+    return { results: {} };
+  }
+  function ckSave(d) { try { localStorage.setItem(CK_KEY, JSON.stringify(d)); } catch (e) {} }
+
+  // every topic, in Dev Path order (then anything not on the path)
+  function pathTopics() {
+    var out = [], seen = {};
+    function add(p, k) {
+      var name = p.topics[k], id = p.id + "|" + name;
+      if (!name || seen[id]) return;
+      seen[id] = 1; out.push({ pack: p, name: name, id: id });
+    }
+    SHOP_PATH.forEach(function (step) {
+      var p = packById(step.pack); if (!p) return;
+      (step.keys || orderOf(p)).forEach(function (k) { add(p, k); });
+    });
+    BUILTIN_PACKS.forEach(function (p) { orderOf(p).forEach(function (k) { add(p, k); }); });
+    return out;
+  }
+  var bankCache = {};
+  function bankFor(p) {
+    if (!bankCache[p.id]) bankCache[p.id] = buildBank(p).map(function (q) {
+      return Object.assign({}, q, { id: p.id + ":" + q.id, pk: p.id });
+    });
+    return bankCache[p.id];
+  }
+  function pickQ(item, lv, used) {
+    var list = bankFor(item.pack).filter(function (q) { return q.t === item.name && q.lv === lv && !used[q.id]; });
+    return list.length ? shuffle(list)[0] : null;
+  }
+
+  // save one topic's result right away, into the checkup record and that subject's own progress
+  function saveTopic(item, lv) {
+    var d = ckLoad();
+    d.results[item.id] = { lv: lv, at: Date.now() };
+    if (!d.startedAt) d.startedAt = Date.now();
+    ckSave(d);
+    var p = item.pack;
+    if (p.id === currentPack.id) {
+      state.topicLevel[item.name] = Math.max(state.topicLevel[item.name] || 0, lv);
+      state.placed = true;
+      saveState();
+    } else {
+      var key = packStoreKey(p), st = null;
+      try { st = JSON.parse(localStorage.getItem(key) || "null"); } catch (e) {}
+      if (!st) st = freshState();
+      st.topicLevel = st.topicLevel || {};
+      st.topicLevel[item.name] = Math.max(st.topicLevel[item.name] || 0, lv);
+      st.placed = true;
+      st.updatedAt = Date.now();
+      try { localStorage.setItem(key, JSON.stringify(st)); } catch (e) {}
+    }
+  }
+  // adaptive steps per topic: Junior question first; right → try Intermediate, wrong → try Beginner
+  function ckAdvance(ck, correct) {
+    var item = ck.items[ck.ti];
+    if (!item) return;
+    if (ck.stage === 2) { ck.stage = correct ? 3 : 1; return; }
+    var lv = ck.stage === 3 ? (correct ? 3 : 2) : (correct ? 1 : 0);
+    saveTopic(item, lv);
+    ck.settled++;
+    ck.ti++; ck.stage = 2;
+  }
+  function ckNext(ck) {
+    while (ck.ti < ck.items.length) {
+      var q = pickQ(ck.items[ck.ti], ck.stage, ck.used);
+      if (q) { ck.used[q.id] = 1; return q; }
+      ck.ti++; ck.stage = 2;                  // no question at that level: skip the topic for now
+    }
+    return null;
+  }
+  function startCheckup() {
+    var all = pathTopics(), done = ckLoad().results;
+    var items = all.filter(function (it) { return !done[it.id]; });
+    if (!items.length) { showRoadmap(); return; }
+    quiz = Object.assign(baseQuiz("checkup", "Skills checkup"), {
+      questions: [],
+      ck: { items: items, ti: 0, stage: 2, used: {}, lastLen: 0, total: all.length, before: all.length - items.length, settled: 0 }
+    });
+    beginQuiz();
+  }
+
+  /* ---------- 3) roadmap ---------- */
+  function topicStatus(item, results) {
+    var st = item.pack.id === currentPack.id ? state : packStateFor(item.pack);
+    var practiced = ((st && st.topicLevel) || {})[item.name] || 0;
+    var r = results[item.id];
+    var checked = !!r || practiced > 0 || !!(st && st.stats && st.stats[item.name]);
+    var lv = Math.max(practiced, r ? r.lv : 0);
+    return { lv: lv, checked: checked };
+  }
+  function tagFor(s) {
+    if (!s.checked) return { cls: "none", text: "Not checked" };
+    if (s.lv <= 0) return { cls: "gap", text: "Gap" };
+    if (s.lv === 1) return { cls: "shaky", text: LV_NAME[1] };
+    if (s.lv === 2) return { cls: "ok", text: LV_NAME[2] };
+    return { cls: "strong", text: LV_NAME[s.lv] };
+  }
+  function roadmapData() {
+    var results = ckLoad().results, items = pathTopics();
+    var rows = items.map(function (it) { var s = topicStatus(it, results); return { item: it, s: s }; });
+    var checked = rows.filter(function (r) { return r.s.checked; });
+    var moves = [];
+    // walk the Dev Path in order: the first checked topics still below Junior are the next moves
+    rows.forEach(function (r) {
+      if (moves.length < 3 && r.s.checked && r.s.lv < JUNIOR) moves.push(r);
+    });
+    if (moves.length < 3) rows.forEach(function (r) {
+      if (moves.length < 3 && !r.s.checked && moves.indexOf(r) < 0) moves.push(r);
+    });
+    var strong = checked.filter(function (r) { return r.s.lv >= 3; });
+    var avg = checked.length ? checked.reduce(function (n, r) { return n + r.s.lv; }, 0) / checked.length : 0;
+    var atJunior = rows.filter(function (r) { return r.s.lv >= JUNIOR; }).length;
+    return { rows: rows, checked: checked.length, total: rows.length, moves: moves, strong: strong, avg: avg, atJunior: atJunior,
+      ckDone: Object.keys(results).length };
+  }
+  function whyText(r) {
+    if (!r.s.checked) return "Not checked yet";
+    if (r.s.lv <= 0) return "Gap · start with " + LV_NAME[1] + " questions";
+    return "At " + LV_NAME[r.s.lv] + " · push it to " + LV_NAME[JUNIOR];
+  }
+  function goTopic(item) {
+    if (item.pack.id !== currentPack.id) activatePack(item.pack);
+    showHome();
+    if (state.placed) startPractice(item.name);
+  }
+
+  var section = document.createElement("section");
+  section.id = "roadmapScreen"; section.hidden = true;
+  var home = document.getElementById("homeScreen");
+  home.parentNode.insertBefore(section, home.nextSibling);
+  SCREENS.push("roadmapScreen");
+  TAB_FOR.roadmapScreen = "homeScreen";
+
+  var retakeArmedRm = false;
+  function showRoadmap(afterCheckup) {
+    show("roadmapScreen");
+    var d = roadmapData();
+    var left = d.total - d.ckDone;
+    var rankIdx = Math.min(4, Math.floor(d.avg + 1e-9));
+    var html = '<div class="back-row"><button class="icon-btn" id="rmBack" aria-label="Back">←</button><h2>Your roadmap</h2></div><div class="stack">';
+
+    html += '<div class="card glow stack"><div class="eyebrow">Skills checkup · all ' + BUILTIN_PACKS.length + ' subjects</div>' +
+      '<div class="rm-big">' + d.atJunior + ' of ' + d.total + ' topics at ' + LV_NAME[JUNIOR] + '+</div>' +
+      '<div class="ck-bar"><i style="width:' + Math.round(d.atJunior / d.total * 100) + '%"></i></div>' +
+      '<div class="muted">' + (d.checked ? 'Overall you test around <b>' + escapeHtml(RANKS[rankIdx] || RANKS[0]) + '</b> across the ' + d.checked + ' topics checked so far.' :
+        'One test across every subject, easy to hard. About two questions per topic, roughly 15–20 minutes. Stop any time; it picks up where you left off.') + '</div>' +
+      (afterCheckup ? '<div class="muted"><b>Checkup saved.</b> Each subject’s levels now start from these results.</div>' : '') +
+      '<div class="row-btns">' +
+      (left > 0 ? '<button class="btn btn-amber" id="rmStart">' + (d.ckDone ? 'Continue checkup (' + left + ' left)' : 'Take the skills checkup') + '</button>' : '') +
+      (d.ckDone ? '<button class="btn btn-ghost" id="rmRetake">Retake checkup</button>' : '') +
+      '</div></div>';
+
+    html += '<div class="card stack"><div class="eyebrow">Your next 3 moves</div>';
+    if (!d.moves.length) html += '<div class="muted">Every topic is at ' + LV_NAME[JUNIOR] + ' or better. Push your weakest ones toward ' + LV_NAME[4] + ' with timed rounds and Recall first.</div>';
+    else if (!d.checked) html += '<div class="muted">Take the checkup and this fills in with the three topics that will move you most, in learning order.</div>';
+    else {
+      html += '<ol class="rm-moves">';
+      d.moves.forEach(function (r, i) {
+        html += '<li class="rm-move"><span class="rm-num">' + (i + 1) + '</span><div class="rm-txt"><div class="rm-name">' + escapeHtml(r.item.name) +
+          '</div><div class="rm-why">' + escapeHtml((r.item.pack.short || r.item.pack.name) + " · " + whyText(r)) + '</div></div>' +
+          '<button class="btn btn-teal" data-go="' + escapeHtml(r.item.id) + '">Go</button></li>';
+      });
+      html += '</ol>';
+    }
+    html += '</div>';
+
+    if (d.strong.length) {
+      html += '<div class="card stack"><div class="eyebrow">Strengths</div><div class="rm-strengths">' +
+        d.strong.map(function (r) { return '<span class="rm-tag strong">' + escapeHtml(r.item.name) + '</span>'; }).join("") + '</div></div>';
+    }
+
+    html += '<div class="section-title">Full map</div><div class="rm-legend">' +
+      ['none:Not checked', 'gap:Gap', 'shaky:' + LV_NAME[1], 'ok:' + LV_NAME[2], 'strong:' + LV_NAME[3] + '+'].map(function (x) {
+        var a = x.split(":"); return '<span class="rm-tag ' + a[0] + '">' + escapeHtml(a[1]) + '</span>';
+      }).join("") + '</div>';
+    BUILTIN_PACKS.forEach(function (p) {
+      var rows = d.rows.filter(function (r) { return r.item.pack.id === p.id; })
+        .sort(function (a, b) { return orderOf(p).map(function (k) { return p.topics[k]; }).indexOf(a.item.name) - orderOf(p).map(function (k) { return p.topics[k]; }).indexOf(b.item.name); });
+      var ok = rows.filter(function (r) { return r.s.lv >= JUNIOR; }).length;
+      html += '<div class="card rm-subject"><div class="rm-subject-head"><b>' + escapeHtml(p.name) + '</b><span>' + ok + ' / ' + rows.length + ' at ' + LV_NAME[JUNIOR] + '+</span></div>';
+      rows.forEach(function (r) {
+        var t = tagFor(r.s);
+        html += '<div class="rm-row"><span>' + escapeHtml(r.item.name) + '</span><span class="rm-tag ' + t.cls + '">' + escapeHtml(t.text) + '</span></div>';
+      });
+      html += '</div>';
+    });
+
+    html += '<div class="muted">Levels go ' + LV_NAME.slice(1).join(" → ") + '. The checkup can place you up to ' + LV_NAME[3] +
+      '; ' + LV_NAME[4] + ' is earned in practice. Your map updates as you practice.</div>' +
+      '<button class="btn btn-ghost btn-block" id="rmCopy">Copy roadmap as text</button></div>';
+    section.innerHTML = html;
+
+    document.getElementById("rmBack").onclick = showHome;
+    var s = document.getElementById("rmStart"); if (s) s.onclick = startCheckup;
+    var rt = document.getElementById("rmRetake");
+    retakeArmedRm = false;
+    if (rt) rt.onclick = function () {
+      if (!retakeArmedRm) { retakeArmedRm = true; rt.textContent = "Tap again to clear checkup results"; return; }
+      ckSave({ results: {} });
+      showToast("Checkup cleared. Practice levels are kept.");
+      showRoadmap();
+    };
+    section.querySelectorAll("[data-go]").forEach(function (b) {
+      b.onclick = function () {
+        var it = pathTopics().find(function (x) { return x.id === b.getAttribute("data-go"); });
+        if (it) goTopic(it);
+      };
+    });
+    document.getElementById("rmCopy").onclick = function () { copyRoadmap(d); };
+  }
+  function copyRoadmap(d) {
+    var lines = ["Mad Minute Dev · roadmap · " + new Date().toLocaleDateString(), d.atJunior + " of " + d.total + " topics at " + LV_NAME[JUNIOR] + " or better", ""];
+    if (d.moves.length) { lines.push("Next moves:"); d.moves.forEach(function (r, i) { lines.push((i + 1) + ". " + r.item.name + " (" + (r.item.pack.short || r.item.pack.name) + ") — " + whyText(r)); }); lines.push(""); }
+    BUILTIN_PACKS.forEach(function (p) {
+      lines.push(p.name + ":");
+      d.rows.filter(function (r) { return r.item.pack.id === p.id; }).forEach(function (r) { lines.push("  " + r.item.name + ": " + tagFor(r.s).text); });
+    });
+    var text = lines.join("\n");
+    var done = function () { showToast("Roadmap copied"); };
+    try {
+      navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); });
+    } catch (e) { fallbackCopy(text); }
+    function fallbackCopy(t) {
+      var x = document.createElement("textarea"); x.value = t; document.body.appendChild(x); x.select();
+      var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+      x.remove(); showToast(ok ? "Roadmap copied" : "Couldn't copy on this device");
+    }
+  }
+
+  // home card: start the checkup, or show the next move once there are results
+  var place = document.getElementById("placeCard");
+  var ckCard = document.createElement("button");
+  ckCard.className = "card stack ck-home"; ckCard.id = "ckCard";
+  place.parentNode.insertBefore(ckCard, place);
+  ckCard.onclick = function () { showRoadmap(); };
+  function renderCkCard() {
+    var d = roadmapData();
+    var next = d.checked && d.moves[0];
+    ckCard.innerHTML = d.ckDone
+      ? '<div class="eyebrow">Your roadmap · ' + d.atJunior + ' of ' + d.total + ' topics at ' + LV_NAME[JUNIOR] + '+</div>' +
+        '<div class="rec-topic">' + (next ? 'Next: ' + escapeHtml(next.item.name) : 'Every topic at ' + LV_NAME[JUNIOR] + '+') + '</div>' +
+        '<div class="ck-meta">' + (next ? escapeHtml((next.item.pack.short || next.item.pack.name) + " · " + whyText(next)) : 'Keep pushing toward ' + LV_NAME[4]) +
+        (d.ckDone < d.total ? ' · checkup ' + d.ckDone + ' of ' + d.total + ' done' : '') + '</div>' +
+        '<div class="ck-bar"><i style="width:' + Math.round(d.atJunior / d.total * 100) + '%"></i></div>'
+      : '<div class="eyebrow">Skills checkup · all ' + BUILTIN_PACKS.length + ' subjects</div>' +
+        '<div class="rec-topic">Find your gaps, get a roadmap</div>' +
+        '<div class="ck-meta">One test across everything, easy to hard. About 2 questions per topic. Stop any time.</div>';
+  }
+
+  /* ---------- hooks into the engine ---------- */
+  var origRender = renderQuestion;
+  renderQuestion = function () {
+    if (quiz && quiz.mode === "checkup") {
+      var ck = quiz.ck;
+      if (quiz.log.length > ck.lastLen) { ck.lastLen = quiz.log.length; ckAdvance(ck, quiz.log[quiz.log.length - 1].correct); }
+      var q = ckNext(ck);
+      if (!q) { endQuiz(); return; }
+      quiz.questions[quiz.idx] = q;
+      var r = origRender.apply(this, arguments);
+      var it = ck.items[ck.ti];
+      document.getElementById("quizTopicTag").textContent = (it.pack.short || it.pack.name) + " · " + it.name;
+      document.getElementById("quizCount").textContent = "Topic " + (ck.before + ck.ti + 1) + " of " + ck.total + " · tap Not sure instead of guessing";
+      document.getElementById("quizProgress").style.width = Math.round((ck.before + ck.ti) / ck.total * 100) + "%";
+      box.hidden = true; opts.hidden = false;
+      return r;
+    }
+    var out = origRender.apply(this, arguments);
+    try { startRecall(); } catch (e) {}
+    return out;
+  };
+
+  var origAnswer = answer;
+  answer = function (choice) {
+    if (quiz && quiz.cur && quiz.cur.recalling) return;      // choices are hidden until revealed
+    var cur = quiz && quiz.cur;
+    var r = origAnswer.apply(this, arguments);
+    try {
+      var ex = document.getElementById("quizExplain");
+      if (cur && cur.recallText && !ex.hidden) {
+        var you = document.createElement("div");
+        you.className = "recall-you";
+        you.innerHTML = "<b>You recalled:</b>" + escapeHtml(cur.recallText);
+        ex.appendChild(you);
+      }
+    } catch (e) {}
+    return r;
+  };
+
+  var origRecord = record;
+  record = function () {
+    if (quiz && quiz.mode === "checkup") { try { logActivity(arguments[2], arguments[1]); saveDaily(); } catch (e) {} return; }
+    return origRecord.apply(this, arguments);
+  };
+
+  var origBegin = beginQuiz;
+  beginQuiz = function () {
+    var r = origBegin.apply(this, arguments);
+    if (quiz && quiz.mode === "checkup") {
+      clearInterval(quiz.timerId); clearInterval(quiz.qTimerId);
+      quiz.timed = false;
+      document.getElementById("quizTimer").hidden = true;
+      document.getElementById("qtimerRow").hidden = true;
+      document.querySelector("#quizScreen .hud").hidden = true;
+      document.getElementById("endBtn").textContent = "Stop and save";
+    }
+    return r;
+  };
+
+  var origEnd = endQuiz;
+  endQuiz = function () {
+    if (quiz && quiz.mode === "checkup") {
+      clearInterval(quiz.timerId); clearInterval(quiz.qTimerId);
+      var Q = quiz; quiz = null;
+      var ck = Q.ck;
+      if (Q.log.length > ck.lastLen) { ck.lastLen = Q.log.length; ckAdvance(ck, Q.log[Q.log.length - 1].correct); }
+      // stopped after getting the Junior question right: that topic is at least Junior
+      if (ck.ti < ck.items.length && ck.stage === 3) { saveTopic(ck.items[ck.ti], 2); ck.settled++; }
+      if (ck.settled) {
+        addEvent("placement", "Skills checkup", ck.settled + " topics checked · " + Q.log.filter(function (l) { return l.correct; }).length + " of " + Q.log.length + " correct");
+        saveState();
+      }
+      invalidateQuestions();
+      showRoadmap(ck.settled > 0);
+      return;
+    }
+    return origEnd.apply(this, arguments);
+  };
+
+  var origHome = renderHome;
+  renderHome = function () {
+    var r = origHome.apply(this, arguments);
+    try { renderCkCard(); renderRecallToggle(); } catch (e) {}
+    return r;
+  };
+  try { renderCkCard(); } catch (e) {}
+
+  window.DevLayer = { startCheckup: startCheckup, showRoadmap: showRoadmap, roadmapData: roadmapData, pathTopics: pathTopics, recallOn: recallOn };
+})();
+</script>
