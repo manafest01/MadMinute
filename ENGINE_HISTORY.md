@@ -23,7 +23,7 @@ Every app (`/`, `/biology/`, `/music/`, `/dev/`) is one self-contained `index.ht
 | `crew overview` | Manager view (coaching, not scoring) |
 | `coach` | Six study methods that ask Claude (only when opened inside Claude) |
 | `Smart jump` | Add-on: suggests a harder subject when you're fast and right |
-| `Dev layer` | Add-on (Dev app only): Recall first, Skills checkup, Roadmap |
+| `shared/mm-learn.js` | Shared add-on loaded by every app: Recall first, Skills checkup, Roadmap |
 | `Standalone demo layer` | Makes the page work anywhere, offline, without a Claude account |
 
 ---
@@ -96,12 +96,21 @@ The quiz became a reusable engine that any subject can plug into.
   Dev Vocabulary · Programming Fundamentals · Read & Debug · Git · Front-End · Back-End · Full Stack & Architecture · DevOps & Kubernetes.
 - **Dev Path**: 32 steps covering all 50 topics; finishing it means Junior or better everywhere.
 - **Code in questions**: ```` ``` ```` fenced blocks show as scrollable code boxes; `` `backticks` `` show as inline code. Questions with code get more time. (`qHTML()` / `inlineHTML()` in model helpers.)
-- **Dev layer** add-on (same pattern as Smart jump):
+- **Dev layer** add-on (same pattern as Smart jump; moved to the shared file in Stage 9):
   - **Recall first**: choices stay hidden until you've pulled the answer from memory (optionally typed). Clocks pause while you think; on a miss it shows what you recalled next to the right answer. On by default, switch on Home.
   - **Skills checkup**: one adaptive test across every subject in path order. Junior question first; right → Intermediate, wrong → Beginner. ~2 questions per topic, saved topic by topic so you can stop and resume. Results seed each subject's levels (never lowering them).
   - **Roadmap**: topics at Junior+, your next 3 moves in learning order, strengths, a full color-coded map, and "Copy roadmap as text" to share with a mentor or manager.
 - Smart jump retargeted to Git, Back-End and DevOps; manager view relabeled **Team**; no DEMO watermark.
 - Built by a script from the Auto engine plus plain-text question files, so the engine code stays identical to the other apps apart from small, listed patches.
+
+## Stage 9 — First shared engine file · 2026-10-19
+
+- Recall first, the Skills checkup and the Roadmap moved out of the Dev page into **`shared/mm-learn.js` + `shared/mm-learn.css`**, loaded by all four apps. This is the first piece of engine code that lives in one place: fix it once, every app gets it.
+- It adapts to whichever app loads it: that app's subjects, path order, level names (B Tech, Section Ready, Junior...) and saved-data keys (`mmauto_`, `mmbio_`, `mmmus_`, `mmdev_`), so progress never mixes between apps.
+- **Recall first** default per app (`window.MM_LEARN = { recall: ... }` just above the script tag): on for Biology, Music and Dev; off for Auto so the timed "mad minute" feel stays for techs. Everyone can switch it on Home.
+- Works with Music's staff, keyboard and sound: the drawing stays visible while you recall.
+- Each app's offline worker precaches the shared files. When `mm-learn.js` changes, bump its `?v=` in each `index.html` and `sw.js` so phones pick it up.
+- Auto `mm-auto-v14`, Biology `mm-bio-v2`, Music `mm-mus-v3`, Dev `mm-dev-v2`.
 
 ---
 
@@ -115,10 +124,10 @@ The quiz became a reusable engine that any subject can plug into.
 | Smart jump | ✓ | — | — | ✓ |
 | Staff, keyboard, sound | — | — | ✓ | — |
 | Code blocks in questions | — | — | — | ✓ |
-| Recall first, Skills checkup, Roadmap | — | — | — | ✓ |
+| Recall first, Skills checkup, Roadmap (shared file) | ✓ | ✓ | ✓ | ✓ |
 
 ## Ideas parked for later
 
-- Move Recall first and the Skills checkup into the shared engine so every app (techs, students) gets them.
-- One engine file shared by all apps, with each subject as a separate data file — fixes land everywhere at once.
+- Show each person's roadmap in the Crew / Team view, so a manager sees gaps and next moves per tech.
+- Keep moving engine parts into `shared/` until each app is just its subjects plus settings.
 - Manager sync over Wi-Fi from phones to a PC (the Team / Crew view on real data).

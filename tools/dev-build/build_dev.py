@@ -1,7 +1,7 @@
 """Build Mad Minute Dev (dev/index.html) from the Mad Minute Auto engine page.
 
-The engine code is kept as-is apart from the small, listed patches below; the Dev-only features
-live in dev_layer.html, inserted as its own block. Run from anywhere:
+The engine code is kept as-is apart from the small, listed patches below. Recall first, the Skills
+checkup and Roadmap come from /shared/mm-learn.js, which every app loads. Run from anywhere:
     python3 build_dev.py <repo_dir> <questions_dir>
 """
 import json, sys, os, re
@@ -234,11 +234,11 @@ src = src[:a] + r'''const SAMPLE_CREW = (() => {
   ];
 })();''' + src[b:]
 
-# ---- Dev layer: recall first, skills checkup and roadmap ----
-layer = open(os.path.join(HERE, "dev_layer.html"), encoding="utf-8").read()
+# ---- shared learning layer (Recall first, Skills checkup, Roadmap) lives in /shared/, loaded by every app ----
 marker = "<script>\n/* ===== Standalone demo layer ====="
-sub(marker, layer + "\n" + marker)
-
+sub('<link rel="stylesheet" href="shared/mm-learn.css', '<link rel="stylesheet" href="../shared/mm-learn.css')
+sub('<script>window.MM_LEARN = { recall: "off" };</script>', '<script>window.MM_LEARN = { recall: "on" };</script>')
+sub('<script src="shared/mm-learn.js', '<script src="../shared/mm-learn.js')
 # leftovers that would look wrong in the Dev app
 for bad in ["Mad Minute Auto", "mmauto_", "Shop path"]:
     assert bad not in src, bad

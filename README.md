@@ -57,4 +57,12 @@ Add it to a phone's home screen the same way (it gets its own **DEV** icon). Its
 How the engine got here, stage by stage: [ENGINE_HISTORY.md](ENGINE_HISTORY.md)
 
 ---
+## In every app: Skills checkup, Roadmap and Recall first
+- **Skills checkup**: one test across every subject, about 2 questions per topic. Stop any time; it picks up where you left off.
+- **Roadmap**: what you have, what's missing, and your next 3 moves. "Copy roadmap as text" to share it with a manager or teacher.
+- **Recall first**: the choices stay hidden until you've pulled the answer from memory. Switch it on or off on Home.
+
+These live in one shared file (`shared/mm-learn.js`), so an improvement there reaches every app.
+
+---
 © 2026 Mana Industries LLC. All rights reserved. This demo is provided for evaluation only. No part of it may be copied, modified, redistributed, or resold without written permission.

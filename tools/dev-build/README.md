@@ -10,7 +10,7 @@
   W: wrong answer   (three W lines)
   E: why the right answer is right
   ```
-- `dev_layer.html` — Recall first, Skills checkup and Roadmap (styles + one script block).
+- Recall first, Skills checkup and Roadmap live in `/shared/mm-learn.js` and `.css`, shared by every app.
 - `build_dev.py` — copies the Auto engine (`/index.html`), swaps in the Dev subjects, Dev Path and patches, and adds the Dev layer.
 - `parse_q.py` — reads and checks the question files.
 

@@ -1,78 +1,47 @@
-<style>
-/* ===== Dev layer styles: code blocks, recall first, skills checkup + roadmap ===== */
-.question-text > span { display: block; }
-.question-text:has(pre.code) { font-size: 17px; }
-pre.code {
-  margin: 12px 0 4px; padding: 12px 14px; background: var(--panel-2); border: 1px solid var(--line);
-  border-radius: 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; text-align: left;
-  font: 500 13.5px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-wrap-style: initial; white-space: pre;
-}
-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92em; background: var(--panel-2); padding: 1px 5px; border-radius: 5px; }
-pre.code code { background: none; padding: 0; font-size: inherit; }
-.miss .q pre.code { font-size: 12.5px; }
-.option code { background: var(--panel-2); }
+/* ===== Mad Minute shared learning layer =====
+   One file loaded by every app (Auto, Biology, Music, Dev), so a fix here reaches all of them.
+   It adapts to whatever app loads it: its subjects, topic order, level names and saved-data keys.
 
-.recall-box { display: flex; flex-direction: column; gap: 10px; }
-.recall-box .recall-hint { font-size: 13.5px; color: var(--text-dim); line-height: 1.45; }
-.recall-box textarea {
-  width: 100%; min-height: 76px; resize: vertical; box-sizing: border-box; padding: 12px 14px; border-radius: 10px;
-  border: 1px solid var(--line); background: var(--panel); color: var(--text); font: 15px/1.4 inherit; font-family: inherit;
-}
-.recall-box textarea:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
-.recall-you { margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: var(--panel-2); color: var(--text); font-size: 13.5px; }
-.recall-you b { color: var(--text-dim); font-weight: 600; margin-right: 4px; }
-.recall-row { margin-top: 10px; }
-.recall-row .seg { width: 100%; }
-.recall-note { margin-top: 6px; font-size: 12.5px; color: var(--text-dim); line-height: 1.4; }
+   1) Recall first: hides the answer choices until you've pulled the answer from memory (typing it
+      is optional). That's active recall, which builds memory far better than recognizing a right answer.
+   2) Skills checkup: one adaptive test across every subject, in learning-path order, about two
+      questions per topic. Each topic is saved as soon as it's settled, so you can stop and resume.
+   3) Roadmap: what you have, what's missing and your next three moves, from the checkup plus
+      everything practiced afterwards. Can be copied as text for a manager, teacher or mentor.
 
-.ck-home { text-align: left; cursor: pointer; color: var(--text); font: inherit; box-shadow: inset 0 0 0 1.5px var(--teal); background: linear-gradient(135deg, var(--teal-soft), var(--panel)); }
-.ck-home .ck-meta { font-size: 13px; color: var(--text-dim); }
-.ck-bar { height: 6px; border-radius: 99px; background: var(--panel-2); overflow: hidden; }
-.ck-bar i { display: block; height: 100%; background: var(--teal); border-radius: 99px; }
+   Optional settings, set before this file loads:
+     window.MM_LEARN = { recall: "on" | "off" }   // Recall first default for this app (default "on")
 
-.rm-big { font-size: 26px; font-weight: 700; font-family: "Space Grotesk", sans-serif; }
-.rm-moves { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.rm-move { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; background: var(--panel-2); }
-.rm-move .rm-num { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--amber); color: var(--amber-ink); font-weight: 700; font-size: 13px; flex-shrink: 0; }
-.rm-move .rm-txt { flex: 1; min-width: 0; }
-.rm-move .rm-name { font-weight: 600; font-size: 15px; }
-.rm-move .rm-why { font-size: 12.5px; color: var(--text-dim); margin-top: 2px; }
-.rm-move .btn { padding: 8px 14px; }
-.rm-subject { display: flex; flex-direction: column; gap: 8px; }
-.rm-subject-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
-.rm-subject-head b { font-size: 15px; }
-.rm-subject-head span { font-size: 12.5px; color: var(--text-dim); }
-.rm-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 6px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
-.rm-row:first-of-type { border-top: none; }
-.rm-tag { font-size: 11.5px; font-weight: 600; padding: 3px 8px; border-radius: 99px; white-space: nowrap; }
-.rm-tag.gap { background: var(--red-soft); color: var(--red); }
-.rm-tag.shaky { background: rgba(242,167,59,.16); color: var(--amber); }
-.rm-tag.ok { background: var(--teal-soft); color: var(--teal); }
-.rm-tag.strong { background: var(--teal); color: var(--teal-ink); }
-.rm-tag.none { background: var(--panel-2); color: var(--text-dim); }
-.rm-legend { display: flex; flex-wrap: wrap; gap: 6px; }
-.rm-strengths { display: flex; flex-wrap: wrap; gap: 6px; }
-</style>
-
-<script>
-/* ===== Dev layer (Mad Minute Dev) =====
-   Three add-ons for the engine, kept in this one block so the core stays the same as the other apps:
-   1) Recall first: hides the answer choices until you've thought of (or typed) your answer.
-      That's active recall, which builds memory far better than recognizing a right answer.
-   2) Skills checkup: one adaptive test across every subject, in Dev Path order. About two questions
-      per topic. Results are saved topic by topic, so you can stop and pick up later.
-   3) Roadmap: what you have, what's missing, and your next three moves, built from the checkup
-      plus everything you practice afterwards.
-   Hooks renderQuestion(), answer(), record(), beginQuiz(), endQuiz() and renderHome() from outside. */
+   It hooks renderQuestion(), answer(), record(), beginQuiz(), endQuiz() and renderHome() from outside,
+   the same way Smart jump does, so the core engine stays untouched.
+   To remove it from an app: delete the two lines that load shared/mm-learn.css and mm-learn.js. */
 (function () {
-  var RECALL_KEY = "mmdev_recall", CK_KEY = "mmdev_checkup";
-  var JUNIOR = UNLOCK_AT;                         // level 2: the bar for "done" on the Dev Path
+  "use strict";
+  if (typeof BUILTIN_PACKS === "undefined" || !document.getElementById("quizOptions")) return;
+
+  var CFG = window.MM_LEARN || {};
+  // each app's keys start with its own prefix (mmauto_, mmbio_, mmmus_, mmdev_)
+  var PREFIX = String((BUILTIN_PACKS[0] && BUILTIN_PACKS[0].storeKey) || "mm_state_").split("state_")[0] || "mm_";
+  var RECALL_KEY = PREFIX + "recall", CK_KEY = PREFIX + "checkup";
+  var BAR = typeof UNLOCK_AT === "number" ? UNLOCK_AT : 2;   // level 2: the bar for "done" on a path step
+  var MULTI = BUILTIN_PACKS.length > 1;
 
   function packById(id) { return BUILTIN_PACKS.find(function (p) { return p.id === id; }); }
   function orderOf(p) { return (p.order || Object.keys(p.topics)).filter(function (k) { return p.topics[k]; }); }
+  function namesOf(p) { return orderOf(p).map(function (k) { return p.topics[k]; }); }
+  function stateOf(p) {
+    if (p.id === currentPack.id) return state;
+    try { return JSON.parse(localStorage.getItem(packStoreKey(p)) || "null") || {}; } catch (e) { return {}; }
+  }
+  function lv(n) { return (typeof LV_NAME !== "undefined" && LV_NAME[n]) || ("Level " + n); }
+  function shortName(p) { return p.short || p.name; }
+  function scopeText() { return MULTI ? "all " + BUILTIN_PACKS.length + " subjects" : "every topic"; }
 
   /* ---------- 1) recall first ---------- */
-  function recallOn() { try { return localStorage.getItem(RECALL_KEY) !== "off"; } catch (e) { return true; } }
+  function recallOn() {
+    try { var v = localStorage.getItem(RECALL_KEY); if (v) return v === "on"; } catch (e) {}
+    return CFG.recall !== "off";
+  }
   function setRecall(on) {
     try { localStorage.setItem(RECALL_KEY, on ? "on" : "off"); } catch (e) {}
     renderRecallToggle();
@@ -85,7 +54,6 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
     a.classList.toggle("on", on); b.classList.toggle("on", !on);
     a.setAttribute("aria-pressed", on); b.setAttribute("aria-pressed", !on);
   }
-  // toggle under the round-type switch on Home
   var modeWrap = document.getElementById("modeWrap");
   if (modeWrap) {
     var row = document.createElement("div");
@@ -99,7 +67,6 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
     document.getElementById("recallOffBtn").onclick = function () { setRecall(false); };
     renderRecallToggle();
   }
-  // the recall panel inside the question box
   var opts = document.getElementById("quizOptions");
   var box = document.createElement("div");
   box.className = "recall-box"; box.id = "recallBox"; box.hidden = true;
@@ -140,7 +107,7 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
   }
   function ckSave(d) { try { localStorage.setItem(CK_KEY, JSON.stringify(d)); } catch (e) {} }
 
-  // every topic, in Dev Path order (then anything not on the path)
+  // every topic, in learning-path order when the app has a path, then everything else in subject order
   function pathTopics() {
     var out = [], seen = {};
     function add(p, k) {
@@ -148,7 +115,8 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
       if (!name || seen[id]) return;
       seen[id] = 1; out.push({ pack: p, name: name, id: id });
     }
-    SHOP_PATH.forEach(function (step) {
+    var path = typeof SHOP_PATH !== "undefined" ? SHOP_PATH : [];
+    path.forEach(function (step) {
       var p = packById(step.pack); if (!p) return;
       (step.keys || orderOf(p)).forEach(function (k) { add(p, k); });
     });
@@ -162,20 +130,19 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
     });
     return bankCache[p.id];
   }
-  function pickQ(item, lv, used) {
-    var list = bankFor(item.pack).filter(function (q) { return q.t === item.name && q.lv === lv && !used[q.id]; });
+  function pickQ(item, level, used) {
+    var list = bankFor(item.pack).filter(function (q) { return q.t === item.name && q.lv === level && !used[q.id]; });
     return list.length ? shuffle(list)[0] : null;
   }
-
-  // save one topic's result right away, into the checkup record and that subject's own progress
-  function saveTopic(item, lv) {
+  // save one topic's result right away: into the checkup record and that subject's own progress (never lowering it)
+  function saveTopic(item, level) {
     var d = ckLoad();
-    d.results[item.id] = { lv: lv, at: Date.now() };
+    d.results[item.id] = { lv: level, at: Date.now() };
     if (!d.startedAt) d.startedAt = Date.now();
     ckSave(d);
     var p = item.pack;
     if (p.id === currentPack.id) {
-      state.topicLevel[item.name] = Math.max(state.topicLevel[item.name] || 0, lv);
+      state.topicLevel[item.name] = Math.max(state.topicLevel[item.name] || 0, level);
       state.placed = true;
       saveState();
     } else {
@@ -183,19 +150,18 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
       try { st = JSON.parse(localStorage.getItem(key) || "null"); } catch (e) {}
       if (!st) st = freshState();
       st.topicLevel = st.topicLevel || {};
-      st.topicLevel[item.name] = Math.max(st.topicLevel[item.name] || 0, lv);
+      st.topicLevel[item.name] = Math.max(st.topicLevel[item.name] || 0, level);
       st.placed = true;
       st.updatedAt = Date.now();
       try { localStorage.setItem(key, JSON.stringify(st)); } catch (e) {}
     }
   }
-  // adaptive steps per topic: Junior question first; right → try Intermediate, wrong → try Beginner
+  // per topic: a level-2 question first; right → try level 3, wrong → try level 1
   function ckAdvance(ck, correct) {
     var item = ck.items[ck.ti];
     if (!item) return;
     if (ck.stage === 2) { ck.stage = correct ? 3 : 1; return; }
-    var lv = ck.stage === 3 ? (correct ? 3 : 2) : (correct ? 1 : 0);
-    saveTopic(item, lv);
+    saveTopic(item, ck.stage === 3 ? (correct ? 3 : 2) : (correct ? 1 : 0));
     ck.settled++;
     ck.ti++; ck.stage = 2;
   }
@@ -220,43 +186,41 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
 
   /* ---------- 3) roadmap ---------- */
   function topicStatus(item, results) {
-    var st = item.pack.id === currentPack.id ? state : packStateFor(item.pack);
-    var practiced = ((st && st.topicLevel) || {})[item.name] || 0;
+    var st = stateOf(item.pack) || {};
+    var practiced = (st.topicLevel || {})[item.name] || 0;
     var r = results[item.id];
-    var checked = !!r || practiced > 0 || !!(st && st.stats && st.stats[item.name]);
-    var lv = Math.max(practiced, r ? r.lv : 0);
-    return { lv: lv, checked: checked };
+    var checked = !!r || practiced > 0 || !!(st.stats && st.stats[item.name]);
+    return { lv: Math.max(practiced, r ? r.lv : 0), checked: checked };
   }
   function tagFor(s) {
     if (!s.checked) return { cls: "none", text: "Not checked" };
     if (s.lv <= 0) return { cls: "gap", text: "Gap" };
-    if (s.lv === 1) return { cls: "shaky", text: LV_NAME[1] };
-    if (s.lv === 2) return { cls: "ok", text: LV_NAME[2] };
-    return { cls: "strong", text: LV_NAME[s.lv] };
+    if (s.lv < BAR) return { cls: "shaky", text: lv(s.lv) };
+    if (s.lv === BAR) return { cls: "ok", text: lv(s.lv) };
+    return { cls: "strong", text: lv(s.lv) };
   }
   function roadmapData() {
     var results = ckLoad().results, items = pathTopics();
-    var rows = items.map(function (it) { var s = topicStatus(it, results); return { item: it, s: s }; });
+    var rows = items.map(function (it) { return { item: it, s: topicStatus(it, results) }; });
     var checked = rows.filter(function (r) { return r.s.checked; });
     var moves = [];
-    // walk the Dev Path in order: the first checked topics still below Junior are the next moves
-    rows.forEach(function (r) {
-      if (moves.length < 3 && r.s.checked && r.s.lv < JUNIOR) moves.push(r);
-    });
-    if (moves.length < 3) rows.forEach(function (r) {
-      if (moves.length < 3 && !r.s.checked && moves.indexOf(r) < 0) moves.push(r);
-    });
-    var strong = checked.filter(function (r) { return r.s.lv >= 3; });
+    // walk the path in order: the first checked topics still below the bar are the next moves
+    rows.forEach(function (r) { if (moves.length < 3 && r.s.checked && r.s.lv < BAR) moves.push(r); });
+    if (moves.length < 3) rows.forEach(function (r) { if (moves.length < 3 && !r.s.checked) moves.push(r); });
     var avg = checked.length ? checked.reduce(function (n, r) { return n + r.s.lv; }, 0) / checked.length : 0;
-    var atJunior = rows.filter(function (r) { return r.s.lv >= JUNIOR; }).length;
-    return { rows: rows, checked: checked.length, total: rows.length, moves: moves, strong: strong, avg: avg, atJunior: atJunior,
-      ckDone: Object.keys(results).length };
+    return {
+      rows: rows, checked: checked.length, total: rows.length, moves: moves, avg: avg,
+      strong: checked.filter(function (r) { return r.s.lv > BAR; }),
+      atBar: rows.filter(function (r) { return r.s.lv >= BAR; }).length,
+      ckDone: Object.keys(results).filter(function (id) { return items.some(function (it) { return it.id === id; }); }).length
+    };
   }
   function whyText(r) {
     if (!r.s.checked) return "Not checked yet";
-    if (r.s.lv <= 0) return "Gap · start with " + LV_NAME[1] + " questions";
-    return "At " + LV_NAME[r.s.lv] + " · push it to " + LV_NAME[JUNIOR];
+    if (r.s.lv <= 0) return "Gap · start with " + lv(1) + " questions";
+    return "At " + lv(r.s.lv) + " · push it to " + lv(BAR);
   }
+  function where(item) { return MULTI ? shortName(item.pack) + " · " : ""; }
   function goTopic(item) {
     if (item.pack.id !== currentPack.id) activatePack(item.pack);
     showHome();
@@ -268,9 +232,9 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
   var home = document.getElementById("homeScreen");
   home.parentNode.insertBefore(section, home.nextSibling);
   SCREENS.push("roadmapScreen");
-  TAB_FOR.roadmapScreen = "homeScreen";
+  if (typeof TAB_FOR !== "undefined") TAB_FOR.roadmapScreen = "homeScreen";
 
-  var retakeArmedRm = false;
+  var retakeArmed = false;
   function showRoadmap(afterCheckup) {
     show("roadmapScreen");
     var d = roadmapData();
@@ -278,25 +242,26 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
     var rankIdx = Math.min(4, Math.floor(d.avg + 1e-9));
     var html = '<div class="back-row"><button class="icon-btn" id="rmBack" aria-label="Back">←</button><h2>Your roadmap</h2></div><div class="stack">';
 
-    html += '<div class="card glow stack"><div class="eyebrow">Skills checkup · all ' + BUILTIN_PACKS.length + ' subjects</div>' +
-      '<div class="rm-big">' + d.atJunior + ' of ' + d.total + ' topics at ' + LV_NAME[JUNIOR] + '+</div>' +
-      '<div class="ck-bar"><i style="width:' + Math.round(d.atJunior / d.total * 100) + '%"></i></div>' +
-      '<div class="muted">' + (d.checked ? 'Overall you test around <b>' + escapeHtml(RANKS[rankIdx] || RANKS[0]) + '</b> across the ' + d.checked + ' topics checked so far.' :
-        'One test across every subject, easy to hard. About two questions per topic, roughly 15–20 minutes. Stop any time; it picks up where you left off.') + '</div>' +
-      (afterCheckup ? '<div class="muted"><b>Checkup saved.</b> Each subject’s levels now start from these results.</div>' : '') +
+    html += '<div class="card glow stack"><div class="eyebrow">Skills checkup · ' + scopeText() + '</div>' +
+      '<div class="rm-big">' + d.atBar + ' of ' + d.total + ' topics at ' + escapeHtml(lv(BAR)) + '+</div>' +
+      '<div class="ck-bar"><i style="width:' + Math.round(d.atBar / d.total * 100) + '%"></i></div>' +
+      '<div class="muted">' + (d.checked
+        ? 'Overall you test around <b>' + escapeHtml(RANKS[rankIdx] || RANKS[0]) + '</b> across the ' + d.checked + ' topics checked so far.'
+        : 'One test across ' + scopeText() + ', easy to hard. About two questions per topic (' + d.total * 2 + ' at most). Stop any time; it picks up where you left off.') + '</div>' +
+      (afterCheckup ? '<div class="muted"><b>Checkup saved.</b> ' + (MULTI ? 'Each subject’s' : 'Your') + ' levels now start from these results.</div>' : '') +
       '<div class="row-btns">' +
       (left > 0 ? '<button class="btn btn-amber" id="rmStart">' + (d.ckDone ? 'Continue checkup (' + left + ' left)' : 'Take the skills checkup') + '</button>' : '') +
       (d.ckDone ? '<button class="btn btn-ghost" id="rmRetake">Retake checkup</button>' : '') +
       '</div></div>';
 
     html += '<div class="card stack"><div class="eyebrow">Your next 3 moves</div>';
-    if (!d.moves.length) html += '<div class="muted">Every topic is at ' + LV_NAME[JUNIOR] + ' or better. Push your weakest ones toward ' + LV_NAME[4] + ' with timed rounds and Recall first.</div>';
-    else if (!d.checked) html += '<div class="muted">Take the checkup and this fills in with the three topics that will move you most, in learning order.</div>';
+    if (!d.checked) html += '<div class="muted">Take the checkup and this fills in with the three topics that will move you most, in learning order.</div>';
+    else if (!d.moves.length) html += '<div class="muted">Every topic is at ' + escapeHtml(lv(BAR)) + ' or better. Push your weakest ones toward ' + escapeHtml(lv(4)) + ' with timed rounds and Recall first.</div>';
     else {
       html += '<ol class="rm-moves">';
       d.moves.forEach(function (r, i) {
         html += '<li class="rm-move"><span class="rm-num">' + (i + 1) + '</span><div class="rm-txt"><div class="rm-name">' + escapeHtml(r.item.name) +
-          '</div><div class="rm-why">' + escapeHtml((r.item.pack.short || r.item.pack.name) + " · " + whyText(r)) + '</div></div>' +
+          '</div><div class="rm-why">' + escapeHtml(where(r.item) + whyText(r)) + '</div></div>' +
           '<button class="btn btn-teal" data-go="' + escapeHtml(r.item.id) + '">Go</button></li>';
       });
       html += '</ol>';
@@ -309,14 +274,15 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
     }
 
     html += '<div class="section-title">Full map</div><div class="rm-legend">' +
-      ['none:Not checked', 'gap:Gap', 'shaky:' + LV_NAME[1], 'ok:' + LV_NAME[2], 'strong:' + LV_NAME[3] + '+'].map(function (x) {
-        var a = x.split(":"); return '<span class="rm-tag ' + a[0] + '">' + escapeHtml(a[1]) + '</span>';
+      [["none", "Not checked"], ["gap", "Gap"], ["shaky", lv(1)], ["ok", lv(BAR)], ["strong", lv(BAR + 1) + "+"]].map(function (a) {
+        return '<span class="rm-tag ' + a[0] + '">' + escapeHtml(a[1]) + '</span>';
       }).join("") + '</div>';
     BUILTIN_PACKS.forEach(function (p) {
+      var names = namesOf(p);
       var rows = d.rows.filter(function (r) { return r.item.pack.id === p.id; })
-        .sort(function (a, b) { return orderOf(p).map(function (k) { return p.topics[k]; }).indexOf(a.item.name) - orderOf(p).map(function (k) { return p.topics[k]; }).indexOf(b.item.name); });
-      var ok = rows.filter(function (r) { return r.s.lv >= JUNIOR; }).length;
-      html += '<div class="card rm-subject"><div class="rm-subject-head"><b>' + escapeHtml(p.name) + '</b><span>' + ok + ' / ' + rows.length + ' at ' + LV_NAME[JUNIOR] + '+</span></div>';
+        .sort(function (a, b) { return names.indexOf(a.item.name) - names.indexOf(b.item.name); });
+      var ok = rows.filter(function (r) { return r.s.lv >= BAR; }).length;
+      html += '<div class="card rm-subject"><div class="rm-subject-head"><b>' + escapeHtml(p.name) + '</b><span>' + ok + ' / ' + rows.length + ' at ' + escapeHtml(lv(BAR)) + '+</span></div>';
       rows.forEach(function (r) {
         var t = tagFor(r.s);
         html += '<div class="rm-row"><span>' + escapeHtml(r.item.name) + '</span><span class="rm-tag ' + t.cls + '">' + escapeHtml(t.text) + '</span></div>';
@@ -324,17 +290,17 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
       html += '</div>';
     });
 
-    html += '<div class="muted">Levels go ' + LV_NAME.slice(1).join(" → ") + '. The checkup can place you up to ' + LV_NAME[3] +
-      '; ' + LV_NAME[4] + ' is earned in practice. Your map updates as you practice.</div>' +
+    html += '<div class="muted">Levels go ' + [1, 2, 3, 4].map(lv).map(escapeHtml).join(" → ") + '. The checkup can place you up to ' + escapeHtml(lv(3)) +
+      '; ' + escapeHtml(lv(4)) + ' is earned in practice. Your map updates as you practice.</div>' +
       '<button class="btn btn-ghost btn-block" id="rmCopy">Copy roadmap as text</button></div>';
     section.innerHTML = html;
 
     document.getElementById("rmBack").onclick = showHome;
     var s = document.getElementById("rmStart"); if (s) s.onclick = startCheckup;
     var rt = document.getElementById("rmRetake");
-    retakeArmedRm = false;
+    retakeArmed = false;
     if (rt) rt.onclick = function () {
-      if (!retakeArmedRm) { retakeArmedRm = true; rt.textContent = "Tap again to clear checkup results"; return; }
+      if (!retakeArmed) { retakeArmed = true; rt.textContent = "Tap again to clear checkup results"; return; }
       ckSave({ results: {} });
       showToast("Checkup cleared. Practice levels are kept.");
       showRoadmap();
@@ -348,25 +314,26 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
     document.getElementById("rmCopy").onclick = function () { copyRoadmap(d); };
   }
   function copyRoadmap(d) {
-    var lines = ["Mad Minute Dev · roadmap · " + new Date().toLocaleDateString(), d.atJunior + " of " + d.total + " topics at " + LV_NAME[JUNIOR] + " or better", ""];
-    if (d.moves.length) { lines.push("Next moves:"); d.moves.forEach(function (r, i) { lines.push((i + 1) + ". " + r.item.name + " (" + (r.item.pack.short || r.item.pack.name) + ") — " + whyText(r)); }); lines.push(""); }
+    var lines = [document.title + " · roadmap · " + new Date().toLocaleDateString(), d.atBar + " of " + d.total + " topics at " + lv(BAR) + " or better", ""];
+    if (d.checked && d.moves.length) {
+      lines.push("Next moves:");
+      d.moves.forEach(function (r, i) { lines.push((i + 1) + ". " + r.item.name + (MULTI ? " (" + shortName(r.item.pack) + ")" : "") + " — " + whyText(r)); });
+      lines.push("");
+    }
     BUILTIN_PACKS.forEach(function (p) {
       lines.push(p.name + ":");
       d.rows.filter(function (r) { return r.item.pack.id === p.id; }).forEach(function (r) { lines.push("  " + r.item.name + ": " + tagFor(r.s).text); });
     });
     var text = lines.join("\n");
-    var done = function () { showToast("Roadmap copied"); };
-    try {
-      navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); });
-    } catch (e) { fallbackCopy(text); }
-    function fallbackCopy(t) {
-      var x = document.createElement("textarea"); x.value = t; document.body.appendChild(x); x.select();
+    function fallback() {
+      var x = document.createElement("textarea"); x.value = text; document.body.appendChild(x); x.select();
       var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
       x.remove(); showToast(ok ? "Roadmap copied" : "Couldn't copy on this device");
     }
+    try { navigator.clipboard.writeText(text).then(function () { showToast("Roadmap copied"); }, fallback); } catch (e) { fallback(); }
   }
 
-  // home card: start the checkup, or show the next move once there are results
+  // Home card: start the checkup, or show the next move once there are results
   var place = document.getElementById("placeCard");
   var ckCard = document.createElement("button");
   ckCard.className = "card stack ck-home"; ckCard.id = "ckCard";
@@ -376,12 +343,12 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
     var d = roadmapData();
     var next = d.checked && d.moves[0];
     ckCard.innerHTML = d.ckDone
-      ? '<div class="eyebrow">Your roadmap · ' + d.atJunior + ' of ' + d.total + ' topics at ' + LV_NAME[JUNIOR] + '+</div>' +
-        '<div class="rec-topic">' + (next ? 'Next: ' + escapeHtml(next.item.name) : 'Every topic at ' + LV_NAME[JUNIOR] + '+') + '</div>' +
-        '<div class="ck-meta">' + (next ? escapeHtml((next.item.pack.short || next.item.pack.name) + " · " + whyText(next)) : 'Keep pushing toward ' + LV_NAME[4]) +
+      ? '<div class="eyebrow">Your roadmap · ' + d.atBar + ' of ' + d.total + ' topics at ' + escapeHtml(lv(BAR)) + '+</div>' +
+        '<div class="rec-topic">' + (next ? 'Next: ' + escapeHtml(next.item.name) : 'Every topic at ' + escapeHtml(lv(BAR)) + '+') + '</div>' +
+        '<div class="ck-meta">' + (next ? escapeHtml(where(next.item) + whyText(next)) : 'Keep pushing toward ' + escapeHtml(lv(4))) +
         (d.ckDone < d.total ? ' · checkup ' + d.ckDone + ' of ' + d.total + ' done' : '') + '</div>' +
-        '<div class="ck-bar"><i style="width:' + Math.round(d.atJunior / d.total * 100) + '%"></i></div>'
-      : '<div class="eyebrow">Skills checkup · all ' + BUILTIN_PACKS.length + ' subjects</div>' +
+        '<div class="ck-bar"><i style="width:' + Math.round(d.atBar / d.total * 100) + '%"></i></div>'
+      : '<div class="eyebrow">Skills checkup · ' + scopeText() + '</div>' +
         '<div class="rec-topic">Find your gaps, get a roadmap</div>' +
         '<div class="ck-meta">One test across everything, easy to hard. About 2 questions per topic. Stop any time.</div>';
   }
@@ -397,7 +364,7 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
       quiz.questions[quiz.idx] = q;
       var r = origRender.apply(this, arguments);
       var it = ck.items[ck.ti];
-      document.getElementById("quizTopicTag").textContent = (it.pack.short || it.pack.name) + " · " + it.name;
+      document.getElementById("quizTopicTag").textContent = where(it) + it.name;
       document.getElementById("quizCount").textContent = "Topic " + (ck.before + ck.ti + 1) + " of " + ck.total + " · tap Not sure instead of guessing";
       document.getElementById("quizProgress").style.width = Math.round((ck.before + ck.ti) / ck.total * 100) + "%";
       box.hidden = true; opts.hidden = false;
@@ -409,7 +376,7 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
   };
 
   var origAnswer = answer;
-  answer = function (choice) {
+  answer = function () {
     if (quiz && quiz.cur && quiz.cur.recalling) return;      // choices are hidden until revealed
     var cur = quiz && quiz.cur;
     var r = origAnswer.apply(this, arguments);
@@ -425,21 +392,22 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
     return r;
   };
 
+  // checkup answers count toward today's practice minutes, but not toward one subject's stats
   var origRecord = record;
-  record = function () {
-    if (quiz && quiz.mode === "checkup") { try { logActivity(arguments[2], arguments[1]); saveDaily(); } catch (e) {} return; }
+  record = function (q, correct, ms) {
+    if (quiz && quiz.mode === "checkup") { try { logActivity(ms, correct); saveDaily(); } catch (e) {} return; }
     return origRecord.apply(this, arguments);
   };
 
   var origBegin = beginQuiz;
   beginQuiz = function () {
     var r = origBegin.apply(this, arguments);
-    if (quiz && quiz.mode === "checkup") {
+    if (quiz && quiz.mode === "checkup") {                   // the checkup measures you: no clock
       clearInterval(quiz.timerId); clearInterval(quiz.qTimerId);
       quiz.timed = false;
       document.getElementById("quizTimer").hidden = true;
       document.getElementById("qtimerRow").hidden = true;
-      document.querySelector("#quizScreen .hud").hidden = true;
+      var hud = document.querySelector("#quizScreen .hud"); if (hud) hud.hidden = true;
       document.getElementById("endBtn").textContent = "Stop and save";
     }
     return r;
@@ -452,10 +420,11 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
       var Q = quiz; quiz = null;
       var ck = Q.ck;
       if (Q.log.length > ck.lastLen) { ck.lastLen = Q.log.length; ckAdvance(ck, Q.log[Q.log.length - 1].correct); }
-      // stopped after getting the Junior question right: that topic is at least Junior
+      // stopped right after getting the level-2 question right: that topic is at least level 2
       if (ck.ti < ck.items.length && ck.stage === 3) { saveTopic(ck.items[ck.ti], 2); ck.settled++; }
       if (ck.settled) {
-        addEvent("placement", "Skills checkup", ck.settled + " topics checked · " + Q.log.filter(function (l) { return l.correct; }).length + " of " + Q.log.length + " correct");
+        addEvent("placement", "Skills checkup", ck.settled + " topics checked · " +
+          Q.log.filter(function (l) { return l.correct; }).length + " of " + Q.log.length + " correct");
         saveState();
       }
       invalidateQuestions();
@@ -473,6 +442,5 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
   };
   try { renderCkCard(); } catch (e) {}
 
-  window.DevLayer = { startCheckup: startCheckup, showRoadmap: showRoadmap, roadmapData: roadmapData, pathTopics: pathTopics, recallOn: recallOn };
+  window.MMLearn = { startCheckup: startCheckup, showRoadmap: showRoadmap, roadmapData: roadmapData, pathTopics: pathTopics, recallOn: recallOn, prefix: PREFIX };
 })();
-</script>
