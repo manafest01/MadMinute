@@ -1,0 +1,1173 @@
+@pack real
+
+# G 1
+Q: You just made a commit and realize you forgot to add one file. Nothing is pushed yet. Cleanest fix?
+A: git add the file, then git commit --amend
+W: git revert HEAD, then commit everything again
+W: Make a second commit called "forgot file" and push both
+W: git reset --hard HEAD~1, then add the file
+E: Amend folds the staged file into the last commit. Fine because nobody else has it yet. (reset --hard would throw away your work.)
+
+Q: git status shows your edited file in red under "Changes not staged for commit." What does that mean?
+A: Git sees the change, but it won't be in the next commit until you git add it
+W: The file has a syntax error Git detected
+W: The change was already committed but not pushed
+W: Git blocked the file because it's too large
+E: Red = changed but not staged. Green = staged and ready to commit.
+
+Q: A coworker says "pull before you start." You're about to begin work on your laptop. Why?
+A: So you build on the latest commits instead of an old copy
+W: Pulling uploads your changes so others can see them
+W: Git won't let you edit files until you pull
+W: Pulling creates a backup branch automatically
+E: Starting from a stale copy is the most common cause of surprise conflicts later. Pull downloads; push uploads.
+
+Q: You typed git commit and a strange full-screen editor opened that ignores your typing. What happened?
+A: Git opened a text editor (often Vim) for the commit message because you didn't use -m
+W: The commit failed and Git is showing an error log
+W: Git is waiting for your GitHub password
+W: Your terminal froze and needs restarting
+E: In Vim, press i to type, then Esc and :wq to save and close. Next time: git commit -m "message".
+
+Q: You edited a file, hated the result, and want it back the way it was at your last commit. Command?
+A: git restore <file>
+W: git revert <file>
+W: git reset --soft <file>
+W: git stash drop <file>
+E: Discards uncommitted edits to that file. No undo, so be sure. revert works on commits, not files.
+
+Q: You push and GitHub says "Updates were rejected because the remote contains work that you do not have." Safe next step?
+A: git pull, resolve any conflicts, then push again
+W: git push --force to make GitHub match your copy
+W: Delete your local folder and clone again, losing your commit
+W: Create a new repository and push there instead
+E: Someone (or you on another computer) pushed first. Force-pushing would erase their work.
+
+Q: You accidentally committed .env with your API key. It's NOT pushed yet. Best move?
+A: Remove it from the commit, add .env to .gitignore, then amend
+W: Push it now and delete the file in the next commit
+W: Rename it to env.txt so Git stops seeing it as secret
+W: Leave it; a private repo makes it safe
+E: git rm --cached .env, add .env to .gitignore, git commit --amend. If it ever reaches GitHub, replace the key.
+
+# G 2
+Q: You're on main and realize your last 3 commits should have been on a new branch. Nothing is pushed. Fix?
+A: Create the branch where you are, then move main back 3 commits
+W: git revert the three commits, then cherry-pick them onto a new branch later
+W: Rename main to feature and create a fresh main from GitHub
+W: Copy the changed files into a new folder and re-commit there
+E: git branch feature; git reset --hard HEAD~3. The commits now live only on feature, and main is clean.
+
+Q: You want to undo your last commit but keep all the changes to redo it properly. Not pushed. Command?
+A: git reset --soft HEAD~1
+W: git reset --hard HEAD~1
+W: git revert HEAD
+W: git checkout HEAD~1
+E: Undoing the last commit sits at the top of Stack Overflow's most popular questions of all time. --soft keeps your changes staged.
+
+Q: You added node_modules/ to .gitignore, but Git still shows changes in it. Why?
+A: It was already tracked; .gitignore only affects files Git isn't tracking yet
+W: .gitignore needs a commit before Git reads it
+W: The pattern must be written as *node_modules* to match folders
+W: .gitignore only works at the top of main, not on branches
+E: Stop tracking it with git rm -r --cached node_modules, then commit.
+
+Q: A merge stops with "CONFLICT (content): Merge conflict in app.js." What do you do?
+A: Edit app.js to the correct final code, remove the <<<<<<< ======= >>>>>>> markers, then add and commit
+W: Run git merge --continue right away; Git will pick the newest version
+W: Delete app.js from both branches and merge again
+W: Commit the file with the markers in it and fix it later
+E: Git couldn't decide which change wins, so you decide. Then git add app.js and finish the merge.
+
+Q: You want to delete a branch called old-ui both locally and on GitHub. Which commands?
+A: git branch -d old-ui and git push origin --delete old-ui
+W: git branch -d old-ui (it removes the GitHub copy too)
+W: git push origin old-ui --prune
+W: git rm -r old-ui
+E: Local and remote branches are separate; delete each. Another of Stack Overflow's all-time top Git questions.
+
+Q: git status says "Your branch is ahead of 'origin/main' by 2 commits." Meaning?
+A: You have 2 local commits that aren't on GitHub yet
+W: GitHub has 2 commits you haven't pulled
+W: Your branch has 2 merge conflicts
+W: Two of your files have unstaged changes
+E: Push to share them. "Behind" would mean GitHub has commits you don't.
+
+Q: You must switch branches for an urgent fix, but you have half-done work you don't want to commit. Best move?
+A: git stash, switch and fix, then return and git stash pop
+W: git checkout the other branch; your edits stay safely on this branch
+W: git reset --hard so the work is saved in the reflog
+W: git commit --amend to hide the work inside your last commit
+E: Stash shelves changes. Switching with uncommitted edits either fails or carries them to the other branch.
+
+# G 3
+Q: You ran git reset --hard and your last two commits vanished from git log. Are they gone?
+A: Usually not; find them with git reflog and reset or branch back to them
+W: Yes; reset --hard deletes commits permanently
+W: Only if you haven't pushed; GitHub keeps no copy
+W: They moved to git stash automatically
+E: The reflog remembers where HEAD has been for weeks. It has saved many careers.
+
+Q: You checked out an old commit, made a new commit there, and Git warns about "detached HEAD." How do you keep that commit?
+A: Create a branch right there: git switch -c rescue
+W: Nothing; it's saved onto main automatically
+W: git push, which attaches it to main on GitHub
+W: git stash, then switch to main and pop it
+E: Commits on a detached HEAD belong to no branch and can be cleaned up by Git later.
+
+Q: A bad commit was pushed to main an hour ago and teammates already pulled. How do you undo it?
+A: git revert <hash> and push the new commit
+W: git reset --hard HEAD~1 and force-push
+W: git commit --amend to rewrite it, then force-push
+W: Delete the commit in GitHub's web interface
+E: Revert adds an "undo" commit, so nobody's history breaks.
+
+Q: A teammate's commit shows every line of a file as changed, but they only edited one line. Likely cause?
+A: Line endings: Windows CRLF vs Mac/Linux LF
+W: Their editor re-encrypted the file
+W: Git compares files by size, not content
+W: They committed from a detached HEAD
+E: Set core.autocrlf or a .gitattributes rule so everyone commits the same line endings.
+
+Q: You renamed File.js to file.js on a Mac and Git doesn't see the change. Why?
+A: The Mac's file system is case-insensitive by default, so Git treats it as the same file
+W: Git never tracks renames, only new files
+W: The rename only applies after a git pull
+W: Git ignores capitalization in .js files
+E: Use git mv File.js file.js. Otherwise it breaks later on Linux servers, which are case-sensitive.
+
+Q: Pushing fails with "Permission denied (publickey)." Most likely?
+A: Your SSH key isn't set up or isn't added to your GitHub account
+W: You don't have write access because the repo is public
+W: Your commit is too large for GitHub
+W: Your branch name has a capital letter
+E: Test with ssh -T git@github.com, add your public key in GitHub settings, or switch the remote to HTTPS.
+
+Q: You want to see exactly what an AI assistant changed before you commit. Command?
+A: git diff
+W: git log -1
+W: git status -v only
+W: git show HEAD
+E: git diff shows every added and removed line not yet staged. git show HEAD shows the last commit, not your new edits.
+
+# G 4
+Q: An API key was committed 40 commits ago and pushed to a public repo. Most important first step?
+A: Revoke and replace the key immediately
+W: Delete the file in a new commit
+W: Make the repository private
+W: Rewrite history with git filter-repo, then decide about the key
+E: Bots scan GitHub for keys within minutes. Rotate first; cleaning history comes second.
+
+Q: A teammate force-pushed main, and your pull now shows conflicts with commits you don't recognize. Careful approach?
+A: Back up your branch, fetch, compare histories, then rebase your own commits onto the new main
+W: Force-push your version back over theirs
+W: git merge origin/main and accept all of their changes blindly
+W: Delete the local repo and re-clone, then retype your work
+E: Then protect main on GitHub so force-pushes are blocked.
+
+Q: A bug appeared sometime in the last 200 commits. Fastest way to find the commit that caused it?
+A: git bisect between a known good and a known bad commit
+W: git log --grep "bug"
+W: git blame on every file
+W: Revert commits one by one from newest to oldest
+E: About 8 tests instead of up to 200.
+
+Q: You rebased your feature branch and git push is rejected. Why, and what's the safer push?
+A: Rebase rewrote your commits; use git push --force-with-lease
+W: The remote branch was deleted; push with -u
+W: Rebase lost your commits; pull first to get them back
+W: Use git push --force, which checks for others' work first
+E: --force-with-lease refuses if someone else pushed since you last fetched. Plain --force doesn't check.
+
+Q: Your repo takes 10 minutes to clone because large audio files were committed years ago and later deleted. Real fix?
+A: Remove them from history (git filter-repo, or migrate to Git LFS) and have everyone re-clone
+W: Delete them again in a new commit
+W: Add them to .gitignore
+W: Run git gc to compress them away
+E: Deleted files stay in history forever until history is rewritten.
+
+Q: Two people edit the same 3,000-line file and hit conflicts daily. Best structural fix?
+A: Split it into smaller modules with clear responsibilities
+W: Merge less often so conflicts batch up
+W: Always choose "theirs" when resolving
+W: Have each person work on a long-lived branch
+E: Constant conflicts usually point at code doing too many jobs in one place.
+
+Q: Main broke after a merge and production must be fixed in minutes. Most reliable move?
+A: Revert the merge commit (git revert -m 1 <hash>) and redeploy, then investigate
+W: Hot-fix directly on the production server
+W: Reset main to the commit before the merge and force-push
+W: Keep the merge and add patches until it works
+E: Roll back first, root-cause second.
+
+# J 1
+Q: Your page shows "undefined" where the user's name should be, but console.log shows the data arriving a moment later. Most likely cause?
+A: The code reads the data before the fetch has finished
+W: The API returned the name in uppercase
+W: The variable was declared with const
+W: The browser blocked the response for privacy
+E: Stack Overflow's classic "How do I return the response from an asynchronous call?" Use await (or .then) before using the data.
+
+Q: A button does nothing and the console shows "Cannot read properties of null (reading 'addEventListener')." Why?
+A: The script ran before the button existed in the page
+W: The button needs a type="button" attribute
+W: addEventListener only works on links
+W: The button's id has a capital letter
+E: getElementById returned null. Put the script at the end of body or use defer.
+
+Q: Your cart total shows 55 instead of 10 when adding "5" and 5. Why?
+A: The price came in as text, so + joined strings
+W: The cart counts each item twice
+W: JavaScript rounds totals to the nearest 5
+W: The numbers overflowed
+E: Values from inputs and many APIs are strings. Convert with Number() first.
+
+Q: You fixed a bug, but the browser still shows the old behavior. First thing to try?
+A: Hard-refresh to bypass the cache (and check for a service worker)
+W: Rewrite the fix a different way
+W: Clear your Git history
+W: Restart the code editor
+E: Browsers and installed web apps cache aggressively. Mad Minute bumps its service-worker version for this reason.
+
+Q: Your if (score = 100) runs even when the score isn't 100. Why?
+A: = assigns 100 instead of comparing
+W: if needs curly braces to work
+W: 100 must be in quotes
+W: score must be declared with let
+E: Use === to compare.
+
+Q: Your form submits and the whole page reloads, wiping the results. Fix?
+A: Call event.preventDefault() in the submit handler
+W: Change method="post" to method="get"
+W: Move the button outside the form
+W: Use onclick instead of a script file
+E: Forms reload or navigate by default. preventDefault stops it.
+
+Q: A friend says "it works for me," but you see a red error in the console. Most useful first question?
+A: Which browser, device and version are they using?
+W: Did they refresh more than once?
+W: Are they on a faster internet connection?
+W: Did they install the same code editor?
+E: Environment differences explain most "works for me" bugs.
+
+# J 2
+Q: Your fetch to your own API fails with a CORS error, but pasting the URL in the address bar works. Why?
+A: The browser blocks cross-origin script requests unless the server allows that origin
+W: fetch requires https while the address bar doesn't
+W: The API only accepts requests with a cookie
+W: Your fetch is missing await
+E: Fix it on the server (allow your site's origin) or serve both from the same origin. Front-end code alone can't fix CORS.
+
+Q: Your code crashes on response.json() with "Unexpected token '<'." Most likely?
+A: The server sent an HTML page (often an error or 404 page) instead of JSON
+W: The JSON has single quotes instead of double quotes
+W: response.json() needs await twice
+W: The JSON file is too large to parse
+E: Log response.status and await response.text() to see what actually came back.
+
+Q: fetch to a missing endpoint doesn't trigger your catch block. Why?
+A: fetch only rejects on network failure; a 404 still resolves
+W: catch only works with XMLHttpRequest
+W: The browser retries 404s silently
+W: The endpoint must be cached
+E: Check if (!response.ok) and throw yourself.
+
+Q: Every button in your list alerts the same number—the last one. You used var in the loop. Fix?
+A: Change var to let
+W: Change var to const outside the loop
+W: Add the listener after the loop finishes
+W: Use == instead of ===
+E: let creates a new variable for each pass of the loop.
+
+Q: You "removed" an item with delete arr[2], but length didn't change and there's a hole. What should you use?
+A: arr.splice(2, 1) or arr.filter(...)
+W: arr.pop(2)
+W: arr.slice(2, 1)
+W: arr.length = 2
+E: "How do I remove a specific item from an array?" is one of Stack Overflow's most-viewed JavaScript questions. slice copies; splice removes.
+
+Q: Your total shows 0.30000000000000004 instead of 0.3. Right fix for money?
+A: Work in whole cents (integers) and format when displaying
+W: Use parseFloat on the total
+W: Use Math.round(total)
+W: Store it as a string
+E: Binary floating point can't store 0.1 exactly. Store cents; format for display.
+
+Q: You sort scores [100, 25, 9] and get [100, 25, 9]. Why?
+A: Default sort compares as text; use sort((a, b) => a - b)
+W: sort() sorts largest first by default
+W: sort() only works on arrays of strings
+W: The array must be copied before sorting
+E: As text, "100" < "25" < "9".
+
+# J 3
+Q: A user's display name is <img src=x onerror=alert(1)> and it pops an alert for everyone who views it. What went wrong?
+A: The name was inserted with innerHTML without escaping (XSS)
+W: The image failed to load from the CDN
+W: The name was too long for the database column
+W: CORS allowed the alert
+E: Use textContent, or escape user text, every time.
+
+Q: Your search box sends a request on every keystroke and results flicker out of order. Two fixes?
+A: Debounce the input and ignore (or cancel) older responses
+W: Use GET instead of POST and cache every response
+W: Add async to the input handler
+W: Increase the server timeout
+E: Debounce cuts requests; AbortController or a request counter stops stale results from overwriting new ones.
+
+Q: Your app works in Chrome but crashes on an older iPhone with "undefined is not a function." Likely cause?
+A: You used a newer JavaScript feature that version of Safari doesn't support
+W: iPhones block localStorage by default
+W: Safari requires semicolons
+W: The CSS failed to load on mobile
+E: Check support on caniuse.com and test on the real device.
+
+Q: A loop awaits 50 independent API calls one at a time and takes 25 seconds. Faster approach?
+A: Start them together and await Promise.all
+W: Use forEach with async callbacks instead
+W: Wrap the loop in setTimeout
+W: Make each call synchronous
+E: Run independent work in parallel (with a cap if the API rate-limits). forEach doesn't wait for async callbacks at all.
+
+Q: A countdown timer runs faster every time the user returns to that screen. Cause?
+A: A new setInterval starts each time and the old one is never cleared
+W: The interval delay doubles each visit
+W: requestAnimationFrame is overriding it
+W: The device clock speeds up in the background
+E: clearInterval before starting a new one, and when leaving the screen.
+
+Q: After weeks of working fine, your app crashes on load with a JSON.parse error. Likely cause?
+A: The saved localStorage text got corrupted or is in an old format
+W: localStorage data expires after 30 days
+W: JSON.parse has a size limit of one week of data
+W: The browser updated its JSON standard
+E: Wrap JSON.parse in try/catch, fall back to defaults, and version your saved data.
+
+Q: Two tabs of your app are open and one keeps erasing the other's progress. Why?
+A: Each tab holds its own copy in memory and saves it over the shared localStorage
+W: Tabs get separate localStorage, so only one saves
+W: localStorage only allows one writer per minute
+W: The service worker deletes duplicate data
+E: Listen for the storage event, or reload state before saving.
+
+# J 4
+Q: Memory climbs every time users switch screens in your single-page app until the tab crashes. Most likely cause?
+A: Event listeners, timers or references that are never cleaned up
+W: Using const instead of let
+W: Too many CSS classes on elements
+W: The service worker caching too often
+E: Take DevTools heap snapshots before and after, and see what keeps growing.
+
+Q: Your Node server crashes at random with an unhandled promise rejection. Best fix?
+A: Handle errors on awaited calls and add a top-level handler that logs and reports
+W: Wrap the whole server in one try/catch at startup
+W: Switch every async function back to callbacks
+W: Restart the server on a schedule
+E: Modern Node exits on unhandled rejections by default. One try/catch at startup can't catch later async errors.
+
+Q: A date shows one day earlier for users in California, but correct for you in Florida. Likely cause?
+A: "2026-10-19" was parsed as UTC midnight and shown in local time
+W: The server clock is in a different time zone
+W: toLocaleDateString rounds down
+W: California observes daylight saving differently
+E: Date-only strings parse as UTC, which is the previous evening in Pacific time. Be deliberate about time zones.
+
+Q: A dependency update broke your app overnight without any code changes. Prevention?
+A: Commit a lockfile and update dependencies on purpose, with tests
+W: Use the ^ version range for everything
+W: Install packages globally instead
+W: Delete node_modules before every run
+E: Lockfiles pin exact versions so installs are repeatable. ^ ranges allow new minor versions in.
+
+Q: A third-party analytics script on your page is hacked and starts stealing form data. What reduces this risk?
+A: Fewer third-party scripts, Subresource Integrity hashes, and a Content Security Policy
+W: Loading the script with async
+W: Minifying your own code
+W: Moving the script to the bottom of the page
+E: Every external script runs with full access to your page.
+
+Q: Your React list re-renders constantly and freezes the page. Common cause?
+A: useEffect sets state with a dependency that changes every render
+W: Using key={item.id} on list items
+W: Passing props to child components
+W: Using useState instead of a class
+E: Fix the dependency array, or compute the value during render instead.
+
+Q: After a deploy, some users get a blank page with "ChunkLoadError." Why?
+A: Their cached old page requests code files the new deploy removed
+W: The new deploy has a syntax error only some browsers see
+W: Their ad blocker removes chunk files
+W: The CDN is down in their region
+E: Keep old assets for a while after deploying, or reload the page when a chunk fails.
+
+# E 1
+Q: Your Python script works for you, but a friend gets "ModuleNotFoundError: No module named 'requests'." Fix?
+A: They install it, ideally from a requirements.txt: pip install -r requirements.txt
+W: Rename the script so Python finds it
+W: Copy your Python folder to their computer
+W: Add import requests at the top of their script too
+E: List dependencies in requirements.txt so anyone can install the same set.
+
+Q: npm start fails with "listen EADDRINUSE: address already in use :::3000." Meaning?
+A: Another process is already using port 3000
+W: Your package.json has an error
+W: Port 3000 needs admin rights
+W: npm can't find your start script
+E: Stop the other process (often an old server still running) or use another port.
+
+Q: You double-click your HTML file to open it, and fetch() for a local JSON file fails. Why?
+A: Pages opened as file:// can't fetch files the way a web server can; run a local server
+W: JSON files must be in the same folder as the CSS
+W: fetch only works with https URLs to other sites
+W: The JSON file needs a .js extension
+E: python -m http.server or VS Code's Live Server fixes it.
+
+Q: After installing Node, a terminal says "command not found: node." First guess?
+A: That terminal was open before the install; open a new one (PATH wasn't updated)
+W: Node installs only work after a reboot of the router
+W: You must type nodejs on every system
+W: Node needs a project folder before it runs
+E: New installs usually update PATH only for new terminals.
+
+Q: A teammate clones the repo and the app crashes because API_KEY is undefined. What's missing?
+A: Their own .env file with the variables, which isn't in Git on purpose
+W: The node_modules folder from your computer
+W: A git pull of the secrets branch
+W: The key hard-coded in the source
+E: Keep a .env.example in the repo listing variable names without real values.
+
+Q: npm install fails with "EACCES: permission denied." Which fix is better?
+A: Fix folder ownership or use a Node version manager, not sudo
+W: Always run sudo npm install
+W: chmod 777 your whole home folder
+W: Reinstall npm with sudo every time
+E: Running npm as root causes more permission problems later; 777 is a security hole.
+
+Q: Python says "IndentationError: unexpected indent" on a line that looks fine. Likely cause?
+A: A mix of tabs and spaces
+W: The line is longer than 80 characters
+W: A missing semicolon on the line before
+W: A capital letter in the variable name
+E: Set your editor to insert spaces and show whitespace.
+
+# E 2
+Q: Code works on Windows, but on the Linux server it can't find "./Images/logo.png." The folder is named images. Why?
+A: Linux file names are case-sensitive; Windows usually isn't
+W: Linux requires absolute paths
+W: PNG files need a different path format on Linux
+W: The server hasn't pulled the images folder yet
+E: Match case exactly. A very common first-deploy bug.
+
+Q: npm install fails with "ERESOLVE unable to resolve dependency tree." Meaning?
+A: Two packages need incompatible versions of the same dependency
+W: The npm registry is down
+W: Your lockfile is corrupted beyond repair
+W: A package name has a typo
+E: Read which packages conflict; update one, or knowingly use --legacy-peer-deps as a last resort.
+
+Q: The app works with Node 20 on your laptop but fails in CI, which uses Node 16. Prevention?
+A: Pin the Node version (.nvmrc or the engines field) and use it everywhere
+W: Always use the newest Node in CI
+W: Remove the lockfile so CI picks compatible versions
+W: Run CI only on your laptop
+E: Same versions everywhere removes a whole class of "works on my machine."
+
+Q: You pip installed a package, but Python still says it's not found. A very common cause?
+A: pip installed into a different Python or virtual environment than the one running your script
+W: pip installs need a reboot
+W: The package name is case-sensitive in import
+W: Python caches missing modules for an hour
+E: Use python -m pip install ... with the same python you run, inside the active venv.
+
+Q: Your script reads "data.csv" and works from its own folder but fails when launched from elsewhere. Why?
+A: Relative paths resolve from the current working directory, not the script's folder
+W: CSV files are locked when opened from another folder
+W: Python only reads files in the home folder
+W: The file needs a .txt extension
+E: Build paths from the script's own location (Path(__file__).parent in Python).
+
+Q: Your Docker container's app can't reach a database at localhost:5432 that runs on your laptop. Why?
+A: Inside a container, localhost means the container itself
+W: Docker blocks port 5432 by default
+W: The database needs to run as root
+W: localhost only works over HTTPS in Docker
+E: Use host.docker.internal, or run both in docker compose and use the service name.
+
+Q: After pulling a teammate's changes, the app fails with "Cannot find module 'zod'." What did you forget?
+A: To run npm install for the dependency they added
+W: To restart your editor
+W: To merge their package-lock.json by hand
+W: To add zod to .gitignore
+E: When package.json changes, reinstall.
+
+# E 3
+Q: Your music library scanner crashes on some files with "UnicodeDecodeError" but works on plain English names. Likely cause?
+A: Text in tags or file names uses an encoding your code didn't expect
+W: The files are too large for Python to open
+W: Python can't read file names with spaces
+W: The drive is formatted for Mac only
+E: Decode explicitly, handle errors per file, and log which files fail.
+
+Q: A test passes on your Mac but fails in CI on Linux only on Mondays. Strong suspect?
+A: Hidden dependence on the date, time zone or locale
+W: CI servers run slower on Mondays
+W: Linux sorts files differently on weekdays
+W: The test runner caches results over weekends
+E: Pin the clock and time zone in tests.
+
+Q: Your app works on home Wi-Fi, but your phone on cellular can't reach the server on your home PC. Why?
+A: The PC's address (192.168.x.x) is private and only reachable on your home network
+W: Cellular networks block JSON responses
+W: The server needs HTTPS for phones only
+W: The PC's firewall only blocks phones
+E: Use a private network like Tailscale rather than opening ports to the internet.
+
+Q: A script runs fine by hand but fails when cron runs it overnight. Common cause?
+A: cron uses a minimal environment: different PATH, no env vars, different working folder
+W: cron runs scripts with less CPU
+W: cron can't run Python scripts
+W: The computer's clock was off by an hour
+E: Use full paths and set needed variables in the cron entry or a wrapper script.
+
+Q: A teammate's formatter rewrites every file you touch, making diffs huge. Fix?
+A: Agree on one formatter and config in the repo, and format everything once in a single commit
+W: Turn off formatting in your own editor
+W: Only commit files they haven't touched
+W: Review diffs with whitespace hidden and move on
+E: Shared config ends formatting wars for good.
+
+Q: A colleague gets a different result from your code with the same input. The only difference: their system language is German. Suspect?
+A: Locale-dependent parsing or formatting (comma vs period decimals)
+W: Different keyboard layouts send different numbers
+W: Their time zone changes math results
+W: German Windows uses a different JavaScript engine
+E: "1,5" means 1.5 in many locales. Parse and format with explicit locales.
+
+Q: Your build works locally but fails on the server with "JavaScript heap out of memory." Fix?
+A: Give the build more memory or reduce what it bundles; the server has less RAM than your PC
+W: Clear the browser cache on the server
+W: Remove comments from the code
+W: Switch from npm to yarn
+E: CI and small servers often have far less memory than a developer laptop.
+
+# E 4
+Q: "Works on my machine" keeps happening across your team. What eliminates most of it?
+A: Containers or dev containers that define the exact environment in code
+W: A shared Google Doc of setup steps
+W: Everyone using the same code editor
+W: Running tests only in CI
+E: The environment becomes a versioned file in the repo, identical for everyone.
+
+Q: Everything's fine in development, but in production users see stale data for minutes. Likely culprit?
+A: A cache layer (CDN, service worker or HTTP cache headers) that dev doesn't have
+W: Production's database replication is always minutes behind
+W: Browsers poll production less often
+W: Production builds are minified
+E: Know every cache between the user and the data, and how each is invalidated.
+
+Q: An install that worked yesterday fails today because a package you depend on was removed from the registry. Protection?
+A: Lockfiles plus a cache or mirror of your dependencies
+W: Pin only the top-level packages
+W: Use the latest tag for every package
+W: Install with --force
+E: Don't let one outside package take you down.
+
+Q: Builds on different machines produce slightly different files, making releases hard to verify. What to aim for?
+A: Reproducible builds: same input, byte-for-byte same output
+W: Faster incremental builds
+W: Building only on the release manager's laptop
+W: Compressing the output
+E: Pin tools and versions, and avoid timestamps baked into output.
+
+Q: A memory leak shows up only after the server runs for 3 days. How do you find it?
+A: Track memory over time, take heap snapshots at intervals, and compare what grows
+W: Schedule a nightly restart
+W: Add more RAM to the server
+W: Turn up log verbosity
+E: Restarts hide the leak; snapshots explain it.
+
+Q: Old code works on Python 3.12 but breaks on 3.8, which a customer runs. Lesson?
+A: Pin and test against every version you support (a CI matrix)
+W: Only support the newest Python
+W: Remove type hints
+W: Tell the customer to upgrade
+E: Supported versions are part of your contract with users.
+
+# C 1
+Q: You want a box centered horizontally and vertically on the page. Quickest modern way?
+A: On the parent: display: flex; justify-content: center; align-items: center
+W: margin: auto on the box only
+W: text-align: center on the parent
+W: vertical-align: middle on the box
+E: "How do I center a div?" is the web's most famous CSS question. margin: auto centers horizontally only; grid's place-items: center also works.
+
+Q: Your new CSS rule isn't applying at all. First thing to check?
+A: In DevTools, whether the selector matches the element and isn't overridden
+W: Add !important to the rule
+W: Move the rule to the top of the file
+W: Restart the browser
+E: DevTools shows every rule that applies and crosses out overridden ones.
+
+Q: Text runs right up to the edge of its box. Which property adds space inside the box?
+A: padding
+W: margin
+W: line-height
+W: gap
+E: Padding is inside the border; margin is outside. gap is between flex or grid children.
+
+Q: Your page looks perfect on desktop but tiny and zoomed-out on phones. Missing piece?
+A: The viewport meta tag
+W: A separate mobile stylesheet
+W: Larger font sizes in px
+W: A media query for 1080p
+E: <meta name="viewport" content="width=device-width, initial-scale=1">
+
+Q: An image overflows its container on small screens. Simple fix?
+A: img { max-width: 100%; height: auto; }
+W: img { width: 100vw; }
+W: img { overflow: hidden; }
+W: img { position: absolute; }
+E: The image shrinks to fit but never grows beyond its real size.
+
+Q: A link turns purple after it's clicked. Why?
+A: The browser applies its :visited style
+W: The link is broken
+W: :active is stuck on
+W: The CSS file reloaded with defaults
+E: Style a:visited if you want to change it.
+
+Q: Two paragraphs have more space between them than you set. Classic cause?
+A: Browser default margins on elements like <p> and <h1>
+W: Line-height adds space below the last line
+W: Paragraphs always add a blank line
+W: Hidden padding from the body tag
+E: Many projects reset default margins at the top of their CSS.
+
+# C 2
+Q: You set width: 100% and padding: 20px, and now there's a horizontal scrollbar. Why?
+A: By default width doesn't include padding, so the box is wider than 100%
+W: Padding always adds a scrollbar on mobile
+W: 100% means 100% of the screen, not the parent
+W: The body has overflow: scroll
+E: box-sizing: border-box makes width include padding and border.
+
+Q: Your z-index: 9999 popup still appears behind another element. Likely cause?
+A: The popup sits inside a parent with its own stacking context (like a transform or a lower z-index)
+W: z-index has a maximum of 999
+W: z-index only works on fixed elements
+W: The other element was added later in the HTML
+E: z-index only competes within the same stacking context. Move the popup out, or fix the parent.
+
+Q: The footer floats in the middle of short pages instead of the bottom. Common fix?
+A: Make the page a flex column with min-height: 100vh and let main grow (flex: 1)
+W: footer { position: absolute; bottom: 0; } on every page
+W: Add margin-top: 100% to the footer
+W: footer { float: bottom; }
+E: The main content stretches to push the footer down. Absolute positioning overlaps content on long pages.
+
+Q: margin-top on a child pushes the whole parent down instead of creating space inside it. What's happening?
+A: Margin collapsing
+W: Padding inheritance
+W: A stacking context
+W: Overflow clipping
+E: Add padding or a border to the parent, or use flex/grid, which don't collapse margins.
+
+Q: Flex items are squished on mobile and text gets cut off. Quick improvement?
+A: Allow wrapping with flex-wrap: wrap (and sensible min-widths)
+W: flex-direction: row-reverse
+W: justify-content: space-between
+W: Set every item to width: 100px
+E: Let rows break onto new lines on narrow screens.
+
+Q: position: absolute puts your badge at the corner of the page, not its card. Fix?
+A: Give the card position: relative
+W: Change the badge to position: fixed
+W: Give the badge z-index: 10
+W: Give the card display: block
+E: Absolute elements anchor to the nearest positioned ancestor.
+
+Q: Dark mode looks fine on your phone, but some text is invisible on a friend's. Likely cause?
+A: Some colors are hard-coded instead of using the theme's variables
+W: Their phone doesn't support prefers-color-scheme
+W: Their font is missing
+W: Their screen brightness is too low
+E: Use CSS variables for every color so both themes are covered.
+
+# C 3
+Q: On iPhones, your installed app's bottom bar hides behind the home indicator. Fix?
+A: Use viewport-fit=cover and pad with env(safe-area-inset-bottom)
+W: Add margin-bottom: 34px everywhere
+W: Use position: sticky instead of fixed
+W: Set height: 100vh on the bar
+E: Safe-area insets adjust to each device; a hard-coded 34px breaks on others.
+
+Q: 100vh makes your mobile page taller than the screen, hiding content under the browser bar. Better unit?
+A: 100dvh (dynamic viewport height)
+W: 100%
+W: 100vw
+W: 100vmin
+E: dvh accounts for mobile browser bars that appear and disappear.
+
+Q: A sticky header stops sticking. Common reason?
+A: An ancestor has overflow: hidden or auto, which breaks position: sticky
+W: Sticky needs z-index above 100
+W: Sticky only works inside a table
+W: The header needs display: inline
+E: Sticky sticks within its nearest scrolling container.
+
+Q: Your animation stutters on phones. Which change helps most?
+A: Animate transform and opacity instead of top, left or width
+W: Use setInterval instead of CSS transitions
+W: Increase the animation duration
+W: Use a GIF instead
+E: Those two properties can be handled by the GPU without recalculating layout.
+
+Q: Tapping an input on iPhone zooms the whole page. Why?
+A: iOS zooms inputs with a font size below 16px
+W: The input lacks a label
+W: The viewport tag is missing initial-scale
+W: Inputs need type="text" on iOS
+E: Use at least 16px on form inputs.
+
+Q: Content jumps down when an image finishes loading, causing misclicks. Fix?
+A: Reserve space with width/height attributes or aspect-ratio
+W: Lazy-load the image
+W: Preload the font
+W: Put the image in a div
+E: Layout shift is a Core Web Vitals metric for this reason.
+
+Q: Long URLs break your card layout on mobile. One-line fix?
+A: overflow-wrap: anywhere
+W: white-space: nowrap
+W: text-overflow: ellipsis alone
+W: word-spacing: 0
+E: Lets long strings wrap instead of pushing the layout wider. ellipsis needs nowrap and overflow hidden to work.
+
+# C 4
+Q: Your CSS file is 4,000 lines and every change breaks something elsewhere. Structural fix?
+A: Scope styles to components with consistent naming (BEM or CSS modules) and shared tokens
+W: Add !important to new rules so they win
+W: Start a second CSS file of overrides
+W: Increase selector specificity everywhere
+E: Clear scope and naming stop styles leaking across the app.
+
+Q: A web font makes text invisible for 3 seconds on slow connections. Fix?
+A: font-display: swap, so a fallback font shows first
+W: Preload every weight of the font
+W: Inline the font file in the CSS
+W: Use font-weight: normal
+E: Users can read immediately; the nicer font swaps in when ready.
+
+Q: A component must look right in a sidebar, main area and modal, each a different width. Modern tool?
+A: Container queries
+W: Media queries
+W: Fixed pixel widths with overflow hidden
+W: Separate copies of the component per location
+E: The component adapts to its container, not just the screen.
+
+Q: Your contrast check fails for light gray text on white. Real risk?
+A: Users with low vision can't read it, and it may fail accessibility requirements
+W: It slows down page rendering
+W: Search engines lower your ranking for gray text
+W: It breaks dark mode
+E: Aim for at least 4.5:1 contrast for body text.
+
+Q: Your page scrolls sideways a few pixels on phones and you can't find why. Best approach?
+A: Find the element wider than the viewport in DevTools and fix it
+W: body { overflow-x: hidden; } and move on
+W: Set width: 100vw on the body
+W: Reduce all margins to zero
+E: Often one fixed-width element or negative margin. Masking it can break sticky elements and hide content.
+
+Q: Your design system says spacing 4, 8, 16, 24, but devs keep using random pixel values. What enforces it?
+A: Spacing tokens as CSS variables plus a lint rule
+W: A style guide PDF
+W: Reviewing screenshots weekly
+W: Allowing any value close to the scale
+E: Make the right way the easy way.
+
+# D 1
+Q: You ran DELETE FROM users; intending to remove one user. What did you forget?
+A: The WHERE clause, so every user was deleted
+W: LIMIT 1 at the start
+W: A COMMIT afterward
+W: The table alias
+E: Write the WHERE first, and test it with a SELECT using the same WHERE.
+
+Q: A user's progress disappeared after they cleared their browser data. Why?
+A: It was stored only in the browser (localStorage)
+W: The service worker expired it
+W: The server deleted inactive accounts
+W: The browser compresses old data
+E: Device-only storage is simple but fragile. Offer export or sync for important data.
+
+Q: Two users signed up with the same email. How do you prevent that at the database level?
+A: A UNIQUE constraint on the email column
+W: An index without uniqueness
+W: A check in the front-end form
+W: Sorting the table by email
+E: The database enforces it even when app code forgets or two requests race.
+
+Q: Searching for "tom" doesn't find "Tom." Fix?
+A: Compare case-insensitively (lowercase both sides, ILIKE, or a case-insensitive collation)
+W: Add an index on the name column
+W: Use LIKE '%tom'
+W: Store all names in uppercase only
+E: Normalize text before comparing. An index makes it faster, not case-insensitive.
+
+Q: A spreadsheet used as a database has one customer's address typed 3 different ways. What design idea prevents this?
+A: Store each fact once (a customers table) and reference it by id
+W: Add data validation colors
+W: Add a column for each version
+W: Sort by address regularly
+E: That's normalization.
+
+Q: You need a database for a small local app with no server. Good choice?
+A: SQLite
+W: PostgreSQL in a cluster
+W: A folder of JSON files edited by hand
+W: Redis with no persistence
+E: A single file, no server, full SQL.
+
+Q: Your query finds 0 rows: WHERE name = 'Tom '. The data has 'Tom'. Why?
+A: The trailing space makes it a different string
+W: = doesn't work on text columns
+W: Names need double quotes in SQL
+W: The table needs an index first
+E: Trim input before saving and searching.
+
+# D 2
+Q: Your page lists 50 orders and makes 51 database queries. What's this called, and the fix?
+A: The N+1 problem; use a JOIN or load related data in one batch
+W: A deadlock; add a transaction
+W: A cache miss; add Redis
+W: A connection leak; restart the pool
+E: One query per row multiplies as data grows.
+
+Q: A user named O'Brien makes your app crash with a SQL syntax error. Root cause?
+A: Values are pasted into the SQL string instead of passed as parameters
+W: The name column is too short
+W: The database doesn't support Irish names
+W: The apostrophe needs a UTF-8 column
+E: Parameterized queries fix the crash and SQL injection at once.
+
+Q: Searching 2 million rows by email takes 4 seconds. First thing to check?
+A: Whether the email column has an index
+W: Whether the query uses SELECT *
+W: The server's network speed
+W: Whether the table has a primary key
+E: Without an index, the database scans every row.
+
+Q: You renamed a column and the live app broke immediately. Safer way next time?
+A: Add the new column, ship code that handles both, migrate the data, then drop the old one
+W: Rename it and deploy the code in the same minute
+W: Rename it inside a transaction
+W: Rename it during low traffic
+E: Expand, migrate, contract: there's never a moment where code and schema disagree.
+
+Q: Prices appear as 19.989999 in your report. Best data type for money?
+A: DECIMAL/NUMERIC, or integer cents
+W: FLOAT
+W: DOUBLE
+W: REAL
+E: Floating point types can't represent most decimal amounts exactly.
+
+Q: Times are stored without time zones, and events show at the wrong hour after daylight saving changes. Better practice?
+A: Store timestamps in UTC (time-zone-aware) and convert for display
+W: Store the server's local time
+W: Store times as text like "3:00 PM"
+W: Add one hour by hand twice a year
+E: UTC in, local out.
+
+Q: Two quiz results from different phones have the same id, and one overwrites the other. Fix?
+A: Generate globally unique ids (UUIDs) on each device
+W: Use timestamps in seconds as ids
+W: Number results 1, 2, 3 on each phone
+W: Use the user's name as the id
+E: Counters and second-level timestamps collide across devices; UUIDs don't.
+
+# D 3
+Q: Two users click "buy" on the last ticket at the same moment, and both succeed. What's missing?
+A: An atomic check-and-update (a conditional UPDATE or a lock in a transaction)
+W: An index on the tickets table
+W: Client-side disabling of the button
+W: A faster server
+E: UPDATE ... SET stock = stock - 1 WHERE id = ? AND stock > 0, then check that a row changed.
+
+Q: A migration ran fine on staging but fails in production: "column contains null values." Why?
+A: Production has old rows with NULLs that staging's fresh data didn't
+W: Production runs a different SQL dialect
+W: The migration timed out
+W: Staging skipped the constraint check
+E: Test migrations on production-like data, and backfill values before adding NOT NULL.
+
+Q: Your nightly backup job has run for a year. When you need it, the restore fails. Lesson?
+A: A backup only counts if restores are tested regularly
+W: Back up twice a night
+W: Keep backups on the same disk for speed
+W: Switch to a different backup format
+E: Schedule restore drills.
+
+Q: Pagination with OFFSET gets slow around page 5,000 and sometimes shows duplicates. Better approach?
+A: Keyset (cursor) pagination: WHERE id > last_seen ORDER BY id LIMIT 50
+W: Larger page sizes
+W: Remove ORDER BY for speed
+W: Cache every page forever
+E: Stable and fast at any depth.
+
+Q: Your ORM fetches every column of every row just to count them. Fix?
+A: Use a COUNT query (the ORM's count method) and select only needed columns
+W: Count the rows in application code after loading
+W: Add more memory to the app server
+W: Add an index on every column
+E: Know what SQL your ORM produces; turn on query logging.
+
+Q: An analyst's giant report query slows the live app for everyone. Common fix?
+A: Run reports on a read replica or a separate analytics store
+W: Add LIMIT 10 to the report
+W: Run the report from a faster laptop
+W: Restart the database after each report
+E: Separate heavy reads from user-facing traffic.
+
+Q: Deleting a user leaves orders pointing to a user that no longer exists. What prevents this?
+A: A foreign key constraint with a deliberate ON DELETE rule
+W: An index on orders.user_id
+W: A nightly cleanup script
+W: Hiding orphaned orders in the UI
+E: Choose RESTRICT, CASCADE or SET NULL on purpose.
+
+# D 4
+Q: Deadlock errors appear a few times a day under load. Reasonable handling?
+A: Retry the transaction, and take locks in a consistent order
+W: Turn off transactions for those queries
+W: Raise the lock timeout to an hour
+W: Add an index to every column
+E: Deadlocks are normal under concurrency; design for retries.
+
+Q: A table reached 500 million rows and queries on recent data slowed down. Structural option?
+A: Partition the table by time
+W: Add more columns for recent data
+W: Vacuum it daily
+W: Rename it and start a new table without migrating
+E: Recent partitions stay small and fast; old ones can be archived.
+
+Q: Phone-to-server sync keeps "losing" edits made offline. Most likely design flaw?
+A: Last-write-wins on whole records, without merging or event logs
+W: Phones sync too often
+W: The server uses UTC
+W: JSON can't represent offline edits
+E: Sync events or field-level changes with ids and timestamps, then merge.
+
+Q: You must change the format of saved progress for 10,000 existing users. Safe plan?
+A: Version the data, migrate on load, keep reading the old format, and test with real old saves
+W: Ship the new format and reset everyone's progress
+W: Ask users to export and re-import
+W: Change the format only for new users and ignore the rest
+E: Breaking saved progress is the fastest way to lose learners.
+
+Q: A query is fast in testing but slow in production with the same SQL. Next step?
+A: Run EXPLAIN (ANALYZE) on production-sized data to see the real plan
+W: Rewrite the query as a stored procedure
+W: Add indexes on every column in the WHERE clause blindly
+W: Move it into application code
+E: Different data sizes and statistics lead to different plans.
+
+Q: A revenue report double-counts after joining orders to order_items. Why?
+A: The join repeats each order once per item before the sum
+W: SUM rounds up on joins
+W: The database cached an old total
+W: order_items has a duplicate primary key
+E: Aggregate at the right level, or sum from the item table.
+
+# P 1
+Q: You pushed to GitHub, but your GitHub Pages site still shows the old version. First checks?
+A: Give the deploy a minute, then hard-refresh (caches and service workers hold old copies)
+W: Push the same commit again
+W: Delete and recreate the repository
+W: Rename index.html to force an update
+E: Deploys take a moment, and caches can make changes look like they didn't happen.
+
+Q: Your site loads at your-site.com but shows a browser security warning. Likely problem?
+A: The HTTPS certificate is missing, expired, or for the wrong domain
+W: The favicon is missing
+W: The site uses HTTP/2
+W: A JavaScript error on the page
+E: Most hosts provide free certificates (Let's Encrypt); check it covers this exact domain.
+
+Q: You pointed your domain's DNS at a new host, and some people still see the old site. Why?
+A: DNS answers are cached for a while (TTL), so the change spreads gradually
+W: The new host hasn't approved those visitors
+W: Their browsers block new IP addresses
+W: DNS changes only apply to new visitors
+E: Lower TTL before migrations; then wait it out.
+
+Q: You deployed at 5 p.m. Friday and it broke over the weekend. Lesson many teams adopt?
+A: Deploy when people are around to watch and roll back
+W: Bundle the week's changes into one Friday release
+W: Skip monitoring on weekends
+W: Only deploy on the first of the month
+E: Small, frequent, watched deploys are safer than big, late ones.
+
+Q: Your live site shows an error. Where do you look first?
+A: The server or host logs (and error tracking, if set up)
+W: Your local browser console only
+W: The README
+W: The Git log
+E: Logs tell the story. Set up error tracking before you need it.
+
+Q: You pushed a broken commit to main, which auto-deploys. Fastest safe fix?
+A: Revert the commit and push, so the previous version redeploys
+W: Edit the files directly on the server
+W: Force-push an older commit over main
+W: Turn off auto-deploy and debug for a day
+E: Roll back first; fix properly after.
+
+Q: A beginner hosts a public site by opening a port on their home PC. Main risk?
+A: Attackers can probe and attack that PC directly from the internet
+W: It uses more home internet data
+W: Search engines won't index it
+W: The site loads slower for visitors
+E: Use a proper host for public sites; keep personal servers private (VPN or Tailscale).
+
+# P 2
+Q: The app works in staging but crashes in production with "DATABASE_URL is undefined." Cause?
+A: The environment variable wasn't set in production
+W: Production uses a different programming language
+W: The production database is down
+W: Staging cached the variable
+E: Config differences cause many real outages. Check required settings at startup and fail loudly.
+
+Q: The deploy succeeded, but the site returns 502 Bad Gateway. Meaning?
+A: The proxy in front couldn't get a valid response from your app (crashed or not listening)
+W: The page wasn't found
+W: The user isn't logged in
+W: DNS is still updating
+E: Check that the app started, the port matches, and read its logs.
+
+Q: After a deploy, some users see the new site and some the old one for hours. Likely cause?
+A: Caching at the CDN or service-worker level
+W: Load balancer sending some users to an old region on purpose
+W: Users on slower networks get older versions
+W: The database replica is behind
+E: Version your files and purge or bump caches on release.
+
+Q: A one-line configuration change took down the whole site. What process change helps most?
+A: Treat config like code: review it, test it, and roll it out gradually
+W: Only allow config changes on weekends
+W: Let one senior person make all config changes by hand
+W: Stop using config files
+E: Postmortem studies find configuration changes behind a large share of major outages.
+
+Q: The server's disk filled up and the app died. Most common culprit?
+A: Logs or uploads growing without limits or rotation
+W: Too many database indexes
+W: The operating system's updates
+W: The Git repository on the server
+E: Rotate logs, cap uploads, and alert on disk usage.
+
+Q: The server was "up," but users couldn't log in for hours before anyone noticed. What was missing?
+A: Monitoring of real user actions (like a scripted login check) with alerts
+W: A larger server
+W: More detailed logs
+W: A second domain name
+E: Monitor what users experience, not just whether the machine responds to ping.
+
+Q: Your free-tier app takes 30 seconds to answer the first request each morning. Why?
+A: The host puts idle apps to sleep; the first request wakes it (cold start)
+W: The database rebuilds its indexes overnight
+W: DNS expires every night
+W: Morning traffic overloads the server
+E: Paid tiers or keep-alive pings avoid it, at a cost.
+
+# P 3
+Q: Your error handler catches every exception and returns "OK." Real-world risk?
+A: Failures become invisible and pile up silently
+W: Error messages become too long
+W: The server slows down from extra logging
+W: Users see too many error pages
+E: A study of major outages found most critical failures came from bugs in error-handling code, often errors simply ignored.
+
+Q: A new release doubled response time for 5% of users. How would you catch this sooner?
+A: A canary release with automatic comparison of latency and errors
+W: A longer QA checklist before release
+W: Releasing at night when traffic is low
+W: Asking users to report slowness
+E: Expose a small slice first and let metrics decide whether to continue.
+
+Q: An outside API you depend on goes down and your whole app hangs. Fix?
+A: Timeouts, retries with backoff, and a graceful fallback when it fails
+W: Retry immediately in a tight loop until it answers
+W: Increase your server's thread count
+W: Cache its error responses forever
+E: Your app shouldn't hang because someone else's did.
+
+Q: A scheduled job ran twice because two servers both ran the cron, so users got duplicate emails. Fix?
+A: Run scheduled jobs in one place or behind a lock, and make them idempotent
+W: Stagger the servers' clocks by a minute
+W: Send emails in smaller batches
+W: Add a "sorry for the duplicate" note
+E: Design jobs so running twice does no harm.
+
+Q: Your HTTPS certificate expired and visitors saw scary warnings all weekend. Prevention?
+A: Automatic renewal plus an alert well before expiry
+W: Buy the longest certificate available and forget it
+W: Serve the site over HTTP as a backup
+W: Check expiry dates once a year
+E: Certificate expiry is a famous, very preventable outage cause.
+
+Q: Someone floods your login endpoint with password guesses. First defenses?
+A: Rate limiting, lockouts or delays, and alerts (plus MFA)
+W: Return the same error for every request
+W: Move the login page to a secret URL
+W: Require longer usernames
+E: A hidden URL doesn't stop automated attacks.
+
+Q: After a migration, a feature fails only for users created before 2024. Strong lead?
+A: Old records have data shapes or nulls the new code doesn't handle
+W: Older users have outdated browsers
+W: The database archived those users
+W: Their sessions expired during the migration
+E: Test against real, old data, not just fresh test accounts.
+
+# P 4
+Q: A deploy fails its health checks and the pipeline rolls back automatically. Is that a process failure?
+A: No; that's the safety net working as designed
+W: Yes; pipelines should never roll back
+W: Yes; health checks should be disabled during deploys
+W: Only if it happens twice in a row
+E: Automatic rollback turned a possible outage into a non-event.
+
+Q: An incident lasted 4 hours, mostly spent figuring out what changed. What shortens this next time?
+A: A change log tied to deploys and config, with deploys marked on dashboards
+W: Larger incident calls
+W: More detailed code comments
+W: Longer log retention only
+E: "What changed?" is the first question in almost every incident.
+
+Q: Every service shares one database password, and one service is compromised. Why is this bad, and what's better?
+A: Everything is exposed; give each service its own least-privilege credentials
+W: It's fine if the password is long
+W: Rotate the shared password yearly
+W: Store the shared password in an environment variable
+E: Limit the blast radius of any single leak.
+
+Q: Retries during an outage made the outage worse. What happened?
+A: A retry storm: clients retried at once and overwhelmed the recovering service
+W: Retries corrupted the database
+W: Logs filled the disk
+W: DNS cached the error
+E: Use exponential backoff with jitter, and circuit breakers.
+
+Q: A postmortem concludes "the engineer made a mistake." Why do mature teams push back?
+A: It stops at blame instead of fixing the system that made the mistake easy
+W: Postmortems shouldn't name causes
+W: Engineers can't make mistakes in production
+W: The conclusion is too short
+E: Ask why the mistake was easy to make and hard to catch.
+
+Q: You can only deploy once a month because releases are big and scary. Path out?
+A: Smaller changes, automated tests, feature flags and fast rollback, deployed more often
+W: Bigger quarterly releases with longer testing
+W: A release freeze until everything is stable
+W: More manual approval steps
+E: Years of DORA research show frequent small deploys are both faster and safer.

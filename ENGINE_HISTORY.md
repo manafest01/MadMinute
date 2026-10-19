@@ -92,7 +92,7 @@ The quiz became a reusable engine that any subject can plug into.
 
 ## Stage 8 — Mad Minute Dev · 2026-10-19
 
-- `/dev/`: 8 subjects, 1,205 questions, Beginner → Junior → Intermediate → Senior.
+- `/dev/`: 8 subjects (9 after Stage 10), 1,205 questions, Beginner → Junior → Intermediate → Senior.
   Dev Vocabulary · Programming Fundamentals · Read & Debug · Git · Front-End · Back-End · Full Stack & Architecture · DevOps & Kubernetes.
 - **Dev Path**: 32 steps covering all 50 topics; finishing it means Junior or better everywhere.
 - **Code in questions**: ```` ``` ```` fenced blocks show as scrollable code boxes; `` `backticks` `` show as inline code. Questions with code get more time. (`qHTML()` / `inlineHTML()` in model helpers.)
@@ -111,6 +111,13 @@ The quiz became a reusable engine that any subject can plug into.
 - Works with Music's staff, keyboard and sound: the drawing stays visible while you recall.
 - Each app's offline worker precaches the shared files. When `mm-learn.js` changes, bump its `?v=` in each `index.html` and `sw.js` so phones pick it up.
 - Auto `mm-auto-v14`, Biology `mm-bio-v2`, Music `mm-mus-v3`, Dev `mm-dev-v2`.
+
+## Stage 10 — Real-World Problems for Dev · 2026-10-19
+
+- New Dev subject, **Real-World Problems**: 164 scenario questions written like a bug report or a coworker's message, in 6 topics: Git Disasters, JavaScript & Async Surprises, CSS & Layout Fights, Data & Database Surprises, Works on My Machine, Deploys & Production Fires.
+- Chosen by researching what developers hit most: Stack Overflow's most popular questions (undoing commits, async "why is it undefined", removing array items, centering a div) and published outage studies (config changes and ignored errors cause most major outages). Every question is written fresh; no text is copied from those sites.
+- Wrong answers are realistic mistakes people actually make (like `--force`, `slice` vs `splice`, `margin: auto`), not joke options.
+- Woven into the Dev Path as 6 "Real World" steps right after the matching lessons (38 steps, 56 topics, 1,369 questions). Dev `mm-dev-v3`.
 
 ---
 

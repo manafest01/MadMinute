@@ -45,6 +45,9 @@ PACKS = [
     ("ops", "DevOps & Kubernetes", "DevOps", ["L", "N", "D", "C", "K", "X", "O", "I"],
      {"L": "Linux & Shell", "N": "Networking", "D": "Docker", "C": "CI/CD", "K": "Kubernetes Basics",
       "X": "Kubernetes in Practice", "O": "Observability", "I": "Cloud & Infrastructure as Code"}),
+    ("real", "Real-World Problems", "Real World", ["G", "J", "C", "D", "E", "P"],
+     {"G": "Git Disasters", "J": "JavaScript & Async Surprises", "C": "CSS & Layout Fights",
+      "D": "Data & Database Surprises", "E": "Works on My Machine", "P": "Deploys & Production Fires"}),
 ]
 DISCLAIM = "Study aid. Official docs win if anything here differs. Code examples use JavaScript unless they say Python."
 
@@ -96,13 +99,17 @@ PATH = [
     ("vocab", ["W"], "Web & Network Terms"),
     ("front", ["H", "C"], "HTML & CSS"),
     ("front", ["D"], "DOM & Events"),
+    ("real", ["C"], "Real World: CSS & Layout Fights"),
     ("dbg", ["M"], "Debugging Method"),
     ("git", ["M", "F"], "Branches & Fixing Mistakes"),
+    ("real", ["G"], "Real World: Git Disasters"),
     ("front", ["A"], "Async & Fetch"),
+    ("real", ["J"], "Real World: JavaScript & Async Surprises"),
     ("vocab", ["D"], "Data & Database Terms"),
     ("back", ["Q"], "SQL & Databases"),
     ("back", ["H", "S"], "HTTP, APIs & Servers"),
     ("back", ["M"], "Data Modeling"),
+    ("real", ["D"], "Real World: Data & Database Surprises"),
     ("dbg", ["R", "A"], "Reviewing Code & Working with AI"),
     ("fund", ["C"], "Classes & Modules"),
     ("front", ["R", "P"], "React, Accessibility & Performance"),
@@ -112,7 +119,9 @@ PATH = [
     ("git", ["R", "W"], "GitHub & Team Workflow"),
     ("ops", ["L", "N"], "Linux & Networking"),
     ("ops", ["D"], "Docker"),
+    ("real", ["E"], "Real World: Works on My Machine"),
     ("ops", ["C"], "CI/CD"),
+    ("real", ["P"], "Real World: Deploys & Production Fires"),
     ("vocab", ["T", "A", "O"], "Tools, Architecture & Ops Terms"),
     ("full", ["A", "O", "S"], "Architecture, Offline & Shipping"),
     ("ops", ["K", "X"], "Kubernetes"),
@@ -180,15 +189,15 @@ src = src[:a] + src[b:]
 a = src.index("  var TARGETS = [")
 b = src.index("  ];", a) + 4
 src = src[:a] + r'''  var TARGETS = [
-    { pack: "git", label: "Git", from: ["vocab", "fund", "dbg"],
+    { pack: "git", label: "Git", from: ["vocab", "fund", "dbg", "real"],
       topics: ["Tools & Workflow Terms"],
       words: /\b(git|commits?|branch(es)?|merg(e|ed|ing)|pull requests?|repo(sitory|sitories)?|version control)\b/i,
       acronyms: /\b(PRs?)\b/ },
-    { pack: "back", label: "back-end", from: ["vocab", "fund", "front", "dbg"],
+    { pack: "back", label: "back-end", from: ["vocab", "fund", "front", "dbg", "real"],
       topics: ["Data & Database Terms"],
       words: /\b(SQL|databases?|servers?|endpoints?|API|quer(y|ies)|status codes?|tables?|rows?)\b/i,
       acronyms: /\b(REST|CRUD|HTTP|JSON|ORM)\b/ },
-    { pack: "ops", label: "DevOps", from: ["vocab", "fund", "back", "full", "git"],
+    { pack: "ops", label: "DevOps", from: ["vocab", "fund", "back", "full", "git", "real"],
       topics: ["Ops & Cloud Terms"],
       words: /\b(linux|shell|terminal|docker|containers?|kubernetes|pods?|clusters?|pipelines?|deploy\w*|logs?|monitoring)\b/i,
       acronyms: /\b(CI|CD|K8s|SSH|DNS|VM)\b/ }
