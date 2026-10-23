@@ -60,6 +60,26 @@ Add it to a phone's home screen the same way (it gets its own **DEV** icon). Its
 
 How the engine got here, stage by stage: [ENGINE_HISTORY.md](ENGINE_HISTORY.md)
 
+## Version history
+Newest first. Full detail, and where each piece lives in the code: [ENGINE_HISTORY.md](ENGINE_HISTORY.md). The plan and what's done: [SPEC.md](SPEC.md).
+
+| Date | Version | What changed | Commit |
+|---|---|---|---|
+| 2026-10-22 | Auto `mm-auto-v15` | **Vocabulary** (408 terms, 35 decks, spaced repeat), **tappable terms** in questions, **My Weak Words**, and **Diagnostic labs** (Circuit Lab + CAN bus Lab). SPEC.md added. | `72131ab` |
+| 2026-10-19 | Dev `mm-dev-v3` | Real-World Problems subject for Dev (164 scenarios) | `e2b2eaf` |
+| 2026-10-19 | all apps | Recall first, Skills checkup and Roadmap shared by every app (`shared/mm-learn.js`) | `2770caa` |
+| 2026-10-19 | Dev | Mad Minute Dev added | `0eca08e` |
+| 2026-10-15 | Music | Mad Minute Music added, then grown to 2,114 questions | `d717cc6`, `a31b8ac` |
+| 2026-10-15 | Auto | Smart jump; free choice vs Guided; Basic Maintenance; Shop Path | `d8616a2`, `664e5ff`, `5e69d34` |
+| 2026-10-11 | Auto | Rebuilt into validated subjects; better wrong answers | `d388e07`, `157429f` |
+| 2026-10-08 | Biology | Mad Minute Biology added | `01eb23a` |
+| 2026-10-06 | Auto | First public demo: offline, installable, DEMO watermark | `7d2e4e0` |
+
+### Decisions from planning conversations
+- **2026-10-22:** Automotive Mad Minute is the one focus project; other builds are parked until its demo is done. Each app gets its own Claude Project holding its SPEC and README.
+- **2026-10-22:** Vocabulary goes per topic, with spaced repeat, tappable terms and a Weak Words deck tied to missed questions.
+- **2026-10-22:** Both diagnostic labs go in the demo as its "wow" feature. Function first; make it pretty later. Lab values are typical textbook values and get fact-checked against service information before a real pitch.
+
 ---
 ## In every app: Skills checkup, Roadmap and Recall first
 - **Skills checkup**: one test across every subject, about 2 questions per topic. Stop any time; it picks up where you left off.
