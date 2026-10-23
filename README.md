@@ -20,6 +20,10 @@ Five subjects, 600 questions each:
 
 A **Shop Path** card on the home screen walks a new tech through all five subjects in order: Shop Safety → Basic Maintenance → Tires & Wheels → Brakes → Steering → 12 V & 48 V → Engine → Drivetrain → Vehicle Networks → High Voltage. Tap any step to jump to it.
 
+**Vocabulary**: 408 flashcard terms, one deck per topic (tire size codes, CAN-H/CAN-L, HVIL and more). "Got it" pushes a card out to 1, 3, 7, 21 and 60 days; "Again" brings it right back. Key terms in quiz questions are tappable for a quick definition, and words from questions you miss collect in **My Weak Words**.
+
+**Diagnostic labs**: a **Circuit Lab** (12 V circuit: tap six test points with a virtual meter; working, open wire, bad ground, short to ground) and a **CAN bus Lab** (scope view of CAN-H/CAN-L plus volts and ohms; working, shorts, missing terminator). Each has Learn mode and a Quiz mode worth XP.
+
 Placement test, ranks (Trainee → Master Tech), progress timeline, and a sample manager crew view. Progress is saved only on your device. No account, no Claude, no internet needed after the first open.
 
 Training content only. Always follow the manufacturer's service procedure and your employer's safety program.

@@ -119,6 +119,16 @@ The quiz became a reusable engine that any subject can plug into.
 - Wrong answers are realistic mistakes people actually make (like `--force`, `slice` vs `splice`, `margin: auto`), not joke options.
 - Woven into the Dev Path as 6 "Real World" steps right after the matching lessons (38 steps, 56 topics, 1,369 questions). Dev `mm-dev-v3`.
 
+## Stage 11 — Vocabulary and diagnostic labs (Auto) · 2026-10-22
+
+- New Auto-only add-on, `extras/mm-extras.js` + `extras/mm-extras.css`, same hook-from-outside pattern (wraps `renderQuestion`, `answer`, `record`, `showResults`, `renderHome`). Remove it by deleting the `extras/` lines in `index.html`.
+- **Vocabulary**: 408 terms in 35 decks (one per topic), data in `extras/vocab/<subject>.js` as `[term, definition, other names]` rows.
+  - Spaced repeat per card (boxes 0 to 5: now, 1, 3, 7, 21, 60 days).
+  - **Tappable terms** in questions and explanations. Before you answer, a term stays plain if its definition would give the answer away. Opening one pauses the clocks.
+  - **My Weak Words**: terms from missed questions and cards marked Again; three Got its in a row and a word graduates. Results show the words a round added.
+- **Diagnostic labs** screen: Circuit Lab and CAN bus Lab, Learn and Quiz modes, +10 XP per right quiz answer, record saved per lab.
+- Saved keys: `mmauto_vocab_srs`, `mmauto_vocab_weak`, `mmauto_labs`. Auto `mm-auto-v15`.
+
 ---
 
 ## Which app has what
@@ -132,6 +142,8 @@ The quiz became a reusable engine that any subject can plug into.
 | Staff, keyboard, sound | — | — | ✓ | — |
 | Code blocks in questions | — | — | — | ✓ |
 | Recall first, Skills checkup, Roadmap (shared file) | ✓ | ✓ | ✓ | ✓ |
+| Vocabulary flashcards, tappable terms, Weak Words | ✓ | — | — | — |
+| Diagnostic labs (Circuit, CAN bus) | ✓ | — | — | — |
 
 ## Ideas parked for later
 

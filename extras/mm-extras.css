@@ -1,0 +1,68 @@
+/* ===== Mad Minute Auto extras: Vocabulary + Diagnostic labs ===== */
+
+/* home card */
+.xtra-card { padding: 6px 0; }
+.xtra-row { display: flex; align-items: center; gap: 14px; width: 100%; background: none; border: none; color: var(--text); font: inherit; text-align: left; padding: 14px 20px; cursor: pointer; }
+.xtra-row + .xtra-row { border-top: 1px solid var(--line); }
+.xtra-row:active { background: var(--panel-2); }
+.xtra-ico { width: 40px; height: 40px; border-radius: 10px; background: var(--teal-soft); color: var(--teal); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.xtra-ico svg { width: 22px; height: 22px; }
+.xtra-ico.amber { background: rgba(242,167,59,.16); color: var(--amber); }
+.xtra-title { font-weight: 700; font-size: 16px; }
+.xtra-go { color: var(--text-dim); font-size: 22px; }
+
+/* vocabulary screen */
+.deck-list { display: flex; flex-direction: column; }
+.deck { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line); }
+.deck:first-child { border-top: none; }
+.deck-info { flex: 1; min-width: 0; }
+.deck-name { font-weight: 600; }
+.deck .btn { padding: 9px 14px; }
+.due-dot { display: inline-block; min-width: 8px; height: 8px; border-radius: 4px; background: var(--amber); margin-right: 6px; vertical-align: 1px; }
+.weak-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.weak-chip { background: var(--red-soft); color: var(--text); border: none; border-radius: 999px; padding: 6px 11px; font: 600 13px inherit; font-family: inherit; cursor: pointer; }
+
+/* flashcard */
+.fc-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.fc-count { color: var(--text-dim); font-size: 13px; }
+.fc-bar { height: 6px; background: var(--panel-2); border-radius: 3px; overflow: hidden; margin-bottom: 16px; }
+.fc-bar i { display: block; height: 100%; background: var(--teal); transition: width .3s; }
+.fc { width: 100%; min-height: 240px; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 24px 20px; color: var(--text); font: inherit; cursor: pointer; display: flex; flex-direction: column; justify-content: center; gap: 14px; text-align: center; }
+.fc-term { font-size: 26px; font-weight: 700; line-height: 1.2; }
+.fc-def { font-size: 17px; line-height: 1.5; text-align: left; }
+.fc-hint { color: var(--text-dim); font-size: 13px; }
+.fc-deck { color: var(--text-dim); font-size: 12.5px; }
+.fc-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.btn-again { background: var(--red-soft); color: var(--red); }
+@media (prefers-reduced-motion: no-preference) {
+  .fc.flip { animation: fcflip .28s ease-out; }
+  @keyframes fcflip { from { transform: rotateY(70deg); opacity: .4; } to { transform: none; opacity: 1; } }
+}
+
+/* tappable terms inside questions and explanations */
+.vt { background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; text-decoration: underline dotted var(--teal); text-decoration-thickness: 2px; text-underline-offset: 3px; display: inline; text-align: inherit; }
+.vt:active { color: var(--teal); }
+.vt-def { font-size: 16px; line-height: 1.5; }
+.vt-term { font-size: 20px; font-weight: 700; margin: 0; }
+
+/* labs */
+.lab-svg { width: 100%; height: auto; display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; }
+.lab-svg .w { stroke: var(--text-dim); stroke-width: 2; fill: none; }
+.lab-svg .lbl { fill: var(--text-dim); font: 600 12px inherit; font-family: inherit; }
+.lab-svg .tp { cursor: pointer; }
+.lab-svg .tp circle { fill: var(--panel-2); stroke: var(--text-dim); stroke-width: 1.2; }
+.lab-svg .tp text { fill: var(--text); font: 700 13px inherit; font-family: inherit; }
+.lab-svg .tp.sel circle { fill: var(--teal-soft); stroke: var(--teal); stroke-width: 2; }
+.lab-svg .part { fill: var(--panel-2); stroke: var(--text-dim); stroke-width: 1.5; }
+.lab-svg .fault { stroke: var(--red); stroke-width: 2.5; fill: none; }
+.lab-meter { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; background: var(--panel-2); border-radius: 10px; padding: 12px 16px; }
+.lab-meter b { font: 700 26px "Space Grotesk", ui-monospace, monospace; }
+.lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.lab-grid .btn { white-space: normal; padding: 11px 10px; }
+.lab-grid .btn.on { background: var(--teal-soft); border-color: var(--teal); color: var(--text); }
+.lab-explain { font-size: 14.5px; line-height: 1.55; }
+.lab-explain .ok { color: var(--teal); font-weight: 700; }
+.lab-explain .no { color: var(--red); font-weight: 700; }
+.lab-legend { display: flex; gap: 16px; font-size: 13px; color: var(--text-dim); flex-wrap: wrap; }
+.lab-legend i { display: inline-block; width: 20px; vertical-align: middle; margin-right: 6px; border-top: 2.5px solid var(--amber); }
+.lab-legend i.l { border-top: 2.5px dashed var(--teal); }
