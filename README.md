@@ -20,6 +20,8 @@ Five subjects, 600 questions each:
 
 A **Shop Path** card on the home screen walks a new tech through all five subjects in order: Shop Safety → Basic Maintenance → Tires & Wheels → Brakes → Steering → 12 V & 48 V → Engine → Drivetrain → Vehicle Networks → High Voltage. Tap any step to jump to it.
 
+**Vocab flashcards** for every topic (503 cards: term, plain meaning, shop tip), with **Drill my misses** and a hands-on **Circuit Lab** where you tap parts of a 12 V lamp circuit and watch the meter readings change.
+
 Placement test, ranks (Trainee → Master Tech), progress timeline, and a sample manager crew view. Progress is saved only on your device. No account, no Claude, no internet needed after the first open.
 
 Training content only. Always follow the manufacturer's service procedure and your employer's safety program.

@@ -1,8 +1,11 @@
 // Mad Minute Auto demo service worker: keeps the app working with no signal.
 // Bump VERSION whenever index.html changes so phones pick up the new copy.
-// The shared learning layer (../shared/mm-learn.*) is precached too; bump its ?v= in index.html and here when it changes.
-const VERSION = "mm-auto-v14";
-const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "shared/mm-learn.css?v=1", "shared/mm-learn.js?v=1"];
+// The shared learning layer (shared/mm-learn.*), flashcards (shared/mm-flash.*, flashcards/*.js) are precached too;
+// bump their ?v= in index.html and here when they change.
+const VERSION = "mm-auto-v15";
+const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "shared/mm-learn.css?v=1", "shared/mm-learn.js?v=1",
+  "shared/mm-flash.css?v=1", "shared/mm-flash.js?v=1",
+  "flashcards/auto.js?v=1", "flashcards/maint.js?v=1", "flashcards/e12.js?v=1", "flashcards/net.js?v=1", "flashcards/hv.js?v=1"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));

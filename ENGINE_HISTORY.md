@@ -119,6 +119,16 @@ The quiz became a reusable engine that any subject can plug into.
 - Wrong answers are realistic mistakes people actually make (like `--force`, `slice` vs `splice`, `margin: auto`), not joke options.
 - Woven into the Dev Path as 6 "Real World" steps right after the matching lessons (38 steps, 56 topics, 1,369 questions). Dev `mm-dev-v3`.
 
+## Stage 11 — Vocab flashcards + Circuit Lab · 2026-10-30
+
+- **Vocab flashcards** for every Auto topic: 35 decks, 503 cards across all five subjects. Each card is a term, its plain meaning, and an "In the shop" tip. Decks live in `flashcards/<subject>.js` (`auto`, `maint`, `e12`, `net`, `hv`), one row per card: `[term, meaning, tip]`.
+- A **Vocab** button under every topic card shows how many cards are due. Tap it, say the meaning, flip, then **Again** or **Got it**. Keyboard: space flips, 1 = Again, 2 = Got it.
+- Cards use the same **Leitner boxes** as spaced review (back in 1, 3, 7, 21, 60 days). "Again" sends a card to the end of the sitting once and puts it in **Drill my misses** until you get it right first try. Saved on the device under `mmflash_<subject>`.
+- **Brush up the words** card on the results screen: after a round, it offers the vocab decks for the topics you missed.
+- **Circuit Lab** (12 V & 48 V, Basic Maintenance, Automotive): a tappable battery → fuse → switch → lamp → ground circuit. Open the switch, blow the fuse, burn out the lamp, corrode or break the ground, or chafe a wire into a short. Live meter readings show what each fault does (across the lamp, ground side drop, current), with a plain explanation of each part.
+- New shared add-on `shared/mm-flash.js` + `shared/mm-flash.css`. Same pattern as Smart jump: it wraps `renderTopicsGrid()` and `showResults()` from outside, so core engine code is untouched. Any app can turn it on by loading the files and adding a `flashcards/` folder. `window.MM_FLASH = { circuitLab: [...] }` picks which subjects show the lab.
+- Auto `mm-auto-v15`.
+
 ---
 
 ## Which app has what
@@ -132,6 +142,8 @@ The quiz became a reusable engine that any subject can plug into.
 | Staff, keyboard, sound | — | — | ✓ | — |
 | Code blocks in questions | — | — | — | ✓ |
 | Recall first, Skills checkup, Roadmap (shared file) | ✓ | ✓ | ✓ | ✓ |
+| Vocab flashcards + Drill my misses (shared file) | ✓ | — | — | — |
+| Circuit Lab | ✓ | — | — | — |
 
 ## Ideas parked for later
 

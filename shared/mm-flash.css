@@ -1,0 +1,116 @@
+/* Mad Minute Flashcards + Circuit Lab. Uses the app's own color tokens (--panel, --amber, --teal…),
+   so it follows System / Light / Dark automatically. */
+
+/* home: Vocab button under each topic card */
+.mmf-cell { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.mmf-cell > .topic-card { flex: 1; }
+.topics-grid > .mmf-cell:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.mmf-vocab {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  background: transparent; border: 1px solid var(--line); border-radius: 10px;
+  color: var(--teal); font: inherit; font-size: 12px; font-weight: 600; padding: 8px 10px; cursor: pointer;
+}
+.mmf-vocab .mmf-n { color: var(--text-dim); font-weight: 500; }
+.mmf-vocab:active { transform: scale(0.98); }
+.mmf-vocab:focus-visible, .mmf-pill:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+.mmf-homebar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.mmf-homebar > :only-child { grid-column: 1 / -1; }
+.mmf-pill {
+  display: flex; flex-direction: column; gap: 3px; text-align: left; cursor: pointer;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px; color: var(--text);
+  font: inherit; padding: 11px 12px;
+}
+.mmf-pill b { font-size: 13px; }
+.mmf-pill span { font-size: 12px; color: var(--text-dim); }
+.mmf-pill:disabled { opacity: 0.55; cursor: default; }
+.mmf-lab-pill b { color: var(--teal); }
+
+/* full-screen layer */
+body.mmf-lock { overflow: hidden; }
+.mmf-overlay {
+  position: fixed; inset: 0; z-index: 9000; background: var(--bg); color: var(--text);
+  display: flex; flex-direction: column; overflow-y: auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 10px) 16px calc(env(safe-area-inset-bottom, 0px) + 16px);
+}
+.mmf-top { display: flex; align-items: center; gap: 12px; max-width: 560px; width: 100%; margin: 0 auto; }
+.mmf-x {
+  width: 40px; height: 40px; flex: none; border-radius: 50%; border: 1px solid var(--line);
+  background: var(--panel); color: var(--text); font-size: 16px; cursor: pointer;
+}
+.mmf-title { display: flex; flex-direction: column; min-width: 0; }
+.mmf-title b { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mmf-title span { font-size: 12px; color: var(--text-dim); }
+.mmf-bar { height: 4px; background: var(--panel-2); border-radius: 2px; max-width: 560px; width: 100%; margin: 12px auto 0; overflow: hidden; }
+.mmf-bar i { display: block; height: 100%; width: 0; background: var(--amber); transition: width .25s ease; }
+.mmf-stage { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 16px; max-width: 560px; width: 100%; margin: 0 auto; padding: 18px 0; }
+.mmf-note { font-size: 12px; color: var(--text-dim); text-align: center; }
+
+/* the card */
+.mmf-card { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; perspective: 1200px; width: 100%; }
+.mmf-inner {
+  display: grid; position: relative; min-height: 300px;
+  transform-style: preserve-3d; transition: transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.mmf-card.flipped .mmf-inner { transform: rotateY(180deg); }
+.mmf-face {
+  grid-area: 1 / 1; display: flex; flex-direction: column; justify-content: center; gap: 14px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 26px 22px;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden; text-align: center;
+}
+.mmf-back { transform: rotateY(180deg); text-align: left; border-color: var(--teal); }
+.mmf-topic { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim); }
+.mmf-back .mmf-topic { color: var(--teal); font-size: 13px; letter-spacing: 0; text-transform: none; font-weight: 700; }
+.mmf-term { font-size: 30px; font-weight: 700; line-height: 1.15; overflow-wrap: anywhere; }
+.mmf-hint { font-size: 12px; color: var(--text-dim); }
+.mmf-meaning { font-size: 18px; line-height: 1.45; }
+.mmf-tip { font-size: 14px; line-height: 1.45; color: var(--text-dim); border-top: 1px solid var(--line); padding-top: 12px; }
+.mmf-tip b { color: var(--amber); }
+@media (prefers-reduced-motion: reduce) { .mmf-inner { transition: none; } }
+
+.mmf-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mmf-actions .btn { padding-top: 14px; padding-bottom: 14px; font-size: 15px; }
+.mmf-actions .btn:disabled { opacity: .4; }
+.mmf-again { color: var(--red); }
+
+.mmf-done { text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.mmf-big { font-size: 26px; font-weight: 700; }
+.mmf-done p { color: var(--text-dim); margin: 0; max-width: 34ch; line-height: 1.45; }
+.mmf-done-btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 6px; }
+
+/* results screen card */
+.mmf-res { display: flex; flex-direction: column; gap: 8px; }
+.mmf-res p { margin: 0; font-size: 13px; }
+.mmf-res-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Circuit Lab */
+.mmf-lab-body { max-width: 560px; width: 100%; margin: 14px auto 0; display: flex; flex-direction: column; gap: 12px; }
+.mmf-status { font-size: 15px; text-align: center; min-height: 22px; }
+.mmf-status b { color: var(--amber); }
+.mmf-svg-wrap { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 6px; }
+.lab-svg { width: 100%; height: auto; display: block; }
+.lab-wire { fill: none; stroke: var(--text-dim); stroke-width: 3; stroke-linejoin: round; }
+.lab-flow { fill: none; stroke: var(--teal); stroke-width: 3; stroke-dasharray: 6 12; animation: mmfFlow 1s linear infinite; }
+@keyframes mmfFlow { to { stroke-dashoffset: -36; } }
+@media (prefers-reduced-motion: reduce) { .lab-flow { animation: none; } }
+.lab-short { fill: none; stroke: var(--red); stroke-width: 3; }
+.lab-part { cursor: pointer; outline: none; }
+.lab-hit { fill: var(--panel); stroke: transparent; stroke-width: 2; }
+.lab-part.sel .lab-hit, .lab-part:focus-visible .lab-hit { stroke: var(--amber); }
+.lab-body { fill: var(--panel-2); stroke: var(--text); stroke-width: 2; }
+.lab-elem { fill: none; stroke: var(--text); stroke-width: 2.5; stroke-linecap: round; }
+.lab-elem.bad { stroke: var(--red); }
+.lab-dot { fill: var(--text); }
+.lab-bulb { fill: var(--panel-2); stroke: var(--text); stroke-width: 2; }
+.lab-glow { fill: var(--amber); }
+.lab-rust { fill: #a5562b; }
+.lab-sym { font-size: 16px; font-weight: 700; fill: var(--text); text-anchor: middle; }
+.lab-small { font-size: 10px; fill: var(--text-dim); text-anchor: middle; }
+.mmf-meters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.mmf-meter { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.mmf-meter span { font-size: 11px; color: var(--text-dim); }
+.mmf-meter b { font-size: 18px; font-variant-numeric: tabular-nums; }
+.mmf-meter small { font-size: 11px; color: var(--text-dim); line-height: 1.3; }
+.mmf-lab-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mmf-info { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--teal); border-radius: 12px; padding: 12px 14px; font-size: 14px; line-height: 1.5; }
+.mmf-foot { font-size: 11px; color: var(--text-dim); margin: 0; text-align: center; }
