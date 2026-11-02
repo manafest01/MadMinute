@@ -1,0 +1,697 @@
+@pack safe
+
+# A 1
+Q: An arc flash is:
+A: A burst of heat and light from current jumping through air
+W: A slow leak of current through damp insulation to ground
+W: A bright spark that only happens on DC battery circuits
+W: The flicker a lamp makes when its circuit is overloaded
+E: An arc flash can hit thousands of degrees in a split second. It burns, blinds and can throw molten metal.
+
+Q: An arc flash label on switchgear tells you:
+A: The hazard level and the protection needed
+W: The install date and the last service date
+W: Who to call for a repair or upgrade quote
+W: The breaker sizes inside and their settings
+E: Labels show the voltage, the arc flash boundary, and either the incident energy or the PPE category.
+
+Q: A "shock hazard" means danger from:
+A: Current passing through your body
+W: Heat released by an arc blast
+W: The pressure wave from a fault
+W: Molten metal thrown by an arc
+E: Shock is current through the body. Arc flash is a separate hazard with its own boundary.
+
+Q: Which person may cross the restricted approach boundary?
+A: A qualified person with proper PPE and a plan
+W: Any experienced worker who stays careful
+W: A trainee watching closely to learn the job
+W: A visitor escorted by the site manager
+E: Only qualified persons, protected against shock and working under a plan, go that close to exposed live parts.
+
+# A 2
+Q: The arc flash boundary is the distance where incident energy drops to:
+A: 1.2 cal/cm²
+W: 4.0 cal/cm²
+W: 8.0 cal/cm²
+W: 0.5 cal/cm²
+E: 1.2 cal/cm² is about where bare skin would get a second-degree burn. Inside that line, arc-rated PPE is needed.
+
+Q: For an exposed movable conductor at 480 V, the limited approach boundary is about:
+A: 10 ft 0 in
+W: 3 ft 6 in
+W: 1 ft 0 in
+W: 5 ft 0 in
+E: NFPA 70E puts it at 10 ft for movable conductors (like overhead lines) and 3 ft 6 in for fixed parts at 151–750 V.
+
+Q: For 480 V, the restricted approach boundary is about:
+A: 1 ft 0 in
+W: 3 ft 6 in
+W: 10 ft 0 in
+W: 0 ft 6 in
+E: In the 151–750 V range, NFPA 70E sets restricted approach at 1 ft.
+
+Q: Incident energy on an arc flash study is given in:
+A: cal/cm²
+W: V/m
+W: A/s
+W: Ω/ft
+E: Calories per square centimeter at a stated working distance, usually 18 in for low-voltage gear.
+
+# A 3
+Q: Arc flash energy rises the most when:
+A: Fault current is high and clearing time is long
+W: The enclosure is small and painted a dark color
+W: The breaker has a low amp rating and new contacts
+W: The room is cool, dry and well lit for the work
+E: Energy grows with current and with how long the arc lasts. Slow protection is often the bigger driver.
+
+Q: A maintenance switch that temporarily speeds up breaker tripping is used to:
+A: Lower incident energy while people work on the gear
+W: Raise the breaker's continuous amp rating for a while
+W: Block the breaker from tripping during maintenance
+W: Let the crew test the CT ratio without opening covers
+E: Faster clearing means less arc energy. It must be turned off afterward so coordination returns.
+
+Q: An arc flash risk assessment should be reviewed at least every:
+A: 5 years, or when the system changes
+W: 10 years, unless an incident happens
+W: Year, even when nothing has changed
+W: Time a new worker joins the crew
+E: NFPA 70E calls for review at intervals of no more than 5 years, and any time a change could affect the results.
+
+Q: Why can a smaller upstream fault current sometimes make arc flash worse?
+A: The breaker may trip slower on its time curve
+W: Smaller fault currents make hotter, tighter arcs
+W: Lower fault current raises the system voltage
+W: The CTs stop reading below a certain current
+E: Lower current can fall below instantaneous pickup, so the device waits on its time-delay curve and the arc lasts longer.
+
+# A 4
+Q: An arc flash label must show voltage, the arc flash boundary and:
+A: Either incident energy or PPE category
+W: Both incident energy and PPE category
+W: The breaker's model and serial number
+W: The study engineer's license number
+E: NFPA 70E requires one or the other, not both. Mixing the two methods on one label invites confusion.
+
+Q: Moving a work position from 18 in to 36 in from an arc source generally:
+A: Cuts incident energy a lot
+W: Leaves incident energy the same
+W: Roughly doubles incident energy
+W: Only matters on DC equipment
+E: Energy falls off sharply with distance. Remote racking and long tools exist for this reason.
+
+Q: Which choice most reduces arc flash exposure?
+A: Remote racking and operating from outside the boundary
+W: Adding a second layer of arc-rated clothing for the task
+W: Posting brighter warning labels on every enclosure door
+W: Holding a longer job briefing before each racking task
+E: Distance and elimination beat PPE. Remote operation keeps people out of the blast zone.
+
+Q: A senior tech finds a label with no study date on gear that was recently modified. The right call:
+A: Treat the label as unreliable and get the study updated
+W: Use the label anyway since it's the posted information
+W: Lower the PPE level because the modified gear is newer
+W: Remove the label so nobody relies on it until later
+E: Changes to the system can change fault current and clearing time. An outdated label can underestimate the hazard.
+
+# P 1
+Q: Rubber insulating gloves must be checked with an air test:
+A: Before each use
+W: Once a year
+W: When they look worn
+W: On high-voltage jobs only
+E: Roll or inflate them to find pinholes every time, even when they look fine.
+
+Q: Leather protectors are worn over rubber gloves to:
+A: Protect the rubber from cuts and punctures
+W: Add extra voltage rating to the rubber
+W: Keep hands cool during long switching
+W: Replace the need for the daily air test
+E: The rubber gives the insulation. The leather keeps it from being damaged.
+
+Q: Arc-rated (AR) clothing is designed to:
+A: Self-extinguish and limit burn injury
+W: Block electrical current through the body
+W: Insulate the wearer against shock at 480 V
+W: Reflect arc light away from the eyes
+E: AR clothing won't melt or keep burning. It does not insulate against shock.
+
+Q: Which fabric should NOT be worn under arc-rated gear?
+A: Meltable synthetics like polyester
+W: Plain, untreated cotton
+W: Natural wool layers
+W: Arc-rated cotton blends
+E: Synthetics can melt into the skin in an arc. Natural fibers or AR layers are used underneath.
+
+# P 2
+Q: Class 0 rubber gloves are rated for a maximum use voltage of:
+A: 1,000 V AC
+W: 500 V AC
+W: 7,500 V AC
+W: 17,000 V AC
+E: Class 00 = 500 V, Class 0 = 1,000 V, Class 1 = 7,500 V, Class 2 = 17,000 V AC.
+
+Q: Class 2 rubber gloves have a maximum use voltage of:
+A: 17,000 V AC
+W: 7,500 V AC
+W: 26,500 V AC
+W: 36,000 V AC
+E: Class 3 is 26,500 V and Class 4 is 36,000 V AC.
+
+Q: Rubber gloves in service must be electrically retested every:
+A: 6 months
+W: 12 months
+W: 2 years
+W: 3 months
+E: OSHA and ASTM call for a lab retest every 6 months once gloves are issued.
+
+Q: PPE Category 2 clothing needs a minimum arc rating of:
+A: 8 cal/cm²
+W: 4 cal/cm²
+W: 25 cal/cm²
+W: 12 cal/cm²
+E: Category 1 = 4, Category 2 = 8, Category 3 = 25, Category 4 = 40 cal/cm².
+
+# P 3
+Q: A glove's color-coded label shows red. That glove is Class:
+A: 0
+W: 00
+W: 1
+W: 2
+E: Beige = 00, red = 0, white = 1, yellow = 2, green = 3, orange = 4.
+
+Q: An arc rating (ATPV) on clothing tells you:
+A: The energy it takes before a likely second-degree burn
+W: The highest voltage the fabric can safely insulate
+W: How many washes it can take before losing rating
+W: The fault current it can handle for half a second
+E: ATPV is in cal/cm². It must meet or beat the incident energy at your working distance.
+
+Q: Layered AR clothing (shirt plus coverall) is rated:
+A: As a tested system, not by adding the numbers
+W: By adding the arc ratings of each layer together
+W: By the lower rating of the two layers only
+W: By the outer layer, ignoring what's underneath
+E: Layers often protect better than the sum, but you can only claim the rating from a system test.
+
+Q: When is hearing protection part of arc flash PPE?
+A: Ear canal inserts are listed for every PPE category
+W: Only for Category 3 and 4 tasks above 600 V
+W: Only when an arc flash study shows over 40 cal/cm²
+W: Never, since hearing loss isn't an arc flash injury
+E: An arc blast is extremely loud. NFPA 70E lists ear canal inserts for every PPE category.
+
+# P 4
+Q: A Class 2 glove is needed for a 13.8 kV job. Your crew only has Class 1. The right move:
+A: Stop and get correctly rated gloves
+W: Wear two pairs of Class 1 together
+W: Use Class 1 with heavier protectors
+W: Proceed carefully since it's quick
+E: Doubling up gloves doesn't create a rating. 13.8 kV needs at least Class 2 (17 kV max use).
+
+Q: A calculated incident energy is 45 cal/cm². What PPE applies?
+A: None, de-energize or redesign the task
+W: Category 4 clothing with a hood
+W: Category 3 worn as a double layer
+W: Category 4 plus a heavier face shield
+E: Category 4 tops out at 40 cal/cm². Above that, de-energize or redesign the task.
+
+Q: Why must PPE be chosen from calculated incident energy, not the PPE table, in some cases?
+A: Tables only apply inside their fault current and clearing time limits
+W: Tables are always too conservative for modern switchgear designs
+W: Tables only cover DC battery systems and UPS rooms in buildings
+W: Tables are only meant for trainees, not for certified technicians
+E: The table method assumes limits. Outside them, only an incident energy study is valid.
+
+Q: As a senior tech, you see a worker's AR shirt cuffs rolled up during switching. You should:
+A: Stop the task until full coverage is restored
+W: Let it go since the shirt itself is arc-rated
+W: Mention it to them after the switching is done
+W: Hand them a face shield and keep switching
+E: Exposed skin defeats the PPE. The system only works with full coverage.
+
+# L 1
+Q: LOTO stands for:
+A: Lockout/tagout
+W: Load out/turn off
+W: Line open/test off
+W: Lock on/tag on
+E: A lock keeps the energy source off. A tag tells others who locked it and why.
+
+Q: Your personal lock should be removed by:
+A: You, the person who put it on
+W: Any supervisor on the site
+W: The lead tech on the next shift
+W: The customer's facility manager
+E: Only the worker who applied it removes it, except under a strict, documented removal procedure.
+
+Q: A tag alone (no lock) is:
+A: A warning, not a physical barrier
+W: Just as safe as a lock and tag
+W: Safer than a lock in most cases
+W: Only allowed on gas and air lines
+E: Tags can't stop someone from operating a device. Locks physically can.
+
+Q: Before working on a circuit you turned off, you must:
+A: Test it to prove it is dead
+W: Trust it since the breaker is off
+W: Check that the panel lights are out
+W: Ask a coworker to confirm it's off
+E: Breakers fail, labels are wrong, and backfeeds exist. Always verify absence of voltage.
+
+# L 2
+Q: "Live-dead-live" means:
+A: Prove the tester, test the circuit, prove the tester again
+W: Test the circuit three times in a row with the same tester
+W: Switch the breaker off, on, then off again before testing
+W: Test the phase, then the neutral, then the ground in order
+E: Proving the tester before and after shows a "dead" reading wasn't a dead meter.
+
+Q: Which step comes FIRST in creating an electrically safe work condition?
+A: Identify every possible source of supply
+W: Apply temporary protective grounds
+W: Test each conductor for absence of voltage
+W: Remove the panel covers to see the bus
+E: Find all sources from up-to-date drawings first: utility, generators, UPS, PV, backfeeds.
+
+Q: After opening a disconnect, you should visually check:
+A: The blades are fully open, where you can see them
+W: The handle points to OFF and the label is clear
+W: The indicating lights on the door have gone out
+W: The load downstream has stopped running
+E: Handles can break from the mechanism. Seeing the open blades confirms the break.
+
+Q: Absence of voltage should be tested:
+A: Phase-to-phase and phase-to-ground on every conductor
+W: Phase-to-ground on one phase, since all share a source
+W: Phase-to-neutral on each phase, skipping phase-to-phase
+W: Phase-to-phase on two phases, since the third must match
+E: Each conductor can be fed differently. Test every combination.
+
+# L 3
+Q: Capacitors and long cables can hold energy after disconnecting. Before contact, you must:
+A: Release stored energy and verify it's gone
+W: Wait a few seconds for it to bleed off
+W: Reverse the leads on the tester and recheck
+W: Close the breaker briefly to drain the charge
+E: Discharge through proper means, then test. Stored energy can kill even after the source is open.
+
+Q: When should temporary protective grounds be applied after verifying absence of voltage?
+A: When induced voltage or re-energizing is possible
+W: Never, a good voltage test is always enough
+W: Only on DC systems with large battery banks
+W: Only on circuits rated 50 V and below
+E: Grounds protect against induced voltage, stored energy and accidental re-energizing on higher-voltage work.
+
+Q: A group lockout on a large job usually uses:
+A: A lockbox where each worker adds a personal lock
+W: One crew lock that the foreman keeps on their belt
+W: Tags only, since locks slow down a large crew
+W: The foreman's sign-off sheet instead of locks
+E: Every worker keeps personal control. The job can't restart until every lock is off the box.
+
+Q: An energized work permit is NOT required for:
+A: Testing and troubleshooting by qualified persons in PPE
+W: Replacing a breaker in a live panel with proper PPE
+W: Adding a new circuit to a live panel during the day
+W: Re-terminating conductors on a live bus in a hurry
+E: NFPA 70E exempts testing, troubleshooting and voltage measurement. Other energized work needs a permit.
+
+# L 4
+Q: The drawings show one source, but a PV system is tied into the same switchboard. Best action:
+A: Stop and update the source list before LOTO
+W: Proceed, since the drawing set is official
+W: Lock only the utility main and the PV meter
+W: Rely on the inverter's anti-islanding trip
+E: Unlisted sources are a top cause of surprise energized parts. Field-verify before you trust drawings.
+
+Q: Who is responsible for LOTO on a multi-employer site?
+A: Host and contract employers coordinate one program
+W: Each worker separately, with no coordination
+W: The utility company that supplies the site
+W: Only the general contractor's safety officer
+E: Host and contractor must exchange procedures so everyone follows one coordinated method.
+
+Q: A lock is found on a device and its owner has left the site. The right path:
+A: Follow the written removal procedure with checks
+W: Cut it off since the owner isn't coming back
+W: Leave it there and work on the circuit anyway
+W: Have the owner's coworker remove it for them
+E: Removal needs the employer's documented process: confirm the worker is gone, inform them, and verify safety.
+
+Q: To verify absence of voltage above 1,000 V, best practice is:
+A: A tester rated for the voltage, proven on a known source
+W: Any digital multimeter on its highest AC voltage range
+W: A non-contact voltage pen held close to each phase
+W: The switchgear's own panel voltmeter reading zero
+E: Tool rating and live-dead-live apply at every voltage. Non-contact testers alone are not enough.
+
+# G 1
+Q: Temporary protective grounds are used to:
+A: Keep dead parts at one potential and clear accidental energizing
+W: Measure the ground resistance of the site's electrode system
+W: Make breakers trip faster during normal daily operation
+W: Replace the permanent equipment ground during the job
+E: They create an equipotential zone and give fault current a path to trip the source.
+
+Q: When applying temporary grounds, connect first to:
+A: The ground end
+W: The phase conductor
+W: The neutral bus
+W: The closest point
+E: Ground end first, removed last. That way the clamp is grounded when it touches the conductor.
+
+Q: Before a hipot test, the test area should be:
+A: Barricaded with signs so nobody wanders in
+W: Left open so others can watch and learn
+W: Marked with floor tape at the test set only
+W: Darkened so the crew can spot any sparks
+E: Hipot puts thousands of volts on equipment. Barricades and an attendant keep people out.
+
+Q: After a DC insulation test, you should ground the item because:
+A: It can hold a dangerous charge
+W: The meter needs it to reset
+W: Grounding cools the insulation
+W: It clears the stored test record
+E: Cables and windings act like capacitors and store charge from the test.
+
+# G 2
+Q: A common rule after a DC hipot is to keep the item grounded for at least:
+A: Four times the test duration
+W: Ten seconds after the test
+W: One minute, whatever the test length
+W: Half of the test duration
+E: Charge can come back from deep in the insulation ("recovery voltage"). Long grounding drains it.
+
+Q: Temporary grounds must be sized for:
+A: The available fault current and clearing time
+W: The normal load current of the circuit
+W: The test set's maximum output current
+W: The length of the run being grounded
+E: An undersized ground can melt during a fault and fail when it's needed most.
+
+Q: Why should the far end of a cable be guarded during a hipot test?
+A: It carries the same test voltage
+W: It's where the ground is connected
+W: The tester takes its reading there
+W: It discharges faster than the near end
+E: Test voltage reaches every point on the cable. The far end needs barriers and a watcher.
+
+Q: Grounds on the work site are placed to create:
+A: An equipotential zone around the worker
+W: A return path for normal load current
+W: A temporary neutral for the circuit
+W: A sensing point for the ground relay
+E: When everything nearby is at the same potential, current has no reason to flow through you.
+
+# G 3
+Q: Induced voltage on a de-energized line comes mostly from:
+A: Nearby energized lines
+W: The station ground grid
+W: The insulation test set
+W: Static from wind and dust
+E: Parallel energized circuits couple voltage and current into the dead line through electric and magnetic fields.
+
+Q: Removing temporary grounds from the test object before a hipot is necessary because:
+A: The test would just short to ground
+W: Grounds can damage the test set
+W: Grounds raise insulation readings
+W: It's only a paperwork requirement
+E: Remove only the grounds on the test object, under control, then re-apply as soon as testing stops.
+
+Q: Recovery voltage after a test is most likely on:
+A: Long cables and large windings
+W: Short control wires
+W: Small fuses and links
+W: Ground rods and grids
+E: More insulation volume stores more absorbed charge, which slowly comes back after a quick discharge.
+
+Q: Grounding clamps should be applied with:
+A: An insulated hot stick
+W: Bare hands after testing
+W: Leather work gloves only
+W: A plain fiberglass ladder
+E: Treat the conductor as live until grounded. Hot sticks keep distance.
+
+# G 4
+Q: Near energized 115 kV lines, the best grounding for workers on a dead line is:
+A: Bracket grounds plus an equipotential zone at the work point
+W: One set of grounds at the substation end only
+W: No grounds at all, since the line already tested dead
+W: Grounds at the far end only, away from the crew
+E: Grounds on both sides plus bonding at the work point keep induced and fault currents off the worker.
+
+Q: While supervising a VLF test, someone needs into the barricade. You should:
+A: Stop, discharge and ground before anyone enters
+W: Lower the test voltage and let them pass through
+W: Escort them in personally while the test runs
+W: Pause the timer but leave the voltage applied
+E: No entry while the object is energized or charged. Stop, discharge, ground, then allow entry.
+
+Q: What best protects a worker if a grounded, dead line is accidentally energized?
+A: Low-impedance grounds that trip the source fast
+W: High-resistance grounds that limit the current
+W: Rubber insulating mats under the crew alone
+W: Standing on a fiberglass ladder while working
+E: Low impedance means high fault current, fast tripping, and a small voltage rise at the worksite.
+
+Q: Planning hipot on a long feeder, a senior tech should first check:
+A: Every termination and tap so all ends are guarded
+W: The near-end termination where the test set connects
+W: The feeder breaker's nameplate and trip settings
+W: The weather forecast for the day of the test
+E: Splices, taps and far ends all see test voltage. Each one needs barriers or a watcher.
+
+# R 1
+Q: A job briefing should happen:
+A: Before every job
+W: Once a month
+W: On big jobs only
+W: After an incident
+E: Cover the hazards, the procedure, the PPE, energy sources and who does what.
+
+Q: Which is the MOST effective way to reduce electrical risk?
+A: Eliminate the hazard by de-energizing
+W: Wear a higher category of arc-rated PPE
+W: Post warning signs on every panel door
+W: Hold a longer safety meeting each week
+E: Elimination is at the top of the hierarchy of risk controls. PPE is last.
+
+Q: A "qualified person" is someone who:
+A: Is trained to recognize and avoid the specific hazards
+W: Has worked in any electrical trade for five years
+W: Owns a full set of insulated tools and a meter
+W: Is the most senior person on the job that day
+E: Qualification is task-specific: knowledge of the equipment, the hazards, and how to avoid them.
+
+Q: If job conditions change mid-task, you should:
+A: Stop and hold a new briefing
+W: Keep going if nearly done
+W: Text the supervisor later
+W: Add a sign and keep going
+E: New hazards need a new plan. A short re-brief keeps everyone aligned.
+
+# R 2
+Q: In the hierarchy of risk controls, PPE is ranked:
+A: Last, least effective
+W: First, most effective
+W: Second, after elimination
+W: Equal to engineering
+E: Order: elimination, substitution, engineering controls, awareness, administrative controls, then PPE.
+
+Q: An example of an engineering control is:
+A: Arc-resistant switchgear
+W: A safety awareness poster
+W: A written job briefing form
+W: Wearing an arc-rated hood
+E: Engineering controls change the equipment so the hazard is reduced without relying on behavior.
+
+Q: Electrical safety retraining under NFPA 70E is required at least every:
+A: 3 years
+W: 5 years
+W: 10 years
+W: 2 years
+E: Retraining is also needed after a new job duty, new equipment, or not following safe practices.
+
+Q: A risk assessment considers:
+A: How likely harm is and how bad it would be
+W: The cost of the job and the crew's schedule
+W: Only the system voltage and nothing else
+W: The weather forecast and the site traffic
+E: Likelihood and severity together decide what controls are needed.
+
+# R 3
+Q: Normal operation of equipment (like flipping a breaker) is low risk when:
+A: It's properly installed, maintained, closed and shows no sign of failure
+W: The operator wears a hard hat, safety glasses and work gloves
+W: The breaker was installed recently and is still under warranty
+W: The room is air-conditioned and the lights are working well
+E: NFPA 70E lists these conditions. If any is missing, treat operation as a hazard.
+
+Q: Which human-error tool is used before switching?
+A: Reading back the switching order step by step
+W: Skipping familiar steps to keep the job moving
+W: Doing the sequence from memory to save time
+W: Letting the newest worker switch alone for practice
+E: Read-back and peer checks catch wrong-breaker and wrong-sequence mistakes.
+
+Q: A Level 1 trainee on your crew during energized testing should be:
+A: Under direct supervision of a qualified person
+W: Working alone on the simpler test points
+W: Kept off the site until they reach Level 2
+W: Put in charge of the switching steps
+E: Unqualified workers inside boundaries must be escorted and supervised by a qualified person.
+
+Q: Signs of impending failure before operating gear include:
+A: Arcing sounds, burning smell, or heat
+W: Clean cabinets and a quiet hum
+W: A current test sticker on the door
+W: Fresh paint and new nameplates
+E: Any of these signs means don't operate it normally. Treat it as a hazard.
+
+# R 4
+Q: An incident report should focus on:
+A: Root causes and system fixes
+W: Who to blame for the incident
+W: Keeping it short and informal
+W: The cost of the damaged gear
+E: The goal is to stop it happening again: procedures, design, training and supervision.
+
+Q: A customer wants energized work to avoid a shutdown. When is that justified?
+A: When de-energizing creates a greater hazard or is infeasible
+W: When the downtime would be costly or inconvenient for them
+W: Whenever the customer puts the request in writing first
+W: When the job can be finished in under one hour of work
+E: Inconvenience alone doesn't justify it. Life-support or infeasible shutdowns can, with a permit.
+
+Q: Leading a crew with mixed experience, the best briefing practice is:
+A: Have each person state their role and the hazards back
+W: Read the plan out quickly so the crew can get started
+W: Let the senior techs skip it since they know the work
+W: Email the plan the night before instead of meeting
+E: Active participation catches misunderstandings before they become incidents.
+
+Q: Your test plan calls for opening a CT circuit's shorting block. What comes first?
+A: Verify the CT is shorted or its primary is de-energized
+W: Put on tinted safety glasses for the bright arc
+W: Swap to longer test leads to keep your distance
+W: Raise the output range on the relay test set
+E: An open CT secondary under load can generate dangerous voltage. Control it before touching.
+
+# C 1
+Q: NFPA 70E covers:
+A: Electrical safety in the workplace
+W: Installing wiring in new buildings
+W: Fire alarm wiring and signaling
+W: Utility power plant design rules
+E: 70E is about safe work practices. NFPA 70 (the NEC) is about installation.
+
+Q: NFPA 70 is better known as:
+A: The National Electrical Code (NEC)
+W: The workplace electrical safety standard
+W: The electrical maintenance standard
+W: The emergency generator standard
+E: The NEC sets installation rules and is adopted by local authorities.
+
+Q: NETA stands for:
+A: InterNational Electrical Testing Association
+W: National Energy Testing Administration
+W: North American Electrical Trade Alliance
+W: National Electrical Technician Academy
+E: NETA writes the ATS, MTS, ECS and ETT standards for electrical testing.
+
+Q: NFPA 70B covers:
+A: Electrical equipment maintenance
+W: Installation of new wiring
+W: Arc flash PPE selection only
+W: Generator fuel storage rules
+E: Since 2023, 70B is a standard with required maintenance practices, not just advice.
+
+# C 2
+Q: ANSI/NETA ATS is the standard for:
+A: Acceptance testing of new equipment
+W: Maintenance testing of in-service gear
+W: Certification of testing technicians
+W: Commissioning of whole power systems
+E: ATS = acceptance testing. MTS = maintenance testing.
+
+Q: ANSI/NETA MTS is used for:
+A: Maintenance testing of existing equipment
+W: Factory testing at the manufacturer's plant
+W: Training and certifying new technicians
+W: Calculating and writing arc flash labels
+E: MTS sets tests and frequencies for equipment already in service.
+
+Q: ANSI/NETA ETT covers:
+A: Certification of electrical testing technicians
+W: Testing of emergency transfer switches
+W: Electrical training for trade school teachers
+W: Equipment tagging during commissioning
+E: ETT sets the four certification levels, training hours and experience.
+
+Q: ANSI/NETA ECS covers:
+A: Commissioning of electrical power systems
+W: Equipment cleaning specifications
+W: Emergency cable splicing methods
+W: Electrical code summaries for techs
+E: ECS addresses system-level commissioning, beyond single-component acceptance tests.
+
+# C 3
+Q: OSHA 1910.269 applies to:
+A: Power generation, transmission and distribution work
+W: Office outlets and general building wiring only
+W: Residential wiring done by homeowners
+W: Automotive service and repair shops
+E: Utility-type work has its own OSHA rules beyond the general Subpart S rules.
+
+Q: Where NETA test values and a manufacturer's instructions differ, generally:
+A: The manufacturer's published data takes priority
+W: NETA's tables always take priority over makers
+W: The tech picks whichever value is easier to meet
+W: The two values are averaged for the report
+E: NETA specs defer to manufacturer data when it's available. The tables cover cases without it.
+
+Q: A NETA Level 3 technician can:
+A: Work independently and supervise Levels 1 and 2
+W: Only assist under a Level 4's direct supervision
+W: Only do equipment setup, cleaning and teardown
+W: Sign test reports as the engineer of record
+E: Level 3 is the first independent level. Level 4 handles complex projects and multiple crews.
+
+Q: NETA certification stays active only while the tech:
+A: Works for a NETA Accredited Company and keeps up continuing education
+W: Pays the yearly renewal fee, whoever they happen to work for
+W: Passes a yearly physical exam and a written refresher test
+W: Holds a valid state journeyman or master electrician license
+E: Leaving NAC employment makes the certification inactive until rejoining one.
+
+# C 4
+Q: Under the NEC, a single rod electrode measuring over 25 Ω needs:
+A: A supplemental electrode
+W: No further action at all
+W: A larger service breaker
+W: A deeper rod in the same hole
+E: NEC 250.53 requires a second electrode unless the single rod is 25 Ω or less.
+
+Q: NETA ATS suggests a main ground electrode system for commercial/industrial sites of no more than:
+A: 5 Ω
+W: 25 Ω
+W: 10 Ω
+W: 1 Ω
+E: Generating and transmission stations aim for 1 Ω or less, unless the engineer specifies otherwise.
+
+Q: The NEC requires emergency system power to be available within:
+A: 10 seconds
+W: 60 seconds
+W: 30 seconds
+W: 2 minutes
+E: NEC Article 700 sets 10 seconds. Legally required standby (701) allows 60 seconds.
+
+Q: Who decides when a test result outside NETA tables is still acceptable?
+A: The engineer of record or owner, in writing
+W: The technician who ran the test that day
+W: Whoever finishes writing the final report
+W: The equipment vendor's sales representative
+E: Senior techs flag and explain deviations. The engineer or owner makes the acceptance call in writing.

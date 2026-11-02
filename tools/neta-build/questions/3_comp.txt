@@ -1,0 +1,1045 @@
+@pack comp
+
+# V 1
+Q: The first part of almost every NETA test procedure is:
+A: Visual and mechanical inspection
+W: High-potential withstand testing
+W: Energizing the gear under load
+W: Writing up the final test report
+E: Compare nameplate to drawings, check for damage, anchorage, cleanliness, grounding and alignment first.
+
+Q: During visual inspection, compare equipment nameplate data to:
+A: The drawings and specifications
+W: The supplier's last invoice
+W: A similar unit on another site
+W: Nothing, nameplates are right
+E: Wrong ratings or models are caught early this way.
+
+Q: An infrared (thermographic) survey finds:
+A: Hot spots from loose connections and overloads
+W: Insulation resistance values on each feeder
+W: Breaker open and close timing on each pole
+W: Ground electrode resistance at the service
+E: Heat shows where resistance is high. IR must be done with the equipment energized and loaded.
+
+Q: Bolted bus connections can be checked by:
+A: Torque check, low-resistance test, or infrared
+W: Hipot test, megger test, or a visual check
+W: Turns ratio, polarity, or excitation test
+W: Phase rotation, phasing, or a meter check
+E: NETA lists these methods. Use the maker's torque values when available.
+
+# V 2
+Q: For infrared surveys, equipment should be:
+A: Energized and carrying a good amount of load
+W: De-energized and cooled to room temperature
+W: Energized at night when the load is lightest
+W: Energized with all loads switched off
+E: No current, no heat. A lightly loaded joint can hide a problem that shows at full load.
+
+Q: Comparing similar components under similar load, NETA calls a 4–15 °C difference:
+A: Probable deficiency, repair as time permits
+W: Normal for loaded gear, no action needed
+W: Major deficiency, repair immediately
+W: Possible deficiency, check next year
+E: 1–3 °C = possible deficiency, 4–15 °C = probable, over 15 °C = major deficiency.
+
+Q: Why do IR windows matter on switchgear?
+A: They allow scans without opening covers near live parts
+W: They let heat escape so the gear runs cooler overall
+W: They raise the insulation rating of the enclosure
+W: They replace the door interlock during the survey
+E: Scanning through windows reduces exposure compared with removing panels on live gear.
+
+Q: Shiny bus bars are hard to read with infrared because:
+A: Low emissivity reflects heat from other objects
+W: Shiny copper always runs colder than its lugs
+W: Infrared cameras can't detect metal surfaces
+W: Polished metal blocks the camera's autofocus
+E: Shiny metal reflects. Readings on insulation, tape or painted surfaces are more reliable.
+
+# V 3
+Q: A difference over 15 °C between similar components under similar load is:
+A: A major deficiency, repair immediately
+W: A possible deficiency, monitor it
+W: Normal for heavily loaded gear
+W: Only a concern on DC systems
+E: That size of rise means a connection or component is failing.
+
+Q: A breaker lug runs hot on one phase only. First suspect:
+A: A loose or corroded connection on that phase
+W: A low ambient temperature in the room
+W: High insulation resistance on that phase
+W: A wrong trip setting on the breaker
+E: Phase-to-phase comparison under equal load isolates the bad joint.
+
+Q: Correct torque on a bolted joint matters because:
+A: Too loose runs hot; too tight can crack or deform parts
+W: Torque only affects how neat the connection looks
+W: Tighter bolts lower the system voltage at the joint
+W: Looser bolts lower the joint's contact resistance
+E: Use the maker's values. Mark torqued bolts so missing ones are easy to spot.
+
+Q: When a scan shows an alarm, the report should include:
+A: Visual and IR images, load, ΔT and a repair priority
+W: The IR image only, since it says everything needed
+W: The customer's name and the date of the survey only
+W: The camera serial number and its emissivity setting
+E: Load at the time of scan matters. A ΔT at 30% load can grow a lot at full load.
+
+# V 4
+Q: An IR scan at 25% load shows a 6 °C rise. Senior judgment says:
+A: It may be much worse at full load, so raise the priority
+W: It's minor since the load was low, so leave it alone
+W: Anything under 10 °C can be ignored at any load level
+W: Re-scan it with no load to get a cleaner baseline
+E: Heating rises with the square of current. A small rise at light load can be serious at full load.
+
+Q: You can't open covers for IR on energized MV gear. A good alternative:
+A: Installed IR windows or permanent temperature sensors
+W: Skip the scan on MV gear and note it in the report
+W: Scan the outside of the cover and call it acceptable
+W: Open the cover quickly without the arc flash PPE
+E: Windows and wireless sensors give data with lower exposure.
+
+Q: A transformer radiator shows one bank of fins cold. Likely cause:
+A: A closed valve or blocked oil flow to that radiator
+W: Normal behavior for radiators on any transformer
+W: A faulty infrared camera reading the wrong area
+W: High insulation resistance in the main windings
+E: Cold fins aren't cooling. Check valves and oil flow before load is raised.
+
+Q: Why follow up infrared findings with a de-energized check?
+A: To find the real cause, like a loose lug, before repair
+W: Infrared readings are never accurate enough to trust
+W: It's only for paperwork, to close out the work order
+W: To retest the spot at a higher load the next day
+E: IR finds where. Torque checks, contact resistance and inspection find why.
+
+# I 1
+Q: An insulation resistance tester (megohmmeter) applies:
+A: A DC test voltage and measures resistance
+W: An AC load current and measures watts
+W: A high current pulse to trip breakers
+W: A frequency sweep across the winding
+E: Common test voltages are 500, 1000, 2500 and 5000 V DC.
+
+Q: Before an insulation resistance test, the equipment must be:
+A: De-energized, isolated and verified dead
+W: Energized and running at full load
+W: Connected to its downstream loads
+W: Switched off at the panel only
+E: Never put a megger on energized equipment. Isolate loads like surge arresters and electronics too.
+
+Q: Insulation resistance readings are usually in:
+A: Megohms or gigohms
+W: Micro-ohms or milliohms
+W: Amps or milliamps
+W: Volts per second
+E: Good insulation reads very high resistance.
+
+Q: Electronics, PTs and surge arresters are disconnected before a megger test because:
+A: Test voltage can damage them or skew readings
+W: They make insulation readings far too high
+W: They need a separate brand of megohmmeter
+W: They stay energized from their own batteries
+E: Sensitive parts can fail under DC test voltage, and some (like arresters) conduct and give false lows.
+
+# I 2
+Q: A common NETA insulation test voltage for 600 V rated cable or equipment is:
+A: 1,000 V DC
+W: 250 V DC
+W: 5,000 V DC
+W: 2,500 V DC
+E: NETA's insulation table pairs 600 V equipment with a 1,000 V DC test, minimum 100 MΩ.
+
+Q: Standard insulation resistance spot tests typically last:
+A: 1 minute
+W: 1 second
+W: 1 hour
+W: 10 minutes
+E: One minute lets charging current die off. Longer readings are used for PI.
+
+Q: The guard terminal on a megohmmeter is used to:
+A: Remove surface leakage from the reading
+W: Raise the test voltage above its setting
+W: Ground the tester's case for safety
+W: Switch the meter to measure current
+E: Guarding bypasses leakage across the surface so you measure the insulation itself.
+
+Q: On a three-phase cable, insulation tests are done:
+A: Each phase to ground, other phases grounded
+W: All three phases tied together, one test only
+W: Each phase to the neutral, shield left floating
+W: Each phase to ground, with the cable energized
+E: Testing each phase with the others grounded checks phase-to-ground and phase-to-phase insulation.
+
+# I 3
+Q: IEEE 43 recommends a minimum IR for most form-wound windings (after 1970) of:
+A: 100 MΩ at 40 °C
+W: 1 MΩ at 20 °C
+W: 5 MΩ at 40 °C
+W: 1,000 MΩ at 20 °C
+E: Random-wound machines under 1 kV use 5 MΩ. Older machines use kV + 1 MΩ.
+
+Q: IEEE 43 recommends a minimum PI for Class B, F and H insulation of:
+A: 2.0
+W: 1.0
+W: 1.5
+W: 4.0
+E: Class A insulation uses 1.5. A PI under these points to moisture or contamination.
+
+Q: One phase of a motor reads far lower than the other two. You should:
+A: Investigate that phase for moisture, dirt or damage
+W: Average the three readings and pass the motor
+W: Pass it, as long as it's above the minimum value
+W: Retest only the two good phases to confirm them
+E: Comparing phases is powerful. A large imbalance flags a localized problem even above minimums.
+
+Q: Insulation readings dropping steadily year over year mean:
+A: Deterioration is happening, so plan action
+W: Normal aging, so no action is ever needed
+W: The tester is aging and needs replacement
+W: The load on the circuit has increased
+E: Trends matter more than one reading. Always compare to past results at a corrected temperature.
+
+# I 4
+Q: A transformer reads 300 MΩ at 1 minute and 330 MΩ at 10 minutes. PI is about:
+A: 1.1, which is poor
+W: 2.2, which is good
+W: 0.9, which is good
+W: 3.0, which is fair
+E: 330 ÷ 300 = 1.1. Little rise means leakage dominates.
+
+Q: PI readings swing wildly between tests on the same day. A likely cause:
+A: Changing surface moisture or temperature
+W: The insulation is in perfect condition
+W: The megger was left in guard mode
+W: The cable run is too short to test
+E: Humidity and dew can change surface leakage minute to minute. Clean, dry, guard and note conditions.
+
+Q: Why is IR alone not enough to accept a large medium-voltage cable?
+A: It can miss local defects that only show under AC stress
+W: It's too accurate and fails good cables too often
+W: It damages XLPE cable at any test voltage used
+W: It only measures the cable's length, not insulation
+E: VLF withstand, tan delta or PD testing add a stress test and a condition check.
+
+Q: A motor tests at 15 MΩ but PI is 3.0. Most likely:
+A: Surface contamination; clean, dry and retest
+W: A perfect motor; accept it as it stands
+W: Shorted turns somewhere in one phase
+W: An open winding on the motor's third phase
+E: Good PI says the insulation body absorbs well. Low absolute value often comes from dirt and moisture.
+
+# H 1
+Q: A hipot (overpotential) test checks:
+A: That insulation can withstand above-normal voltage
+W: How much current a motor draws when running
+W: How deep a ground rod is driven into soil
+W: How fast a breaker trips on a fault
+E: It's a pass/fail stress test. Insulation that survives is fit for service.
+
+Q: VLF stands for:
+A: Very low frequency
+W: Variable load factor
+W: Voltage level finder
+W: Vacuum leak function
+E: VLF testers apply AC at about 0.1 Hz so a small unit can test long cables.
+
+Q: Hipot testing is usually done:
+A: After insulation resistance passes
+W: Before any other test is started
+W: With the equipment energized
+W: Only on low-voltage equipment
+E: If IR is poor, a hipot may fail and damage the item. Check IR first.
+
+Q: Power factor (Doble-type) testing measures:
+A: Insulation losses at an AC test voltage
+W: The load's power factor while in service
+W: Motor speed and slip at rated load
+W: Ground electrode resistance to earth
+E: It finds moisture, contamination and aging in transformers, bushings and cables.
+
+# H 2
+Q: In a DC step-voltage test, good insulation shows leakage current that:
+A: Rises in step with voltage and holds steady at each step
+W: Jumps sharply at the higher steps and keeps climbing
+W: Reads zero at every step, all the way to full voltage
+W: Rises faster than voltage at every step of the test
+E: A sudden, out-of-proportion rise means a weak spot approaching breakdown.
+
+Q: Insulating oil dielectric breakdown is tested with:
+A: ASTM D877 or D1816 test cells
+W: A clamp-on ammeter and probe
+W: A fall-of-potential ground tester
+W: A transformer turns ratio set
+E: The voltage at which oil breaks down in a standard gap shows moisture and particle contamination.
+
+Q: Dissolved gas analysis (DGA) of transformer oil detects:
+A: Internal faults by the gases they make
+W: The oil's color and its clarity only
+W: The transformer's turns ratio per phase
+W: Dirt on the outside of the bushings
+E: Different faults make different gases. It's a powerful early-warning test.
+
+Q: Acetylene in a transformer's DGA most strongly points to:
+A: Arcing
+W: Normal aging
+W: Light loading
+W: Clean oil
+E: Acetylene needs very high temperatures. Even small amounts are a concern.
+
+# H 3
+Q: Testing a bushing using its test tap measures C1 in which mode?
+A: UST (ungrounded specimen test)
+W: GST (grounded specimen test)
+W: GSTg (guarded specimen test)
+W: DC leakage at 10 kV
+E: UST measures between the center conductor and the tap, leaving ground currents out.
+
+Q: Hydrogen as the main gas in DGA often points to:
+A: Partial discharge (corona)
+W: Overheated paper only
+W: Healthy, brand-new oil
+W: A loose bushing cap
+E: Low-energy discharges break oil into hydrogen. Trend it and look at ratios.
+
+Q: High CO and CO₂ in DGA suggest:
+A: Overheated paper insulation
+W: Arcing in the oil only
+W: Moisture from the air
+W: A well-sealed gasket
+E: Paper aging releases carbon oxides. Paper can't be replaced, so it's a life concern.
+
+Q: Why is VLF preferred over DC hipot for aged XLPE cable?
+A: It stresses insulation like service AC, without space charge
+W: It applies higher DC voltage for a more severe test
+W: It finishes faster than any DC test on any cable
+W: It needs no barricades because the voltage is low
+E: IEEE 400.2 covers VLF testing of shielded cable.
+
+# H 4
+Q: A transformer winding PF reads well above past results and similar units. Next step:
+A: Check temperature correction, then investigate with DGA and more tests
+W: Pass it, since power factor only describes the load in service
+W: Lower the test voltage until the result comes back in range
+W: Ignore it if the insulation resistance test already passed
+E: Rising PF signals moisture or deterioration. Confirm conditions first, then dig in.
+
+Q: During a 30-minute VLF withstand test, a cable fails at minute 20. The cable:
+A: Has a defect to locate and repair before service
+W: Passes, since it lasted most of the test time
+W: Should be retested at a higher voltage to confirm
+W: Only needs a longer test at lower voltage
+E: Withstand is pass/fail. Failure in service would have come at a worse time.
+
+Q: A senior tech pairs tan delta with VLF because it:
+A: Grades condition, not just pass or fail
+W: Uses no test voltage on the cable at all
+W: Removes the need for safety barricades
+W: Measures cable length more precisely
+E: Tan delta stability, value and tip-up rank which cables need attention first.
+
+Q: DGA shows ethylene rising fast with little acetylene. Most likely:
+A: Thermal overheating, often a hot joint or core problem
+W: Normal off-gassing from new oil after filling
+W: Partial discharge with no heating involved
+W: Moisture in the paper with no other issue
+E: Ethylene tracks high-temperature thermal faults. Rapid change matters more than one number.
+
+# G 1
+Q: A ground resistance test measures:
+A: How well the electrode connects to earth
+W: Insulation resistance of the feeders
+W: Breaker contact resistance per pole
+W: Motor winding resistance per phase
+E: Lower resistance helps fault current and lightning find a path to earth.
+
+Q: The "fall-of-potential" method uses:
+A: Two probes in the earth plus the electrode
+W: A clamp around the grounding conductor
+W: A megohmmeter clipped to the ground rod
+W: An infrared camera aimed at the rod
+E: Current goes out to a far probe. A potential probe measures voltage between.
+
+Q: Station batteries are mainly there to:
+A: Power breaker tripping and controls when AC is lost
+W: Start the backup generator's engine every month
+W: Run the building lights during normal operation
+W: Store solar power for use at peak times
+E: If the battery fails, protection can't trip breakers during a fault.
+
+Q: When working on lead-acid batteries, a key hazard is:
+A: Hydrogen gas and acid
+W: Radiation and X-rays
+W: Freezing electrolyte
+W: Strong magnetic fields
+E: Ventilate, wear face and eye protection, and keep sparks away.
+
+# G 2
+Q: In fall-of-potential testing, the potential probe goes at about:
+A: 62% of the distance to the current probe
+W: 10% of the distance to the current probe
+W: 100% of the distance to the current probe
+W: 50% of the distance to the current probe
+E: In uniform soil, 62% gives the true resistance. Moving it ±10% and getting close readings confirms it.
+
+Q: The clamp-on ground tester only works when:
+A: Parallel ground paths complete the loop
+W: The rod is fully isolated from others
+W: The system is energized at 13.8 kV
+W: The soil is frozen or very dry
+E: It needs a return through other grounds. A single isolated rod gives no reading.
+
+Q: A vented lead-acid battery capacity test follows:
+A: IEEE 450
+W: IEEE 43
+W: NFPA 110
+W: ASTM D877
+E: IEEE 450 covers maintenance and testing of vented lead-acid batteries.
+
+Q: Per IEEE 450, replace a battery when capacity falls below:
+A: 80% of rated
+W: 50% of rated
+W: 95% of rated
+W: 65% of rated
+E: Below 80%, capacity falls quickly toward end of life.
+
+# G 3
+Q: Intercell connection resistance on a battery is checked to find:
+A: Loose or corroded straps that can heat up
+W: The acid level inside each battery cell
+W: The charger's output frequency and ripple
+W: Paint and corrosion damage on the rack
+E: Compare readings to each other and to the baseline. High values need cleaning and retorquing.
+
+Q: For VRLA batteries, ohmic (impedance or conductance) readings are used to:
+A: Trend cell health against a baseline
+W: Replace the capacity test completely
+W: Measure each cell's specific gravity
+W: Check the charger's float voltage only
+E: IEEE 1188 covers VRLA. A rising impedance trend flags weak cells.
+
+Q: A ground grid test at a substation must consider:
+A: Grid size, since probes must be far outside its field
+W: The paint color on the substation fence posts
+W: Only the depth of one rod at the grid's corner
+W: The time of day the test is being done
+E: Large grids need long probe spacing. Too close and readings come out too low.
+
+Q: Battery float voltage set too high causes:
+A: Overcharging, water loss and grid corrosion
+W: Undercharging and sulfation of the plates
+W: Higher capacity over the battery's life
+W: Lower cell temperatures during float
+E: Too low causes sulfation. Set float voltage to the maker's value with temperature compensation.
+
+# G 4
+Q: Fall-of-potential readings keep climbing as you move the P probe, never flattening. This means:
+A: The current probe is too close; move it farther out
+W: The grounding system is excellent; record it
+W: The soil is too dry to test; stop for the day
+W: Average all the readings and report that value
+E: Without a plateau, the probes' zones of influence overlap. Extend the C probe.
+
+Q: During a battery capacity test, one cell drops much faster than the rest. Best action:
+A: Note it and, if allowed, jumper it out per procedure
+W: Stop the test and call the whole battery good
+W: Raise the charger voltage to hold that cell up
+W: Add acid to that cell and restart the test
+E: IEEE 450 allows removing a failed cell under conditions. Record time and voltages for the report.
+
+Q: A data center's ground tests at 8 Ω; the spec says 5 Ω. The senior move:
+A: Report it as a deficiency, with options like more rods
+W: Round it down to 5 Ω, since it's close enough
+W: Pass it, since the NEC allows up to 25 Ω
+W: Wait for wet weather and retest until it passes
+E: The project spec governs. Report honestly and let the engineer decide on fixes.
+
+Q: Battery temperature during a capacity test is recorded because:
+A: Capacity is corrected for temperature
+W: The load tester needs it to start up
+W: It changes the battery's voltage rating
+W: It's needed only for the safety log
+E: Cold batteries deliver less. IEEE 450 gives correction factors.
+
+# T 1
+Q: A transformer turns ratio (TTR) test checks:
+A: That the winding ratio matches the nameplate
+W: The insulation resistance of each winding
+W: The oil level and the tank's pressure
+W: The load current drawn on each phase
+E: It catches wrong taps, shorted turns and wiring errors.
+
+Q: H1, H2 and H3 on a transformer are:
+A: High-voltage terminals
+W: Low-voltage terminals
+W: Ground terminals
+W: Neutral terminals
+E: X terminals are low voltage. H0 or X0 is the neutral.
+
+Q: A transformer's tap changer is used to:
+A: Adjust the voltage ratio slightly
+W: Measure the winding current
+W: Cool the windings under load
+W: Ground the core during testing
+E: De-energized tap changers (DETC) need the transformer off to move them.
+
+Q: Before testing a transformer, check its nameplate for:
+A: Ratings, connections, impedance and taps
+W: Paint color code and the factory location
+W: Shipping weight and the crate dimensions
+W: The installer's name and phone number
+E: Every test result is compared against nameplate values.
+
+# T 2
+Q: NETA expects measured turns ratios to be within:
+A: 0.5% of the calculated ratio
+W: 5% of the calculated ratio
+W: 10% of the calculated ratio
+W: 2% of the rated voltage
+E: Ratio errors beyond this point to shorted turns or wrong connections.
+
+Q: Winding resistance tests on transformers find:
+A: Loose connections and bad tap changer contacts
+W: Moisture trapped in the paper insulation
+W: Low breakdown voltage in the insulating oil
+W: Dirt and tracking on the outside bushings
+E: Compare phases to each other and to factory data after temperature correction.
+
+Q: Transformer insulation resistance tests are typically:
+A: HV to LV+ground, LV to HV+ground, and HV to LV
+W: HV to LV only, with the tank left floating
+W: Between phases of one winding only
+W: Neutral to ground only, at 500 V DC
+E: Each combination checks a different insulation system inside the tank.
+
+Q: A transformer excitation current test helps detect:
+A: Core problems and shorted turns
+W: Dirt on the outside of bushings
+W: Oil color and its clarity
+W: Radiator oil flow and valves
+E: Phases follow a typical pattern (two similar, the center leg lower on a three-legged core). Changes flag problems.
+
+# T 3
+Q: Single-phase transformers rated 200 kVA or less with HV of 8,660 V or less are usually:
+A: Additive polarity
+W: Subtractive polarity
+W: Without polarity
+W: Reversed polarity
+E: Larger or higher-voltage units are usually subtractive. Polarity matters when paralleling.
+
+Q: After a winding resistance test, the transformer core may be magnetized. You should:
+A: Demagnetize it per the test set's procedure
+W: Energize it right away to clear the magnetism
+W: Ignore it, since it fades within a minute
+W: Run a hipot test to remove the magnetism
+E: Residual magnetism can cause high inrush on energizing and skew excitation tests.
+
+Q: SFRA (sweep frequency response analysis) detects:
+A: Winding movement or core deformation
+W: Moisture content in the oil and paper
+W: Dirt and tracking on the bushings
+W: Ground grid resistance at the pad
+E: Compare to a baseline. Common after shipping, a through-fault or relocation.
+
+Q: The neutral-ground bond on a wye secondary is checked because:
+A: A missing or extra bond changes ground fault paths
+W: It sets the transformer's turns ratio on each tap
+W: It controls how the tank sheds heat under load
+W: It decides the tap position the unit runs on
+E: The bond must be at the right place only. Verify it before energizing.
+
+# T 4
+Q: TTR on every tap shows one phase off by 2%. Likely cause:
+A: Shorted turns or a winding problem on that phase
+W: The wrong tap selected on all three phases
+W: Normal factory tolerance for that size unit
+W: Low oil level in the main transformer tank
+E: A single phase off on every tap points to that phase's winding, not the tap changer.
+
+Q: Winding resistance on one phase is high only at tap 3. The likely problem:
+A: A poor tap changer contact at that position
+W: A shorted turn affecting every tap position
+W: A cracked bushing on the high-voltage side
+W: Wet insulating oil throughout the tank
+E: Tap-specific changes point to the tap changer contacts. Cycling the changer may help.
+
+Q: A transformer's sudden pressure relay should be tested for:
+A: Operation and correct trip wiring to the lockout
+W: Turns ratio accuracy on its sensing winding
+W: Oil color and the gauge glass level
+W: Infrared emissivity of the relay housing
+E: It detects pressure surges from internal faults. A dead trip circuit means no protection.
+
+Q: A dry-type transformer reads low IR after sitting in a damp building. Best plan:
+A: Dry it out and retest before energizing
+W: Energize it to warm up and dry it out
+W: Hipot it at higher voltage to burn it dry
+W: Accept it, since dry-types handle moisture
+E: Energizing wet insulation can fail it. Dry, retest and trend toward stable readings.
+
+# B 1
+Q: A micro-ohmmeter (often called a "Ductor") measures:
+A: Very low resistance, like breaker contacts and bus joints
+W: Very high resistance, like cable and winding insulation
+W: Earth resistance of the site's grounding electrodes
+W: AC voltage and current on energized feeders
+E: Readings are in micro-ohms. High readings show worn or dirty contacts.
+
+Q: Before racking a breaker in or out, you must:
+A: Confirm it's open and follow the arc flash PPE plan
+W: Close it first so the contacts are lined up
+W: Remove its trip unit so it can't trip on you
+W: Let a trainee do it alone for the experience
+E: Racking a closed breaker can create an arc. Many sites use remote racking tools.
+
+Q: An MCC is:
+A: A motor control center
+W: A main circuit cutoff
+W: A metering control cabinet
+W: A medium current coil
+E: It's a lineup of motor starters, breakers and controls in one structure.
+
+Q: Breaker auxiliary contacts (52a and 52b) are checked to ensure:
+A: They change state correctly with the breaker
+W: They carry the breaker's main load current
+W: They set the trip unit's long-time curve
+W: They measure insulation across the poles
+E: Controls, interlocks and indicating lights all depend on them.
+
+# B 2
+Q: NETA says contact resistance that deviates from similar poles by more than this should be investigated:
+A: 50%
+W: 5%
+W: 200%
+W: 15%
+E: Compare poles of the same breaker and identical breakers. Big differences mean a problem.
+
+Q: Contact resistance is usually measured with a DC test current of at least:
+A: 100 A
+W: 1 A
+W: 10 mA
+W: 5,000 A
+E: Higher current breaks through surface films and gives a realistic reading.
+
+Q: Primary injection tests a low-voltage breaker by:
+A: Passing high current through its main contacts
+W: Sending a test signal into the trip unit port
+W: Applying a megger across its open contacts
+W: Timing its operation with a stopwatch
+E: It checks the whole system: sensors, trip unit and mechanism.
+
+Q: Secondary injection tests:
+A: The trip unit's electronics through its test port
+W: The main contacts at full rated current
+W: The insulation between poles at 1,000 V DC
+W: The arc chutes and the arc runners
+E: It's quicker and lighter, but doesn't check the breaker's current sensors.
+
+# B 3
+Q: LSIG on an electronic trip unit means:
+A: Long-time, short-time, instantaneous, ground fault
+W: Low, standard, intermediate, grade settings
+W: Line, source, input and ground terminals
+W: Load, switch, isolate and guard functions
+E: Each function has its own pickup and delay settings.
+
+Q: Thermal-magnetic molded-case breakers are commonly long-time tested at:
+A: 300% of rating
+W: 100% of rating
+W: 1,000% of rating
+W: 50% of rating
+E: At 300%, the trip time is compared with the maker's time band.
+
+Q: A vacuum bottle integrity test is done by:
+A: Applying high voltage across the open contacts
+W: Shaking the bottle and listening for a rattle
+W: Measuring contact resistance with it closed
+W: Scanning the bottle with an infrared camera
+E: A bottle that lost vacuum flashes over at test voltage. Use the maker's voltage.
+
+Q: Trip-free operation means a breaker:
+A: Trips even if the close signal is held on
+W: Never trips, even under fault conditions
+W: Trips with no control power at all
+W: Has no trip coil, only a close coil
+E: It's checked along with anti-pump, which stops repeated close attempts on a fault.
+
+# B 4
+Q: After a breaker interrupts a large fault, maintenance calls for:
+A: Inspection and testing before returning it to service
+W: Immediate reclosing to get the load back on line
+W: Cleaning the outside of the breaker and moving on
+W: Replacing the entire switchgear lineup right away
+E: Check contacts, arc chutes, insulation and trip function. The fault may have damaged it.
+
+Q: Timing tests on an MV breaker show slow opening on one pole. Likely causes:
+A: Lubrication, mechanism wear or linkage problems
+W: High insulation resistance across that pole
+W: A wrong CT ratio feeding that pole's relay
+W: A low ambient temperature in the room only
+E: Slow opening lengthens fault duration and arc flash energy. Compare to the maker's data.
+
+Q: An LV breaker passes secondary injection but fails primary injection. Suspect:
+A: The current sensors or the wiring to the trip unit
+W: The trip unit's display, which shows the wrong value
+W: Dirty paint on the breaker's front escutcheon
+W: Nothing, since secondary injection results win
+E: That's why primary injection is the stronger acceptance test.
+
+Q: A breaker's trip settings don't match the coordination study. You should:
+A: Report it and set them only per the engineer's approved settings
+W: Pick settings that seem right based on the breaker's load
+W: Leave them alone, since the breaker hasn't tripped wrongly
+W: Set every function to maximum so it never trips by mistake
+E: Settings tie into the arc flash and coordination studies. Changes need approval.
+
+# R 1
+Q: A protective relay's job is to:
+A: Sense abnormal conditions and tell a breaker to trip
+W: Carry the feeder's load current to the breaker
+W: Store energy to close the breaker after a fault
+W: Supply control power to the breaker's motor
+E: Relays are the brains. Breakers are the muscle.
+
+Q: A relay test set injects:
+A: Simulated currents and voltages into the relay
+W: Full fault current into the main switchgear bus
+W: Fresh oil into the transformer under test
+W: DC charging current into the station battery
+E: It lets you test the relay's response without a real fault.
+
+Q: A relay's "pickup" is:
+A: The lowest value where it starts to operate
+W: How fast the breaker closes after a trip
+W: The relay's weight on its panel mount
+W: The CT ratio the relay is wired to
+E: Below pickup, the relay ignores the current. At and above it, it times toward a trip.
+
+Q: CT ratio testing confirms:
+A: The right secondary current for a given primary current
+W: The CT's paint color matches the drawings
+W: The CT's insulation is above the minimum
+W: The CT's weight matches the nameplate
+E: A wrong ratio makes every relay and meter reading wrong.
+
+# R 2
+Q: Relay timing is usually checked at:
+A: Several multiples of pickup on the curve
+W: Pickup only, since the rest follows
+W: Zero current, to check for false trips
+W: 100× pickup, the worst-case fault
+E: Checking several points confirms the whole curve and time dial.
+
+Q: The CT excitation (saturation) test shows:
+A: The voltage-current curve and knee point
+W: The CT's ratio and nothing else
+W: Insulation resistance of the secondary
+W: The burden of the meter circuit only
+E: It confirms the CT can drive its burden without saturating in a fault.
+
+Q: Induction disc relays should be checked for:
+A: Disc freedom, spring tension, contacts and target
+W: Battery level, firmware and display brightness
+W: Software version and network settings
+W: Oil quality and gasket condition
+E: Electromechanical relays wear mechanically. Clean and adjust before timing tests.
+
+Q: A relay "target" or flag shows:
+A: That the relay operated
+W: The CT ratio in use
+W: The room temperature
+W: The breaker's age
+E: Targets help find which relay tripped after an event. Reset after testing.
+
+# R 3
+Q: A phase-angle meter is used in service to check:
+A: CT and PT phasing at the relay with load flowing
+W: Insulation resistance of the CT secondary wiring
+W: Ground rod depth and soil resistivity nearby
+W: Breaker contact wear on each of the three poles
+E: In-service checks confirm polarity and phasing that bench tests can't.
+
+Q: Testing a microprocessor relay should include:
+A: Settings check, element tests and trip output checks
+W: A visual inspection of the front panel only
+W: A hipot test of the relay case at 2,500 V
+W: Checking that the display lights up on power
+E: Confirm the right setting file loaded, each element works and outputs actually trip the breaker.
+
+Q: A "trip check" verifies:
+A: The relay's output actually opens the breaker
+W: The relay's front panel lights all work
+W: The breaker's paint and labels are correct
+W: The relay's internal clock is set right
+E: A perfect relay is useless if its wire to the trip coil is broken.
+
+Q: Burden measurement on a CT circuit checks:
+A: The total load seen by the CT secondary
+W: The CT's primary current during a fault
+W: The relay's settings and curve choice
+W: The PT secondary voltage at the relay
+E: Excess burden from long leads or added devices pushes the CT toward saturation.
+
+# R 4
+Q: A differential relay shows operate current under normal load after commissioning. First check:
+A: CT polarity, ratio and phase compensation settings
+W: Replace the relay, since it must be faulty
+W: Raise the pickup until the reading goes away
+W: Ignore it as long as the value stays small
+E: Standing differential current usually means a wiring or settings mismatch.
+
+Q: A relay passed bench tests, but the breaker didn't trip during a real fault. Likely gap:
+A: Trip circuit, DC supply or outputs not tested end to end
+W: The relay's display contrast was set too low to read
+W: The CT nameplate was painted over during install
+W: The fault happened at night when relays run slower
+E: End-to-end functional testing proves the whole chain, not just the relay.
+
+Q: Why record "as-found" before adjusting a relay?
+A: It shows how protection would have behaved
+W: It's only needed for billing the customer
+W: It lets you skip recording the as-left
+W: It makes the relay trip faster afterward
+E: As-found data shows drift and hidden problems. As-left proves the final condition.
+
+Q: CT excitation curves on three phases match except one, which saturates much lower. Likely:
+A: Shorted turns or a wrong tap on that CT
+W: Normal manufacturing variation in CTs
+W: A better CT than the other two phases
+W: The test was run too slowly on that phase
+E: Matching CTs should have matching curves. A low knee point means trouble in a fault.
+
+# C 1
+Q: Medium-voltage cables have a metallic shield to:
+A: Control the electric field and carry fault current
+W: Keep water out of the conductor strands
+W: Add strength when pulling through conduit
+W: Make the cable easier to see in a trench
+E: The shield must be grounded properly. Broken shields stress insulation.
+
+Q: Before testing a cable, its ends should be:
+A: Isolated from equipment and guarded
+W: Left connected to the motor or load
+W: Tied to the energized bus for reference
+W: Covered with tape and left unattended
+E: Disconnect transformers, arresters and loads so you test only the cable.
+
+Q: A cable fault is:
+A: A break or insulation failure along the cable
+W: A cable that was cut too short to terminate
+W: Any cable carrying more than half its rating
+W: A missing label at one of the cable's ends
+E: Finding where along a long run is the job of fault locating.
+
+Q: XLPE stands for:
+A: Cross-linked polyethylene
+W: Extra-large polymer element
+W: Extruded low-pressure epoxy
+W: Cross-layer paper enamel
+E: It's the most common insulation for modern medium-voltage cable.
+
+# C 2
+Q: A TDR (time domain reflectometer) finds faults by:
+A: Sending a pulse and timing its reflection
+W: Measuring insulation resistance at 5 kV
+W: Listening for sparks along the route
+W: Heating the cable to find a hot spot
+E: Opens and low-resistance faults reflect clearly. It also measures cable length.
+
+Q: A "thumper" (surge generator) is used to:
+A: Make a high-resistance fault flash over so it can be located
+W: Measure the cable's length from one end without digging
+W: Megger the cable at a higher voltage than normal testers
+W: Dry out wet cable insulation by heating the conductor
+E: Each surge creates a thump at the fault. Use it carefully because it stresses the cable.
+
+Q: Shield continuity testing confirms:
+A: The metallic shield is intact end to end
+W: The conductor's turns ratio is correct
+W: The jacket color matches the phase
+W: The cable's age matches the records
+E: A broken shield can't carry fault current or control the field.
+
+Q: Tan delta on cable is judged by:
+A: Its value, stability over time and change with voltage
+W: Only the cable's length and its conductor size
+W: Only the jacket color and the print legend
+W: The weather and soil moisture on test day
+E: IEEE 400.2 guidance ranks results as no action, further study or action required.
+
+# C 3
+Q: Arc reflection fault locating combines:
+A: A TDR with a surge that briefly shorts the fault
+W: Infrared scanning with ultrasound listening
+W: A megger reading with a clamp-on meter
+W: A hipot test with dissolved gas analysis
+E: The arc creates a short-lived low-resistance path the TDR can see clearly.
+
+Q: Partial discharge testing on cables helps find:
+A: Defects in splices, terminations and insulation
+W: The conductor's ampacity at full load
+W: Phase rotation at each end of the run
+W: The ground rod depth at each termination
+E: PD often starts at accessories. Locating it lets you fix a splice before it fails.
+
+Q: Why is repeated thumping at high energy discouraged?
+A: It can damage good parts of the cable
+W: It's too quiet to hear at the fault
+W: It dries out the cable insulation
+W: It's against the NEC in every state
+E: Use the lowest energy that works and pre-locate with TDR or arc reflection first.
+
+Q: Cable "pre-location" means:
+A: Finding the rough distance before pinpointing
+W: Labeling the cable reels before shipping
+W: Testing the cable before it's pulled in
+W: Marking the trench route before digging
+E: Pre-locate with TDR or arc reflection, then pinpoint with acoustic or magnetic detection.
+
+# C 4
+Q: A new 15 kV cable passes VLF withstand but shows high PD at one splice. Senior judgment:
+A: Investigate or remake that splice before energizing
+W: Accept the cable, since the withstand test passed
+W: Retest it with a DC hipot to confirm the result
+W: Energize it now and monitor the splice for a year
+E: A withstand pass doesn't prove a defect-free splice. Fixing it now costs less than a failure.
+
+Q: Tan delta on one phase of an aged cable is high and unstable over time. Likely:
+A: Moisture or water-treeing in that phase
+W: Excellent condition for an aged cable
+W: The wrong frequency set on the test unit
+W: A loose clamp on the test lead only
+E: Instability over time points to water in the insulation. Plan replacement or rejuvenation.
+
+Q: A fault locate points to a known splice location. Next step:
+A: Confirm by pinpointing, then repair and retest the run
+W: Cut the cable at random spots nearby to check it
+W: Re-energize the cable to see if the fault clears
+W: Repair the splice and skip retesting the cable
+E: Confirm before digging. Retest after repair to prove the whole run is sound.
+
+Q: For a 30-year-old XLPE feeder, the best test choice is:
+A: VLF, with tan delta or PD for condition data
+W: DC hipot at the maximum allowed voltage
+W: No testing; just energize and watch it
+W: A 10 kV megger test with no other tests
+E: Industry guidance favors AC-type testing on aged extruded cable.
+
+# M 1
+Q: A motor's insulation is tested from:
+A: Windings to the frame (ground)
+W: The frame to the concrete floor
+W: One end of a winding to the other
+W: The fan blade to the motor shaft
+E: Disconnect the motor leads from the starter or drive first.
+
+Q: A surge arrester protects equipment from:
+A: Voltage spikes like lightning and switching
+W: Long-term overloads on the circuit
+W: Low voltage during utility sags
+W: High ground resistance at the site
+E: It diverts surge energy to ground, so its ground connection must be solid.
+
+Q: Power factor correction capacitors are used to:
+A: Supply reactive power and improve PF
+W: Store energy as backup during outages
+W: Raise the system frequency under load
+W: Lower the site's ground resistance
+E: Better PF lowers current and utility penalties.
+
+Q: Before touching a capacitor bank, you must:
+A: Make sure it's discharged and grounded
+W: Open the breaker and start right away
+W: Wait about a second for it to bleed off
+W: Check the cans for bulging and leaks only
+E: Capacitors hold charge after power is removed.
+
+# M 2
+Q: A motor winding resistance test compares phases to find:
+A: Shorted turns, loose connections or open strands
+W: Moisture and dirt in the winding insulation
+W: Bearing wear and shaft misalignment
+W: Cracks or damage on the cooling fan blades
+E: The three phases should closely match. A low phase can mean shorted turns.
+
+Q: The surge comparison test on a motor checks:
+A: Turn-to-turn insulation by comparing waveforms
+W: Bearing temperature under full rated load
+W: Motor speed and slip compared to nameplate
+W: Ground resistance at the motor's frame
+E: Matching waveforms mean healthy turn insulation. A shift points to a weak or shorted turn.
+
+Q: The NEC requires capacitors 600 V and below to discharge to 50 V or less within:
+A: 1 minute
+W: 5 minutes
+W: 10 seconds
+W: 1 hour
+E: Above 600 V the limit is 5 minutes. Still verify and ground before touching.
+
+Q: Surge arrester testing commonly includes:
+A: Insulation resistance, ground checks and watts-loss
+W: A load bank test at 75% of the arrester rating
+W: A turns ratio test across the arrester stack
+W: Contact resistance at 100 A through the arrester
+E: A damaged arrester can leak, overheat or fail to protect.
+
+# M 3
+Q: Current imbalance in a running motor is often caused by:
+A: Voltage unbalance or a winding problem
+W: High insulation resistance in the stator
+W: A clean, well-ventilated motor housing
+W: New bearings with fresh grease
+E: Check supply voltages first, then the motor's windings.
+
+Q: Before megging a motor fed by a VFD, you must:
+A: Disconnect the drive from the motor leads
+W: Leave the drive connected to save time
+W: Run the motor first to warm it up
+W: Megger through the drive's input side
+E: Megger voltage can destroy drive electronics.
+
+Q: Capacitor bank testing can include:
+A: Capacitance, IR, fuses and discharge resistors
+W: A turns ratio test on each capacitor can
+W: Oil DGA on each can in the bank
+W: Breaker timing on each capacitor fuse
+E: A failed can or blown fuse changes capacitance and unbalances the bank.
+
+Q: A motor should NOT be surge tested when:
+A: Its ground insulation has failed IR
+W: It's brand new from the factory
+W: It's rated under 100 horsepower
+W: It's fed from a variable drive
+E: Surge tests stress insulation. Pass IR and PI first.
+
+# M 4
+Q: Surge waveforms for two phases match, but the third shifts left with lower amplitude. Likely:
+A: A turn-to-turn short on that phase
+W: A perfectly healthy motor winding
+W: Bad test leads on that phase only
+W: A broken rotor bar in the motor
+E: Shorted turns lower inductance, which shifts the ring wave.
+
+Q: A capacitor bank keeps blowing one fuse. Senior troubleshooting starts with:
+A: Measuring each unit's capacitance and checking for harmonic resonance
+W: Installing larger fuses so the bank stops dropping out of service
+W: Removing the fuse and running that leg of the bank unfused
+W: Ignoring it, since one blown fuse doesn't change the bank's output
+E: Failed units or harmonic resonance with the system cause repeat fuse operations.
+
+Q: A motor shows 6% current imbalance with 1% voltage unbalance. This suggests:
+A: Normal amplification of supply unbalance; check the source
+W: A shorted turn on one phase, for certain
+W: A faulty clamp meter giving bad readings
+W: No issue at any level of current unbalance
+E: A 6–10× multiplier is typical. Correcting supply unbalance often fixes it.
+
+Q: A surge arrester's leakage current keeps rising across tests. You should:
+A: Plan replacement, since it's degrading and could fail
+W: Accept it as normal aging for any surge arrester
+W: Raise the system voltage to reduce the leakage
+W: Disconnect its ground lead to stop the leakage
+E: Arresters wear with each surge. A failing one can short and cause an outage.

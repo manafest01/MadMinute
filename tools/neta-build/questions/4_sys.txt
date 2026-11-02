@@ -1,0 +1,581 @@
+@pack sys
+
+# P 1
+Q: Commissioning means:
+A: Proving a system works as designed before handover
+W: Paying the sales team a percentage on the gear
+W: Installing the equipment and wiring it up
+W: Writing and approving the purchase orders
+E: It goes beyond single tests to check how whole systems work together.
+
+Q: Acceptance testing is done:
+A: On new equipment before it goes into service
+W: On old equipment after ten years of service
+W: Only after equipment fails in the field
+W: Only at the factory before it ships out
+E: NETA ATS covers acceptance tests. MTS covers ongoing maintenance.
+
+Q: A factory acceptance test (FAT) happens:
+A: At the manufacturer, before shipping
+W: On site, after the gear is energized
+W: At the utility's office, by mail
+W: After the warranty period ends
+E: Catching problems at the factory is cheaper than finding them on site.
+
+Q: Before energizing new gear for the first time, the crew should confirm:
+A: Tests passed, grounds removed and everyone clear
+W: The doors are shut and the lights are working
+W: The customer and the engineer are both on site
+W: The paint is dry and the labels are installed
+E: Pre-energization checklists prevent energizing onto grounds, tools or people.
+
+# P 2
+Q: In data center commissioning, Level 2 usually covers:
+A: Installation verification on site
+W: Factory witness testing at the plant
+W: The integrated systems test
+W: Final paperwork and turnover
+E: L1 factory, L2 installation checks, L3 start-up, L4 functional tests, L5 integrated systems test.
+
+Q: Level 5 commissioning, the integrated systems test (IST), checks:
+A: How all systems respond together, like a utility loss
+W: One breaker at a time, each on its own test bench
+W: The completed paperwork against the specifications
+W: Production quality at the gear manufacturer's plant
+E: The IST pulls power and watches generators, UPS, cooling and controls work as one.
+
+Q: A commissioning "punch list" is:
+A: A list of open items to fix before turnover
+W: A list of the tools loaded on each truck
+W: A list of a test set's error codes
+W: A list of the site's safety rules
+E: Each item gets an owner and closes when fixed and verified.
+
+Q: Commissioning tags (like red, yellow, green) are used to:
+A: Show which level each piece of equipment has passed
+W: Mark the purchase price on each piece of gear
+W: Label the phase colors on each set of cables
+W: Show which contractor installed each item
+E: A quick visual on the floor of where each item stands.
+
+# P 3
+Q: Phasing out before closing two sources together confirms:
+A: Phases line up, so you don't close out of phase
+W: The breakers are new and still under warranty
+W: Insulation on both sources is above minimum
+W: The station batteries are fully charged
+E: Closing A to B is a dead short. Check voltage across each pair before tying sources.
+
+Q: A switching order is:
+A: A written step-by-step plan for operating devices
+W: A purchase order for new disconnect switches
+W: A list of every breaker's size and frame
+W: A relay setting file for a feeder breaker
+E: It's reviewed, briefed, read back and checked off step by step.
+
+Q: Energizing a large transformer for the first time, expect:
+A: High inrush, so protection must ride through it
+W: No current at all until load is connected
+W: A drop in system frequency for a minute
+W: An instant trip on every energizing attempt
+E: Inrush can be many times rated current for a short time. Relays use restraint or delay.
+
+Q: Who usually leads switching during first energization?
+A: The qualified person named in the switching plan
+W: Whoever on the crew arrives at the site first
+W: A trainee, for experience under observation
+W: The equipment vendor's sales representative
+E: One person directs. Others confirm and log each step.
+
+# P 4
+Q: During an IST, the generator starts but the UPS stays on battery too long. Senior response:
+A: Stop at a safe point, capture data, and find the cause before retesting
+W: Keep testing the rest of the script and note the issue for later
+W: Skip the UPS steps and finish the other systems on schedule
+W: Pass the step, since the critical load never lost any power
+E: An IST finding is a gift before go-live. Trend logs and sequence of events reveal why.
+
+Q: Why does commissioning need an approved test script before testing?
+A: Everyone agrees on steps, expected results and pass criteria
+W: Scripts slow the testing down so mistakes are less likely
+W: The test sets require a loaded script before they'll start
+W: An approved script replaces the job's safety planning
+E: Scripts prevent arguments afterward about what "pass" meant.
+
+Q: The owner wants to skip the load bank test to save time. As lead, you:
+A: Explain the risk in writing and get the owner's formal decision
+W: Skip it quietly and leave it out of the final report
+W: Record passing results as if the test was completed
+W: Walk off the job until the owner agrees to the test
+E: Document the risk and get a written decision. Never record tests that weren't done.
+
+Q: Which mindset best fits a commissioning lead?
+A: Assume nothing works until it's proven
+W: Trust the installer's word on each item
+W: Test only what's quick and easy to reach
+W: Pass anything that's close enough to spec
+E: Commissioning finds what everyone else missed. Verify, don't assume.
+
+# D 1
+Q: A test report should include:
+A: Equipment ID, results, test equipment used and who tested
+W: A single pass or fail checkmark for the whole lineup
+W: The customer's name and the date, nothing else
+W: Photos of the equipment, with no test numbers
+E: Clear records let others trust, repeat and compare the work.
+
+Q: "As-found" readings are taken:
+A: Before any repair or adjustment
+W: After all repairs are finished
+W: Only on brand-new equipment
+W: Only when results look bad
+E: They show the condition you found it in. As-left shows the condition you left it in.
+
+Q: Test equipment must be:
+A: Within its calibration date
+W: Brand new for every job
+W: Bought by the customer
+W: The cheapest brand made
+E: An out-of-cal instrument can make bad equipment look good.
+
+Q: Why record ambient temperature and humidity on a test?
+A: They affect readings, especially insulation tests
+W: They're needed for the site's weather forecast
+W: They let the company bill extra on hot days
+W: They're not needed for any electrical test
+E: Temperature correction and humidity notes explain differences between tests.
+
+# D 2
+Q: Test equipment calibration should be traceable to:
+A: National standards, like NIST
+W: The tech's own personal meter
+W: The equipment's nameplate data
+W: The customer's past test reports
+E: Traceability ties your readings back to a recognized reference.
+
+Q: A deficiency found during testing should be:
+A: Reported with the reading, criteria and recommendation
+W: Fixed quietly on site without writing anything down
+W: Left out of the report to avoid upsetting the owner
+W: Mentioned only to the crew at the end of the shift
+E: The owner needs to know what failed, by how much, and what to do.
+
+Q: A report says "Pass" but lists no acceptance criteria. The problem:
+A: Nobody can verify why it passed
+W: There's no problem with it at all
+W: It's far too detailed to be useful
+W: The criteria are meant to stay secret
+E: List the standard or maker's value used so results can be checked.
+
+Q: Why keep test data in a consistent format year to year?
+A: So results can be trended over time
+W: So the reports look longer and fuller
+W: Because color coding rules require it
+W: To make the data harder to audit
+E: Trends reveal slow deterioration that one test can't show.
+
+# D 3
+Q: NETA-style reports typically rate results as:
+A: Acceptable, needs attention or unacceptable
+W: Gold, silver or bronze for each item
+W: Red, white or blue by equipment type
+W: Pass only, with no other ratings used
+E: Clear categories help owners plan repairs by urgency.
+
+Q: A Level 2 technician's role on reports is usually to:
+A: Record test data accurately for review
+W: Approve and sign the final report alone
+W: Sign as the engineer of record
+W: Decide the owner's repair budget
+E: Level 3 and 4 techs review, interpret and sign off.
+
+Q: When a reading looks odd, before reporting it you should:
+A: Check connections and setup, then retest
+W: Adjust it so it matches the other phases
+W: Delete it and leave that line blank
+W: Average it with the other readings
+E: Bad leads and setups cause many strange readings. Confirm before calling it a failure.
+
+Q: Field notes should be written:
+A: As you go, not from memory later
+W: Once at the end of the week
+W: Only if something failed
+W: By the customer's staff
+E: Live notes are more accurate and defensible.
+
+# D 4
+Q: Reviewing a junior's report, you find a temperature-corrected IR value calculated wrong. You should:
+A: Correct it, explain the method, and recheck similar entries
+W: Leave it alone, since the raw reading is in the report
+W: Throw out the whole report and retest everything
+W: Fail the equipment, just to be on the safe side
+E: Fix the error, coach the person, and check for the same mistake elsewhere.
+
+Q: An owner asks you to remove a failed result from the final report. You:
+A: Decline, and document any corrective action taken
+W: Remove it, since the owner is paying for the report
+W: Change the result to "pass" with a footnote
+W: Move it to an appendix that nobody reads
+E: Honest reports protect people. Show the failure and the fix if one was made.
+
+Q: Good commissioning documentation at turnover includes:
+A: Test reports, as-left settings, as-builts and open issues
+W: The final invoice and the signed change orders only
+W: Photos of each piece of gear with no test data
+W: The punch list alone, since it covers the problems
+E: The owner's team will maintain this gear for decades using it.
+
+Q: Two techs' readings on the same item differ a lot. Best senior approach:
+A: Compare setups and instruments, then retest together
+W: Pick the better-looking result for the report
+W: Average the two readings and report that value
+W: Report both readings and leave it to the owner
+E: Differences usually come from method. Find it and standardize the procedure.
+
+# F 1
+Q: Functional testing checks that:
+A: Equipment and controls do what they should when operated
+W: Paint, labels and nameplates match the drawings exactly
+W: Insulation resistance is above the minimum on each item
+W: Prices on the bill of materials match the purchase order
+E: It proves the system works as a whole, not just that parts passed tests.
+
+Q: Interlocks are designed to:
+A: Stop unsafe operations, like tying two sources
+W: Make the switchgear lighter and easier to ship
+W: Speed up breaker tripping during a fault
+W: Keep the switchgear cool under heavy load
+E: Mechanical or electrical interlocks must be tested to prove they actually block.
+
+Q: An indicating light test confirms:
+A: Lights show breaker and control status correctly
+W: The room's lighting is bright enough to work
+W: The bulbs are from the approved brand list
+W: The insulation on the light wiring is good
+E: Operators rely on lights to know if a breaker is open or closed.
+
+Q: A Kirk key interlock works by:
+A: Letting one key operate devices only in a safe sequence
+W: Locking the front door of the electrical room
+W: Measuring current through the interlocked breaker
+W: Setting the relay curves for the two breakers
+E: The key is trapped until its device is in a safe state.
+
+# F 2
+Q: A control circuit test energizes:
+A: Control wiring to check close, trip and alarm functions
+W: The main bus at full voltage to check the insulation
+W: The space heaters only, to dry out the switchgear
+W: The utility service to check the incoming metering
+E: Testing controls with the primary de-energized is a safe first step.
+
+Q: Testing an alarm point means:
+A: Creating the condition and confirming the alarm arrives
+W: Reading the alarm label and checking its wording
+W: Pressing the horn test button on the panel only
+W: Muting the alarm so it doesn't bother the crew
+E: An alarm only counts if the right person or system actually receives it.
+
+Q: Why test the breaker anti-pump function?
+A: To prevent repeated closing onto a fault
+W: To make the breaker close more quickly
+W: To check the oil level in the dashpot
+W: To raise the breaker's trip current
+E: With a held close signal, the breaker should close once and trip, not cycle.
+
+Q: Breaker close and trip should be tested from:
+A: Every control point: local, remote and SCADA
+W: The front panel switch only, since it's primary
+W: The SCADA screen only, since that's what's used
+W: The manual push buttons only, by hand
+E: Each path has its own wiring and permissives.
+
+# F 3
+Q: Main-tie-main schemes should be tested for:
+A: Transfer, interlocking and protection in each source condition
+W: Paint color and labeling on all three breakers
+W: Phase rotation on the tie breaker only
+W: One breaker operating once from its front panel
+E: Test loss of each source, return of power, and blocks against paralleling when not allowed.
+
+Q: A lockout relay (86) test confirms:
+A: It trips all the right breakers and blocks closing until reset
+W: It lights its front LED whenever the breaker trips
+W: It recloses the breakers automatically after the trip
+W: It measures bus voltage and reports it to SCADA
+E: Missing one trip wire can leave a faulted zone fed.
+
+Q: A feeder breaker trips with no relay target. Likely places to look:
+A: Trip wiring, DC grounds or a shunt trip from another device
+W: The breaker's nameplate and its interrupting rating
+W: The electrical room's thermostat and HVAC settings
+W: Phase rotation at the main bus and the feeder
+E: Unexplained trips often come from control wiring, DC grounds, or external trip inputs.
+
+Q: A DC ground on the station battery system is dangerous because:
+A: A second ground can cause false trips or block real ones
+W: It raises the battery's capacity above its rating
+W: It improves protection by grounding the trip circuit
+W: It lowers charger noise but shortens battery life
+E: DC systems are usually ungrounded. Find the first ground before a second one acts.
+
+# F 4
+Q: A breaker trips from its own relay but not from the bus differential lockout. Next step:
+A: Trace the 86 trip contact wiring to that breaker
+W: Pass it, since the breaker trips from its own relay
+W: Replace the breaker, since its trip coil must be bad
+W: Raise the differential pickup and test it again
+E: Every protection path must be proven separately.
+
+Q: A transfer scheme passed testing but closed both mains during a real event. Likely gap:
+A: A scenario or permissive that wasn't tested
+W: The breakers were too new to work reliably
+W: Too many tests wore out the mechanisms
+W: The building was too cold that day
+E: Commissioning must cover abnormal sequences, not just the normal path.
+
+Q: A senior tech builds a functional test plan. It should start from:
+A: The schematics and the sequence of operations
+W: Whatever items are quickest and easiest to test
+W: Notes from last year's job at a different site
+W: The order the equipment arrived on site
+E: Every contact and permissive in the schematic should map to a test step.
+
+Q: Testing protection "end to end" means:
+A: From the sensing input through relay logic to the breaker opening
+W: Testing only the two terminations at each end of a cable run
+W: Checking the relay's display and settings at the front panel
+W: Testing the first and the last breaker in the lineup only
+E: It proves the whole chain works, including wiring, DC supply and the mechanism.
+
+# A 1
+Q: An automatic transfer switch (ATS) switches the load:
+A: From normal to emergency power when normal fails
+W: From DC to AC power when the inverter starts
+W: From high voltage to low voltage at the service
+W: From one motor to another when the first trips
+E: When normal returns and is stable, it switches back.
+
+Q: Emergency systems under the NEC must restore power within:
+A: 10 seconds
+W: 60 seconds
+W: 5 minutes
+W: 30 seconds
+E: Life safety loads like egress lighting can't wait long.
+
+Q: An ATS "test switch" is used to:
+A: Simulate loss of normal power
+W: Lock out the generator for service
+W: Measure the switch's insulation
+W: Reset the utility revenue meter
+E: It lets you run a transfer test without dropping the utility.
+
+Q: The ATS starts the generator through:
+A: An engine start contact
+W: A call to the vendor
+W: A manual crank handle
+W: A signal from the utility
+E: The ATS closes a contact when normal power fails, telling the generator to start.
+
+# A 2
+Q: The ATS engine-start time delay exists to:
+A: Ride through brief outages without starting the engine
+W: Make the generator run longer after each start
+W: Speed up the transfer once the engine starts
+W: Test the starting battery before each start
+E: A second or two avoids starts on momentary blips.
+
+Q: The retransfer time delay (emergency to normal) exists to:
+A: Make sure utility power is stable before switching back
+W: Shorten the generator's total run time each outage
+W: Lower inrush current when the load transfers back
+W: Charge the generator's starting battery more quickly
+E: Utility power can bounce. Waiting avoids transferring back onto a shaky source.
+
+Q: The engine cooldown time delay lets the generator:
+A: Run unloaded for a while after retransfer
+W: Shut down instantly as soon as load drops
+W: Start faster the next time it's called
+W: Recharge the ATS controller's battery
+E: Cooling down prevents heat soak and extends engine life.
+
+Q: NFPA 110 monthly generator tests run at least 30 minutes with load of at least:
+A: 30% of nameplate kW
+W: 5% of nameplate kW
+W: 100% of nameplate kW
+W: 10% of nameplate kW
+E: Light loading causes wet stacking. Load or exhaust temperature targets prevent it.
+
+# A 3
+Q: An in-phase monitor in an ATS:
+A: Allows transfer between live sources only when nearly in phase
+W: Measures insulation resistance on both sources before transfer
+W: Tests the generator's ground resistance before each transfer
+W: Counts engine run hours for the maintenance schedule
+E: It prevents damaging motors with out-of-phase reconnection.
+
+Q: A closed-transition ATS:
+A: Briefly parallels both sources so the load never drops
+W: Always opens one source fully before closing the other
+W: Never transfers back to normal once on emergency
+W: Runs with no controls, relying on manual operation
+E: The overlap is short, often under 100 ms. Utility rules may apply.
+
+Q: When monthly tests can't meet the load target, NFPA 110's annual load bank test is commonly:
+A: 50% load for 30 minutes, then 75% for 60 minutes
+W: 10% load for 10 minutes, then shut down
+W: 100% load for 8 hours without stopping
+W: No load for 2 hours, then 25% for 30 minutes
+E: Load banks burn off unburned fuel and prove capacity.
+
+Q: Life safety emergency power systems are classified by NFPA 110 as:
+A: Level 1
+W: Level 3
+W: Level 0
+W: Level 4
+E: Level 1 is where failure could mean loss of life. Level 2 is less critical.
+
+# A 4
+Q: An ATS transfers but critical motors trip on retransfer. Likely cause and fix:
+A: Out-of-phase transfer; add in-phase monitoring or delayed transition
+W: The motors are undersized; replace them with larger motors
+W: The generator is too cold; add a bigger block heater
+W: There's too little load; add a permanent load bank
+E: Residual motor voltage out of phase with the source creates huge torque and current.
+
+Q: A Level 1 system also needs a longer test at least every 36 months of:
+A: 4 hours
+W: 15 minutes
+W: 24 hours
+W: 1 hour
+E: NFPA 110 calls for the triennial 4-hour test to prove sustained operation.
+
+Q: The generator reaches voltage but the ATS won't transfer. Check first:
+A: Emergency voltage and frequency pickup settings and timers
+W: The utility revenue meter and its demand reset
+W: Insulation resistance on the ATS power poles
+W: The paint and labels on the ATS cabinet door
+E: The ATS waits for acceptable voltage and frequency on emergency before transferring.
+
+Q: For a hospital ATS test, a senior tech should coordinate with:
+A: Facility staff, so life safety areas are ready
+W: No one, since transfer tests are routine work
+W: The utility only, since it's their power
+W: The generator vendor only, since it's theirs
+E: Planned outages in hospitals need careful communication and backup plans.
+
+# G 1
+Q: A standby generator's job is to:
+A: Supply power when the utility fails
+W: Raise utility voltage during sags
+W: Store solar energy for the night
+W: Test the site's insulation daily
+E: It powers critical loads during outages.
+
+Q: Generator output frequency depends on:
+A: Engine speed
+W: Load power factor
+W: The ATS setting
+W: The cable length
+E: A 4-pole, 60 Hz generator runs at 1,800 rpm.
+
+Q: A load bank is used to:
+A: Put an artificial load on a generator for testing
+W: Store spare batteries for the generator's starter
+W: Transfer the building's load to the generator
+W: Measure the generator's ground resistance
+E: It proves the generator can carry real load without risking site equipment.
+
+Q: Wet stacking in diesel generators comes from:
+A: Long periods of running at light load
+W: Long periods of running at full load
+W: Cold weather alone, with any load
+W: Too much fuel filtering on the engine
+E: Unburned fuel builds up in the exhaust. Load testing burns it off.
+
+# G 2
+Q: Before paralleling a generator to the bus, these must match:
+A: Voltage, frequency, phase angle and phase rotation
+W: Voltage only, since frequency adjusts itself
+W: Frequency only, since voltage follows the bus
+W: Engine hours and the last service date
+E: Closing out of sync can damage the engine, generator and switchgear.
+
+Q: The device that checks matching before a paralleling breaker closes is:
+A: A synchronism-check relay (25)
+W: An undervoltage relay (27)
+W: A lockout relay (86)
+W: A differential relay (87)
+E: It blocks closing unless voltage, frequency and angle are within limits.
+
+Q: A reverse power relay (32) on a generator protects against:
+A: The generator motoring off the bus
+W: Overvoltage on the generator bus
+W: Ground faults inside the stator
+W: Low oil pressure in the engine
+E: Motoring can damage the prime mover. 32 trips it off.
+
+Q: Load sharing between paralleled generators is done by:
+A: Governors (kW) and voltage regulators (kVAR)
+W: The ATS controller, which divides the load
+W: Matching circuit breaker frame sizes
+W: The fuel system, which balances engine speed
+E: Governors share real power. Regulators share reactive power.
+
+# G 3
+Q: A synchroscope shows the generator slowly rotating clockwise. This means:
+A: The generator is slightly faster than the bus
+W: The generator is slightly slower than the bus
+W: The generator's phases are reversed
+W: The generator is off and not turning
+E: Close just before 12 o'clock while it rotates slowly in the fast direction.
+
+Q: Loss of excitation (40) protection trips when:
+A: The generator loses its field and draws reactive power
+W: The engine's fuel tank runs below the low level
+W: The generator's output voltage rises too high
+W: The generator's frequency rises above the setting
+E: Without excitation, the generator acts like an induction machine and overheats.
+
+Q: Generator step-load tests check:
+A: Voltage and frequency dips and recovery when loads are added
+W: Steady-state output at one fixed load for several hours
+W: Insulation resistance of the stator at operating temperature
+W: Fuel quality and filter condition under full load
+E: NFPA 110 and owners set limits on how far and how long voltage and frequency can dip.
+
+Q: Generator neutral grounding affects:
+A: Ground fault current and protection design
+W: Engine speed and governor response
+W: Fuel use per kilowatt-hour produced
+W: The size of the radiator needed
+E: Paralleled generators need careful neutral grounding to avoid circulating currents.
+
+# G 4
+Q: Two paralleled generators share kW evenly but one carries far more kVAR. Likely fix:
+A: Adjust voltage regulator droop or reactive sharing
+W: Adjust the engine governor's speed setting
+W: Change the generator breaker's frame size
+W: Add a load bank to the lighter generator
+E: kVAR sharing is controlled by excitation, not speed.
+
+Q: A generator breaker closed out of phase during commissioning. Required follow-up:
+A: Inspect the generator, coupling and breaker before running again
+W: Retry the sync immediately while the crew is still in place
+W: Ignore it as long as nothing tripped or alarmed at the time
+W: Widen the sync window so it closes more easily next time
+E: Out-of-phase closing creates huge torque that can damage shafts and windings.
+
+Q: Circulating current between paralleled generators with solidly grounded neutrals often involves:
+A: Third-harmonic current through the neutrals
+W: Fifth-harmonic current through the phases only
+W: DC current fed from the starting batteries
+W: Fuel pressure differences between the engines
+E: Mismatched winding pitch lets third-harmonic current loop through the neutrals.
+
+Q: A senior lead's plan for paralleling switchgear should include:
+A: Sync checks, load sharing, protection and failure scenarios
+W: A single successful sync of each unit to the bus
+W: A visual inspection of each generator breaker
+W: Reverse power testing on one generator only
+E: Test the normal sequence and what happens when a unit fails, a breaker fails, or utility returns.

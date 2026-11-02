@@ -8,7 +8,7 @@ Newest stage is at the bottom. Commit hashes link a stage to the exact change in
 
 ## How to read the code
 
-Every app (`/`, `/biology/`, `/music/`, `/dev/`) is one self-contained `index.html`. Inside, the engine is split by comment headers. Search for these to jump to a part:
+Every app (`/`, `/biology/`, `/music/`, `/dev/`, `/neta/`) is one self-contained `index.html`. Inside, the engine is split by comment headers. Search for these to jump to a part:
 
 | Header in the code | What it does |
 |---|---|
@@ -129,21 +129,32 @@ The quiz became a reusable engine that any subject can plug into.
 - New shared add-on `shared/mm-flash.js` + `shared/mm-flash.css`. Same pattern as Smart jump: it wraps `renderTopicsGrid()` and `showResults()` from outside, so core engine code is untouched. Any app can turn it on by loading the files and adding a `flashcards/` folder. `window.MM_FLASH = { circuitLab: [...] }` picks which subjects show the lab.
 - Auto `mm-auto-v15`.
 
+## Stage 12 — Mad Minute NETA · 2026-11-02
+
+- `/neta/`: electrical testing and commissioning, 4 subjects, 27 topics, 432 questions, built around the four domains of NETA's exam outline (Safety, Fundamentals & Theory, Component Testing, Systems & Commissioning).
+- **Levels match NETA's**: the engine's four levels per topic are named L1 Trainee, L2 Assistant, L3 Certified, L4 Senior.
+- **NETA Path**: 27 steps, one per topic, from job briefings and arc flash through component testing to generators and paralleling.
+- **Vocab flashcards** for every topic: 241 cards in `neta/flashcards/<subject>.js`, using the shared `mm-flash.js` add-on.
+- `mm-flash.js` gained one option: `window.MM_FLASH.tipLabel` sets the label before each card's tip ("On the job" here; Auto keeps the default "In the shop").
+- Smart jump retargeted to Component Testing and Commissioning. No DEMO watermark.
+- Built like Dev: `tools/neta-build/build_neta.py` copies the Auto engine and swaps in questions from plain-text files. Wrong answers were written to match the right answer's length so length doesn't give it away.
+- NETA `mm-neta-v1`.
+
 ---
 
 ## Which app has what
 
-| Feature | Auto `/` | Biology | Music | Dev |
-|---|:-:|:-:|:-:|:-:|
-| Placement, ranks, timeline, spaced review | ✓ | ✓ | ✓ | ✓ |
-| Offline + home-screen install | ✓ | ✓ | ✓ | ✓ |
-| Path card + Free/Guided | ✓ | — | ✓ | ✓ |
-| Smart jump | ✓ | — | — | ✓ |
-| Staff, keyboard, sound | — | — | ✓ | — |
-| Code blocks in questions | — | — | — | ✓ |
-| Recall first, Skills checkup, Roadmap (shared file) | ✓ | ✓ | ✓ | ✓ |
-| Vocab flashcards + Drill my misses (shared file) | ✓ | — | — | — |
-| Circuit Lab | ✓ | — | — | — |
+| Feature | Auto `/` | Biology | Music | Dev | NETA |
+|---|:-:|:-:|:-:|:-:|:-:|
+| Placement, ranks, timeline, spaced review | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Offline + home-screen install | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Path card + Free/Guided | ✓ | — | ✓ | ✓ | ✓ |
+| Smart jump | ✓ | — | — | ✓ | ✓ |
+| Staff, keyboard, sound | — | — | ✓ | — | — |
+| Code blocks in questions | — | — | — | ✓ | — |
+| Recall first, Skills checkup, Roadmap (shared file) | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Vocab flashcards + Drill my misses (shared file) | ✓ | — | — | — | ✓ |
+| Circuit Lab | ✓ | — | — | — | — |
 
 ## Ideas parked for later
 

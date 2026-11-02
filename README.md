@@ -56,6 +56,19 @@ Dev Vocabulary, Programming Fundamentals, Read & Debug (predict the output, spot
 
 Add it to a phone's home screen the same way (it gets its own **DEV** icon). Its progress is kept separate from the other apps.
 
+## Also here: Mad Minute NETA
+One-minute drills for electrical testing and commissioning, built around NETA's exam outline. 4 subjects, 27 topics, 432 questions, with levels that match NETA's: **L1 Trainee → L2 Assistant → L3 Certified → L4 Senior**.
+- **Electrical Safety**: risk & job briefings, arc flash & boundaries, PPE & rubber gloves, lockout/tagout, grounds & hipot safety, codes & NETA standards
+- **Testing Fundamentals & Theory**: units & math, three-phase power, reading drawings, faults & grounding, insulation theory, CTs & PTs, protection & ANSI device numbers
+- **Component Testing**: visual/mechanical & infrared, insulation resistance, hipot/VLF/power factor, grounding & batteries, transformers, breakers & switchgear, relays & CT testing, cables & fault locating, motors/arresters/capacitors
+- **Systems & Commissioning**: documentation, the commissioning process, functional & trip testing, ATS & emergency power, generators & paralleling
+
+A **NETA Path** card walks through all 27 topics, easy to hard. **Vocab flashcards** for every topic (241 cards: term, plain meaning, on-the-job tip).
+
+**Open it:** https://manafest01.github.io/MadMinute/neta/
+
+Add it to a phone's home screen the same way (it gets its own **NETA** icon). Its progress is kept separate from the other apps. Study aid only: questions are original, not NETA's; the ANSI/NETA standards, NFPA 70E and the NEC always win.
+
 How the engine got here, stage by stage: [ENGINE_HISTORY.md](ENGINE_HISTORY.md)
 
 ---

@@ -1,0 +1,813 @@
+@pack theory
+
+# T 1
+Q: In a three-phase system, the phases are spaced:
+A: 120° apart
+W: 90° apart
+W: 180° apart
+W: 60° apart
+E: Three waves, each a third of a cycle (120°) behind the last.
+
+Q: A "480Y/277 V" system means:
+A: 480 V phase-to-phase and 277 V phase-to-neutral
+W: 480 V on two phases and 277 V on the third phase
+W: 480 V phase-to-ground and 277 V phase-to-phase
+W: 480 V on the primary and 277 V on the secondary
+E: The Y means wye. Line voltage is √3 times the phase-to-neutral voltage.
+
+Q: In the US, normal power frequency is:
+A: 60 Hz
+W: 50 Hz
+W: 120 Hz
+W: 400 Hz
+E: Most of Europe and Asia use 50 Hz. 400 Hz shows up in aircraft.
+
+Q: Power factor compares:
+A: Real power to apparent power
+W: Line voltage to line current
+W: Load current to fault current
+W: Line voltage to phase voltage
+E: PF = kW ÷ kVA. A PF of 1.0 means all the power does real work.
+
+# T 2
+Q: In a wye system, line voltage equals:
+A: √3 × phase voltage
+W: 1 × phase voltage
+W: 2 × phase voltage
+W: Phase voltage ÷ √3
+E: 277 × 1.732 ≈ 480. In wye, line and phase currents are equal.
+
+Q: In a delta system, line current equals:
+A: √3 × winding current
+W: 1 × winding current
+W: 3 × winding current
+W: Winding current ÷ √3
+E: In delta, line and phase voltages are equal, but line current is √3 times winding current.
+
+Q: Three-phase real power is:
+A: √3 × V(line) × I(line) × PF
+W: 3 × V(line) × I(line) × PF
+W: √3 × V(line) × I(line) ÷ PF
+W: V(line) × I(line) × PF × 2
+E: The √3 factor comes from using line values instead of phase values.
+
+Q: Reactive power (kVAR) is caused mainly by:
+A: Inductive and capacitive loads
+W: Resistive heaters and lighting
+W: Ground faults on the system
+W: Loose bolted connections
+E: Motors and transformers draw magnetizing (inductive) current. Capacitors supply reactive power back.
+
+# T 3
+Q: kVA² equals:
+A: kW² + kVAR²
+W: kW + kVAR
+W: kW × kVAR
+W: kW² − kVAR²
+E: The power triangle: kW and kVAR are the legs, kVA is the long side.
+
+Q: Phase rotation (ABC vs ACB) matters most because it:
+A: Sets which way three-phase motors spin
+W: Sets the system's nominal voltage level
+W: Changes the frequency the loads see
+W: Decides the system's power factor
+E: Swap any two phases and a motor reverses. Always check rotation before energizing motor loads.
+
+Q: Voltage unbalance is calculated as:
+A: Max deviation from average ÷ average × 100
+W: Highest phase voltage − lowest phase voltage
+W: Average voltage ÷ highest voltage × 100
+W: Line voltage ÷ phase voltage × 100
+E: Example: 470, 480, 490 V → average 480, max deviation 10 → about 2.1%.
+
+Q: A small voltage unbalance makes a motor's current unbalance:
+A: Several times larger
+W: About the same size
+W: Somewhat smaller
+W: Drop to zero
+E: Roughly 6–10 times the voltage unbalance, which overheats windings fast.
+
+# T 4
+Q: Negative-sequence current in a motor causes:
+A: Extra rotor heating from a field spinning backward
+W: Faster spinning and higher output torque
+W: Lower winding temperature at full load
+W: A better power factor at light loads
+E: Negative sequence creates a counter-rotating field that induces high-frequency rotor currents and heat.
+
+Q: The three symmetrical components are:
+A: Positive, negative and zero sequence
+W: Line, phase and neutral sequence
+W: Real, reactive and apparent power
+W: Primary, secondary and tertiary
+E: Any unbalanced set can be broken into these three balanced sets. Faults are analyzed this way.
+
+Q: Zero-sequence current shows up mainly during:
+A: Ground faults
+W: Balanced three-phase load
+W: Ungrounded phase-to-phase faults
+W: Normal motor starting
+E: 3I0 = Ia + Ib + Ic. It's zero when the phases balance and appears when current returns through ground.
+
+Q: Harmonics from VFDs and electronics mostly cause:
+A: Extra heating in neutrals and transformers
+W: A drop in the system's base frequency
+W: A better displacement power factor
+W: Slower relay trips on every feeder
+E: Triplen harmonics (3rd, 9th...) add up in the neutral. K-rated transformers handle the extra heat.
+
+# W 1
+Q: A one-line (single-line) diagram shows:
+A: The power system with one line for all phases
+W: Every control wire and terminal number
+W: The building floor plan and room layout
+W: One phase of the system in full detail
+E: It's the map of sources, transformers, breakers and loads. Start every job here.
+
+Q: A schematic (elementary) diagram is best for:
+A: Following control logic and trip circuits
+W: Seeing where gear sits in the room
+W: Ordering replacement parts by number
+W: Showing cable lengths and routes
+E: Schematics show how contacts, coils and relays work together, not where they physically are.
+
+Q: A wiring diagram shows:
+A: Actual terminal-to-terminal connections
+W: The protection settings for each relay
+W: The utility service and its metering
+W: The building's load schedule by panel
+E: Use it when you need to find the physical wire on a terminal strip.
+
+Q: On a drawing, "52" next to a breaker symbol means:
+A: An AC circuit breaker
+W: A 52-amp breaker rating
+W: Breaker number 52 on site
+W: A 52 kV voltage rating
+E: ANSI device number 52 is an AC circuit breaker. 52a and 52b are its auxiliary contacts.
+
+# W 2
+Q: A 52a contact is:
+A: Open when the breaker is open, closed when it's closed
+W: Closed when the breaker is open, open when it's closed
+W: Always closed, unless the breaker is racked fully out
+W: The trip coil that opens the breaker on a fault
+E: "a" follows the breaker. "b" is the opposite.
+
+Q: A three-line diagram adds what a one-line hides:
+A: Each phase, CT polarity and relay wiring
+W: The building's square footage and rooms
+W: Purchase prices for each piece of gear
+W: Fewer details, for quick overview use
+E: Three-lines are needed to check CT polarity and how relays and meters are wired.
+
+Q: Drawings normally show devices in their:
+A: De-energized (shelf) state
+W: Energized, in-service state
+W: Tripped state after a fault
+W: Most common operating state
+E: A "normally open" contact is drawn open, even if it's usually closed in service.
+
+Q: Before testing, a field drawing set should be checked for:
+A: The latest revision and field markups
+W: The cleanest, easiest-to-read copy
+W: The original issue for construction
+W: The title block and page count only
+E: Old drawings cause wrong-device testing and missed sources. Red-line any differences you find.
+
+# W 3
+Q: A polarity dot on a CT on a three-line drawing shows:
+A: Which way current enters for in-phase output
+W: Which secondary tap sets the CT's ratio
+W: Where the CT secondary gets grounded
+W: The CT's accuracy class for relaying
+E: Current into the dotted primary side comes out of the dotted secondary side. Relays depend on this.
+
+Q: An "X" in a transformer terminal label (X1, X2) usually marks:
+A: The low-voltage side
+W: The high-voltage side
+W: The neutral terminal only
+W: The tertiary winding only
+E: H terminals are high voltage, X terminals are low voltage.
+
+Q: As-built drawings are:
+A: Updated to show what was actually installed
+W: The original design drawings from the engineer
+W: Rough sketches made for bidding the project
+W: Renderings made for the owner's marketing
+E: Field changes get red-lined, then drafted into as-builts at turnover.
+
+Q: A breaker trip circuit on a schematic runs from DC through:
+A: The relay trip contact, the 52a contact and the trip coil
+W: The relay trip contact, the 52b contact and the close coil
+W: The CT secondary, the relay and back to the CT ground
+W: The PT secondary, the meter and back to the PT ground
+E: The 52a opens the circuit once the breaker trips, which protects the trip coil.
+
+# W 4
+Q: As-found CT wiring disagrees with the three-line. The right first move:
+A: Document it and confirm with the engineer before changing anything
+W: Rewire it to match the drawing right away, since drawings govern
+W: Leave it as is, since the relays haven't caused any false trips
+W: Mark up the drawing to match the field and keep testing
+E: Either could be wrong. Changing wiring blindly can make protection operate backward.
+
+Q: A trip coil keeps burning out. On the schematic you suspect:
+A: A missing or failed 52a contact in series with the coil
+W: A blown indicating lamp on the breaker control panel
+W: An extra ground on the CT secondary circuit
+W: A mislabeled breaker on the front of the lineup
+E: Trip coils are short-duty. Without the 52a breaking the circuit, they stay energized and fail.
+
+Q: On a protection one-line, "87T" over a transformer zone means:
+A: Transformer differential protection
+W: A transformer rated for 87 kVA
+W: The 87th transformer on the site
+W: A transformer alarm at 87 °C
+E: 87 is differential. The T suffix says it protects the transformer.
+
+Q: A lockout relay (86) contact appears in a breaker's close circuit. Its purpose:
+A: Block reclosing until someone resets it
+W: Speed up the breaker's closing time
+W: Bypass the trip circuit during testing
+W: Measure the breaker's closing time
+E: After a serious fault, the 86 prevents closing back in until the fault is found and the relay reset.
+
+# M 1
+Q: Ohm's law says voltage equals:
+A: Current × resistance
+W: Current ÷ resistance
+W: Resistance ÷ current
+W: Current + resistance
+E: V = I × R. Rearrange for I = V ÷ R or R = V ÷ I.
+
+Q: 1 megohm (MΩ) equals:
+A: 1,000,000 ohms
+W: 1,000 ohms
+W: 100,000 ohms
+W: 0.001 ohms
+E: Insulation readings are in MΩ or GΩ. 1 GΩ = 1,000 MΩ.
+
+Q: 1 micro-ohm (µΩ) equals:
+A: 0.000001 ohm
+W: 0.001 ohm
+W: 1,000 ohms
+W: 0.0001 ohm
+E: Contact resistance on breakers is measured in µΩ, millionths of an ohm.
+
+Q: 1 kV equals:
+A: 1,000 volts
+W: 100 volts
+W: 10,000 volts
+W: 1,000,000 volts
+E: A 13.8 kV feeder runs at 13,800 volts.
+
+# M 2
+Q: Full-load current of a 1,000 kVA, 480 V three-phase transformer is about:
+A: 1,203 A
+W: 2,083 A
+W: 694 A
+W: 3,610 A
+E: I = kVA × 1000 ÷ (1.732 × V) = 1,000,000 ÷ 831 ≈ 1,203 A.
+
+Q: To convert 68 °F to Celsius:
+A: (68 − 32) × 5/9 = 20 °C
+W: (68 − 32) × 9/5 = 65 °C
+W: 68 × 5/9 = 38 °C
+W: (68 + 32) × 5/9 = 56 °C
+E: Temperature matters because insulation readings are corrected to a standard temperature.
+
+Q: A 50 hp motor at 460 V draws about 65 A. A 100 hp motor at the same voltage draws about:
+A: 124 A
+W: 65 A
+W: 96 A
+W: 250 A
+E: Current scales roughly with horsepower at the same voltage. Use the NEC table or nameplate for exact values.
+
+Q: Power in a resistor carrying 10 A through 5 Ω is:
+A: 500 W
+W: 50 W
+W: 250 W
+W: 2 W
+E: P = I²R = 100 × 5 = 500 W.
+
+# M 3
+Q: Available fault current at a transformer secondary is roughly:
+A: Full-load amps ÷ %Z (as a decimal)
+W: Full-load amps × %Z (as a decimal)
+W: Secondary voltage ÷ transformer kVA
+W: Full-load amps × the turns ratio
+E: 1,203 A ÷ 0.0575 ≈ 20,900 A for a 1,000 kVA, 5.75%Z transformer (infinite source).
+
+Q: A 13,800 V to 480 V transformer has a voltage ratio of:
+A: 28.75 : 1
+W: 13.8 : 1
+W: 48 : 1
+W: 2.875 : 1
+E: 13,800 ÷ 480 = 28.75. TTR testers compare measured ratio to this.
+
+Q: A 1200:5 CT carrying 600 A primary gives a secondary current of:
+A: 2.5 A
+W: 5 A
+W: 1.25 A
+W: 10 A
+E: Ratio is 240:1. 600 ÷ 240 = 2.5 A.
+
+Q: A PT with ratio 4200:120 reads 118 V secondary. Primary voltage is about:
+A: 4,130 V
+W: 4,200 V
+W: 3,500 V
+W: 4,800 V
+E: Ratio is 35:1. 118 × 35 = 4,130 V.
+
+# M 4
+Q: Insulation resistance roughly halves for every:
+A: 10 °C rise in temperature
+W: 1 °C rise in temperature
+W: 50 °C rise in temperature
+W: 10 °C drop in temperature
+E: That's why readings are temperature-corrected to a base (often 20 °C, or 40 °C for rotating machines).
+
+Q: A cable reads 2,000 MΩ at 30 °C. Corrected to 20 °C (halving per 10 °C), it's about:
+A: 4,000 MΩ
+W: 1,000 MΩ
+W: 2,000 MΩ
+W: 8,000 MΩ
+E: Colder insulation reads higher, so correcting down 10 °C doubles the value.
+
+Q: A 13,800 V delta to 480Y/277 transformer is TTR-tested per phase: HV winding vs LV phase-to-neutral winding. Expected ratio:
+A: About 49.8
+W: About 28.75
+W: About 16.6
+W: About 86.3
+E: Each HV winding sees 13,800 V; the LV winding it links sees 277 V. 13,800 ÷ 277 ≈ 49.8.
+
+Q: A motor's voltages read 455, 470, 475 V. Voltage unbalance is about:
+A: 2.5%
+W: 4.3%
+W: 0.5%
+W: 20%
+E: Average 466.7. Biggest deviation is 11.7. 11.7 ÷ 466.7 ≈ 2.5%. Above about 1%, NEMA suggests derating.
+
+# F 1
+Q: A "fault" in a power system is:
+A: An abnormal current path, like a short circuit
+W: A planned shutdown for maintenance work
+W: A low power factor on a large motor load
+W: A breaker carrying its full rated load
+E: Faults can be phase-to-phase, phase-to-ground, or three-phase, and can carry huge current.
+
+Q: The most common type of fault on power systems is:
+A: Single line-to-ground
+W: Three-phase bolted
+W: Phase-to-phase only
+W: Open neutral
+E: Most faults start as one conductor touching ground through insulation failure or contact.
+
+Q: Equipment grounding conductors are there to:
+A: Give fault current a low-impedance path to the source
+W: Carry the normal load current back to the source
+W: Raise the voltage on metal parts during faults
+W: Serve as the neutral for single-phase loads
+E: A good path lets the breaker trip fast and keeps metal enclosures near ground potential.
+
+Q: Bonding means:
+A: Connecting metal parts so they're at the same potential
+W: Gluing insulation sleeves in place on the bus bars
+W: Tying every neutral to ground in each downstream panel
+W: Tightening all bus bolts to the maker's torque value
+E: Bonded parts can't have dangerous voltage between them.
+
+# F 2
+Q: A solidly grounded wye system on a ground fault will:
+A: Draw high fault current and trip quickly
+W: Keep running and alarm, with no trip
+W: Draw only a few amps of fault current
+W: Shift the frequency until it trips
+E: Low impedance to ground means large fault current. Protection clears it fast.
+
+Q: A high-resistance grounded (HRG) system limits ground fault current to:
+A: A few amps, so it can keep running and alarm
+W: Thousands of amps, so the breaker trips fast
+W: Zero amps, so a ground fault does nothing
+W: Exactly the load current of the faulted feeder
+E: HRG keeps processes running on a first ground fault while crews locate it.
+
+Q: The neutral-to-ground bond should be made:
+A: At the service or the separately derived source only
+W: In every panel so each one has its own good ground
+W: At every receptacle to keep the neutral at zero volts
+W: At the farthest panel from the service entrance
+E: Extra bonds downstream put neutral current on ground paths and confuse ground fault protection.
+
+Q: An ungrounded delta system's big risk on a first ground fault is:
+A: Transient overvoltages that stress insulation
+W: An immediate high-current trip of the main
+W: Lower voltage on all three phases at once
+W: Instant reversal of every motor on the bus
+E: Intermittent arcing grounds can build voltage to several times normal. Ground detectors help find faults.
+
+# F 3
+Q: A low-resistance grounded system typically limits ground fault current to:
+A: Hundreds of amps, and trips
+W: Under 10 amps, and only alarms
+W: Zero amps, so nothing happens
+W: Full bolted three-phase fault level
+E: Common on medium-voltage systems: limits damage while still giving enough current for relays.
+
+Q: A bolted three-phase fault usually gives:
+A: The highest fault current, used for equipment ratings
+W: The lowest fault current, used for relay pickup
+W: No current, since the phases cancel each other
+W: Only negative-sequence current in the system
+E: Equipment interrupting and withstand ratings are checked against it.
+
+Q: The X/R ratio of the fault path matters because it sets:
+A: How much DC offset (asymmetry) the fault current has
+W: The nominal system voltage at the faulted bus
+W: The phase rotation seen by downstream motors
+W: The ground conductor size needed by the NEC
+E: High X/R means more asymmetry, which raises peak current that breakers must handle.
+
+Q: Why is a ground fault on an HRG system urgent even if nothing trips?
+A: A second fault on another phase becomes phase-to-phase
+W: HRG systems can't alarm, so nobody will notice it
+W: The ground fault changes the system frequency
+W: The ground fault lowers the system power factor
+E: Find and fix the first fault before a second one causes a high-current trip.
+
+# F 4
+Q: A ground fault relay never trips during a real ground fault. A likely cause:
+A: A downstream neutral-ground bond gives current another path
+W: The fault current was far too large for the relay to see
+W: The relay's pickup was set much lower than the study
+W: The CT ratio was too small for the ground fault level
+E: Current returning on the ground path outside the sensor's window makes the fault look like balanced load.
+
+Q: A zero-sequence (window) CT around all phases and the neutral reads:
+A: Only the current not returning through those conductors
+W: The total load current of the circuit it surrounds
+W: The current on phase A only, for metering use
+W: The phase-to-ground voltage of the circuit
+E: Balanced current cancels. What's left is current leaving through ground, the ground fault.
+
+Q: An HRG resistor reads open during testing. The system has become:
+A: Effectively ungrounded, with no ground fault detection
+W: Solidly grounded, with high ground fault current
+W: Better protected, since current is now zero
+W: Unaffected, since the resistor is only a sensor
+E: An open resistor loses fault detection and lets overvoltages build. It's a priority fix.
+
+Q: Fault current split between two parallel ground paths risks that:
+A: Neither path carries enough to trip its own sensor
+W: The fault clears faster than normal on both paths
+W: Voltage drops to zero everywhere on the system
+W: Breaker interrupting ratings increase as a result
+E: Divided current can fall below pickup. Coordinate grounding design with relay CT locations.
+
+# I 1
+Q: Electrical insulation's job is to:
+A: Keep current in the conductor and out of other paths
+W: Let current flow faster through the conductor
+W: Store energy in the cable for short outages
+W: Measure the voltage on the conductor
+E: Good insulation has very high resistance. Testing checks it hasn't broken down.
+
+Q: Insulation breaks down over time mainly from:
+A: Heat, moisture, contamination and electrical stress
+W: Running too lightly loaded for long periods
+W: Normal room lighting and fresh paint over time
+W: Being stored in a clean, dry warehouse
+E: These stresses age insulation. Testing tracks the trend before it fails.
+
+Q: Higher insulation resistance generally means:
+A: Better insulation condition
+W: Worse insulation condition
+W: The equipment is energized
+W: The meter needs calibration
+E: Low or falling readings point to moisture, dirt or damage.
+
+Q: Dust and moisture on insulator surfaces cause:
+A: Surface leakage current
+W: Higher insulation readings
+W: Lower load current
+W: Faster breaker trips
+E: Cleaning and drying often bring readings back up. The guard terminal can separate surface leakage.
+
+# I 2
+Q: When DC test voltage is applied to insulation, the total current is made of:
+A: Capacitive charging, absorption and leakage currents
+W: Load, fault and neutral currents added together
+W: Positive, negative and zero sequence currents
+W: Leakage current alone, with nothing else present
+E: Charging dies fast, absorption fades over minutes, and leakage stays. Good insulation has low leakage.
+
+Q: The polarization index (PI) is the ratio of:
+A: 10-minute reading ÷ 1-minute reading
+W: 1-minute reading ÷ 10-minute reading
+W: 60-second reading ÷ 30-second reading
+W: Test voltage ÷ leakage current at 1 min
+E: Good insulation keeps absorbing, so resistance rises over time and PI is higher.
+
+Q: The dielectric absorption ratio (DAR) usually compares:
+A: 60-second ÷ 30-second readings
+W: 10-minute ÷ 1-minute readings
+W: 30-second ÷ 60-second readings
+W: 15-second ÷ 60-second readings
+E: DAR is a quicker version of PI, used when a 10-minute test isn't practical.
+
+Q: A PI near 1.0 usually means:
+A: Insulation is wet, dirty or deteriorated
+W: Insulation is clean, dry and excellent
+W: The megohmmeter's battery is failing
+W: The test ran longer than it should
+E: If resistance doesn't rise with time, leakage is dominating. Many machines want PI ≥ 2.0.
+
+# I 3
+Q: Dissipation factor (tan delta) measures:
+A: How much test current is lost as heat in the insulation
+W: The cable's total length from end to end
+W: Voltage drop along the cable under full load
+W: How fast the breaker opens on a fault
+E: Perfect insulation would be purely capacitive. A rising loss angle signals aging or moisture.
+
+Q: Partial discharge is:
+A: Small sparks inside voids or on insulation surfaces
+W: Normal load sharing between parallel cables
+W: A breaker opening part way and then closing
+W: Static on the test leads, not the insulation
+E: PD eats insulation from the inside over time and is a leading cause of MV failures.
+
+Q: Why are insulation readings corrected to a base temperature?
+A: Resistance changes a lot with temperature, so trends need a common base
+W: Megohmmeters only work properly when the gear is at exactly 20 °C
+W: Correcting the readings makes marginal equipment pass more often
+W: It's only needed on DC equipment, since AC gear isn't affected
+E: Without correction, a cold day looks like improvement and a hot day like a failure.
+
+Q: For a machine whose 1-minute IR is above 5,000 MΩ, PI is:
+A: Not a reliable indicator
+W: Always required to be 4.0
+W: Automatically a failing result
+W: The only result that matters
+E: IEEE 43 notes that at very high values the PI may not be meaningful. Judge by the absolute value and trend.
+
+# I 4
+Q: One phase of a cable shows much higher dissipation factor than the others. Most likely:
+A: Localized aging or water trees on that phase
+W: Normal behavior for one phase in every cable
+W: That phase is in better shape than the others
+W: The test set was on the wrong frequency
+E: Comparing phases of the same cable run is one of the strongest tools for spotting a weak one.
+
+Q: Tip-up in a power factor test means:
+A: PF rising with test voltage, a sign of voids
+W: PF dropping as insulation temperature rises
+W: The bushing's test tap cap working loose
+W: Current dropping as test voltage rises
+E: Good insulation's PF is fairly flat with voltage. A rise points to internal discharges.
+
+Q: Water trees in XLPE cable grow fastest with:
+A: Moisture plus electrical stress over time
+W: Dry heat and no electrical stress at all
+W: Low DC voltage and dry soil conditions
+W: Cold temperatures alone, with no moisture
+E: Water trees lower breakdown strength and can turn into electrical trees that fail the cable.
+
+Q: Why can high DC test voltage harm aged XLPE cable?
+A: It can trap space charge that stresses weak spots later
+W: It overheats the copper conductor during the test
+W: It changes the insulation's color and its rating
+W: It shrinks the outer jacket away from the shield
+E: Industry guidance (IEEE 400) moved to VLF and other AC methods for aged extruded cable.
+
+# D 1
+Q: ANSI device number 50 is:
+A: Instantaneous overcurrent
+W: Time overcurrent
+W: Differential
+W: Undervoltage
+E: 50 trips with no intentional delay above its pickup.
+
+Q: ANSI device number 51 is:
+A: Time overcurrent
+W: Instantaneous overcurrent
+W: Overvoltage
+W: Lockout relay
+E: 51 trips faster as current goes higher, following a curve.
+
+Q: ANSI device number 27 is:
+A: Undervoltage
+W: Overvoltage
+W: Frequency
+W: Reverse power
+E: 59 is overvoltage. 27 drops out when voltage sags too low.
+
+Q: ANSI device number 86 is:
+A: Lockout relay
+W: Differential relay
+W: AC circuit breaker
+W: Frequency relay
+E: The 86 trips and blocks closing until manually reset.
+
+# D 2
+Q: ANSI device number 87 is:
+A: Differential
+W: Directional overcurrent
+W: Lockout
+W: Reclosing
+E: 87 compares current in and out of a zone. A difference means a fault inside.
+
+Q: ANSI device number 59 is:
+A: Overvoltage
+W: Undervoltage
+W: Time overcurrent
+W: Ground fault
+E: 59 trips when voltage rises too high.
+
+Q: ANSI device number 81 is:
+A: Frequency
+W: Lockout
+W: Reverse power
+W: Synchronism check
+E: 81 can be over- or under-frequency (81O / 81U), often used for load shedding.
+
+Q: ANSI device number 25 is:
+A: Synchronism check
+W: Undervoltage
+W: Phase balance
+W: Thermal overload
+E: 25 blocks closing unless voltage, frequency and angle on both sides match.
+
+# D 3
+Q: ANSI device number 32 is:
+A: Directional (reverse) power
+W: Pressure switch
+W: Frequency
+W: Lockout relay
+E: On generators, 32 trips if the generator starts motoring (taking power in).
+
+Q: ANSI device number 67 is:
+A: Directional overcurrent
+W: Differential
+W: Instantaneous overcurrent
+W: Reclosing relay
+E: 67 only trips for current flowing in one direction, useful on loops and parallel feeders.
+
+Q: On a time-current curve (TCC), the axes are usually:
+A: Current across, time up, both log scale
+W: Voltage across, frequency up, both linear
+W: Time across, voltage up, both log scale
+W: Power across, current up, both linear
+E: Log-log lets you see milliseconds to minutes and amps to tens of thousands on one plot.
+
+Q: Raising a relay's time dial setting:
+A: Shifts its curve up, making it slower at every current
+W: Lowers the current where the relay starts timing
+W: Turns the time element into an instantaneous one
+W: Changes the CT ratio the relay expects to see
+E: Pickup (tap) sets where it starts timing. The time dial sets how fast it trips once it does.
+
+# D 4
+Q: Selective coordination means:
+A: Only the device nearest the fault opens
+W: Every breaker in the path opens together
+W: The main breaker always trips first
+W: All devices are from the same maker
+E: It keeps the outage as small as possible. Upstream devices back up the downstream ones.
+
+Q: A typical coordination time interval between two overcurrent relays is about:
+A: 0.2–0.4 seconds
+W: 2–4 seconds
+W: 0.002–0.004 seconds
+W: 20–40 seconds
+E: The margin covers breaker clearing time, relay overtravel and errors.
+
+Q: An extremely inverse curve is often chosen to:
+A: Coordinate with fuses and ride through inrush
+W: Coordinate with undervoltage relays on motors
+W: Protect DC battery systems from overcharge
+W: Trip generators for reverse power quickly
+E: Its shape matches fuse curves and lets short inrush pass while still clearing faults.
+
+Q: A transformer differential relay must handle magnetizing inrush, so it often uses:
+A: Second-harmonic restraint
+W: A much longer time dial
+W: Lower CT ratios on one side
+W: No CTs on the low side
+E: Inrush is rich in 2nd harmonic. Restraint keeps the 87T from tripping on energizing.
+
+# X 1
+Q: A current transformer (CT) is used to:
+A: Step large currents down for meters and relays
+W: Step voltage up for long transmission lines
+W: Store energy for breaker tripping
+W: Measure insulation resistance in service
+E: A 1200:5 CT turns 1,200 A on the bus into 5 A for the relay.
+
+Q: A potential (voltage) transformer (PT/VT) is used to:
+A: Step high voltage down to a safe measuring level
+W: Step load current down for meters and relays
+W: Raise the voltage delivered to the load
+W: Ground the system's neutral point
+E: Typical secondaries are 120 V or 69 V for meters and relays.
+
+Q: A CT secondary should NEVER be:
+A: Open-circuited while the primary carries current
+W: Shorted through a shorting block for testing
+W: Connected to a relay and a meter in series
+W: Grounded at one point in the circuit
+E: With nowhere for current to go, the CT can develop dangerous voltage and overheat.
+
+Q: A PT secondary should NEVER be:
+A: Short-circuited
+W: Connected to a meter
+W: Protected by fuses
+W: Grounded at one point
+E: A shorted PT draws huge current and can fail. CTs are the opposite: never open them.
+
+# X 2
+Q: CT accuracy class C400 means it can deliver:
+A: 400 V at 20× rated current within 10% ratio error
+W: 400 A continuously without overheating
+W: 400 VA at rated current within 1% error
+W: 400% of rated current for one second
+E: The C class tells you how much burden it can drive during faults without saturating.
+
+Q: CT "burden" is:
+A: The total impedance connected to the secondary
+W: The physical weight of the CT on its mount
+W: The primary current flowing through the CT
+W: The CT's ratio stamped on the nameplate
+E: Relays, meters and lead wires all add burden. Too much and the CT saturates sooner.
+
+Q: CT polarity markings H1 and X1 mean:
+A: Current into H1 flows out of X1 in phase
+W: H1 is the ground and X1 is the neutral
+W: They mark the CT's high-voltage taps
+W: They mark the CT's highest ratio tap
+E: Getting polarity wrong can make differential and directional relays trip on load.
+
+Q: CT secondaries should be grounded:
+A: At one point only
+W: At every device
+W: Never at all
+W: At both ends
+E: One ground keeps the circuit safe without creating loops that cause false currents.
+
+# X 3
+Q: A CT's knee point is where:
+A: A 10% voltage rise takes a 50% rise in excitation current
+W: The CT's ratio error drops to exactly zero percent
+W: The CT turns off and stops passing secondary current
+W: Primary current reaches the CT's nameplate rating
+E: Past the knee, the core saturates and the CT stops reproducing primary current well.
+
+Q: CT saturation during a fault can cause:
+A: Relays to see less current and trip late or not at all
+W: More accurate readings than at normal load current
+W: Lower fault current flowing in the primary circuit
+W: The breaker to close back in after the fault
+E: High fault current plus DC offset can drive a CT into saturation. Sizing and burden matter.
+
+Q: A multi-ratio CT tapped at X2–X4 instead of X1–X5 gives:
+A: A lower ratio than the full winding
+W: The same ratio as the full winding
+W: A higher ratio than the full winding
+W: A voltage output instead of current
+E: Using fewer turns lowers the ratio. Check the nameplate tap table for each combination.
+
+Q: Metering-class CTs differ from relaying-class CTs because metering CTs:
+A: Are accurate at load but may saturate in faults
+W: Are better for fault protection than relaying CTs
+W: Have no ratio, only a voltage rating
+W: Never need their polarity checked
+E: Relaying CTs must stay accurate at many times rated current. Metering CTs focus on normal load.
+
+# X 4
+Q: A differential relay trips on load after new CTs were installed. Strong suspect:
+A: Reversed polarity on one set of CTs
+W: Too little load on the transformer
+W: A new time dial on the feeder relay
+W: Blown fuses on the bus PT secondary
+E: One CT backward makes through-load look like an internal fault. Check polarity and phasing.
+
+Q: Two CTs feeding one differential zone have very different saturation curves. The risk:
+A: False differential current during external faults
+W: No risk, since the relay averages the two CTs
+W: Higher accuracy during heavy external faults
+W: Lower total burden on both CT secondaries
+E: Mismatched saturation creates false difference current. Settings and CT matching guard against it.
+
+Q: PT ferroresonance is most likely when:
+A: A PT is energized through capacitance on an ungrounded system
+W: A PT sits on a solidly grounded bus with no secondary load
+W: A PT has properly sized fuses on its secondary circuit
+W: A PT is brand new and has never been energized before
+E: The PT's core and system capacitance can resonate and create overvoltages. Loading resistors help.
+
+Q: Which set of CT tests gives the most complete picture?
+A: Ratio, polarity, excitation, insulation and winding resistance
+W: Ratio alone, since the other values follow from it
+W: A careful visual inspection of the CT and its wiring
+W: Insulation resistance alone at 1,000 V DC for 1 minute
+E: Together they confirm the CT reads right, points the right way and will hold up in a fault.

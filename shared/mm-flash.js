@@ -4,6 +4,7 @@
 
    Decks come from the app:  window.MM_FLASH_DECKS[packId][topicKey] = [[term, meaning, tip], ...]
    Options come from the app: window.MM_FLASH = { circuitLab: ["e12", ...] }  (packs that show the lab)
+                              tipLabel: "On the job"  (label before each card's tip; default "In the shop")
 
    Like Smart jump and mm-learn.js, it hooks engine functions from outside
    (renderTopicsGrid, showResults) and changes no core code.
@@ -150,7 +151,7 @@
           '<span class="mmf-face mmf-back">' +
             '<span class="mmf-topic">' + esc(c.term) + '</span>' +
             '<span class="mmf-meaning">' + esc(c.meaning) + '</span>' +
-            (c.tip ? '<span class="mmf-tip"><b>In the shop:</b> ' + esc(c.tip) + '</span>' : "") +
+            (c.tip ? '<span class="mmf-tip"><b>' + esc(OPT.tipLabel || "In the shop") + ':</b> ' + esc(c.tip) + '</span>' : "") +
           '</span>' +
         '</span>' +
       '</button>' +
