@@ -352,7 +352,11 @@
   .sheet { width: 100%; max-width: 560px; background: var(--panel); border-radius: 18px 18px 0 0; padding: 20px 18px calc(20px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 10px; }
   .sheet h3 { font-size: 17px; }
   .reason { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border: 1px solid var(--line); border-radius: 10px; font-size: 14px; cursor: pointer; }
-  .reason input { accent-color: var(--amber); width: 18px; height: 18px; }
+  .reason input { accent-color: var(--amber); width: 18px; height: 18px; flex-shrink: 0; }
+  .sheet { max-height: 92vh; overflow-y: auto; }
+  .challenge-link { align-self: flex-start; margin-top: 16px; background: none; border: none; padding: 6px 0; color: var(--red); font: inherit; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; opacity: .85; }
+  .challenge-link:hover, .challenge-link:focus-visible { opacity: 1; }
+  .miss .challenge-link { margin-top: 2px; }
 
   /* results extras */
   .res-xp { text-align: center; font-size: 13.5px; color: var(--text-dim); }
@@ -849,7 +853,12 @@
     <button class="btn btn-teal btn-block" style="margin-top:14px;" onclick="saveNewQuestion()">Save question</button>
     <div class="form-msg" id="formMsg"></div>
 
-    <div class="section-title">Flagged questions <span id="flagCount"></span></div>
+    <div class="section-title">Challenged questions <span id="flagCount"></span></div>
+    <div class="row-btns" id="flagTools" hidden style="margin-bottom:10px;">
+      <button class="btn btn-ghost" onclick="copyFlags()">Copy all as text</button>
+      <button class="btn btn-ghost" onclick="downloadFlags()">Download file</button>
+      <button class="btn btn-ghost" id="flagEmail" onclick="emailFlags()" hidden>Email them</button>
+    </div>
     <div id="flagList"></div>
 
     <div class="section-title">Your added questions</div>
@@ -899,6 +908,26 @@
   </section>
 </div>
 
+<div class="sheet-back" id="flagSheet" hidden onclick="if(event.target===this)closeFlag()">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="flagTitle">
+    <h3 id="flagTitle">Challenge this question</h3>
+    <div class="muted" id="flagQ"></div>
+    <div class="muted" id="flagA"></div>
+    <label class="reason"><input type="radio" name="flagReason" value="wrong">The marked answer is wrong</label>
+    <label class="reason"><input type="radio" name="flagReason" value="impossible">The setup doesn't add up (a reading or situation that can't happen)</label>
+    <label class="reason"><input type="radio" name="flagReason" value="two">More than one answer is right</label>
+    <label class="reason"><input type="radio" name="flagReason" value="unclear">The question is unclear</label>
+    <label class="reason"><input type="radio" name="flagReason" value="typo">Typo or formatting problem</label>
+    <label class="reason"><input type="radio" name="flagReason" value="other">Something else</label>
+    <textarea id="flagNote" maxlength="500" rows="2" placeholder="What's wrong? e.g. it shows voltage on a ground with no source"></textarea>
+    <input type="text" id="flagSource" maxlength="300" placeholder="Source (optional): manual, test, website, page number">
+    <div class="form-msg err" id="flagMsg" role="status"></div>
+    <div class="row-btns">
+      <button class="btn btn-amber" id="flagSend" onclick="sendFlag()">Send challenge</button>
+      <button class="btn btn-ghost" onclick="closeFlag()">Cancel</button>
+    </div>
+  </div>
+</div>
 <nav class="tabbar" id="tabbar" aria-label="Main">
   <button data-tab="homeScreen" onclick="goTab('homeScreen')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"/></svg>Home</button>
   <button data-tab="mapScreen" onclick="goTab('mapScreen')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2.2"/><circle cx="12" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="5" cy="18" r="2.2"/><circle cx="12" cy="18" r="2.2"/><circle cx="19" cy="18" r="2.2"/><path d="M7.2 6h2.6M14.2 6h2.6M7.2 18h2.6"/></svg>Map</button>
@@ -916,7 +945,6 @@
       <div class="quiz-topic-tag"><span id="quizTopicTag">Topic</span><span class="lv-chip" id="quizLvChip">Helper</span></div>
       <div class="quiz-tools">
         <button class="tool-btn" id="soundBtn" onclick="toggleSound()"></button>
-        <button class="tool-btn" onclick="openFlag()" aria-label="Flag this question as wrong or unclear"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></button>
         <div class="timer" id="quizTimer">1:00</div>
       </div>
     </div>
@@ -933,26 +961,11 @@
       <div class="question-text" id="quizQuestionText">—</div>
       <div class="options" id="quizOptions"></div>
       <div class="explain" id="quizExplain" hidden></div>
+      <button type="button" class="challenge-link" id="challengeLink" onclick="openFlag()">Challenge this question</button>
     </div>
     <div class="row-btns">
       <button class="btn btn-teal" id="nextBtn" onclick="nextQuestion()" hidden>Next</button>
       <button class="btn btn-ghost" id="endBtn" onclick="endQuiz()">End early</button>
-    </div>
-  </div>
-  <div class="sheet-back" id="flagSheet" hidden>
-    <div class="sheet" role="dialog" aria-labelledby="flagTitle">
-      <h3 id="flagTitle">Flag this question</h3>
-      <div class="muted" id="flagQ"></div>
-      <label class="reason"><input type="radio" name="flagReason" value="wrong">The marked answer is wrong</label>
-      <label class="reason"><input type="radio" name="flagReason" value="unclear">The question is unclear</label>
-      <label class="reason"><input type="radio" name="flagReason" value="typo">Typo or formatting problem</label>
-      <label class="reason"><input type="radio" name="flagReason" value="other">Something else</label>
-      <input type="text" id="flagNote" maxlength="300" placeholder="Optional: what's wrong?">
-      <div class="form-msg err" id="flagMsg"></div>
-      <div class="row-btns">
-        <button class="btn btn-amber" onclick="sendFlag()">Send flag</button>
-        <button class="btn btn-ghost" onclick="closeFlag()">Cancel</button>
-      </div>
     </div>
   </div>
 </div>
@@ -2284,7 +2297,7 @@ const BUILTIN_PACKS = [
   ["V", 3, "Two batteries in parallel, like on a diesel truck, should be:", ["The same type and age", "Different sizes for balance", "One new and one old", "Charged separately only"], "A weak battery drags down the good one in a parallel pair."],
   ["V", 4, "The intelligent battery sensor on the negative cable measures:", ["Current, voltage, and temperature", "Only battery voltage", "Alternator speed", "Starter current only"], "It reports battery state of charge and health, usually over LIN, so the car can manage charging."],
   ["V", 4, "A battery's state of health (SOH) is different from its state of charge (SOC) because SOH:", ["SOH is capacity vs. new", "SOH measures temperature", "They are the same thing", "SOH only applies to EVs"], "A battery can be fully charged but still weak if its health is poor."],
-  ["V", 4, "Capacity drops sharply in the cold. A battery rated 600 CCA might give only about what at 0°F compared with 80°F?", ["About 60% of its warm power", "About 150% of its warm power", "Exactly the same power", "About 5% of its warm power"], "Cold cuts available power while a cold engine needs more to crank."],
+  ["V", 4, "A battery cranks fine at 80°F. At 0°F, about how much of that cranking power is left?", ["About 40%", "About 150%", "All of it, 100%", "About 5%"], "Common battery charts show about 65% at 32°F and about 40% at 0°F, while a cold engine can need twice the power to crank."],
   ["V", 4, "A battery's internal resistance rising over time causes:", ["Bigger voltage drops under load", "Higher resting voltage", "Faster cranking", "Lower parasitic draw"], "Higher resistance means more voltage lost inside the battery when cranking."],
   ["V", 4, "Equalizing charge on a flooded battery means:", ["A controlled overcharge", "A fast charge to full in minutes", "Discharging it to 0 V first", "Adding acid to each cell"], "It's used on some flooded batteries, never on AGM unless the maker allows."],
   ["V", 4, "A battery-maintainer left on a stored car keeps it:", ["Topped up, not overcharged", "At 0% to protect it", "At 15 V constantly", "Disconnected from the car"], "Float charging offsets self-discharge and small draws."],
@@ -2650,7 +2663,7 @@ const BUILTIN_PACKS = [
   ["T", 2, "A \"known-good\" comparison helps by:", ["Showing what normal looks like", "Replacing parts faster", "Clearing codes", "Charging the battery"], "Many techs keep reference waveforms and readings from good vehicles."],
   ["T", 2, "A thermal camera can help find:", ["Hot spots", "CAN data errors", "Isolation faults", "Fuel pressure"], "Heat shows where current meets resistance or friction."],
   ["T", 2, "A ground symbol on a diagram often includes a code, like G103, that tells you:", ["Its location", "The wire's color", "The fuse size", "The battery type"], "A component locator shows where each ground point is."],
-  ["T", 2, "A scan tool's \"mode $06\" or \"test results\" screen is useful to:", ["How close a test is to failing", "Clear codes", "Program modules", "Reset the radio"], "Values near the limit warn of trouble before a code sets."],
+  ["T", 2, "A scan tool's \"mode $06\" or \"test results\" screen shows:", ["How close a test is to failing", "A button to clear codes", "Module programming steps", "Radio settings"], "Values near the limit warn of trouble before a code sets."],
   ["T", 2, "A scope's \"single\" trigger mode is helpful for:", ["Capturing one rare event", "Watching a steady signal live", "Measuring resistance", "Testing fuses"], "It freezes the screen the first time the trigger condition is met."],
   ["T", 2, "A \"relative\" or delta mode on a meter lets you:", ["Zero out lead resistance", "Raise the voltage", "Change AC to DC", "Test diodes"], "It's useful for measuring very small resistances accurately."],
   ["T", 2, "A logic probe or LED test light that shows red and green helps by:", ["Showing high and low states quickly", "Measuring exact resistance in ohms", "Reading CAN messages as text", "Charging a module's capacitor"], "It's a quick way to see whether a signal is switching."],
@@ -2668,7 +2681,7 @@ const BUILTIN_PACKS = [
   ["T", 3, "A meter's min/max function shows a dropout to 0 V during a road test. That proves:", ["Voltage dropped at some point", "The circuit never lost voltage", "The meter is broken", "The battery is fully charged"], "It catches events too fast or rare to see live."],
   ["T", 3, "Recording scan data during a road test is useful when:", ["It only happens while driving", "The car won't start at all", "The battery is dead", "The tires are low"], "A snapshot or recording captures the moment it happens."],
   ["T", 3, "A scope's trigger set too high above the signal will:", ["Never trigger", "Show a perfect waveform", "Change the signal", "Short the circuit"], "The signal never crosses the trigger level."],
-  ["T", 3, "A scope set to 1 s per division on a fast sensor signal will:", ["A crushed waveform", "Show each pulse clearly", "Change the signal's speed", "Block the signal"], "Too long a time base hides fast details."],
+  ["T", 3, "A scope set to 1 s per division on a fast sensor signal shows:", ["A crushed, unreadable waveform", "Each pulse clearly", "A slower signal than real", "No signal at all"], "Too long a time base hides fast details."],
   ["T", 3, "A scope probe set to 10x while the scope expects 1x will:", ["Show readings ten times too low", "Show readings correctly", "Show readings ten times too high", "Show no signal"], "Match the probe setting with the scope's channel setting."],
   ["T", 3, "A 20 µs per division setting is a good fit for:", ["Fast signals", "Fuel gauge readings", "Battery resting voltage", "Temperature changes"], "Short time bases show fast events in detail."],
   ["T", 3, "An amp clamp shows 2 A of draw with the car asleep. A next step is to:", ["Find the drawing circuit", "Replace the battery", "Replace the alternator", "Ignore it"], "2 A will drain a battery in a day or two."],
@@ -2725,7 +2738,7 @@ const BUILTIN_PACKS = [
   ["H", 1, "Many automakers add 48 V systems mainly to meet:", ["Fuel economy and emissions targets", "Radio power needs", "Tire pressure rules", "Seat heating demands"], "Mild hybrids are a cheaper way to cut fuel use than full hybrids."],
   ["H", 1, "A 48 V battery is often located:", ["In the trunk floor or under a seat", "On the roof", "Inside the engine block", "Behind the grille"], "Placement varies. The service information shows where it is."],
   ["H", 2, "Carmakers use 48 V instead of 12 V for heavy loads because:", ["A quarter of the current", "It's cheaper than 12 V everywhere", "It needs thicker wires", "It removes the battery"], "P = V × I. Four times the voltage means a quarter of the current, so wires can be smaller."],
-  ["H", 2, "The 48 V battery in a mild hybrid is usually:", ["Lithium-ion", "Lead-acid", "Nickel-cadmium", "Alkaline"], "Lithium-ion packs are small and light and handle the quick charge-discharge cycles well."],
+  ["H", 2, "The 48 V pack in most mild hybrids uses which battery type?", ["Lithium-ion", "Lead-acid", "Nickel-cadmium", "Alkaline"], "Lithium-ion packs are small and light and handle the quick charge-discharge cycles well."],
   ["H", 2, "A belt-driven starter generator (BSG) replaces the:", ["The alternator", "Water pump", "Fuel pump", "Torque converter"], "The BSG spins the engine for restarts, adds torque, and regenerates when slowing."],
   ["H", 2, "The DC-DC converter in a 48 V mild hybrid:", ["Feeds the 12 V side", "Converts AC to DC for the motor only", "Raises 12 V to 400 V", "Charges the car from the wall"], "It does the 12 V side's charging job once the 48 V generator replaces the alternator."],
   ["H", 2, "Some mild hybrids can sail, which means:", ["Engine off while coasting", "Driving on water", "Idling faster", "Using only the 12 V battery"], "The 48 V system keeps power steering, brakes, and accessories working."],
@@ -2802,7 +2815,7 @@ const BUILTIN_PACKS = [
   ["H", 4, "A 48 V battery reports a large cell voltage spread. The BMS will likely:", ["Limit power", "Ignore it", "Raise the voltage", "Turn on the headlights"], "Like an EV pack, imbalance limits safe operation."],
   ["H", 4, "A 48 V system shows normal voltage at rest but drops to 38 V during assist. Suspect:", ["A weak pack or resistance", "A healthy system", "A full fuel tank", "New tires"], "Big sag under load points to cell weakness or bad connections."],
   ["H", 4, "A 48 V mild hybrid is classed below high voltage, but techs should still use:", ["Safe practices for 48 V", "No precautions at all", "HV Class 0 gloves by law", "Only bare hands"], "Respect the arc and burn risk, and follow the OEM's 48 V rules."],
-  ["H", 4, "A 48 V battery cell group fails. Some packs allow:", ["Replacing the pack as a unit only", "Swapping a single cell at the roadside", "Running on 12 V cells", "Ignoring it safely"], "Most 48 V packs are serviced as complete units. Follow the OEM."],
+  ["H", 4, "A 48 V battery cell group fails. Most OEMs have you:", ["Replace the pack as a unit", "Swap a single cell at the roadside", "Run it on 12 V cells", "Ignore it, since 48 V is safe"], "Most 48 V packs are serviced as complete units. Follow the OEM."],
   ["H", 4, "The 48 V system's inverter and DC-DC need a stable 12 V supply because:", ["Their control electronics run on 12 V", "They make 12 V from nothing", "They don't use any 12 V", "12 V powers the BSG"], "A weak 12 V battery can disable the 48 V system's controls."],
   ["H", 4, "Why might a mild hybrid's start-stop work in summer but not in winter?", ["A cold 48 V or 12 V battery limits restarts", "The engine is too hot in winter", "The belt shrinks in summer", "The radio blocks it"], "Batteries lose power in the cold, so the system skips auto-stop."],
   ["H", 4, "A scan tool shows the 48 V pack at 51 V while charging under regen. This is:", ["Within the normal operating range", "An overvoltage fault", "Below the minimum voltage", "An HV system reading"], "It's inside the unrestricted 36–52 V band."],
@@ -3063,7 +3076,7 @@ const BUILTIN_PACKS = [
   ["X", 2, "A scan tool's network view shows every module on one bus missing. Good first checks are:", ["Shorts, DLC wiring, and shared feeds", "Each missing module's software level and calibration", "The tire pressures and the spare", "The HV battery's cell voltages"], "When a whole bus drops out, look for something that affects every node on it."],
   ["X", 2, "You measure 60 Ω at the DLC, but CAN-H to ground reads 2 Ω. The fault is:", ["CAN-H shorted to ground", "A missing terminator at one end of the bus", "A normal reading", "CAN-L shorted to CAN-H"], "Terminator resistance looks fine, but CAN-H has a short to ground somewhere."],
   ["X", 2, "To find where a CAN line is shorted to ground, you can:", ["Split the bus until the short goes away", "Replace every module on that bus at once", "Clear codes and wait for it to return", "Raise the bus voltage until the short burns itself open"], "Splitting the bus at connectors or splice packs narrows the short to one section."],
-  ["X", 2, "A good starting scope setting for 500 kbit/s CAN is about:", ["1–2 V per division and 10–20 µs per division", "10 V per division and 1 s per division", "50 mV per division and 1 ms per division, to see noise", "20 V per division and 100 ms per division"], "That shows a few frames clearly with each 2 µs bit visible."],
+  ["X", 2, "A good starting scope setting for 500 kbit/s CAN is about:", ["1–2 V per division and 10–20 µs per division", "10 V per division and 1 s per division", "50 mV per division and 1 ms per division, to see noise", "20 V per division and 100 ms per division"], "At 20 µs per division, a 10-division screen shows about 200 µs: roughly one frame, with each 2 µs bit visible."],
   ["X", 2, "A scope with \"serial decode\" can:", ["Show CAN IDs and data from the waveform", "Measure each module's terminating resistance", "Program modules", "Test isolation"], "Decoding turns the voltage pattern into frames you can read."],
   ["X", 2, "A CAN interface tool (sniffer) connected to the bus can:", ["Log and display raw CAN traffic", "Charge the battery while you work", "Replace the gateway module", "Change the bus termination value"], "Seeing which IDs are present, and how often, helps find missing or babbling nodes."],
   ["X", 2, "A module drops off the network only on bumpy roads. Suspect:", ["A loose pin or chafed wire there", "A software bug that only runs when the car is moving", "A battery that is too fully charged", "Tires that are worn on the outside edges"], "Intermittent opens or shorts that follow vibration point to a physical connection."],
@@ -3079,7 +3092,7 @@ const BUILTIN_PACKS = [
   ["X", 3, "Ringing on the edges of CAN bits usually points to:", ["A termination problem", "Too many modules", "A weak alternator", "Normal at any level"], "Reflections from poor termination show up as overshoot and ringing on each edge."],
   ["X", 3, "The bus reads 60 Ω, but one module won't communicate. What's the next logical check?", ["Its power, ground, and pins", "Replace both terminating resistors", "Replace the gateway", "Clear all codes"], "60 Ω proves the backbone and terminators. A silent module often has a power, ground, or pin problem."],
   ["X", 3, "A scope shows CAN-H stuck near 12 V. That points to:", ["A short to battery", "A normal bus", "An open terminator", "A missing ground on the scope"], "A CAN line held at battery voltage can't signal, and the bus goes down."],
-  ["X", 3, "A scope shows CAN-H normal but CAN-L flat at 2.5 V. The bus may still partly work because:", ["It may limp along, with more errors", "CAN only needs CAN-L to work at all", "CAN-L only carries power to the transceivers, not data", "This is a perfectly normal pattern"], "Many high-speed transceivers lose noise immunity and fail with one line open."],
+  ["X", 3, "A scope shows CAN-H switching normally but CAN-L flat at 2.5 V. What should you expect?", ["Errors or a dead bus, depending on the transceivers", "Normal communication, since CAN only needs CAN-H", "No effect, since CAN-L only powers the transceivers", "A normal pattern for a healthy bus"], "Some transceivers limp along on one line with lots of errors. Many lose noise immunity and fail. Either way, find the open on CAN-L."],
   ["X", 3, "A scope shows dominant bits that don't reach full levels, with CAN-H at about 3.0 V and CAN-L at about 2.0 V. Possible cause:", ["Extra bus load or a weak transceiver", "A perfectly healthy bus with good margin", "An open in CAN-H somewhere between the DLC and the ECM", "A low tire pressure warning"], "A smaller differential means something is loading the bus or a driver is weak."],
   ["X", 3, "A scope shows CAN-H and CAN-L both offset upward by 1 V from normal. This points to:", ["A ground offset at that point", "A normal pattern at any location", "A missing terminator at one end of the backbone", "CAN-H shorted to CAN-L"], "Check the module grounds and your scope ground reference."],
   ["X", 3, "Decoded traffic shows one ID sent nonstop with no gaps, and other modules' messages missing. This is:", ["A babbling node flooding the bus", "A healthy bus running at its normal design load", "A missing terminating resistor", "An open in the CAN-H wire"], "A node stuck transmitting a high-priority ID blocks lower-priority traffic."],
@@ -3087,7 +3100,7 @@ const BUILTIN_PACKS = [
   ["X", 3, "A module shows \"bus-off\" in its data. This means the module:", ["Had too many transmit errors and stopped sending", "Is the gateway for that bus", "Has the lowest ID on the bus", "Is asleep and needs a wake-up frame to start again"], "Find why its transmissions failed: wiring, transceiver, or bus faults."],
   ["X", 3, "A module won't communicate, but power, ground, and CAN wiring all test good. Before replacing it, many OEMs require:", ["Checking for a software or configuration issue", "Replacing the bus terminators", "Swapping it with a used module from another car", "Disconnecting the battery for a day"], "Some modules need programming or a reset rather than replacement."],
   ["X", 3, "After installing a new module, it talks but other modules set \"invalid data\" codes. Likely cause:", ["The module isn't programmed for this car", "The new module has the wrong terminating resistor", "The bus has a short to ground", "The 12 V battery is overcharged"], "Configuration sets things like options and variants. Without it, the data may be wrong."],
-  ["X", 3, "Measured with the key on and a DMM, CAN-H reads 4.5 V and CAN-L reads 0.5 V steady. This suggests:", ["The bus may be stuck dominant", "A normal idle bus", "Both terminators missing", "CAN-H is open somewhere near the DLC connector"], "A DMM seeing full dominant levels steadily means something is holding the bus dominant."],
+  ["X", 3, "Measured with the key on and a DMM, CAN-H reads 3.5 V and CAN-L reads 1.5 V steady. This suggests:", ["The bus may be stuck dominant", "A normal idle bus", "Both terminators missing", "CAN-H is open somewhere near the DLC connector"], "A DMM seeing full dominant levels steadily means something is holding the bus dominant."],
   ["X", 3, "A bus stuck dominant can be caused by:", ["A failed transceiver or a node stuck transmitting", "An extra terminating resistor in a replacement part", "A missing message ID", "Too few modules on the bus"], "A stuck dominant bus blocks all communication."],
   ["X", 3, "To check a terminator inside a module, you can:", ["Measure across its CAN pins, unplugged", "Measure its power pin to ground with the key on", "Measure CAN-H to battery positive", "Measure its case to the chassis"], "An unplugged end module should show about 120 Ω across its CAN pins if it holds a terminator."],
   ["X", 3, "A splice in the CAN harness has green corrosion. The best repair is:", ["Replace the section and seal the splice", "Clean it with sandpaper, then wrap it in electrical tape", "Twist the wires together tighter", "Spray it with silicone and leave it"], "Corrosion spreads under insulation. Repair it properly and seal it."],
@@ -3378,7 +3391,7 @@ const BUILTIN_PACKS = [
   ["S", 2, "UDP is often used for discovery and streaming because it's:", ["Simple and fast, no setup", "Guaranteed to deliver every packet", "Required for diagnostics", "Only used on fiber"], "Lost discovery or stream packets can just be resent or skipped."],
   ["S", 2, "An OTA update fails partway. A well-designed system:", ["Rolls back to a working version", "Leaves the module blank", "Erases every module", "Disables the car permanently"], "Many systems use two memory banks so a failed update doesn't brick the module."],
   ["S", 2, "A DoIP vehicle identification request is usually sent as a:", ["UDP broadcast on the shop network", "TCP connection to one known IP", "CAN frame on pins 6 and 14", "LIN header from the BCM"], "Any DoIP vehicle on the network answers with its VIN and logical address."],
-  ["S", 3, "On the OBD-II connector, the DoIP activation line is pin:", ["8", "16", "6", "4"], "Pin 8 activates DoIP. Ethernet uses pins 3 and 11 (receive) and 12 and 13 (transmit)."],
+  ["S", 3, "On the OBD-II connector, the DoIP activation line is pin:", ["8", "16", "6", "4"], "Pin 8 activates DoIP. The Ethernet pairs use pins 3 and 11, and 12 and 13."],
   ["S", 3, "Once connected through DoIP, a scan tool typically talks to modules using:", ["UDS, as on CAN", "HTML web pages", "SOME/IP messages only", "Plain voltage readings"], "DoIP is the transport. UDS (ISO 14229) still defines reading codes, running tests, and programming."],
   ["S", 3, "AVB/TSN (Audio Video Bridging / Time-Sensitive Networking) adds:", ["Guaranteed timing", "Encryption of every frame only", "Higher voltage on the pair", "A second CAN bus on the side"], "TSN reserves bandwidth and bounds delay so audio, video, and control data arrive on time."],
   ["S", 3, "Before DoIP diagnostics can start, the tester usually sends:", ["A routing activation request", "A CAN wake-up pulse only", "A DHCP release message", "A reboot command to the gateway"], "Routing activation opens the path through the DoIP gateway to the modules behind it."],
@@ -3874,7 +3887,7 @@ const BUILTIN_PACKS = [
   ["B", 2, "The BMS limits power during hard acceleration when:", ["A cell is near its minimum voltage or too hot", "The tires are freshly rotated", "The coolant temperature is below the thermostat setting", "The car is low on washer fluid"], "Power limits keep every cell within safe voltage and temperature."],
   ["B", 2, "Regenerative braking is often reduced when:", ["The pack is full or very cold", "The pack is half full and warm", "The tires are new", "The headlights are on"], "A full or cold pack can't safely accept much charge current."],
   ["B", 2, "The chiller in an EV's thermal system:", ["Uses refrigerant to cool the battery coolant", "Uses engine oil from a hybrid to warm the cells", "Uses brake fluid to cool the inverter", "Uses washer fluid to cool the motor"], "It's a heat exchanger between the A/C refrigerant and the battery coolant loop."],
-  ["B", 2, "A pack's nominal voltage changes from about 360 V when nearly empty to about:", ["400 V or more when full", "36 V when full", "12 V when full", "1,000 V when full, since cells double in voltage"], "Cell voltage rises with charge, so pack voltage swings across its range."],
+  ["B", 2, "A pack's actual voltage changes from about 360 V when nearly empty to about:", ["400 V or more when full", "36 V when full", "12 V when full", "1,000 V when full, since cells double in voltage"], "Cell voltage rises with charge, so pack voltage swings across its range."],
   ["B", 2, "An EV that sits unused for weeks can still lose some charge because:", ["Modules and electronics wake up and draw power", "The cells slowly lose charge only when it's hot", "The tires pull power from the pack", "The radio charges the pack"], "Monitoring, 12 V top-ups, and self-discharge all slowly use energy."],
   ["B", 2, "The HV pack and the 12 V battery differ in that the 12 V battery:", ["Runs the car's low-voltage electronics and wakes it up", "Powers the drive motor when the HV pack is low", "Is charged only at public stations", "Holds more energy than the HV pack"], "Even in an EV, the 12 V battery powers modules and closes the contactors."],
   ["B", 2, "A pack's cooling plates are bonded or pressed against the cells with:", ["A thermal interface material", "Bare air gaps, so the cells stay isolated", "Brake fluid", "Engine oil"], "Thermal pads or paste move heat from the cells to the plates while insulating them."],
@@ -4537,6 +4550,7 @@ function renderQuestion() {
   document.getElementById("quizQuestionText").textContent = q.q;
   document.getElementById("quizExplain").hidden = true;
   document.getElementById("nextBtn").hidden = true;
+  document.getElementById("challengeLink").hidden = false;
 
   // shuffle answer order so the right answer isn't always in the same spot
   const order = shuffle(q.o.map((_, i) => i));
@@ -4653,6 +4667,9 @@ function answer(choice) {
 function nextQuestion() {
   if (!quiz) return;
   if (!quiz.locked) return;
+  // don't move on behind an open Challenge sheet; go once it closes
+  if (!document.getElementById("flagSheet").hidden) { quiz.pendingNext = true; return; }
+  quiz.pendingNext = false;
   quiz.paused = false;
   renderQuestion();
 }
@@ -4819,8 +4836,12 @@ function showResults(Q, ups, rankAfter) {
       <div class="yours">${yours}</div>
       <div class="right">Correct: ${escapeHtml(l.rightText)}</div>
       ${l.q.e ? `<div class="why">${escapeHtml(l.q.e)}</div>` : ""}
+      ${isFlagged(l.q.id) ? '<div class="muted" style="font-size:12px">Challenged. Thanks.</div>' : `<button type="button" class="challenge-link" data-qid="${escapeHtml(String(l.q.id))}">Challenge this question</button>`}
     </div>`;
   }).join("");
+  document.querySelectorAll("#resMisses .challenge-link").forEach(b => {
+    b.onclick = () => { const q = byId(b.dataset.qid); if (q) openFlag(q, b); };
+  });
 }
 
 /* ================= subject packs =================
@@ -5410,6 +5431,7 @@ function setGoal(v) {
   daily.goal = Number(v) || 100;
   saveDaily();
   renderDailyCard();
+  showToast("Daily goal set to " + daily.goal + " XP");
 }
 
 /* ================= points during a round ================= */
@@ -5518,41 +5540,69 @@ function secondsFor(q) {
   return Math.max(10, Math.min(25, Math.round(4 + words / 3)));
 }
 
-/* ================= flagging a bad question ================= */
+/* ================= challenging a question =================
+   A small red "Challenge this question" link sits under every question and under every miss on
+   the Results screen. A challenge is saved on this device (and to the shared database when the page
+   runs inside Claude). The question stops coming up for that person until it's reviewed.
+   Review, copy, or download all challenges from the + screen. */
 const LOCAL_FLAGS = "mmauto_flags_local";
+const CHALLENGE_EMAIL = "";   // put an address here to add an "Email it" button on the review list
 const isFlagged = id => !!(state.flagged && state.flagged[id]);
-let flagFor = null;
-function openFlag() {
-  if (!quiz || !quiz.cur) return;
-  flagFor = quiz.cur.q;
-  quiz.paused = true;
-  document.getElementById("flagQ").textContent = flagFor.q;
+let flagFor = null, flagFromQuiz = false, flagLink = null;
+function openFlag(q, link) {
+  flagFromQuiz = !q;
+  if (!q) { if (!quiz || !quiz.cur) return; q = quiz.cur.q; quiz.paused = true; }
+  flagFor = q; flagLink = link || null;
+  document.getElementById("flagQ").textContent = q.q;
+  document.getElementById("flagA").textContent = "Marked correct: " + q.o[q.a];
   document.querySelectorAll('input[name="flagReason"]').forEach(r => r.checked = false);
   document.getElementById("flagNote").value = "";
+  document.getElementById("flagSource").value = "";
   document.getElementById("flagMsg").textContent = "";
+  document.getElementById("flagSend").disabled = false;
   document.getElementById("flagSheet").hidden = false;
+  setTimeout(() => { const r = document.querySelector('input[name="flagReason"]'); if (r) r.focus(); }, 30);
 }
 function closeFlag() {
   document.getElementById("flagSheet").hidden = true;
-  flagFor = null;
-  // resume unless the question is waiting on an explanation
-  if (quiz && document.getElementById("quizExplain").hidden) quiz.paused = false;
+  flagFor = null; flagLink = null;
+  // resume the clock unless the question is waiting on an explanation or was skipped
+  if (flagFromQuiz && quiz && !quiz.locked) quiz.paused = false;
+  flagFromQuiz = false;
+  if (quiz && quiz.pendingNext) nextQuestion();
 }
 async function sendFlag() {
   const r = document.querySelector('input[name="flagReason"]:checked');
+  const note = clip(document.getElementById("flagNote").value, 500);
   if (!r) { document.getElementById("flagMsg").textContent = "Pick a reason first."; return; }
-  const q = flagFor;
+  if ((r.value === "other" || r.value === "impossible") && !note) {
+    document.getElementById("flagMsg").textContent = "Add a few words about what's wrong."; return;
+  }
+  const q = flagFor; if (!q) { closeFlag(); return; }
+  document.getElementById("flagSend").disabled = true;
   const flag = {
     pack: currentPack.id, packName: currentPack.name, qid: q.id, topic: q.t, level: q.lv,
-    q: q.q, correct: q.o[q.a], reason: r.value, note: clip(document.getElementById("flagNote").value, 300), at: Date.now()
+    q: q.q, correct: q.o[q.a], reason: r.value, note,
+    source: clip(document.getElementById("flagSource").value, 300), at: Date.now()
   };
   (state.flagged || (state.flagged = {}))[q.id] = true;
   saveState();
   let saved = false;
   if (dbApi) { try { await dbApi.collection("flags").add(flag); saved = true; } catch (e) {} }
   if (!saved) { try { const l = JSON.parse(localStorage.getItem(LOCAL_FLAGS) || "[]"); flag.id = "l" + Date.now(); l.push(flag); localStorage.setItem(LOCAL_FLAGS, JSON.stringify(l)); } catch (e) {} }
+  const fromQuiz = flagFromQuiz, link = flagLink;
+  // in a practice round, a challenged question that wasn't answered yet is skipped and doesn't count
+  if (fromQuiz && quiz && quiz.cur && quiz.cur.q === q && !quiz.locked && quiz.mode !== "placement") {
+    quiz.locked = true; clearInterval(quiz.qTimerId); quiz.idx++;
+    document.querySelectorAll("#quizOptions .option").forEach(b => b.disabled = true);
+    const ex = document.getElementById("quizExplain");
+    ex.textContent = "Challenge saved. This question won't count. Tap Next."; ex.hidden = false;
+    document.getElementById("nextBtn").hidden = false;
+  }
+  if (link) { const done = document.createElement("div"); done.className = "muted"; done.style.fontSize = "12px"; done.textContent = "Challenged. Thanks."; link.replaceWith(done); }
+  document.getElementById("challengeLink").hidden = fromQuiz;
   closeFlag();
-  showToast("Flagged. It won't come up again for you until it's reviewed.");
+  showToast("Challenge saved. It won't come up again for you until it's reviewed.");
 }
 async function loadFlags() {
   let list = [];
@@ -5565,13 +5615,40 @@ async function loadFlags() {
   try { list = list.concat(JSON.parse(localStorage.getItem(LOCAL_FLAGS) || "[]").filter(f => f.pack === currentPack.id)); } catch (e) {}
   return list.sort((a, b) => b.at - a.at);
 }
-const REASON_TEXT = { wrong: "Marked answer is wrong", unclear: "Question is unclear", typo: "Typo or formatting", other: "Other" };
+const REASON_TEXT = { wrong: "Marked answer is wrong", impossible: "Setup doesn't add up", two: "More than one answer is right", unclear: "Question is unclear", typo: "Typo or formatting", other: "Other" };
+let flagCache = [];
+function flagsText(list) {
+  return list.map((f, i) => [
+    `${i + 1}. [${f.packName || f.pack}] ${f.topic || ""} · Level ${f.level || "?"} · id ${f.qid}`,
+    `   Q: ${f.q}`, `   Marked correct: ${f.correct || ""}`,
+    `   Challenge: ${REASON_TEXT[f.reason] || f.reason}${f.note ? " — " + f.note : ""}`,
+    f.source ? `   Source: ${f.source}` : "", `   When: ${new Date(f.at).toLocaleString()}`
+  ].filter(Boolean).join("\n")).join("\n\n");
+}
+async function copyFlags() {
+  const text = "Mad Minute challenges\n\n" + flagsText(flagCache);
+  try { await navigator.clipboard.writeText(text); showToast("Copied " + flagCache.length + " challenge" + (flagCache.length === 1 ? "" : "s")); }
+  catch (e) { downloadFlags(); }
+}
+function downloadFlags() {
+  const blob = new Blob([JSON.stringify(flagCache, null, 2)], { type: "application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "mad-minute-challenges-" + new Date().toISOString().slice(0, 10) + ".json";
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+function emailFlags() {
+  const body = flagsText(flagCache).slice(0, 1800);
+  location.href = "mailto:" + encodeURIComponent(CHALLENGE_EMAIL) + "?subject=" + encodeURIComponent("Mad Minute challenges") + "&body=" + encodeURIComponent(body);
+}
 async function renderFlags() {
   const wrap = document.getElementById("flagList");
   wrap.innerHTML = '<div class="empty-note">Loading…</div>';
   const list = await loadFlags();
+  flagCache = list;
   document.getElementById("flagCount").textContent = list.length ? `(${list.length})` : "";
-  if (!list.length) { wrap.innerHTML = '<div class="empty-note">No flagged questions in this subject.</div>'; return; }
+  document.getElementById("flagTools").hidden = !list.length;
+  document.getElementById("flagEmail").hidden = !CHALLENGE_EMAIL;
+  if (!list.length) { wrap.innerHTML = '<div class="empty-note">No challenged questions in this subject.</div>'; return; }
   wrap.innerHTML = "";
   list.forEach(f => {
     const item = document.createElement("div");
@@ -5583,8 +5660,9 @@ async function renderFlags() {
       <div class="q">${escapeHtml(f.q)}</div>
       <div class="muted">Marked correct: ${escapeHtml(f.correct || "")}</div>
       ${f.note ? `<div class="muted">Note: ${escapeHtml(f.note)}</div>` : ""}
+      ${f.source ? `<div class="muted">Source: ${escapeHtml(f.source)}</div>` : ""}
       <div class="row-btns" style="margin-top:8px;">
-        <button class="btn btn-ghost" data-act="dismiss">Dismiss flag</button>
+        <button class="btn btn-ghost" data-act="dismiss">Dismiss</button>
         ${removable ? '<button class="btn btn-ghost" data-act="remove" style="color:var(--red)">Remove question</button>' : ""}
       </div>`;
     item.querySelector('[data-act="dismiss"]').onclick = async () => { await dropFlag(f); if (state.flagged) delete state.flagged[f.qid]; saveState(); renderFlags(); };
@@ -6768,7 +6846,7 @@ function mdToHtml(src) {
       if (!armed) { armed = true; btn.textContent = "Tap again to erase all progress"; return; }
       try {
         Object.keys(localStorage).forEach(function (k) {
-          if (/^mmauto_/.test(k)) localStorage.removeItem(k);
+          if (/^(mmauto_|mmflash_)/.test(k)) localStorage.removeItem(k);
         });
       } catch (e) {}
       location.reload();

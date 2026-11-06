@@ -2,7 +2,7 @@
 // Bump VERSION whenever index.html changes so phones pick up the new copy.
 // The shared learning layer (shared/mm-learn.*), flashcards (shared/mm-flash.*, flashcards/*.js) are precached too;
 // bump their ?v= in index.html and here when they change.
-const VERSION = "mm-auto-v15";
+const VERSION = "mm-auto-v16";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "shared/mm-learn.css?v=1", "shared/mm-learn.js?v=1",
   "shared/mm-flash.css?v=1", "shared/mm-flash.js?v=1",
   "flashcards/auto.js?v=1", "flashcards/maint.js?v=1", "flashcards/e12.js?v=1", "flashcards/net.js?v=1", "flashcards/hv.js?v=1"];
@@ -23,8 +23,8 @@ self.addEventListener("fetch", e => {
   const req = e.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
-  // Other Mad Minute apps (like /biology/, /music/ and /dev/) live under this folder with their own offline cache. Leave them alone.
-  if (url.origin === location.origin && ["biology/", "music/", "dev/"].some(d => url.pathname.startsWith(new URL(d, self.registration.scope).pathname))) return;
+  // Other Mad Minute apps (like /biology/, /music/, /dev/ and /neta/) live under this folder with their own offline cache. Leave them alone.
+  if (url.origin === location.origin && ["biology/", "music/", "dev/", "neta/"].some(d => url.pathname.startsWith(new URL(d, self.registration.scope).pathname))) return;
   // The app page: try the network first so updates show up, fall back to the cached copy offline.
   if (req.mode === "navigate") {
     e.respondWith(

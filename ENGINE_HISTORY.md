@@ -140,6 +140,19 @@ The quiz became a reusable engine that any subject can plug into.
 - Built like Dev: `tools/neta-build/build_neta.py` copies the Auto engine and swaps in questions from plain-text files. Wrong answers were written to match the right answer's length so length doesn't give it away.
 - NETA `mm-neta-v1`.
 
+## Stage 13 — Challenge a question + hardening pass · 2026-11-06
+
+- **Challenge this question**: a small red link under every question, and under every miss on the Results screen. Reasons: answer is wrong, the setup doesn't add up (a reading or situation that can't happen), more than one answer is right, unclear, typo, other. A "What's wrong?" note and an optional **Source** (manual, test, website, page).
+- Challenging pauses the clock. In a practice round, an unanswered challenged question is skipped and doesn't count. The question stops coming up for that person until it's reviewed.
+- The **+** screen lists challenges with their notes and sources, plus **Copy all as text** and **Download file**. Set `CHALLENGE_EMAIL` in `index.html` to add an **Email them** button.
+- Fixed: the next question could start behind an open Challenge sheet after a fast right answer.
+- Fixed: **Reset demo** left flashcard progress (`mmflash_*`) behind.
+- Fixed: the Auto offline cache didn't skip `/neta/`, so opening NETA before its own cache existed could save the NETA page as the Auto app's offline copy.
+- Picking a daily goal now confirms with a toast.
+- Question fixes (edited in place, so saved progress still lines up): 0°F battery power (40%, not 60%), stuck-dominant CAN readings (3.5 V / 1.5 V, not 4.5 V / 0.5 V), CAN-L open outcome, scope time base note, DoIP pin note, two duplicate or awkward 48 V stems, two grammar fixes in Test Tools, "actual" vs "nominal" pack voltage.
+- Tested: every visible button on every screen clicked for a new user and a placed user (251 clicks, no dead buttons, no script errors), plus 72 end-to-end checks across placement, practice, study, timeouts, review, all five subjects, flashcards, Circuit Lab, Skills checkup, crew view, theme, and reset.
+- Auto `mm-auto-v16`.
+
 ---
 
 ## Which app has what
