@@ -224,6 +224,7 @@ The quiz became a reusable engine that any subject can plug into.
   - **Data:** Reset (moved here from the progress screen).
 - The app's own controls are moved in with their ids, so they keep working. The home **Settings** row from Stage 18 is gone; Settings lives on its own screen now.
 - Calendar days show a small **xp** mark next to each number.
+- Flashcards tidy-up: home keeps **one** Flashcards button; the per-topic Flashcards bars, Drill my misses and Circuit Lab moved into the hub (Circuit Lab at its top, closing it returns to the hub). The flip card now sits near the top instead of floating mid-screen, and **Again** is a red outline button instead of looking switched off.
 - Fixed: the path card's **Go** did nothing before placement (it only started a round for placed users, so it looked dead). It now always starts the next topic on the path, or says what unlocks it. Shared fix in `mm-home.js`, all apps.
 - Sign in is a placeholder for now: **Sign in with your company** (each company gets its own single sign-on) and **Use an email instead**, both showing "coming soon". Real sign-in needs an online database, planned later.
 - Tested in all five apps: gear, name saved after reload, theme, goal, timed/study, retake, back; light and dark; no script errors.

@@ -166,3 +166,10 @@ body.mmf-lock { overflow: hidden; }
 .mmf-due { font-size: 12px; font-weight: 600; color: var(--amber); white-space: nowrap; }
 .mmf-due.none { color: var(--text-dim); font-weight: 500; }
 .mmf-hub-g { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); margin-top: 6px; }
+
+/* card sits near the top instead of floating mid-screen */
+.mmf-stage { justify-content: flex-start; padding-top: 28px; }
+/* Again: a clear red outline button, not gray */
+.mmf-actions .mmf-again { background: transparent; border: 1.5px solid var(--red); color: var(--red); }
+.mmf-actions .mmf-again:disabled, .mmf-actions .mmf-got:disabled { opacity: .35; }
+.mmf-hub-wide.mmf-lab-pill { width: 100%; }

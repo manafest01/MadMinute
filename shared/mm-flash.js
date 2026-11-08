@@ -1,5 +1,6 @@
 /* ===== Mad Minute Flashcards + Circuit Lab (shared add-on) =====
-   A Flashcards button on the home screen that opens the Flashcards hub,
+   One Flashcards button on the home screen that opens the Flashcards hub (topic decks,
+   Drill my misses and Circuit Lab live in the hub),
    vocab flip cards for every topic that has a deck, a "Drill my misses" deck,
    symbol cards in series (symbol on the front, laid out in circuit order; needs shared/mm-symbols.js
    and window.MM_SYMBOLS from flashcards/sym-*.js), a "brush up the words" card on the results screen,
@@ -128,7 +129,7 @@
   }
   // close for good: forget the session and redraw the home counts
   function closeOverlay() {
-    var backToHub = S && S.opt && S.opt.fromHub;
+    var backToHub = (S && S.opt && S.opt.fromHub) || (L && labFromHub);
     removeOverlay();
     S = null; L = null;
     refreshHome();
@@ -249,6 +250,8 @@
       '<div class="mmf-title"><b>Flashcards</b><span>Symbols and words, on a spaced schedule</span></div></div>' +
       '<div class="mmf-hub">';
 
+    if (p && (OPT.circuitLab || []).indexOf(p.id) >= 0)
+      html += '<button class="mmf-pill mmf-lab-pill mmf-hub-wide" type="button" data-hub="lab"><b>Circuit Lab</b><span>Tap the parts of a 12 V circuit, watch it work</span></button>';
     var circ = circuits();
     if (circ.length) {
       var smem = load(SYM_PACK), sAll = allSymbolCards();
@@ -292,6 +295,8 @@
     o.querySelector(".mmf-x").onclick = closeOverlay;
     document.addEventListener("keydown", onKey);
 
+    var labB = o.querySelector('[data-hub="lab"]');
+    if (labB) labB.onclick = function () { openLab(); labFromHub = true; };
     var walk = o.querySelector('[data-hub="walk"]');
     if (walk) walk.onclick = function () { openDeck("Every circuit", allSymbolCards(), { ordered: true, p: SYM_PACK, fromHub: true }); };
     var sm = o.querySelector('[data-hub="symmiss"]');
@@ -399,24 +404,6 @@
     if (!hasDecks && !lab && !hasSyms) { if (bar) bar.remove(); return; }
 
     var mem = load(p);
-    var names = (typeof allTopics === "function") ? allTopics() : [];
-    var cards = Array.prototype.slice.call(grid.children);
-    cards.forEach(function (card, i) {
-      var t = names[i];
-      var deck = t ? cardsFor(p, t) : [];
-      if (!deck.length) return;
-      var due = dueCount(p, deck, mem);
-      var cell = el("div", "mmf-cell");
-      grid.insertBefore(cell, card);
-      cell.appendChild(card);
-      var b = el("button", "mmf-vocab", '<span>Flashcards</span><span class="mmf-n">' +
-        (due ? due + " due" : deck.length + " cards") + '</span>');
-      b.type = "button";
-      b.setAttribute("aria-label", "Flashcards for " + t + ", " + (due ? due + " due" : deck.length + " cards"));
-      b.onclick = function (e) { e.stopPropagation(); openDeck(t, deck); };
-      cell.appendChild(b);
-    });
-
     if (!bar) {
       bar = el("div", "mmf-homebar");
       bar.id = "mmfHomeBar";
@@ -425,16 +412,10 @@
     var everything = hasDecks ? allCards(p) : [];
     var misses = everything.filter(function (c) { return isMiss(mem[c.id]); });
     var dueAll = hasDecks ? dueCount(p, everything, mem) : 0;
+    // home keeps one Flashcards button; topic decks, Drill my misses and Circuit Lab live in the hub
     bar.innerHTML =
       '<button class="mmf-pill mmf-flash-pill" type="button" id="mmfHubBtn"><b>Flashcards</b><span>' +
-        (hasSyms ? "Symbols in series + words" : "Words for every topic") + (dueAll ? " · " + dueAll + " due" : "") + '</span></button>' +
-      (hasDecks ? '<button class="mmf-pill" type="button" id="mmfMissBtn"' + (misses.length ? "" : " disabled") + '>' +
-        '<b>Drill my misses</b><span>' + (misses.length ? misses.length + (misses.length === 1 ? " vocab card" : " vocab cards") : "No missed cards yet") + '</span></button>' : "") +
-      (lab ? '<button class="mmf-pill mmf-lab-pill" type="button" id="mmfLabBtn"><b>Circuit Lab</b><span>Tap the parts, watch it work</span></button>' : "");
-    var mb = document.getElementById("mmfMissBtn");
-    if (mb) mb.onclick = function () { openDeck("My misses", misses); };
-    var lb = document.getElementById("mmfLabBtn");
-    if (lb) lb.onclick = openLab;
+        (hasSyms ? "Symbols in series, words" : "Words for every topic") + (lab ? ", Circuit Lab" : "") + (dueAll ? " \u00b7 " + dueAll + " due" : "") + '</span></button>';
     document.getElementById("mmfHubBtn").onclick = openHub;
   }
   function refreshHome() {
@@ -484,7 +465,9 @@
     reblow: ["Fuse blew again", "A new fuse pops right away because the short is still there. Fix the chafed wire first (tap Fix everything), then replace the fuse."]
   };
 
+  var labFromHub = false;   // opened from the hub: closing goes back to the hub
   function openLab() {
+    labFromHub = false;
     removeOverlay();
     S = null;
     L = { sw: true, fuse: true, ground: 0, lamp: true, sel: "lamp" };   // ground: 0 good, 1 corroded, 2 broken
