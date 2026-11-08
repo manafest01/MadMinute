@@ -3,7 +3,7 @@
 .mmg-big { font-size: 15px; color: var(--text-dim); }
 .mmg-big b { font-size: 40px; line-height: 1; color: var(--text); margin-right: 4px; }
 .mmg-bar { height: 8px; background: var(--panel-2); border-radius: 4px; overflow: hidden; }
-.mmg-bar i { display: block; height: 100%; background: var(--amber); border-radius: 4px; transition: width .6s ease; }
+.mmg-bar i { display: block; height: 100%; background: linear-gradient(90deg, #f2a73b, #ff7a45); border-radius: 4px; transition: width .6s ease; }
 .mmg-sub { font-size: 12.5px; color: var(--text-dim); line-height: 1.4; }
 .mmg-sub b { color: var(--amber); }
 .mmg-new { color: var(--amber); font-weight: 700; }
@@ -19,8 +19,10 @@
 .mmg-tile { padding: 12px 14px; gap: 2px; display: flex; flex-direction: column; }
 .mmg-num { font-size: 26px; font-weight: 700; line-height: 1.1; }
 .mmg-num small { font-size: 13px; font-weight: 500; color: var(--text-dim); }
-.mmg-hs { border-color: var(--amber); }
-.mmg-hs .eyebrow, .mmg-hs .mmg-num { color: var(--amber); }
+.mmg-hs { background: #f2a73b; border-color: #f2a73b; }
+.mmg-hs .eyebrow, .mmg-hs .mmg-num, .mmg-hs .mmg-num small, .mmg-hs .mmg-sub { color: #1a1205; }
+.mmg-today { border-color: var(--teal); }
+.mmg-today .mmg-num { color: var(--teal); }
 .mmg-cal { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
 .mmg-mhead { display: flex; align-items: center; justify-content: space-between; }
 .mmg-mhead .icon-btn { width: 34px; height: 34px; font-size: 18px; }
@@ -30,8 +32,13 @@
 .mmg-c { display: flex; flex-direction: column; align-items: center; padding: 5px 0; border-radius: 8px; min-height: 40px; }
 .mmg-c em { font-style: normal; font-size: 13px; }
 .mmg-c small { font-size: 10px; color: var(--text-dim); }
-.mmg-c.on { background: var(--amber-dim, rgba(242,167,59,.18)); }
-.mmg-c.on em, .mmg-c.on small { color: var(--text); font-weight: 600; }
-.mmg-c.today { box-shadow: inset 0 0 0 1.5px var(--amber); }
+/* vibrant: studied days glow amber, goal days are solid amber, the HI SCORE day is teal */
+.mmg-c.on { background: rgba(242,167,59,.38); }
+.mmg-c.on em, .mmg-c.on small { color: var(--text); font-weight: 700; }
+.mmg-c.goal { background: #f2a73b; }
+.mmg-c.goal em, .mmg-c.goal small { color: #1a1205; font-weight: 700; }
+.mmg-c.crown { background: #3fb8ae; }
+.mmg-c.crown em, .mmg-c.crown small { color: #062b28; font-weight: 700; }
+.mmg-c.today { box-shadow: 0 0 0 2px var(--teal); }
 .mmg-c.later em { color: var(--text-dim); opacity: .5; }
 .mmg-goal { font-size: 12px; color: var(--text-dim); text-align: center; padding: 4px 0 8px; }

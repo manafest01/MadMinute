@@ -1,8 +1,8 @@
 // Mad Minute Biology service worker: keeps the app working with no signal.
 // Bump VERSION whenever index.html changes so phones pick up the new copy.
 // The shared learning layer (../shared/mm-learn.*) is precached too; bump its ?v= in index.html and here when it changes.
-const VERSION = "mm-bio-v8";
-const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "../shared/mm-learn.css?v=1", "../shared/mm-learn.js?v=1", "../shared/mm-home.css?v=3", "../shared/mm-home.js?v=4", "../shared/mm-goals.css?v=1", "../shared/mm-goals.js?v=2"];
+const VERSION = "mm-bio-v9";
+const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "../shared/mm-learn.css?v=1", "../shared/mm-learn.js?v=1", "../shared/mm-home.css?v=3", "../shared/mm-home.js?v=4", "../shared/mm-goals.css?v=2", "../shared/mm-goals.js?v=3"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));

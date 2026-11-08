@@ -212,6 +212,7 @@ The quiz became a reusable engine that any subject can plug into.
 - Tested in all five apps with sample data: tab, month arrows, switching tabs, home row; light and dark; no script errors.
 - Auto `mm-auto-v25`, Biology `mm-bio-v7`, Music `mm-mus-v8`, Dev `mm-dev-v8`, NETA `mm-neta-v8`.
 - Labels changed to arcade-style **HI SCORE** (week line, best-day tile, "NEW HI SCORE!"). Auto `mm-auto-v26`, Biology `mm-bio-v8`, Music `mm-mus-v9`, Dev `mm-dev-v9`, NETA `mm-neta-v9`.
+- Calendar days now show **XP** instead of minutes, in vibrant colors: solid amber on days you hit the daily goal, lighter amber on days you studied, teal outline on today. The **HI SCORE · day** tile is the most XP in one day (solid amber); Today shows XP big, minutes small. The weekly HI SCORE stays in minutes. Auto `mm-auto-v27`, Biology `mm-bio-v9`, Music `mm-mus-v10`, Dev `mm-dev-v10`, NETA `mm-neta-v10`.
 
 ---
 

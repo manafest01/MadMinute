@@ -2,8 +2,8 @@
    A Calendar tab in the bottom bar. The main score is time spent studying:
    - This week's minutes vs your best week (your high score: meet it or beat it)
    - Which days you studied this week (showing up every day is the point)
-   - Today's minutes and your best single day
-   - A month calendar with minutes per day; the best day gets a crown
+   - Today's XP and your HI SCORE day (most XP in one day)
+   - A month calendar with XP per day, bright amber on goal days; the HI SCORE day gets a crown
    The daily XP goal stays, but only as a small gray line.
 
    Study time comes from the engine's own log (daily.act: seconds per day, one answer never
@@ -82,6 +82,11 @@
       var s = secOn(k);
       if (s > h.day.sec) { h.day = { sec: s, key: k }; changed = true; }
     });
+    h.xpDay = h.xpDay || { xp: 0, key: null };
+    Object.keys(daily.days || {}).forEach(function (k) {
+      var x = daily.days[k] || 0;
+      if (x > h.xpDay.xp) { h.xpDay = { xp: x, key: k }; changed = true; }
+    });
     // completed weeks only count toward the record once they're over; this week is compared live
     for (var w = 1; w <= 9; w++) {
       var st = weekStart(addDays(today, -7 * w)), s = weekSec(st);
@@ -126,11 +131,11 @@
 
     // today + best day
     var tSec = secOn(todayK), tXP = (daily.days && daily.days[todayK]) || 0;
-    var bd = hi.day && hi.day.key ? hi.day : null;
+    var bd = hi.xpDay && hi.xpDay.key ? hi.xpDay : null;   // the crowned day: most XP in one day
     document.getElementById("mmgTiles").innerHTML =
-      '<div class="card mmg-tile"><div class="eyebrow">Today</div><div class="mmg-num">' + mins(tSec) + ' <small>min</small></div>' +
-        '<div class="mmg-sub">' + tXP + ' XP</div></div>' +
-      '<div class="card mmg-tile mmg-hs"><div class="eyebrow">♛ HI SCORE · day</div><div class="mmg-num">' + (bd ? mins(bd.sec) : "0") + ' <small>min</small></div>' +
+      '<div class="card mmg-tile mmg-today"><div class="eyebrow">Today</div><div class="mmg-num">' + tXP + ' <small>XP</small></div>' +
+        '<div class="mmg-sub">' + mins(tSec) + ' min studied</div></div>' +
+      '<div class="card mmg-tile mmg-hs"><div class="eyebrow">♛ HI SCORE · day</div><div class="mmg-num">' + (bd ? bd.xp : 0) + ' <small>XP</small></div>' +
         '<div class="mmg-sub">' + (bd ? fmtDay(bd.key) : "Not set yet") + '</div></div>';
 
     // month calendar
@@ -140,10 +145,11 @@
     "SMTWTFS".split("").forEach(function (c) { cells += '<span class="mmg-h">' + c + '</span>'; });
     for (var b = 0; b < first1.getDay(); b++) cells += '<span></span>';
     for (var n = 1; n <= daysIn; n++) {
-      var dk = keyOf(new Date(view.getFullYear(), view.getMonth(), n)), s = secOn(dk);
-      var crown = bd && bd.key === dk, later = dk > todayK;
-      cells += '<span class="mmg-c' + (s ? " on" : "") + (dk === todayK ? " today" : "") + (later ? " later" : "") + '">' +
-        '<em>' + (crown ? "♛" : n) + '</em><small>' + (s ? mins(s) + "m" : (later ? "" : "·")) + '</small></span>';
+      var dk = keyOf(new Date(view.getFullYear(), view.getMonth(), n)), x = (daily.days && daily.days[dk]) || 0;
+      var crown = bd && bd.key === dk, later = dk > todayK, goal = daily.goal || 100;
+      // full amber = hit the daily goal, lighter amber = studied, crown = HI SCORE day
+      cells += '<span class="mmg-c' + (x >= goal ? " goal" : x ? " on" : "") + (crown ? " crown" : "") + (dk === todayK ? " today" : "") + (later ? " later" : "") + '">' +
+        '<em>' + (crown ? "♛" : n) + '</em><small>' + (x ? x : (later ? "" : "·")) + '</small></span>';
     }
     var prevOk = new Date(view.getFullYear(), view.getMonth(), 0) >= addDays(now, -62);
     var nextOk = new Date(view.getFullYear(), view.getMonth() + 1, 1) <= now;
@@ -152,7 +158,7 @@
       '<b>' + view.toLocaleDateString("en-US", { month: "long", year: "numeric" }) + '</b>' +
       '<button class="icon-btn" type="button" id="mmgNext" aria-label="Next month"' + (nextOk ? "" : " disabled") + '>›</button></div>' +
       '<div class="mmg-grid">' + cells + '</div>' +
-      '<div class="mmg-sub">Minutes studied each day. ♛ = your HI SCORE day.</div>';
+      '<div class="mmg-sub">XP earned each day. Bright = hit your daily goal. ♛ = your HI SCORE day.</div>';
     document.getElementById("mmgPrev").onclick = function () { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); render(); };
     document.getElementById("mmgNext").onclick = function () { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); render(); };
 
