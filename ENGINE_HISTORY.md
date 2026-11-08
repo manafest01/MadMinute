@@ -230,6 +230,14 @@ The quiz became a reusable engine that any subject can plug into.
 - Tested in all five apps: gear, name saved after reload, theme, goal, timed/study, retake, back; light and dark; no script errors.
 - Auto `mm-auto-v28`, Biology `mm-bio-v10`, Music `mm-mus-v11`, Dev `mm-dev-v11`, NETA `mm-neta-v11`.
 
+## Stage 21 — Bigger Maintenance flashcard decks · 2026-11-08
+
+- Basic Maintenance flashcards went from 63 to 239 cards: about **40 per topic** (Oil & Filter, Fluids & Levels, Belts/Hoses/Filters, Battery/Lights/Wipers, Under-Car Checks, Inspections & Intervals). Same format: term, plain meaning, shop tip.
+- Added by `tools/flash-build/maint_add.py`, which skips any term the topic already has. Some basics also appear in the Automotive, 12 V and HV decks on purpose; each subject keeps its own progress.
+- Still 20 cards per sitting, on the same 1/3/7/21/60-day schedule.
+- Next decks to build up to 40 per topic: 12 V & 48 V, High Voltage, Networks, Automotive.
+- Auto `mm-auto-v31`.
+
 ---
 
 ## Which app has what
