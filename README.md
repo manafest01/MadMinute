@@ -13,16 +13,17 @@ One-minute automotive knowledge drills from **Mana Industries LLC**.
 3. Open it once from the new **AUTO** icon. After that it works with **no internet**.
 
 ## What's inside
-Five subjects, 600 questions each:
-- **Automotive Technician**: 9 topics, ordered easy to hard (Shop Safety → Tires & Wheels → Brakes → Steering & Suspension → Engine → Drivetrain → Heating & A/C)
+Six subjects:
+- **Shop Safety**: 8 topics, 491 questions, built on OSHA and ANSI rules: PPE, Hazard Communication (SDS), Fire Safety, Lifts/Jacks & Stands, Tools & Equipment, Air & Exhaust, Electrical Safety, Emergencies & First Aid
+- **Automotive Technician**: 8 topics, ordered easy to hard (Tires & Wheels → Brakes → Steering & Suspension → Engine → Drivetrain → Heating & A/C)
 - **Basic Maintenance**: oil & filter service, fluids & levels, belts/hoses/filters, battery/lights/wipers, under-car checks, and inspections & intervals
 - **12 V & 48 V Electrical**: batteries, starting & charging, wiring, sensors & actuators, test tools, and 48 V mid-voltage systems
 - **Vehicle Networks**: CAN, LIN and other networks, OBD-II & UDS, automotive Ethernet, and DoIP
 - **High Voltage**: HV safety & PPE, isolation, HVIL & interlocks, contactors & shutdown, HV battery & BMS, and inverter, motor & charging
 
-A **Shop Path** card on the home screen walks a new tech through all five subjects in order: Shop Safety → Basic Maintenance → Tires & Wheels → Brakes → Steering → 12 V & 48 V → Engine → Drivetrain → Vehicle Networks → High Voltage. Tap any step to jump to it.
+A **Shop Path** card on the home screen walks a new tech through all six subjects in order: Shop Safety → Basic Maintenance → Tires & Wheels → Brakes → Steering → 12 V & 48 V → Engine → Drivetrain → Vehicle Networks → High Voltage. Tap any step to jump to it.
 
-**Vocab flashcards** for every topic (503 cards: term, plain meaning, shop tip), with **Drill my misses** and a hands-on **Circuit Lab** where you tap parts of a 12 V lamp circuit and watch the meter readings change.
+**Vocab flashcards** for every topic (term, plain meaning, shop tip; 40 per topic in Shop Safety and Maintenance), plus **symbol flashcards** that show schematic symbols in circuit order, with **Drill my misses** and a hands-on **Circuit Lab** where you tap parts of a 12 V lamp circuit and watch the meter readings change.
 
 Placement test, ranks (Trainee → Master Tech), progress timeline, and a sample manager crew view. Progress is saved only on your device. No account, no Claude, no internet needed after the first open.
 
@@ -83,3 +84,7 @@ These live in one shared file (`shared/mm-learn.js`), so an improvement there re
 
 ---
 © 2026 Mana Industries LLC. All rights reserved. This demo is provided for evaluation only. No part of it may be copied, modified, redistributed, or resold without written permission.
+
+
+## Working on the code
+AI assistants and developers: start with **[AGENTS.md](AGENTS.md)**. To rebuild or extend the demo with Grok or another AI, use **[GROK_STARTER_PROMPT.md](GROK_STARTER_PROMPT.md)**.

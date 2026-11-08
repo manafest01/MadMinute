@@ -260,6 +260,12 @@ The quiz became a reusable engine that any subject can plug into.
 - Built by `tools/safety-build/append_safety.py` (reusable: `python3 append_safety.py <repo> content_p2`) from `content_p2.py` and `content_p3.py`, then `polish_distractors.py`. The append script skips duplicate questions and flashcard terms, so adding more content later is safe.
 - Auto `mm-auto-v35`, `flashcards/safe.js?v=2`.
 
+## Stage 24 — Handoff guide for other AI assistants · 2026-11-08
+
+- **AGENTS.md**: how the repo is built, the question/flashcard/symbol formats, the rules that must not break (cache bumps, progress keys, offline-only, accuracy), how to add subjects and apps, tools, testing and shipping.
+- **GROK_STARTER_PROMPT.md**: a ready-to-paste first message for Grok (or any AI) to pick up the project, with notes on where to run it and checking the service's terms before uploading.
+- README updated for the Shop Safety subject and links to both files. No app files changed, so no cache bump.
+
 ---
 
 ## Which app has what
