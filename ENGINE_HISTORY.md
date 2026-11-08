@@ -163,6 +163,7 @@ The quiz became a reusable engine that any subject can plug into.
 - Plan doc: Mad Minute — Visual Flashcards Plan (v0.2). Next phases: EV/HV and CAN symbols in series, then coding in series.
 - Tested: every circuit walked card by card, hub buttons, back-to-hub on close, Escape, light and dark, Circuit Lab, NETA hub; no script errors.
 - Auto `mm-auto-v17`, NETA `mm-neta-v2`.
+- Placement card: a close **✕** in the corner hides it until the app is opened again; ticking **Don't show this again** first keeps it hidden on this device (`mm_place_hidden`, cleared by Reset demo). Retake placement on the Progress screen still works. Auto `mm-auto-v18`.
 
 ---
 
