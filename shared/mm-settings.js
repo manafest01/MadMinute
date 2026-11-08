@@ -2,7 +2,7 @@
    A gear button at the top of the home screen opens Settings, with everything about you
    and how the app behaves in one place:
    - Profile: your name (saved on this device), your rank, a link to your full progress
-   - Account: where your progress is saved; sign-in shows here when the app has accounts
+   - Account: where your progress is saved, plus sign-in placeholders (company sign-in or email)
    - Appearance: System / Light / Dark
    - Practice: Timed or Study, Recall first or Show choices, daily XP goal, Retake placement
    - Data: Reset (in the demo build)
@@ -36,9 +36,11 @@
 
       '<div class="mms-h">Account</div>' +
       '<div class="card mms-acct">' +
-        '<div class="mms-row"><b>Sign in</b><span class="mms-pill">Not set up yet</span></div>' +
+        '<div class="mms-row"><b>Sign in</b><span class="mms-pill">Coming soon</span></div>' +
+        '<button class="btn btn-ghost mms-signin" type="button" id="mmsCompany">Sign in with your company</button>' +
+        '<button class="btn btn-ghost mms-signin" type="button" id="mmsEmail">Use an email instead</button>' +
         '<div class="mms-note" id="mmsSync"></div>' +
-        '<div class="mms-note">Signing in to keep your progress across phones is planned. Until then, keep using the same phone and browser.</div>' +
+        '<div class="mms-note">Your company will be able to give you a sign-in, so your progress follows you to any phone and your manager sees your training. Until then, keep using the same phone and browser.</div>' +
       '</div>' +
 
       '<div class="mms-h">Appearance</div>' +
@@ -56,6 +58,10 @@
   try { SCREENS.push("settingsScreen"); } catch (e) {}
   document.getElementById("mmsBack").onclick = function () { showHome(); };
   document.getElementById("mmsProgress").onclick = function () { showProfile(); };
+  // sign-in placeholders: company sign-in (SSO) per company, or email; needs an online database first
+  function soon() { try { showToast("Sign-in is coming soon"); } catch (e) {} }
+  document.getElementById("mmsCompany").onclick = soon;
+  document.getElementById("mmsEmail").onclick = soon;
 
   /* ---------- the gear button replaces the theme button in the header ---------- */
   var themeBtn = document.getElementById("themeBtn");

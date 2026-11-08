@@ -24,3 +24,4 @@
 .mms-retake .btn { width: 100%; }
 #mmsData .btn { width: 100%; }
 #mmsTheme { grid-template-columns: repeat(3, 1fr); display: grid; }
+.mms-signin { width: 100%; opacity: .75; }

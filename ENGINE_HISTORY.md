@@ -224,6 +224,7 @@ The quiz became a reusable engine that any subject can plug into.
   - **Data:** Reset (moved here from the progress screen).
 - The app's own controls are moved in with their ids, so they keep working. The home **Settings** row from Stage 18 is gone; Settings lives on its own screen now.
 - Calendar days show a small **xp** mark next to each number.
+- Sign in is a placeholder for now: **Sign in with your company** (each company gets its own single sign-on) and **Use an email instead**, both showing "coming soon". Real sign-in needs an online database, planned later.
 - Tested in all five apps: gear, name saved after reload, theme, goal, timed/study, retake, back; light and dark; no script errors.
 - Auto `mm-auto-v28`, Biology `mm-bio-v10`, Music `mm-mus-v11`, Dev `mm-dev-v11`, NETA `mm-neta-v11`.
 
