@@ -199,6 +199,19 @@ The quiz became a reusable engine that any subject can plug into.
 - **After placement:** Today's goal and Your rank share one slim row (tap the rank side for your profile, as before); "Fill your next gap" and the roadmap card are slimmer, one line each. Auto `mm-auto-v23`, Biology `mm-bio-v5`, Music `mm-mus-v6`, Dev `mm-dev-v6`, NETA `mm-neta-v6`.
 - **Settings row:** Timed / Study, Recall first / Show choices and Retake placement fold into one tap-to-open **Settings** row that shows the current choice ("Timed · Recall first"). **Daily review** shows only when something is due. Auto `mm-auto-v24`, Biology `mm-bio-v6`, Music `mm-mus-v7`, Dev `mm-dev-v7`, NETA `mm-neta-v7`.
 
+## Stage 19 — Calendar tab: study time and high scores · 2026-11-08
+
+- New shared add-on `shared/mm-goals.js` / `.css` in all five apps: a **Calendar** tab (calendar icon) right after Map.
+  - **This week:** minutes studied, a bar toward your **high score** (best week so far), and "N min to beat it" / "New high score!".
+  - **Days studied:** a Sun–Sat row of check circles. Showing up every day is the point.
+  - **Today** (minutes and XP) and **Best day** (crowned).
+  - **Month calendar** with minutes per day; studied days tinted, today outlined, best day crowned; back about two months.
+  - The daily XP goal stays only as a small gray line at the bottom.
+- Study time comes from the engine's existing log (`daily.act`, capped at a minute per answer so idle time doesn't count). High scores are saved separately (`<app>_hiscore_v1`) so they outlast the two months of day-by-day history. Flashcard time isn't counted yet.
+- Today's goal card left the home screen (kept hidden so the engine still updates it); your rank now has the row to itself.
+- Tested in all five apps with sample data: tab, month arrows, switching tabs, home row; light and dark; no script errors.
+- Auto `mm-auto-v25`, Biology `mm-bio-v7`, Music `mm-mus-v8`, Dev `mm-dev-v8`, NETA `mm-neta-v8`.
+
 ---
 
 ## Which app has what

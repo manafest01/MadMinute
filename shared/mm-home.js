@@ -73,8 +73,9 @@
   var hidByUs = false;
   function tidy() {
     if (stats) {
-      stats.hidden = daily.hidden && rank.hidden;
-      stats.classList.toggle("one", daily.hidden !== rank.hidden);
+      var dh = daily.hidden || daily.parentNode !== stats;   // mm-goals.js moves Today's goal to the Calendar tab
+      stats.hidden = dh && rank.hidden;
+      stats.classList.toggle("one", dh !== rank.hidden);
     }
     if (settings) { settings.hidden = !!modeWrap.hidden; summary(); }
     var ck = document.getElementById("ckCard");
