@@ -163,13 +163,20 @@ The quiz became a reusable engine that any subject can plug into.
 - Plan doc: Mad Minute — Visual Flashcards Plan (v0.2). Next phases: EV/HV and CAN symbols in series, then coding in series.
 - Tested: every circuit walked card by card, hub buttons, back-to-hub on close, Escape, light and dark, Circuit Lab, NETA hub; no script errors.
 - Auto `mm-auto-v17`, NETA `mm-neta-v2`.
-- Placement card: a close **✕** in the corner hides it until the app is opened again; ticking **Don't show this again** first keeps it hidden on this device (`mm_place_hidden`, cleared by Reset demo). Retake placement on the Progress screen still works. Auto `mm-auto-v18`.
+- Placement card: a close **✕** in the corner hides it until the app is opened again; ticking **Don't show this again** first keeps it hidden on this device (`mmauto_place_hidden`, cleared by Reset demo). Retake placement on the Progress screen still works. Auto `mm-auto-v18`.
 
 ## Stage 15 — Mad Minute Hub · 2026-11-08
 
 - **Hub page** at `/hub/`: one home-screen icon ("MM Hub") that opens every Mad Minute app, grouped as Trades (Auto demo, NETA) and Learning (Dev, Biology, Music), each with its own icon and a one-line description.
 - Works offline with its own small service worker (`hub/sw.js`, `mm-hub-v1`) that only looks after the hub folder. The Auto service worker now skips `/hub/` so the two never overwrite each other's offline copy. Auto `mm-auto-v19`.
 - Icon drawn by `tools/hub-build/make_icons.py`. To add an app later: one line in `APPS` in `hub/index.html`, plus its icon in `hub/sw.js`.
+
+## Stage 16 — Placement card close in every app · 2026-11-08
+
+- The placement card's close **✕** and **Don't show this again** box are now in Biology, Music, Dev and NETA too.
+- Each app remembers it separately (`mmauto_`, `mmbio_`, `mmmus_`, `mmdev_`, `mmneta_` + `place_hidden`), so hiding it in one app doesn't hide it in the others, and each app's Reset clears its own. Because Dev and NETA are built from the Auto page, their build scripts carry it automatically on the next rebuild.
+- Tested in all five apps: shows, ✕ hides until reopen, ticked stays hidden, apps don't affect each other.
+- Auto `mm-auto-v20`, Biology `mm-bio-v3`, Music `mm-mus-v4`, Dev `mm-dev-v4`, NETA `mm-neta-v3`.
 
 ---
 

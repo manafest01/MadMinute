@@ -4189,7 +4189,7 @@ function renderRankBlock(prefix) {
 let retakeArmed = false;
 // Placement card close (X): hides it until the app is opened again.
 // With "Don't show this again" ticked, it stays hidden on this device. Retake placement on the Progress screen still works.
-const PLACE_HIDE_KEY = "mm_place_hidden";
+const PLACE_HIDE_KEY = "mmauto_place_hidden";
 let placeClosed = false;
 function placeHiddenForGood() { try { return localStorage.getItem(PLACE_HIDE_KEY) === "1"; } catch (e) { return false; } }
 function closePlaceCard() {
@@ -6865,7 +6865,7 @@ function mdToHtml(src) {
       if (!armed) { armed = true; btn.textContent = "Tap again to erase all progress"; return; }
       try {
         Object.keys(localStorage).forEach(function (k) {
-          if (/^(mmauto_|mmflash_|mm_place_hidden)/.test(k)) localStorage.removeItem(k);
+          if (/^(mmauto_|mmflash_)/.test(k)) localStorage.removeItem(k);
         });
       } catch (e) {}
       location.reload();
