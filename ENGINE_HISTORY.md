@@ -153,6 +153,17 @@ The quiz became a reusable engine that any subject can plug into.
 - Tested: every visible button on every screen clicked for a new user and a placed user (251 clicks, no dead buttons, no script errors), plus 72 end-to-end checks across placement, practice, study, timeouts, review, all five subjects, flashcards, Circuit Lab, Skills checkup, crew view, theme, and reset.
 - Auto `mm-auto-v16`.
 
+## Stage 14 — Flashcards button + symbol cards in series · 2026-11-08
+
+- **Flashcards button**: a full-width amber button at the top of Topics opens the new **Flashcards hub**, with everything in one place: symbol circuits, word decks for every topic with due counts, and Drill my misses. The small per-topic button now says **Flashcards** instead of Vocab. NETA gets the button and hub too (words only).
+- **Symbols in series**: 19 symbol cards across 7 real 12 V circuits (lamp, relay control side, relay load side, coolant temp sensor, throttle position sensor, dash indicator LED, charging). The symbol is on the front; flip for the name, what it does, and a shop tip. A strip on each card shows the whole circuit in the order current flows, with the current part in amber. A part already learned shows in the strip but doesn't get a second card.
+- **Walk every circuit** runs all 19 in order; finishing a circuit offers the next one. **Drill symbol misses** collects the ones you hit Again on.
+- New files: `shared/mm-symbols.js` (the symbol drawings, standard wiring-diagram symbols as SVG, sharp at any size and offline) and `flashcards/sym-e12.js` (the circuits). Symbol progress is saved under `mmflash_symbols`, so Reset demo clears it too.
+- Escape now closes the hub and Circuit Lab as well as a deck.
+- Plan doc: Mad Minute — Visual Flashcards Plan (v0.2). Next phases: EV/HV and CAN symbols in series, then coding in series.
+- Tested: every circuit walked card by card, hub buttons, back-to-hub on close, Escape, light and dark, Circuit Lab, NETA hub; no script errors.
+- Auto `mm-auto-v17`, NETA `mm-neta-v2`.
+
 ---
 
 ## Which app has what
@@ -167,6 +178,8 @@ The quiz became a reusable engine that any subject can plug into.
 | Code blocks in questions | — | — | — | ✓ | — |
 | Recall first, Skills checkup, Roadmap (shared file) | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Vocab flashcards + Drill my misses (shared file) | ✓ | — | — | — | ✓ |
+| Flashcards button + hub (shared file) | ✓ | — | — | — | ✓ |
+| Symbol cards in series | ✓ | — | — | — | — |
 | Circuit Lab | ✓ | — | — | — | — |
 
 ## Ideas parked for later

@@ -1,6 +1,9 @@
 /* ===== Mad Minute Flashcards + Circuit Lab (shared add-on) =====
-   Vocab flip cards for every topic that has a deck, a "Drill my misses" deck,
-   a "brush up the words" card on the results screen, and the hands-on Circuit Lab.
+   A Flashcards button on the home screen that opens the Flashcards hub,
+   vocab flip cards for every topic that has a deck, a "Drill my misses" deck,
+   symbol cards in series (symbol on the front, laid out in circuit order; needs shared/mm-symbols.js
+   and window.MM_SYMBOLS from flashcards/sym-*.js), a "brush up the words" card on the results screen,
+   and the hands-on Circuit Lab.
 
    Decks come from the app:  window.MM_FLASH_DECKS[packId][topicKey] = [[term, meaning, tip], ...]
    Options come from the app: window.MM_FLASH = { circuitLab: ["e12", ...] }  (packs that show the lab)
@@ -77,14 +80,22 @@
   /* ---------- the flip-card screen ---------- */
   var S = null;   // the open session
 
-  function openDeck(title, cards) {
-    var p = pack(); if (!p) return;
+  // opt (all optional): ordered = keep the cards in order (symbols in series),
+  // p = where progress is saved (symbols use their own store), fromHub = closing goes back to the hub,
+  // next = the circuit to offer after this one
+  function openDeck(title, cards, opt) {
+    opt = opt || {};
+    var p = opt.p || pack(); if (!p) return;
     var mem = load(p);
-    var list = pickSession(cards, mem, false);
-    var caughtUp = !list.length;
-    if (caughtUp) list = pickSession(cards, mem, true);
+    var list, caughtUp = false;
+    if (opt.ordered) list = cards.slice();
+    else {
+      list = pickSession(cards, mem, false);
+      caughtUp = !list.length;
+      if (caughtUp) list = pickSession(cards, mem, true);
+    }
     if (!list.length) { toast("No cards here yet"); return; }
-    S = { p: p, title: title, all: cards, queue: list, i: 0, got: 0, again: 0, missed: {}, flipped: false, caughtUp: caughtUp };
+    S = { p: p, title: title, all: cards, queue: list, i: 0, got: 0, again: 0, missed: {}, flipped: false, caughtUp: caughtUp, opt: opt };
     buildOverlay();
     renderCard();
   }
@@ -117,13 +128,15 @@
   }
   // close for good: forget the session and redraw the home counts
   function closeOverlay() {
+    var backToHub = S && S.opt && S.opt.fromHub;
     removeOverlay();
     S = null; L = null;
     refreshHome();
+    if (backToHub) openHub();
   }
   function onKey(e) {
-    if (!S) return;
     if (e.key === "Escape") { closeOverlay(); return; }
+    if (!S) return;
     if (!S.queue[S.i]) return;
     if (e.key === " " || e.key === "Enter") { e.preventDefault(); flip(); }
     else if (S.flipped && (e.key === "1" || e.key === "ArrowLeft")) grade(false);
@@ -139,6 +152,7 @@
     if (!c) { renderDone(stage); return; }
     document.getElementById("mmfCount").textContent = (S.i + 1) + " / " + total;
     S.flipped = false;
+    if (c.sym) { renderSymbolCard(stage, c); return; }
     stage.innerHTML =
       (S.caughtUp && S.i === 0 ? '<div class="mmf-note">All caught up — this is extra practice.</div>' : "") +
       '<button class="mmf-card" type="button" id="mmfCard" aria-live="polite">' +
@@ -159,9 +173,141 @@
         '<button class="btn mmf-again" type="button" disabled>Again</button>' +
         '<button class="btn btn-amber mmf-got" type="button" disabled>Got it</button>' +
       '</div>';
+    wireCard(stage);
+  }
+  function wireCard(stage) {
     document.getElementById("mmfCard").onclick = flip;
     stage.querySelector(".mmf-again").onclick = function () { grade(false); };
     stage.querySelector(".mmf-got").onclick = function () { grade(true); };
+  }
+
+  /* ---------- symbol cards: the symbol on the front, flip for the name ---------- */
+  var SYM = window.MMSymbols;
+  var SYM_PACK = { id: "symbols" };   // symbol progress has its own store: mmflash_symbols
+  function circuits() { return (SYM && window.MM_SYMBOLS) || []; }
+  function symbolCards(circ) {
+    var out = [];
+    circ.steps.forEach(function (s, i) {
+      if (s.length < 2) return;   // a part learned earlier: shown in the strip, no card of its own
+      out.push({ id: "sym|" + circ.key + "|" + s[1], term: s[1], meaning: s[2], tip: s[3] || "",
+        topic: circ.name, sym: s[0], circ: circ, pos: i });
+    });
+    return out;
+  }
+  function allSymbolCards() {
+    var out = [];
+    circuits().forEach(function (c) { out = out.concat(symbolCards(c)); });
+    return out;
+  }
+  // the whole circuit as a row of small symbols, the current part in amber
+  function strip(circ, pos) {
+    return '<span class="mmf-strip" aria-hidden="true">' + circ.steps.map(function (s, i) {
+      return '<span class="mmf-strip-part' + (i === pos ? " on" : "") + (i < pos ? " done" : "") + '">' + SYM.svg(s[0], "mini") + '</span>';
+    }).join("") + '</span>';
+  }
+  function renderSymbolCard(stage, c) {
+    var step = "Part " + (c.pos + 1) + " of " + c.circ.steps.length;
+    stage.innerHTML =
+      '<button class="mmf-card mmf-symcard" type="button" id="mmfCard" aria-live="polite">' +
+        '<span class="mmf-inner">' +
+          '<span class="mmf-face mmf-front">' +
+            '<span class="mmf-topic">' + esc(c.circ.name) + ' · ' + step + '</span>' +
+            strip(c.circ, c.pos) +
+            '<span class="mmf-sym">' + SYM.svg(c.sym) + '</span>' +
+            '<span class="mmf-hint">Name this symbol and what it does, then tap to flip</span>' +
+          '</span>' +
+          '<span class="mmf-face mmf-back">' +
+            '<span class="mmf-symrow"><span class="mmf-sym-sm">' + SYM.svg(c.sym, "mini") + '</span>' +
+              '<span class="mmf-topic">' + esc(c.term) + '</span></span>' +
+            '<span class="mmf-meaning">' + esc(c.meaning) + '</span>' +
+            (c.tip ? '<span class="mmf-tip"><b>' + esc(OPT.tipLabel || "In the shop") + ':</b> ' + esc(c.tip) + '</span>' : "") +
+          '</span>' +
+        '</span>' +
+      '</button>' +
+      '<div class="mmf-actions" id="mmfActions">' +
+        '<button class="btn mmf-again" type="button" disabled>Again</button>' +
+        '<button class="btn btn-amber mmf-got" type="button" disabled>Got it</button>' +
+      '</div>';
+    wireCard(stage);
+  }
+  function openCircuit(circ, fromHub) {
+    var list = circuits(), i = list.indexOf(circ);
+    openDeck(circ.name, symbolCards(circ), { ordered: true, p: SYM_PACK, fromHub: fromHub, next: list[i + 1] || null });
+  }
+
+  /* ---------- the Flashcards hub: everything in one place ---------- */
+  function openHub() {
+    var p = pack();
+    removeOverlay();
+    S = null;
+    var o = el("div", "mmf-overlay");
+    o.id = "mmfOverlay";
+    o.setAttribute("role", "dialog");
+    o.setAttribute("aria-modal", "true");
+    o.setAttribute("aria-label", "Flashcards");
+    var html = '<div class="mmf-top"><button class="mmf-x" type="button" aria-label="Close flashcards">✕</button>' +
+      '<div class="mmf-title"><b>Flashcards</b><span>Symbols and words, on a spaced schedule</span></div></div>' +
+      '<div class="mmf-hub">';
+
+    var circ = circuits();
+    if (circ.length) {
+      var smem = load(SYM_PACK), sAll = allSymbolCards();
+      var sMiss = sAll.filter(function (c) { return isMiss(smem[c.id]); });
+      html += '<div class="mmf-hub-h"><b>Symbols in series</b><span>Each circuit in the order current flows. Symbol on the front, flip for what it is.</span></div>' +
+        '<div class="mmf-hub-two">' +
+          '<button class="mmf-pill" type="button" data-hub="walk"><b>Walk every circuit</b><span>' + sAll.length + ' symbol cards</span></button>' +
+          '<button class="mmf-pill" type="button" data-hub="symmiss"' + (sMiss.length ? "" : " disabled") + '><b>Drill symbol misses</b><span>' +
+            (sMiss.length ? sMiss.length + " to work on" : "None yet") + '</span></button>' +
+        '</div>';
+      circ.forEach(function (c, i) {
+        var n = symbolCards(c).length;
+        html += '<button class="mmf-circ" type="button" data-circ="' + i + '">' +
+          '<span class="mmf-circ-t"><b>' + esc(c.name) + '</b><span>' + esc(c.sub) + ' · ' + n + (n === 1 ? " new symbol" : " new symbols") + '</span></span>' +
+          strip(c, -1) + '</button>';
+      });
+    }
+
+    var decks = p ? decksOf(p) : {};
+    var names = Object.keys(decks).length && typeof allTopics === "function" ? allTopics() : [];
+    var topics = names.filter(function (t) { return cardsFor(p, t).length; });
+    if (topics.length) {
+      var mem = load(p);
+      var misses = allCards(p).filter(function (c) { return isMiss(mem[c.id]); });
+      html += '<div class="mmf-hub-h"><b>Words: ' + esc(p.name || "this subject") + '</b><span>Vocab for every topic. Switch subjects on the home screen for other decks.</span></div>' +
+        '<button class="mmf-pill mmf-hub-wide" type="button" data-hub="miss"' + (misses.length ? "" : " disabled") + '><b>Drill my misses</b><span>' +
+          (misses.length ? misses.length + (misses.length === 1 ? " vocab card" : " vocab cards") : "No missed cards yet") + '</span></button>';
+      topics.forEach(function (t) {
+        var deck = cardsFor(p, t), due = dueCount(p, deck, mem);
+        html += '<button class="mmf-circ mmf-topicrow" type="button" data-topic="' + esc(t) + '">' +
+          '<span class="mmf-circ-t"><b>' + esc(t) + '</b><span>' + deck.length + ' cards</span></span>' +
+          '<span class="mmf-due' + (due ? "" : " none") + '">' + (due ? due + " due" : "All caught up") + '</span></button>';
+      });
+    }
+    html += '</div>';
+    o.innerHTML = html;
+    document.body.appendChild(o);
+    document.body.classList.add("mmf-lock");
+    o.querySelector(".mmf-x").onclick = closeOverlay;
+    document.addEventListener("keydown", onKey);
+
+    var walk = o.querySelector('[data-hub="walk"]');
+    if (walk) walk.onclick = function () { openDeck("Every circuit", allSymbolCards(), { ordered: true, p: SYM_PACK, fromHub: true }); };
+    var sm = o.querySelector('[data-hub="symmiss"]');
+    if (sm) sm.onclick = function () {
+      var m = load(SYM_PACK);
+      openDeck("Symbol misses", allSymbolCards().filter(function (c) { return isMiss(m[c.id]); }), { ordered: true, p: SYM_PACK, fromHub: true });
+    };
+    var vm = o.querySelector('[data-hub="miss"]');
+    if (vm) vm.onclick = function () {
+      var m = load(p);
+      openDeck("My misses", allCards(p).filter(function (c) { return isMiss(m[c.id]); }), { fromHub: true });
+    };
+    Array.prototype.forEach.call(o.querySelectorAll("[data-circ]"), function (b) {
+      b.onclick = function () { openCircuit(circuits()[+b.getAttribute("data-circ")], true); };
+    });
+    Array.prototype.forEach.call(o.querySelectorAll("[data-topic]"), function (b) {
+      b.onclick = function () { var t = b.getAttribute("data-topic"); openDeck(t, cardsFor(p, t), { fromHub: true }); };
+    });
   }
 
   function flip() {
@@ -200,8 +346,9 @@
   function renderDone(stage) {
     document.getElementById("mmfCount").textContent = "Done";
     var p = S.p, mem = load(p);
-    var left = dueCount(p, S.all, mem);
     var missedHere = Object.keys(S.missed).length;
+    if (S.opt.ordered) { renderSeriesDone(stage, missedHere); return; }
+    var left = dueCount(p, S.all, mem);
     stage.innerHTML =
       '<div class="mmf-done">' +
         '<div class="mmf-big">' + (missedHere ? missedHere + " to keep working on" : "Clean deck") + '</div>' +
@@ -214,7 +361,25 @@
         '</div>' +
       '</div>';
     var more = document.getElementById("mmfMore");
-    if (more) more.onclick = function () { var t = S.title, a = S.all; openDeck(t, a); };
+    if (more) more.onclick = function () { var t = S.title, a = S.all, o = S.opt; openDeck(t, a, o); };
+    document.getElementById("mmfClose").onclick = closeOverlay;
+  }
+  // end of a circuit: offer the next circuit in line
+  function renderSeriesDone(stage, missedHere) {
+    var next = S.opt.next, fromHub = S.opt.fromHub;
+    stage.innerHTML =
+      '<div class="mmf-done">' +
+        '<div class="mmf-big">' + (missedHere ? missedHere + " to keep working on" : "Circuit complete") + '</div>' +
+        '<p>' + (missedHere
+          ? "Those wait in Drill symbol misses until you name them right first try."
+          : "You named every part from the battery around to ground.") + '</p>' +
+        '<div class="mmf-done-btns">' +
+          (next ? '<button class="btn btn-amber" type="button" id="mmfNext">Next: ' + esc(next.name) + '</button>' : "") +
+          '<button class="btn btn-ghost" type="button" id="mmfClose">Done</button>' +
+        '</div>' +
+      '</div>';
+    var nb = document.getElementById("mmfNext");
+    if (nb) nb.onclick = function () { openCircuit(next, fromHub); };
     document.getElementById("mmfClose").onclick = closeOverlay;
   }
 
@@ -228,7 +393,8 @@
     var decks = decksOf(p);
     var hasDecks = Object.keys(decks).length > 0;
     var lab = (OPT.circuitLab || []).indexOf(p.id) >= 0;
-    if (!hasDecks && !lab) { if (bar) bar.remove(); return; }
+    var hasSyms = circuits().length > 0;
+    if (!hasDecks && !lab && !hasSyms) { if (bar) bar.remove(); return; }
 
     var mem = load(p);
     var names = (typeof allTopics === "function") ? allTopics() : [];
@@ -241,10 +407,10 @@
       var cell = el("div", "mmf-cell");
       grid.insertBefore(cell, card);
       cell.appendChild(card);
-      var b = el("button", "mmf-vocab", '<span>Vocab</span><span class="mmf-n">' +
+      var b = el("button", "mmf-vocab", '<span>Flashcards</span><span class="mmf-n">' +
         (due ? due + " due" : deck.length + " cards") + '</span>');
       b.type = "button";
-      b.setAttribute("aria-label", "Vocab flashcards for " + t + ", " + (due ? due + " due" : deck.length + " cards"));
+      b.setAttribute("aria-label", "Flashcards for " + t + ", " + (due ? due + " due" : deck.length + " cards"));
       b.onclick = function (e) { e.stopPropagation(); openDeck(t, deck); };
       cell.appendChild(b);
     });
@@ -256,7 +422,10 @@
     }
     var everything = hasDecks ? allCards(p) : [];
     var misses = everything.filter(function (c) { return isMiss(mem[c.id]); });
+    var dueAll = hasDecks ? dueCount(p, everything, mem) : 0;
     bar.innerHTML =
+      '<button class="mmf-pill mmf-flash-pill" type="button" id="mmfHubBtn"><b>Flashcards</b><span>' +
+        (hasSyms ? "Symbols in series + words" : "Words for every topic") + (dueAll ? " · " + dueAll + " due" : "") + '</span></button>' +
       (hasDecks ? '<button class="mmf-pill" type="button" id="mmfMissBtn"' + (misses.length ? "" : " disabled") + '>' +
         '<b>Drill my misses</b><span>' + (misses.length ? misses.length + (misses.length === 1 ? " vocab card" : " vocab cards") : "No missed cards yet") + '</span></button>' : "") +
       (lab ? '<button class="mmf-pill mmf-lab-pill" type="button" id="mmfLabBtn"><b>Circuit Lab</b><span>Tap the parts, watch it work</span></button>' : "");
@@ -264,6 +433,7 @@
     if (mb) mb.onclick = function () { openDeck("My misses", misses); };
     var lb = document.getElementById("mmfLabBtn");
     if (lb) lb.onclick = openLab;
+    document.getElementById("mmfHubBtn").onclick = openHub;
   }
   function refreshHome() {
     var home = document.getElementById("homeScreen");
@@ -453,6 +623,6 @@
     var baseResults = window.showResults;
     window.showResults = function (Q) { baseResults.apply(this, arguments); try { decorateResults(Q); } catch (e) {} };
   }
-  window.MMFlash = { openDeck: openDeck, openLab: openLab, cardsFor: cardsFor };
+  window.MMFlash = { openDeck: openDeck, openLab: openLab, openHub: openHub, cardsFor: cardsFor };
   refreshHome();
 })();

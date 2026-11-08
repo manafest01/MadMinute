@@ -114,3 +114,54 @@ body.mmf-lock { overflow: hidden; }
 .mmf-lab-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .mmf-info { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--teal); border-radius: 12px; padding: 12px 14px; font-size: 14px; line-height: 1.5; }
 .mmf-foot { font-size: 11px; color: var(--text-dim); margin: 0; text-align: center; }
+
+/* Flashcards button: full width, first thing in the home bar */
+.mmf-flash-pill { grid-column: 1 / -1; border-color: var(--amber); }
+.mmf-flash-pill b { font-size: 15px; color: var(--amber); }
+
+/* schematic symbols (shared/mm-symbols.js): lines take the color of whatever holds them */
+.mms { display: block; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.mms .t { stroke-width: 7; }
+.mms .f { fill: currentColor; stroke: none; }
+.mms .d { stroke-dasharray: 4 5; stroke-width: 2; }
+.mms text { fill: currentColor; stroke: none; font-size: 18px; font-weight: 700; font-family: inherit; }
+.mms text.s { font-size: 12px; font-weight: 600; }
+.mms text.c { font-size: 18px; text-anchor: middle; }
+.mms-big { width: 100%; max-width: 300px; height: auto; margin: 0 auto; }
+
+/* symbol card */
+.mmf-symcard .mmf-inner { min-height: 330px; }
+.mmf-sym { color: var(--text); padding: 6px 0; }
+.mmf-symrow { display: flex; align-items: center; gap: 10px; }
+.mmf-sym-sm { width: 64px; flex: none; color: var(--teal); }
+.mmf-sym-sm .mms { width: 64px; height: auto; }
+
+/* circuit strip: the whole circuit in a row, "you are here" in amber */
+.mmf-strip { display: flex; align-items: center; justify-content: center; flex-wrap: nowrap; color: var(--text-dim); opacity: .9; }
+.mmf-strip-part { flex: 1 1 0; max-width: 54px; min-width: 0; padding: 4px 0; border-bottom: 2px solid transparent; }
+.mmf-strip-part .mms { width: 100%; height: auto; stroke-width: 4; }
+.mmf-strip-part.on { color: var(--amber); border-bottom-color: var(--amber); }
+.mmf-strip-part.on .mms { stroke-width: 5; }
+.mmf-strip-part.done { color: var(--teal); }
+
+/* hub */
+.mmf-hub { max-width: 560px; width: 100%; margin: 14px auto 0; display: flex; flex-direction: column; gap: 10px; }
+.mmf-hub-h { display: flex; flex-direction: column; gap: 3px; margin-top: 10px; }
+.mmf-hub-h b { font-size: 16px; }
+.mmf-hub-h span { font-size: 13px; color: var(--text-dim); line-height: 1.4; }
+.mmf-hub-two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mmf-hub-wide { width: 100%; }
+.mmf-circ {
+  display: flex; flex-direction: column; gap: 8px; text-align: left; cursor: pointer; width: 100%;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px; color: var(--text);
+  font: inherit; padding: 12px;
+}
+.mmf-circ:active, .mmf-pill:active { transform: scale(0.99); }
+.mmf-circ:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.mmf-circ-t { display: flex; flex-direction: column; gap: 2px; }
+.mmf-circ-t b { font-size: 14px; }
+.mmf-circ-t span { font-size: 12px; color: var(--text-dim); }
+.mmf-circ .mmf-strip { justify-content: flex-start; color: var(--teal); }
+.mmf-topicrow { flex-direction: row; justify-content: space-between; align-items: center; }
+.mmf-due { font-size: 12px; font-weight: 600; color: var(--amber); white-space: nowrap; }
+.mmf-due.none { color: var(--text-dim); font-weight: 500; }
