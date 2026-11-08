@@ -247,6 +247,19 @@ The quiz became a reusable engine that any subject can plug into.
 - New users now open on Shop Safety (first subject).
 - Auto `mm-auto-v34`, NETA `mm-neta-v15` (shared flashcard file).
 
+## Stage 23 — Shop Safety subject, Phases 2 and 3 · 2026-11-08
+
+- **All 8 Shop Safety topics are built out**: 491 questions and 320 flashcards (was 175 and 104).
+  - Fire Safety 63 / 40: extinguisher classes and types, monthly and yearly checks, 75 ft (Class A) and 50 ft (Class B) travel, safety cans and cabinets, bonding/grounding, hot work (35-foot rule, 30-minute fire watch), oxygen and fuel-gas cylinders, EV thermal runaway.
+  - Lifts, Jacks & Stands 63 / 40: ANSI/ALI ALOIM and the ALI gold label, spotting and center of gravity, symmetric vs. asymmetric lifts, four-post lifts and rolling jacks, jack stands, engine hoists, EV lift points, air-suspension jack mode.
+  - Tools & Equipment 63 / 40: 30 psi cleaning air, grinders (1/8 in rest, 1/4 in tongue guard, ring test), hand and air tools, presses and spring compressors, tire service (40 psi bead seating, cages and clip-on chucks per 1910.177), injection injuries, oxy-acetylene (15 psi limit).
+  - Air & Exhaust 59 / 42: CO (OSHA 50 ppm, NIOSH 35 ppm), extraction and the hierarchy of controls, brake and clutch dust (1910.1001 App F), respirators and fit tests, isocyanates, welding fumes, refrigerants and EPA Section 609, oxygen-deficient air and pits.
+  - Electrical Safety 60 / 40: HV above 60 V DC, Class 0 gloves and 6-month retest, service disconnect and wait times, CAT III meters and live-dead-live, lockout/tagout, GFCIs, batteries and jump-starting, airbags.
+  - Emergencies & First Aid 62 / 38: emergency action plans (1910.38), exits, eyewash (10 seconds, 15 minutes, weekly), first aid (1910.151), CPR/AED, bleeding and burns, bloodborne pathogens, OSHA reporting (1904.39) and the 300 log.
+- **Accuracy pass**: 82 questions where the right answer stood out as the longest option got more believable wrong answers.
+- Built by `tools/safety-build/append_safety.py` (reusable: `python3 append_safety.py <repo> content_p2`) from `content_p2.py` and `content_p3.py`, then `polish_distractors.py`. The append script skips duplicate questions and flashcard terms, so adding more content later is safe.
+- Auto `mm-auto-v35`, `flashcards/safe.js?v=2`.
+
 ---
 
 ## Which app has what
