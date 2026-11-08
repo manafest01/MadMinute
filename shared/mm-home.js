@@ -4,8 +4,9 @@
       one close X and one "Don't show this again" box. (The X and the box come from each app.)
    2) The path card is one line: the step, its name and Go. The Map tab shows the whole path.
    3) The Team / Crew overview card is gone from home: the Team / Crew tab opens the same screen.
-   Once you're placed, the Tests card goes away and the roadmap card (from mm-learn.js) shows
-   in a slimmer style.
+   4) Once you're placed, the Tests card goes away, the roadmap card (from mm-learn.js) shows
+      in a slimmer style, Today's goal and your rank share one slim row, and "Fill your next gap"
+      is one line like the path card.
 
    Load it after shared/mm-learn.js. Like the other add-ons, it hooks renderHome from outside
    and changes no core code. To remove it: delete its <script> and <link> tags. */
@@ -32,9 +33,23 @@
     else { var ck = document.getElementById("ckCard"); if (ck) ck.click(); }
   };
 
+  // 4) after placement: Today's goal and your rank share one slim row
+  var daily = document.getElementById("dailyCard"), rank = document.getElementById("rankCard");
+  var stats = null;
+  if (daily && rank) {
+    stats = document.createElement("div");
+    stats.className = "mmh-stats"; stats.id = "mmhStats";
+    daily.parentNode.insertBefore(stats, daily);
+    stats.appendChild(daily); stats.appendChild(rank);
+  }
+
   // after every home redraw: the roadmap card only shows once you're placed
   var hidByUs = false;
   function tidy() {
+    if (stats) {
+      stats.hidden = daily.hidden && rank.hidden;
+      stats.classList.toggle("one", daily.hidden !== rank.hidden);
+    }
     var ck = document.getElementById("ckCard");
     if (!ck) return;
     var placed = false;

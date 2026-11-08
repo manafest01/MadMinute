@@ -21,7 +21,7 @@
 /* roadmap card after placement: slimmer */
 .ck-home.mmh-slim { padding-top: 12px; padding-bottom: 12px; gap: 4px; }
 .ck-home.mmh-slim .rec-topic { font-size: 16px; }
-.ck-home.mmh-slim .ck-meta { font-size: 12px; }
+.ck-home.mmh-slim .ck-meta { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* 2) path card: one line, no step bubbles (the Map tab has the whole path) */
 #pathCard { padding-top: 12px; padding-bottom: 12px; gap: 0; }
@@ -30,3 +30,23 @@
 
 /* 3) Team / Crew overview lives in its tab, not on home */
 #crewCard { display: none !important; }
+
+/* 4) after placement: goal + rank side by side, next gap on one line */
+.mmh-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mmh-stats.one { grid-template-columns: 1fr; }
+.mmh-stats > .card { padding: 12px; margin: 0; min-width: 0; }
+.mmh-stats .daily-card { gap: 10px; align-items: center; }
+.mmh-stats .goal-ring, .mmh-stats .goal-ring svg { width: 44px; height: 44px; }
+.mmh-stats .goal-ring > span { font-size: 11px; }
+.mmh-stats .daily-xp { font-size: 16px; }
+.mmh-stats #dailyStreak { font-size: 11px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.mmh-stats #rankCard { gap: 8px; justify-content: center; }
+.mmh-stats .rank-line { gap: 10px; }
+.mmh-stats .badge { width: 36px; height: 40px; }
+.mmh-stats .rank-name { font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mmh-stats .meter { height: 5px; }
+.mmh-stats #homeRankSub { display: none; }
+#recCard { padding-top: 12px; padding-bottom: 12px; }
+#recCard > div { min-width: 0; }
+#recCard .rec-topic { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#recCard .rec-meta { font-size: 12px; }
