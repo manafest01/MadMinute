@@ -259,8 +259,10 @@
           '<button class="mmf-pill" type="button" data-hub="symmiss"' + (sMiss.length ? "" : " disabled") + '><b>Drill symbol misses</b><span>' +
             (sMiss.length ? sMiss.length + " to work on" : "None yet") + '</span></button>' +
         '</div>';
+      var lastGroup = "";
       circ.forEach(function (c, i) {
         var n = symbolCards(c).length;
+        if (c.group && c.group !== lastGroup) { html += '<div class="mmf-hub-g">' + esc(c.group) + '</div>'; lastGroup = c.group; }
         html += '<button class="mmf-circ" type="button" data-circ="' + i + '">' +
           '<span class="mmf-circ-t"><b>' + esc(c.name) + '</b><span>' + esc(c.sub) + ' · ' + n + (n === 1 ? " new symbol" : " new symbols") + '</span></span>' +
           strip(c, -1) + '</button>';
@@ -372,7 +374,7 @@
         '<div class="mmf-big">' + (missedHere ? missedHere + " to keep working on" : "Circuit complete") + '</div>' +
         '<p>' + (missedHere
           ? "Those wait in Drill symbol misses until you name them right first try."
-          : "You named every part from the battery around to ground.") + '</p>' +
+          : "You named every part in this one, in order.") + '</p>' +
         '<div class="mmf-done-btns">' +
           (next ? '<button class="btn btn-amber" type="button" id="mmfNext">Next: ' + esc(next.name) + '</button>' : "") +
           '<button class="btn btn-ghost" type="button" id="mmfClose">Done</button>' +

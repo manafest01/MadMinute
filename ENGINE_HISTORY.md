@@ -178,6 +178,16 @@ The quiz became a reusable engine that any subject can plug into.
 - Tested in all five apps: shows, ✕ hides until reopen, ticked stays hidden, apps don't affect each other.
 - Auto `mm-auto-v20`, Biology `mm-bio-v3`, Music `mm-mus-v4`, Dev `mm-dev-v4`, NETA `mm-neta-v3`.
 
+## Stage 17 — Symbols in series: high voltage / EV and CAN · 2026-11-08
+
+- 18 new symbol cards in 5 circuits, grouped in the Flashcards hub under **High voltage / EV** and **Networks (CAN)** (the 12 V circuits now sit under **12 V**). That's 37 symbol cards across 12 circuits in all.
+  - **HV drive path:** HV pack, service disconnect, main contactor, precharge, DC link capacitor, inverter, 3-phase traction motor.
+  - **Isolation check:** insulation tester (megohmmeter), chassis ground. **HV interlock (HVIL).**
+  - **CAN bus:** terminating resistor, module, twisted pair, DLC. **Signals on the scope:** recessive bit, dominant bit, CAN-H shorted to ground, PWM.
+- 18 new drawings in `shared/mm-symbols.js`; new decks `flashcards/sym-hv.js` and `flashcards/sym-net.js`.
+- Tested: every new circuit walked card by card; all 37 symbols drawn on one sheet and checked; no script errors.
+- Auto `mm-auto-v21`, NETA `mm-neta-v4` (shared flashcard file update).
+
 ---
 
 ## Which app has what

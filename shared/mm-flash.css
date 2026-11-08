@@ -165,3 +165,4 @@ body.mmf-lock { overflow: hidden; }
 .mmf-topicrow { flex-direction: row; justify-content: space-between; align-items: center; }
 .mmf-due { font-size: 12px; font-weight: 600; color: var(--amber); white-space: nowrap; }
 .mmf-due.none { color: var(--text-dim); font-weight: 500; }
+.mmf-hub-g { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); margin-top: 6px; }
