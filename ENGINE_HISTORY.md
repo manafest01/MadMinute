@@ -197,6 +197,7 @@ The quiz became a reusable engine that any subject can plug into.
 - Tested in all five apps: both buttons start the right test, ✕ hides the card, placed users see the slim roadmap card, no script errors.
 - Auto `mm-auto-v22`, Biology `mm-bio-v4`, Music `mm-mus-v5`, Dev `mm-dev-v5`, NETA `mm-neta-v5`.
 - **After placement:** Today's goal and Your rank share one slim row (tap the rank side for your profile, as before); "Fill your next gap" and the roadmap card are slimmer, one line each. Auto `mm-auto-v23`, Biology `mm-bio-v5`, Music `mm-mus-v6`, Dev `mm-dev-v6`, NETA `mm-neta-v6`.
+- **Settings row:** Timed / Study, Recall first / Show choices and Retake placement fold into one tap-to-open **Settings** row that shows the current choice ("Timed · Recall first"). **Daily review** shows only when something is due. Auto `mm-auto-v24`, Biology `mm-bio-v6`, Music `mm-mus-v7`, Dev `mm-dev-v7`, NETA `mm-neta-v7`.
 
 ---
 

@@ -50,3 +50,20 @@
 #recCard > div { min-width: 0; }
 #recCard .rec-topic { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #recCard .rec-meta { font-size: 12px; }
+
+/* 5) Settings row: tap to open */
+.mmh-settings { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; }
+.mmh-settings > summary {
+  list-style: none; display: flex; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer;
+}
+.mmh-settings > summary::-webkit-details-marker { display: none; }
+.mmh-set-t { font-weight: 600; font-size: 14px; }
+.mmh-set-s { flex: 1; font-size: 12px; color: var(--text-dim); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mmh-set-c { color: var(--text-dim); font-size: 18px; transition: transform .2s ease; }
+.mmh-settings[open] .mmh-set-c { transform: rotate(90deg); }
+.mmh-settings > summary:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; border-radius: 14px; }
+.mmh-set-body { display: flex; flex-direction: column; gap: 10px; padding: 0 12px 12px; }
+.mmh-set-retake .btn { width: 100%; }
+/* Daily review: only when there's something to review */
+#homeActions:has(#reviewBtn:disabled) { display: none; }
+#reviewBtn:disabled { display: none; }
