@@ -214,6 +214,19 @@ The quiz became a reusable engine that any subject can plug into.
 - Labels changed to arcade-style **HI SCORE** (week line, best-day tile, "NEW HI SCORE!"). Auto `mm-auto-v26`, Biology `mm-bio-v8`, Music `mm-mus-v9`, Dev `mm-dev-v9`, NETA `mm-neta-v9`.
 - Calendar days now show **XP** instead of minutes, in vibrant colors: solid amber on days you hit the daily goal, lighter amber on days you studied, teal outline on today. The **HI SCORE · day** tile is the most XP in one day (solid amber); Today shows XP big, minutes small. The weekly HI SCORE stays in minutes. Auto `mm-auto-v27`, Biology `mm-bio-v9`, Music `mm-mus-v10`, Dev `mm-dev-v10`, NETA `mm-neta-v10`.
 
+## Stage 20 — Settings screen · 2026-11-08
+
+- New shared add-on `shared/mm-settings.js` / `.css` in all five apps. A **gear** at the top of home (in place of the old theme button) opens **Settings**:
+  - **Profile:** your name (saved on this device, shown as initials), your rank, a link to your progress and timeline.
+  - **Account:** where progress is saved. Sign-in is marked "Not set up yet"; syncing across phones is planned.
+  - **Appearance:** System / Light / Dark.
+  - **Practice:** Timed or Study, Recall first or Show choices, the daily XP goal, Retake placement.
+  - **Data:** Reset (moved here from the progress screen).
+- The app's own controls are moved in with their ids, so they keep working. The home **Settings** row from Stage 18 is gone; Settings lives on its own screen now.
+- Calendar days show a small **xp** mark next to each number.
+- Tested in all five apps: gear, name saved after reload, theme, goal, timed/study, retake, back; light and dark; no script errors.
+- Auto `mm-auto-v28`, Biology `mm-bio-v10`, Music `mm-mus-v11`, Dev `mm-dev-v11`, NETA `mm-neta-v11`.
+
 ---
 
 ## Which app has what

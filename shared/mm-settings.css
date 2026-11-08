@@ -1,0 +1,26 @@
+/* Mad Minute Settings screen (shared add-on, see mm-settings.js). Uses each app's color tokens. */
+.mms-page { gap: 10px; }
+.mms-h { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); margin-top: 10px; }
+.mms-profile { display: flex; align-items: center; gap: 14px; }
+.mms-avatar {
+  width: 56px; height: 56px; border-radius: 50%; flex: none; display: grid; place-items: center;
+  background: var(--amber); color: #1a1205; font-size: 20px; font-weight: 700;
+}
+.mms-pmain { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.mms-label { font-size: 12px; color: var(--text-dim); }
+.mms-pmain input {
+  width: 100%; font: inherit; font-size: 16px; color: var(--text); background: var(--panel-2);
+  border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px;
+}
+.mms-pmain input:focus { outline: 2px solid var(--amber); outline-offset: 1px; }
+.mms-rank { font-size: 12.5px; color: var(--teal); }
+.mms-link { display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: var(--text); font: inherit; text-align: left; padding-top: 14px; padding-bottom: 14px; }
+.mms-link span:last-child { color: var(--text-dim); font-size: 18px; }
+.mms-acct { display: flex; flex-direction: column; gap: 6px; }
+.mms-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.mms-pill { font-size: 11px; font-weight: 600; color: var(--text-dim); border: 1px solid var(--line); border-radius: 999px; padding: 3px 9px; }
+.mms-note { font-size: 12.5px; color: var(--text-dim); line-height: 1.45; }
+.mms-practice .field-label { margin-top: 0; }
+.mms-retake .btn { width: 100%; }
+#mmsData .btn { width: 100%; }
+#mmsTheme { grid-template-columns: repeat(3, 1fr); display: grid; }

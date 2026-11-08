@@ -149,7 +149,7 @@
       var crown = bd && bd.key === dk, later = dk > todayK, goal = daily.goal || 100;
       // full amber = hit the daily goal, lighter amber = studied, crown = HI SCORE day
       cells += '<span class="mmg-c' + (x >= goal ? " goal" : x ? " on" : "") + (crown ? " crown" : "") + (dk === todayK ? " today" : "") + (later ? " later" : "") + '">' +
-        '<em>' + (crown ? "♛" : n) + '</em><small>' + (x ? x : (later ? "" : "·")) + '</small></span>';
+        '<em>' + (crown ? "♛" : n) + '</em><small>' + (x ? x + '<i>xp</i>' : (later ? "" : "·")) + '</small></span>';
     }
     var prevOk = new Date(view.getFullYear(), view.getMonth(), 0) >= addDays(now, -62);
     var nextOk = new Date(view.getFullYear(), view.getMonth() + 1, 1) <= now;
