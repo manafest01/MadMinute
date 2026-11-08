@@ -238,6 +238,15 @@ The quiz became a reusable engine that any subject can plug into.
 - Next decks to build up to 40 per topic: 12 V & 48 V, High Voltage, Networks, Automotive.
 - Auto `mm-auto-v32`.
 
+## Stage 22 — Shop Safety subject, Phase 1 · 2026-11-08
+
+- **Shop Safety is its own subject** (id `safe`, first in the subject list and **step 1 of the shop path**), with 8 topics: PPE, Hazard Communication (SDS), Fire Safety, Lifts/Jacks & Stands, Tools & Equipment, Air & Exhaust, Electrical Safety, Emergencies & First Aid. Ranks: New Hire, Safety Aware, Safety Smart, Safety Lead, Safety Captain.
+- The old Automotive "Shop Safety" topic (67 questions, 20 flashcards) moved into the new subject, each item sorted into its topic. Automotive now has 8 topics.
+- **PPE** (60 questions, 40 flashcards) and **Hazard Communication / SDS** (61 questions, 40 flashcards) are built out in full: Z87 eyewear, gloves by hazard, 85 dBA hearing program, respirators (medical evaluation, yearly fit test, change schedules), hierarchy of controls, insulating gloves; all 16 SDS sections, label elements, the 8 pictograms, Danger vs. Warning, secondary labels, PEL/TWA, flash point, NFPA vs. GHS.
+- Built by `tools/safety-build/build_safety.py` from `content_p1.py`, with sources in the plan doc (OSHA 1910.132/.134/.95/.137/.1200, ANSI Z87.1). The Fire, Lifts, Tools, Air, Electrical and Emergencies topics are filled out in Phases 2–3.
+- New users now open on Shop Safety (first subject).
+- Auto `mm-auto-v34`, NETA `mm-neta-v15` (shared flashcard file).
+
 ---
 
 ## Which app has what

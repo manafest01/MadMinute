@@ -284,7 +284,7 @@
       topics.forEach(function (t) {
         var deck = cardsFor(p, t), due = dueCount(p, deck, mem);
         html += '<button class="mmf-circ mmf-topicrow" type="button" data-topic="' + esc(t) + '">' +
-          '<span class="mmf-circ-t"><b>' + esc(t) + '</b><span>' + deck.length + ' cards</span></span>' +
+          '<span class="mmf-circ-t"><b>' + esc(t) + '</b><span>' + deck.length + (deck.length === 1 ? ' card' : ' cards') + '</span></span>' +
           '<span class="mmf-due' + (due ? "" : " none") + '">' + (due ? due + " due" : "All caught up") + '</span></button>';
       });
     }

@@ -2,9 +2,9 @@
 // Bump VERSION whenever index.html changes so phones pick up the new copy.
 // The shared layers (../shared/mm-learn.*, ../shared/mm-flash.*) and the vocab decks (flashcards/*.js) are precached too;
 // bump their ?v= in index.html and here when they change.
-const VERSION = "mm-neta-v14";
+const VERSION = "mm-neta-v15";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "../shared/mm-learn.css?v=1", "../shared/mm-learn.js?v=1", "../shared/mm-home.css?v=3", "../shared/mm-home.js?v=6", "../shared/mm-goals.css?v=3", "../shared/mm-goals.js?v=4", "../shared/mm-settings.css?v=3", "../shared/mm-settings.js?v=2",
-  "../shared/mm-flash.css?v=4", "../shared/mm-flash.js?v=5",
+  "../shared/mm-flash.css?v=4", "../shared/mm-flash.js?v=6",
   "flashcards/safe.js?v=1", "flashcards/theory.js?v=1", "flashcards/comp.js?v=1", "flashcards/sys.js?v=1"];
 
 self.addEventListener("install", e => {

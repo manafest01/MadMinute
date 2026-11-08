@@ -1,27 +1,5 @@
 /* Vocab flashcards: Automotive Technician. Row = [term, plain meaning, shop tip]. Easy words first. */
 (window.MM_FLASH_DECKS = window.MM_FLASH_DECKS || {}).auto = {
-H: [
-  ["PPE", "Personal protective equipment: safety glasses, gloves, boots and hearing protection that guard you from injury.", "Safety glasses go on before you walk into the bay, not when the job looks risky."],
-  ["SDS", "Safety Data Sheet: the sheet that lists a chemical's hazards, first aid, PPE and spill steps.", "Every chemical in the shop has one. Know where the binder or the QR code is."],
-  ["Lockout/tagout", "Locking and tagging an energy source off so nobody can turn it on while you work on it.", "Your lock, your key. Nobody removes your lock but you."],
-  ["Jack stand", "A fixed-height support placed under a lift point to hold a raised vehicle.", "Never work under a car held only by a jack. Jacks lift; stands hold."],
-  ["Lift point", "The spot on the frame or pinch weld the maker says is safe to lift or support the vehicle.", "Check the service info or the lift-point chart; hybrids and EVs often have special ones."],
-  ["Wheel chock", "A wedge placed against a tire to stop the vehicle from rolling.", "Chock the wheels that stay on the ground whenever one end is in the air."],
-  ["Two-post lift", "A lift with two columns and arms that pick the car up by its frame or pinch welds.", "Check the arm locks engage and the car is balanced before raising it high."],
-  ["Lift safety lock", "The mechanical catch that holds the lift up even if hydraulic pressure is lost.", "Lower onto the locks before working underneath."],
-  ["Carbon monoxide (CO)", "A colorless, odorless, deadly gas in engine exhaust.", "Hook up the exhaust hose any time an engine runs indoors."],
-  ["Fire extinguisher class", "The type of fire an extinguisher is rated for: A ordinary combustibles, B flammable liquids, C electrical.", "An ABC extinguisher covers most shop fires. Know where the nearest one is."],
-  ["PASS", "How to use an extinguisher: Pull the pin, Aim at the base, Squeeze, Sweep side to side.", "Aim at the base of the fire, not the flames."],
-  ["Hearing protection", "Earplugs or muffs that block loud noise from air tools, grinders and engines.", "Impact guns and air chisels can damage hearing over time. Wear them."],
-  ["Eyewash station", "A station that flushes chemicals or debris out of your eyes with clean water.", "Flush for at least 15 minutes, then get checked."],
-  ["Brake dust", "Fine dust from brake pads and shoes that you shouldn't breathe or blow around.", "Use a brake washer or wet method, never compressed air."],
-  ["Used oil", "Engine oil that has been drained; a regulated waste that must be stored and recycled properly.", "Keep it separate from solvents and antifreeze so it can be recycled."],
-  ["Battery acid", "Sulfuric acid inside lead-acid batteries; it burns skin and eyes.", "Wear glasses and gloves when handling batteries. Baking soda neutralizes spills."],
-  ["Spill kit", "Absorbent pads, socks and granules kept ready to contain a fluid spill.", "Contain first, then clean. Keep spills out of floor drains."],
-  ["Pinch point", "A spot where moving parts meet and can trap fingers or hands.", "Belts, pulleys, fans and lift arms. Keep hands clear when the engine runs."],
-  ["Electric cooling fan", "A radiator fan that can switch on by itself even with the key off.", "Keep hands out of the fan's path, or unplug it first."],
-  ["Airbag (SRS)", "Supplemental Restraint System: the airbags and seat belt pretensioners.", "Disconnect the battery and wait the time in the service info before working near airbags."]
-],
 W: [
   ["Tire size", "The code on the sidewall, like 225/45R17: width in millimeters / sidewall height as a percent of width, R = radial, 17 = rim diameter in inches.", "Match the size on the door placard unless the maker lists an approved option."],
   ["Section width", "The tire's width from sidewall to sidewall, in millimeters; the first number in the size.", "225 means 225 mm wide."],
