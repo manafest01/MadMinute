@@ -118,9 +118,9 @@
       '<div class="eyebrow">This week</div>' +
       '<div class="mmg-big"><b>' + mins(wSec) + '</b> min studied</div>' +
       '<div class="mmg-bar"><i style="width:' + pct + '%"></i></div>' +
-      '<div class="mmg-sub">' + (first ? "Your first full week sets your high score."
-        : beat ? '<span class="mmg-new">New high score!</span> Best week was ' + mins(best) + ' min.'
-        : 'High score: <b>' + mins(best) + ' min</b> · ' + mins(Math.max(0, best - wSec)) + ' min to beat it') + '</div>' +
+      '<div class="mmg-sub">' + (first ? "Your first full week sets your HI SCORE."
+        : beat ? '<span class="mmg-new">NEW HI SCORE!</span> Last best was ' + mins(best) + ' min.'
+        : 'HI SCORE: <b>' + mins(best) + ' min</b> · ' + mins(Math.max(0, best - wSec)) + ' min to beat it') + '</div>' +
       '<div class="mmg-dots" aria-label="Days studied this week: ' + studied + ' of 7">' + dots + '</div>' +
       '<div class="mmg-sub">' + studied + ' of 7 days studied. A little every day beats a lot once a week.</div>';
 
@@ -130,7 +130,7 @@
     document.getElementById("mmgTiles").innerHTML =
       '<div class="card mmg-tile"><div class="eyebrow">Today</div><div class="mmg-num">' + mins(tSec) + ' <small>min</small></div>' +
         '<div class="mmg-sub">' + tXP + ' XP</div></div>' +
-      '<div class="card mmg-tile mmg-hs"><div class="eyebrow">♛ Best day</div><div class="mmg-num">' + (bd ? mins(bd.sec) : "0") + ' <small>min</small></div>' +
+      '<div class="card mmg-tile mmg-hs"><div class="eyebrow">♛ HI SCORE · day</div><div class="mmg-num">' + (bd ? mins(bd.sec) : "0") + ' <small>min</small></div>' +
         '<div class="mmg-sub">' + (bd ? fmtDay(bd.key) : "Not set yet") + '</div></div>';
 
     // month calendar
@@ -152,7 +152,7 @@
       '<b>' + view.toLocaleDateString("en-US", { month: "long", year: "numeric" }) + '</b>' +
       '<button class="icon-btn" type="button" id="mmgNext" aria-label="Next month"' + (nextOk ? "" : " disabled") + '>›</button></div>' +
       '<div class="mmg-grid">' + cells + '</div>' +
-      '<div class="mmg-sub">Minutes studied each day. ♛ = your best day.</div>';
+      '<div class="mmg-sub">Minutes studied each day. ♛ = your HI SCORE day.</div>';
     document.getElementById("mmgPrev").onclick = function () { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); render(); };
     document.getElementById("mmgNext").onclick = function () { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); render(); };
 

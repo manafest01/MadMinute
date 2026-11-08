@@ -211,6 +211,7 @@ The quiz became a reusable engine that any subject can plug into.
 - Today's goal card left the home screen (kept hidden so the engine still updates it); your rank now has the row to itself.
 - Tested in all five apps with sample data: tab, month arrows, switching tabs, home row; light and dark; no script errors.
 - Auto `mm-auto-v25`, Biology `mm-bio-v7`, Music `mm-mus-v8`, Dev `mm-dev-v8`, NETA `mm-neta-v8`.
+- Labels changed to arcade-style **HI SCORE** (week line, best-day tile, "NEW HI SCORE!"). Auto `mm-auto-v26`, Biology `mm-bio-v8`, Music `mm-mus-v9`, Dev `mm-dev-v9`, NETA `mm-neta-v9`.
 
 ---
 
