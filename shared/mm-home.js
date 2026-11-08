@@ -7,6 +7,7 @@
    4) Once you're placed, the Tests card goes away, the roadmap card (from mm-learn.js) shows
       in a slimmer style, Today's goal and your rank share one slim row, and "Fill your next gap"
       is one line like the path card.
+   6) The path card's Go always starts the next path topic, placed or not.
    5) Daily review only shows when there's something to review. (Timed / Study, Recall first and
       Retake placement live on the Settings screen: shared/mm-settings.js.)
 
@@ -43,6 +44,19 @@
     stats.className = "mmh-stats"; stats.id = "mmhStats";
     daily.parentNode.insertBefore(stats, daily);
     stats.appendChild(daily); stats.appendChild(rank);
+  }
+
+  // 6) the path card's Go: before, it only started a round once you were placed, so it looked dead.
+  //    Now it always starts the next topic on the path (or says what unlocks it).
+  if (typeof window.goPathStep === "function" && typeof pathStepInfo === "function") {
+    window.goPathStep = function (i) {
+      var info = pathStepInfo(SHOP_PATH[i]);
+      if (!info) return;
+      if (info.pack.id !== currentPack.id) activatePack(info.pack);
+      showHome();
+      if (isUnlocked(info.nextTopic)) startPractice(info.nextTopic);
+      else showToast(unlockNote(info.nextTopic));
+    };
   }
 
   // after every home redraw: the roadmap card only shows once you're placed
