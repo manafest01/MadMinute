@@ -4,6 +4,8 @@ One-minute automotive knowledge drills from **Mana Industries LLC**.
 
 **Open it:** https://manafest01.github.io/MadMinute/
 
+**All apps in one place (Hub):** https://manafest01.github.io/MadMinute/hub/
+
 ## Put it on your phone (with its own icon)
 1. Open the link above on your phone.
 2. **iPhone (Safari):** tap Share → **Add to Home Screen**.

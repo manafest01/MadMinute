@@ -165,6 +165,12 @@ The quiz became a reusable engine that any subject can plug into.
 - Auto `mm-auto-v17`, NETA `mm-neta-v2`.
 - Placement card: a close **✕** in the corner hides it until the app is opened again; ticking **Don't show this again** first keeps it hidden on this device (`mm_place_hidden`, cleared by Reset demo). Retake placement on the Progress screen still works. Auto `mm-auto-v18`.
 
+## Stage 15 — Mad Minute Hub · 2026-11-08
+
+- **Hub page** at `/hub/`: one home-screen icon ("MM Hub") that opens every Mad Minute app, grouped as Trades (Auto demo, NETA) and Learning (Dev, Biology, Music), each with its own icon and a one-line description.
+- Works offline with its own small service worker (`hub/sw.js`, `mm-hub-v1`) that only looks after the hub folder. The Auto service worker now skips `/hub/` so the two never overwrite each other's offline copy. Auto `mm-auto-v19`.
+- Icon drawn by `tools/hub-build/make_icons.py`. To add an app later: one line in `APPS` in `hub/index.html`, plus its icon in `hub/sw.js`.
+
 ---
 
 ## Which app has what
