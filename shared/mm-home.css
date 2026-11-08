@@ -1,0 +1,32 @@
+/* Mad Minute compact home (shared add-on, see mm-home.js). Uses each app's own color tokens. */
+
+/* 1) Tests card */
+.mmh-tests { gap: 10px; }
+.mmh-tests .mmh-h { margin: 0; padding-right: 40px; }
+.mmh-two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mmh-btn {
+  display: flex; flex-direction: column; gap: 2px; text-align: left; cursor: pointer;
+  background: transparent; color: var(--text); font: inherit;
+  border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px;
+}
+.mmh-btn b { font-size: 15px; }
+.mmh-btn span { font-size: 12px; color: var(--text-dim); }
+.mmh-main { background: var(--amber); border-color: var(--amber); color: #1a1205; }
+.mmh-main span { color: #1a1205; opacity: .8; }
+.mmh-btn:active { transform: scale(0.98); }
+.mmh-btn:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.mmh-hint { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+.mmh-tests .place-never { justify-content: flex-start; }
+
+/* roadmap card after placement: slimmer */
+.ck-home.mmh-slim { padding-top: 12px; padding-bottom: 12px; gap: 4px; }
+.ck-home.mmh-slim .rec-topic { font-size: 16px; }
+.ck-home.mmh-slim .ck-meta { font-size: 12px; }
+
+/* 2) path card: one line, no step bubbles (the Map tab has the whole path) */
+#pathCard { padding-top: 12px; padding-bottom: 12px; gap: 0; }
+#pathCard .path-steps, #pathCard #pathNextMeta { display: none; }
+#pathCard .rec-topic { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* 3) Team / Crew overview lives in its tab, not on home */
+#crewCard { display: none !important; }

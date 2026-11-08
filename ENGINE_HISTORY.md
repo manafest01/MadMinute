@@ -188,6 +188,15 @@ The quiz became a reusable engine that any subject can plug into.
 - Tested: every new circuit walked card by card; all 37 symbols drawn on one sheet and checked; no script errors.
 - Auto `mm-auto-v21`, NETA `mm-neta-v4` (shared flashcard file update).
 
+## Stage 18 — Compact home, every app · 2026-11-08
+
+- New shared add-on `shared/mm-home.js` / `.css`, loaded by all five apps right after `mm-learn.js`:
+  - **Tests card:** Placement and Skills checkup are now two buttons side by side in one card, with one ✕ and one **Don't show this again** box. The roadmap card shows only after placement, in a slimmer style.
+  - **Path card:** one line (step, name, Go). The step bubbles come off; the Map tab shows the whole path.
+  - **Team / Crew overview card:** off the home screen; the Team / Crew tab opens the same screen (both only show for managers).
+- Tested in all five apps: both buttons start the right test, ✕ hides the card, placed users see the slim roadmap card, no script errors.
+- Auto `mm-auto-v22`, Biology `mm-bio-v4`, Music `mm-mus-v5`, Dev `mm-dev-v5`, NETA `mm-neta-v5`.
+
 ---
 
 ## Which app has what
