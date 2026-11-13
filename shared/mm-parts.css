@@ -1,0 +1,115 @@
+/* Mad Minute Exploded View. Uses the app's color tokens, so it follows System / Light / Dark.
+   Builds on the overlay styles in shared/mm-flash.css. */
+
+/* home: Exploded View sits beside Flashcards */
+.mmf-homebar.mmp-has .mmf-flash-pill { grid-column: auto; }
+.mmp-home-pill { border-color: var(--teal); }
+.mmp-home-pill b { font-size: 15px; color: var(--teal); }
+.mmf-homebar.mmp-has > .mmp-home-pill:only-child { grid-column: 1 / -1; }
+
+.mmp-body { max-width: 560px; width: 100%; margin: 14px auto 0; display: flex; flex-direction: column; gap: 12px; padding-bottom: 24px; }
+.mmp-lead { margin: 0; font-size: 14px; color: var(--text-dim); line-height: 1.45; }
+
+/* the drawing */
+.mmp-wrap { padding: 4px; }
+.mmp-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.mmp-svg .b { fill: var(--panel-2); stroke: var(--text); stroke-width: 1.6; stroke-linejoin: round; }
+.mmp-svg .f { fill: var(--text-dim); stroke: var(--text); stroke-width: 1.2; }
+.mmp-svg .m { fill: var(--text-dim); stroke: var(--text); stroke-width: 1; }
+.mmp-svg .r { fill: var(--bg); stroke: var(--text); stroke-width: 1.4; }
+.mmp-svg .h { fill: var(--bg); stroke: var(--text); stroke-width: 1.2; }
+.mmp-svg .t { fill: var(--teal-soft, rgba(63,184,174,.18)); stroke: var(--text); stroke-width: 1.4; }
+.mmp-svg .l { fill: none; stroke: var(--text-dim); stroke-width: 1; }
+.mmp-svg .l2 { fill: none; stroke: var(--text); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.mmp-svg .dash { fill: none; stroke: var(--text-dim); stroke-width: 1.2; stroke-dasharray: 3 3; }
+.mmp-svg .tube { fill: none; stroke: var(--text); stroke-width: 3.5; stroke-linecap: round; }
+.mmp-svg .hose { fill: none; stroke: var(--text); stroke-width: 6; stroke-linecap: round; }
+.mmp-axis { fill: none; stroke: var(--text-dim); stroke-width: 1; stroke-dasharray: 8 4 2 4; opacity: .55; }
+.mmp-pipe { fill: none; stroke: var(--red); stroke-width: 2.4; stroke-linejoin: round; opacity: .8; }
+.mmp-push { fill: none; stroke: var(--amber); stroke-width: 2.4; }
+.mmp-arrowhead { fill: var(--amber); }
+
+.mmp-part { transition: transform .6s cubic-bezier(.2,.7,.2,1), opacity .2s ease; cursor: pointer; outline: none; }
+.mmp-svg.together .mmp-part { cursor: default; }
+.mmp-part.sel .b, .mmp-part.sel .r, .mmp-part.sel .h, .mmp-part.sel .m, .mmp-part.sel .f, .mmp-part.sel .t { stroke: var(--amber); stroke-width: 2.4; }
+.mmp-part.sel .l2, .mmp-part.sel .tube, .mmp-part.sel .hose { stroke: var(--amber); }
+.mmp-part:focus-visible .b { stroke: var(--amber); stroke-width: 2.4; }
+/* one part lit up (quiz and flashcards), the rest faded */
+.mmp-svg.focus .mmp-part { opacity: .28; }
+.mmp-svg.focus .mmp-part.hi { opacity: 1; }
+.mmp-part.hi .b, .mmp-part.hi .r, .mmp-part.hi .t { fill: var(--amber-dim, #f4d6a6); stroke: var(--amber); stroke-width: 2.6; }
+.mmp-part.hi .m, .mmp-part.hi .f { stroke: var(--amber); stroke-width: 2; }
+.mmp-part.hi .l2, .mmp-part.hi .tube, .mmp-part.hi .hose { stroke: var(--amber); }
+.mmp-svg.focus .mmp-pipe, .mmp-svg.focus .mmp-push, .mmp-svg.focus .mmp-axis { opacity: .25; }
+
+.mmp-badge { cursor: pointer; }
+.mmp-badge circle { fill: var(--panel); stroke: var(--teal); stroke-width: 1.5; }
+.mmp-badge text { font-size: 10px; font-weight: 700; fill: var(--teal); text-anchor: middle; }
+.mmp-badge.sel circle { fill: var(--amber); stroke: var(--amber); }
+.mmp-badge.sel text { fill: var(--bg); }
+@media (prefers-reduced-motion: reduce) { .mmp-part { transition: none; } }
+
+/* exploded / together switch */
+.mmp-toggle { display: grid; grid-template-columns: 1fr 1fr; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 3px; gap: 3px; }
+.mmp-toggle button { background: none; border: 0; border-radius: 9px; color: var(--text-dim); font: inherit; font-size: 13px; font-weight: 600; padding: 8px; cursor: pointer; }
+.mmp-toggle button.on { background: var(--panel-2); color: var(--text); }
+
+.mmp-info { min-height: 46px; }
+.mmp-info.miss { border-left-color: var(--red); }
+.mmp-tip { display: block; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); color: var(--text-dim); font-size: 13px; }
+.mmp-tip b { color: var(--amber); }
+
+.mmp-modes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mmp-modes .mmp-wide { grid-column: 1 / -1; }
+.mmp-mode b { color: var(--amber); font-size: 14px; }
+
+.mmp-legend { display: flex; flex-wrap: wrap; gap: 6px; }
+.mmp-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--panel); border: 1px solid var(--line); border-radius: 999px; color: var(--text); font: inherit; font-size: 12px; padding: 5px 10px 5px 5px; cursor: pointer; }
+.mmp-chip i { font-style: normal; font-weight: 700; font-size: 11px; width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; border: 1px solid var(--teal); color: var(--teal); }
+.mmp-chip.on { border-color: var(--amber); }
+.mmp-chip.on i { background: var(--amber); border-color: var(--amber); color: var(--bg); }
+
+/* assembly list */
+.mmp-asm { display: flex; gap: 12px; align-items: center; text-align: left; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 10px; color: var(--text); font: inherit; cursor: pointer; }
+.mmp-asm-pic { width: 42%; flex: none; pointer-events: none; }
+.mmp-asm-t { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.mmp-asm-t b { font-size: 15px; }
+.mmp-asm-t span { font-size: 12px; color: var(--text-dim); }
+.mmp-asm-t .mmp-best { color: var(--teal); font-weight: 600; }
+
+/* Name the part */
+.mmp-hud { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-dim); }
+.mmp-hud b { color: var(--teal); font-variant-numeric: tabular-nums; }
+.mmp-clock { flex: 1; height: 5px; background: var(--panel-2); border-radius: 3px; overflow: hidden; }
+.mmp-clock i { display: block; height: 100%; width: 100%; background: var(--amber); transition: width .1s linear; }
+.mmp-q { font-size: 17px; font-weight: 700; text-align: center; }
+.mmp-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mmp-opt { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font: inherit; font-size: 14px; font-weight: 600; padding: 14px 10px; cursor: pointer; min-height: 56px; }
+.mmp-opt:disabled { cursor: default; }
+.mmp-opt.right { border-color: var(--teal); background: var(--teal-soft, rgba(63,184,174,.18)); }
+.mmp-opt.wrong { border-color: var(--red); background: var(--red-soft, rgba(226,87,76,.16)); }
+.mmp-next { width: 100%; padding-top: 14px; padding-bottom: 14px; margin-top: 4px; }
+
+/* Put it in order */
+.mmp-slots { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+.mmp-slots li { display: flex; align-items: center; gap: 8px; min-height: 30px; padding: 4px 10px 4px 5px; border: 1px dashed var(--line); border-radius: 10px; font-size: 13px; color: var(--text-dim); }
+.mmp-slots li i { font-style: normal; font-weight: 700; font-size: 11px; width: 20px; height: 20px; border-radius: 50%; display: inline-grid; place-items: center; background: var(--panel-2); color: var(--text-dim); flex: none; }
+.mmp-slots li.full { border-style: solid; background: var(--panel); color: var(--text); font-weight: 600; }
+.mmp-slots li.full i { background: var(--teal); color: var(--bg); }
+.mmp-slots li.now { border-color: var(--amber); color: var(--amber); }
+.mmp-final { width: 100%; text-align: left; }
+.mmp-bank { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.mmp-tile { display: flex; flex-direction: column; align-items: center; gap: 4px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font: inherit; font-size: 11.5px; font-weight: 600; padding: 8px 6px; cursor: pointer; line-height: 1.2; text-align: center; }
+.mmp-tile .mmp-thumb { width: 56px; height: 56px; }
+.mmp-tile.used { opacity: .25; cursor: default; }
+.mmp-tile.shake { animation: mmpShake .35s ease; border-color: var(--red); }
+@keyframes mmpShake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+.mmp-status { min-height: 20px; font-size: 13px; text-align: center; color: var(--red); }
+
+.mmp-done { padding-top: 10px; }
+.mmp-xp { color: var(--teal); }
+.mmp-note { font-size: 12.5px; text-align: left; }
+
+/* picture flashcards (front = drawing with one part lit) */
+.mmf-piccard .mmf-pic { display: block; width: 100%; }
+.mmf-piccard .mmf-pic .mmp-svg { max-height: 230px; }

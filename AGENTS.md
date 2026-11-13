@@ -24,8 +24,8 @@ https://manafest01.github.io/MadMinute/hub/ (all apps).
 |---|---|
 | `index.html` | **Mad Minute Auto** — the main demo. 6 subjects: Shop Safety, Automotive Technician, Basic Maintenance, 12 V & 48 V Electrical, Vehicle Networks, High Voltage |
 | `sw.js`, `manifest.webmanifest`, `icons/` | Auto's offline cache, install info and icons |
-| `shared/` | Add-ons loaded by every app: `mm-learn` (roadmap/learning layer), `mm-home` (compact home screen), `mm-goals` (Calendar tab, HI SCORE), `mm-settings` (gear/Settings screen), `mm-resume` (Pick up where you left off, Test history), `mm-flash` (flashcards, hub, Circuit Lab), `mm-symbols` (schematic symbol drawings) |
-| `flashcards/*.js` | Vocab decks for Auto (`safe`, `auto`, `maint`, `e12`, `net`, `hv`) and symbol-circuit decks (`sym-*.js`) |
+| `shared/` | Add-ons loaded by every app: `mm-learn` (roadmap/learning layer), `mm-home` (compact home screen), `mm-goals` (Calendar tab, HI SCORE), `mm-settings` (gear/Settings screen), `mm-resume` (Pick up where you left off, Test history), `mm-flash` (flashcards, hub, Circuit Lab), `mm-symbols` (schematic symbol drawings), `mm-parts` (Exploded View: name the part, put it in order) |
+| `flashcards/*.js` | Vocab decks for Auto (`safe`, `auto`, `maint`, `e12`, `net`, `hv`), symbol-circuit decks (`sym-*.js`) and Exploded View assemblies (`parts-*.js`, format in the file's top comment) |
 | `biology/`, `music/`, `dev/`, `neta/` | The other apps, each a full copy with its own `index.html`, `sw.js`, manifest, icons and decks |
 | `hub/` | The launcher page that lists every app |
 | `tools/` | Python scripts that generate or bulk-edit content (see section 6) |

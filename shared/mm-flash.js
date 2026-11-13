@@ -156,8 +156,10 @@
   // close for good: forget the session and redraw the home counts
   function closeOverlay() {
     var backToHub = (S && S.opt && S.opt.fromHub) || (L && labFromHub);
+    var backTo = S && S.opt && S.opt.back;   // a deck opened by another add-on returns there
     removeOverlay();
     S = null; L = null;
+    if (typeof backTo === "function") { backTo(); return; }
     refreshHome();
     if (backToHub) openHub();
   }
@@ -180,6 +182,7 @@
     document.getElementById("mmfCount").textContent = (S.i + 1) + " / " + total;
     S.flipped = false;
     if (c.sym) { renderSymbolCard(stage, c); return; }
+    if (c.pic) { renderPictureCard(stage, c); return; }
     stage.innerHTML =
       (S.caughtUp && S.i === 0 ? '<div class="mmf-note">All caught up — this is extra practice.</div>' : "") +
       '<button class="mmf-card" type="button" id="mmfCard" aria-live="polite">' +
@@ -257,6 +260,30 @@
       '</div>';
     wireCard(stage);
   }
+  /* ---------- picture cards (Exploded View, shared/mm-parts.js): the drawing on the front ---------- */
+  function renderPictureCard(stage, c) {
+    stage.innerHTML =
+      (S.caughtUp && S.i === 0 ? '<div class="mmf-note">All caught up — this is extra practice.</div>' : "") +
+      '<button class="mmf-card mmf-piccard" type="button" id="mmfCard" aria-live="polite">' +
+        '<span class="mmf-inner">' +
+          '<span class="mmf-face mmf-front">' +
+            '<span class="mmf-topic">' + esc(c.topic) + '</span>' +
+            '<span class="mmf-pic">' + c.pic + '</span>' +
+            '<span class="mmf-hint">Name the lit-up part and what it does, then tap to flip</span>' +
+          '</span>' +
+          '<span class="mmf-face mmf-back">' +
+            '<span class="mmf-topic">' + esc(c.term) + '</span>' +
+            '<span class="mmf-meaning">' + esc(c.meaning) + '</span>' +
+            (c.tip ? '<span class="mmf-tip"><b>' + esc(OPT.tipLabel || "In the shop") + ':</b> ' + esc(c.tip) + '</span>' : "") +
+          '</span>' +
+        '</span>' +
+      '</button>' +
+      '<div class="mmf-actions" id="mmfActions">' +
+        '<button class="btn mmf-again" type="button" disabled>Again</button>' +
+        '<button class="btn btn-amber mmf-got" type="button" disabled>Got it</button>' +
+      '</div>';
+    wireCard(stage);
+  }
   function openCircuit(circ, fromHub) {
     var list = circuits(), i = list.indexOf(circ);
     openDeck(circ.name, symbolCards(circ), { ordered: true, p: SYM_PACK, fromHub: fromHub, next: list[i + 1] || null });
@@ -285,6 +312,8 @@
     }
     if (p && (OPT.circuitLab || []).indexOf(p.id) >= 0)
       html += '<button class="mmf-pill mmf-lab-pill mmf-hub-wide" type="button" data-hub="lab"><b>Circuit Lab</b><span>Tap the parts of a 12 V circuit, watch it work</span></button>';
+    if (window.MMParts && MMParts.count())
+      html += '<button class="mmf-pill mmf-lab-pill mmf-hub-wide" type="button" data-hub="parts"><b>Exploded View</b><span>Take a brake apart, name every part, put it back in order</span></button>';
     var circ = circuits();
     if (circ.length) {
       var smem = load(SYM_PACK), sAll = allSymbolCards();
@@ -330,6 +359,8 @@
 
     var labB = o.querySelector('[data-hub="lab"]');
     if (labB) labB.onclick = function () { openLab(); labFromHub = true; };
+    var partsB = o.querySelector('[data-hub="parts"]');
+    if (partsB) partsB.onclick = function () { removeOverlay(); MMParts.open(true); };
     var walk = o.querySelector('[data-hub="walk"]');
     if (walk) walk.onclick = function () { openDeck("Every circuit", allSymbolCards(), { ordered: true, p: SYM_PACK, fromHub: true }); };
     var sm = o.querySelector('[data-hub="symmiss"]');
@@ -401,7 +432,9 @@
     stage.innerHTML =
       '<div class="mmf-done">' +
         '<div class="mmf-big">' + (missedHere ? missedHere + " to keep working on" : "Clean deck") + '</div>' +
-        '<p>' + (missedHere
+        '<p>' + (missedHere && S.opt.back
+          ? "Missed cards come first next time, until you get them right first try. Every card comes back on a growing schedule: 1 day, then 3, 7, 21 and 60."
+          : missedHere
           ? "Those are in Drill my misses until you get them right first try. Every card comes back on a growing schedule: 1 day, then 3, 7, 21 and 60."
           : "Every card stuck. Each one comes back on a growing schedule (1 day, then 3, 7, 21 and 60) so it stays stuck.") + '</p>' +
         '<div class="mmf-done-btns">' +

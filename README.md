@@ -25,6 +25,8 @@ A **Shop Path** card on the home screen walks a new tech through all six subject
 
 **Vocab flashcards** for every topic (term, plain meaning, shop tip; 40 per topic in Shop Safety and Maintenance), plus **symbol flashcards** that show schematic symbols in circuit order, with **Drill my misses** and a hands-on **Circuit Lab** where you tap parts of a 12 V lamp circuit and watch the meter readings change.
 
+**Exploded View**: take a disc brake corner apart (and follow the brake hydraulic path from pedal to rotor), tap any part to learn it, then **Name the part** against the clock and **Put it in order**. Every part is also a picture flashcard.
+
 Placement test, ranks (Trainee → Master Tech), progress timeline, and a sample manager crew view. Progress is saved only on your device. No account, no Claude, no internet needed after the first open.
 
 Training content only. Always follow the manufacturer's service procedure and your employer's safety program.

@@ -296,6 +296,18 @@ The quiz became a reusable engine that any subject can plug into.
 - Self-review changes before shipping: 48 V cable color and cell count reworded to avoid an unsupported claim; an HV "annual retraining" card corrected to NFPA 70E's three-year maximum; a brake-dust card changed to OSHA Appendix F's "equivalent method".
 - Auto `mm-auto-v44`: `flashcards/hv.js?v=3`, `e12.js?v=3`, `net.js?v=3`, `auto.js?v=4`, `maint.js?v=3`, `safe.js?v=3`.
 
+## Stage 28 — Exploded View: take a brake apart · 2026-11-13
+
+- **Exploded View** (`shared/mm-parts.js`, `shared/mm-parts.css`, data in `flashcards/parts-brakes.js`): a new section in Auto, opened from an **Exploded View** button beside Flashcards on Home, or from the Flashcards hub.
+  - **Disc Brake Corner** (11 parts: knuckle, dust shield, hub and bearing, rotor, caliper bracket, abutment clips, inner and outer pads, piston and seal, caliper housing, slide pins and boots). Numbered exploded drawing; tap a part or its name for what it does and a shop tip. **Taken apart / Put together** slides the parts into place and back.
+  - **Brake Hydraulic Path** (9 parts: pedal, booster, master cylinder and reservoir, ABS unit, steel line, flex hose, caliper, pads, rotor), drawn as a flow with the fluid lines.
+  - **Name the part**: one part lights up, pick its name from 4. 10 XP each, +5 under 5 seconds, +20 for a clean sweep. Misses go to the front of that assembly's flashcards.
+  - **Put it in order**: tap the parts in the order they go on (corner) or the order the push travels (path). Ties are allowed (inner/outer pad). 5 XP per clean step, +20 with no slips. Ends with the order and a note on how designs vary.
+  - **Flashcards**: picture on the front (whole drawing, that part lit up), name, meaning and shop tip on the back, on the usual spaced schedule.
+- `shared/mm-flash.js`: picture cards (`c.pic`), a `back` option so another add-on's deck closes back to it, and the Exploded View button in the hub (only when `MMParts` is loaded, so NETA shows nothing new).
+- New keys (nothing old renamed): `mmparts_disc-corner`, `mmparts_brake-path` (best scores), `mmflash_parts` (card progress).
+- Auto `mm-auto-v45`: `shared/mm-flash.js?v=8`, `shared/mm-parts.css?v=1`, `shared/mm-parts.js?v=1`, `flashcards/parts-brakes.js?v=1`. NETA `mm-neta-v17` (shared flash file).
+
 ---
 
 ## Which app has what
@@ -313,6 +325,7 @@ The quiz became a reusable engine that any subject can plug into.
 | Flashcards button + hub (shared file) | ✓ | — | — | — | ✓ |
 | Symbol cards in series | ✓ | — | — | — | — |
 | Circuit Lab | ✓ | — | — | — | — |
+| Exploded View (shared file) | ✓ | — | — | — | — |
 | Pick up where you left off, Test history (shared file) | ✓ | — | — | — | — |
 
 ## Ideas parked for later
