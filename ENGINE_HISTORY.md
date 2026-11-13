@@ -326,6 +326,13 @@ The quiz became a reusable engine that any subject can plug into.
 - `shared/mm-parts.js`: a part can have `dTop`, drawn in front of every other part (for studs through the rotor hat, the axle nut and bolt heads).
 - Auto `mm-auto-v48`, `shared/mm-parts.js?v=4`, `shared/mm-parts.css?v=3`, `flashcards/parts-brakes.js?v=4`.
 
+
+## Stage 31 — Exploded View pulled back for testing · 2026-11-13
+
+- At Thomas's request, Exploded View is hidden from the live app while he tests it more: no Home button, no Flashcards hub button. Nothing was deleted.
+- Test switch: open https://manafest01.github.io/MadMinute/?lab=1 once on a device and Exploded View stays on there (saved as `mmparts_lab`); `?lab=0` turns it off again. To ship it for everyone, delete the switch block at the top of `shared/mm-parts.js`.
+- Auto `mm-auto-v49`, `shared/mm-parts.js?v=5`.
+
 ---
 
 ## Which app has what
@@ -343,7 +350,7 @@ The quiz became a reusable engine that any subject can plug into.
 | Flashcards button + hub (shared file) | ✓ | — | — | — | ✓ |
 | Symbol cards in series | ✓ | — | — | — | — |
 | Circuit Lab | ✓ | — | — | — | — |
-| Exploded View (shared file) | ✓ | — | — | — | — |
+| Exploded View (shared file; testing, `?lab=1`) | ✓ | — | — | — | — |
 | Pick up where you left off, Test history (shared file) | ✓ | — | — | — | — |
 
 ## Ideas parked for later

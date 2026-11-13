@@ -12,11 +12,19 @@
    Needs shared/mm-flash.js (for the cards and the overlay styles). Load it after mm-flash.js.
    Progress: best scores in "mmparts_<assembly key>", card progress in "mmflash_parts".
    Like the other add-ons it hooks renderTopicsGrid from outside and changes no core code.
+   Testing switch: hidden until a device opens the app with ?lab=1 (saved as mmparts_lab); ?lab=0 hides it again.
    To remove it: delete its <script> and <link> tags and its data file's <script> tag. */
 (function () {
   "use strict";
   var ASM = window.MM_PARTS || [];
   if (!ASM.length) return;
+  // Still being tested: hidden unless this device has opened the app once with ?lab=1 (?lab=0 turns it back off).
+  try {
+    var flag = new URLSearchParams(location.search).get("lab");
+    if (flag === "1") localStorage.setItem("mmparts_lab", "1");
+    if (flag === "0") localStorage.removeItem("mmparts_lab");
+    if (localStorage.getItem("mmparts_lab") !== "1") return;
+  } catch (e) { return; }
   var CARD_PACK = { id: "parts" };      // card progress lives in mmflash_parts
   var FAST_MS = 5000;                   // answer inside this for the speed bonus
   var DAY = 86400000;
