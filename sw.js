@@ -2,10 +2,10 @@
 // Bump VERSION whenever index.html changes so phones pick up the new copy.
 // The shared learning layer (shared/mm-learn.*), flashcards (shared/mm-flash.*, flashcards/*.js) are precached too;
 // bump their ?v= in index.html and here when they change.
-const VERSION = "mm-auto-v42";
+const VERSION = "mm-auto-v43";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "shared/mm-learn.css?v=1", "shared/mm-learn.js?v=1", "shared/mm-home.css?v=3", "shared/mm-home.js?v=6", "shared/mm-goals.css?v=3", "shared/mm-goals.js?v=4", "shared/mm-settings.css?v=3", "shared/mm-settings.js?v=2", "shared/mm-resume.css?v=1", "shared/mm-resume.js?v=2",
   "shared/mm-flash.css?v=5", "shared/mm-flash.js?v=7", "shared/mm-symbols.js?v=2", "flashcards/sym-e12.js?v=2", "flashcards/sym-hv.js?v=1", "flashcards/sym-net.js?v=1",
-  "flashcards/safe.js?v=2", "flashcards/auto.js?v=4", "flashcards/maint.js?v=2", "flashcards/e12.js?v=3", "flashcards/net.js?v=3", "flashcards/hv.js?v=3"];
+  "flashcards/safe.js?v=2", "flashcards/auto.js?v=4", "flashcards/maint.js?v=3", "flashcards/e12.js?v=3", "flashcards/net.js?v=3", "flashcards/hv.js?v=3"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
