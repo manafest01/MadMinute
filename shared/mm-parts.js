@@ -164,7 +164,7 @@
   function openExplorer(a, fromHub) {
     var keepHub = V ? V.fromHub : !!fromHub;
     if (fromHub != null) keepHub = !!fromHub;
-    V = { mode: "explore", a: a, sel: null, together: false, fromHub: keepHub };
+    V = { mode: "explore", a: a, sel: null, together: !!a.startTogether, fromHub: keepHub };
     layer(a.name, a.sub);
     renderExplorer();
   }

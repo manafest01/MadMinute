@@ -309,6 +309,14 @@ The quiz became a reusable engine that any subject can plug into.
 - Auto `mm-auto-v45`: `shared/mm-flash.js?v=8`, `shared/mm-parts.css?v=1`, `shared/mm-parts.js?v=1`, `flashcards/parts-brakes.js?v=1`. NETA `mm-neta-v17` (shared flash file).
 - Fix (same day, from Thomas's review on his phone): the rotor was drawn backwards. Now the friction disc sits inboard by the dust shield and the hat faces out toward the wheel, over the hub flange. The knuckle, dust shield and hub stay on the car during a brake job, so they no longer move in the exploded view, have gray numbers, and are left out of Put it in order. The order is now rotor → caliper bracket → abutment clips → pads → caliper. Auto `mm-auto-v46`, `shared/mm-parts.css?v=2`, `shared/mm-parts.js?v=2`, `flashcards/parts-brakes.js?v=2`.
 
+
+## Stage 29 — Exploded View: MacPherson strut corner · 2026-11-13
+
+- New assembly **MacPherson Strut Corner** (front view, 13 parts): strut mount, coil spring, strut, strut-to-knuckle bolts (shown end-on, since they run front to back), steering knuckle, dust shield, hub and bearing, rotor (hat facing the wheel), caliper and pads, outer tie rod end, lower ball joint, lower control arm, CV axle. Opens **put together**, with the strut tilted in at the top; **Taken apart** spreads the strut stack up its own axis.
+- **Put it in order: Follow the weight down to the wheel**: strut mount → spring → strut → bolts → knuckle → hub. The note explains the lower arm and ball joint locate the knuckle but don't carry the spring's load, and that the caliper is drawn on top for clarity.
+- `shared/mm-parts.js`: an assembly can set `startTogether: true` to open put together.
+- Auto `mm-auto-v47`, `shared/mm-parts.js?v=3`, `flashcards/parts-brakes.js?v=3`.
+
 ---
 
 ## Which app has what
