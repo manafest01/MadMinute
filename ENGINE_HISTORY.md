@@ -317,6 +317,15 @@ The quiz became a reusable engine that any subject can plug into.
 - `shared/mm-parts.js`: an assembly can set `startTogether: true` to open put together.
 - Auto `mm-auto-v47`, `shared/mm-parts.js?v=3`, `flashcards/parts-brakes.js?v=3`.
 
+
+## Stage 30 — MacPherson strut corner in 3D (isometric) · 2026-11-13
+
+- Thomas's review: wanted an isometric view, and the caliper belongs behind the rotor, not on top. The strut corner is now modeled in 3D and drawn as a 3/4 isometric view from the front, outside and above the car, by `tools/parts-build/strut_iso.py` (X outboard, Y up, Z forward; every part is built from cylinders, boxes and plates, then projected). Rerun it to change the drawing.
+- The caliper sits at the back of the rotor, so put together you only see its edge. The rotor hat faces the wheel, the studs and axle nut show through it, the strut leans 8° inboard at the top, the strut-to-knuckle bolts run front to back with their heads facing you, and the spring's back coils are dimmed.
+- Taken apart: the strut stack lifts up its own axis, the bolts pull out toward you, the shield, hub and rotor slide outboard, the caliper lifts up and back, and the axle, tie rod, ball joint and control arm drop away.
+- `shared/mm-parts.js`: a part can have `dTop`, drawn in front of every other part (for studs through the rotor hat, the axle nut and bolt heads).
+- Auto `mm-auto-v48`, `shared/mm-parts.js?v=4`, `shared/mm-parts.css?v=3`, `flashcards/parts-brakes.js?v=4`.
+
 ---
 
 ## Which app has what

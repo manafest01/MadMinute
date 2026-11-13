@@ -69,6 +69,13 @@
         (opt.tap ? ' tabindex="0" role="button" aria-label="' + (i + 1) + ', ' + esc(p.name) + '"' : "") +
         ' style="transform:translate(' + at[0] + 'px,' + at[1] + 'px)">' + p.d + '</g>';
     });
+    // dTop: the bits of a part that sit in front of everything else (studs through the rotor hat, the axle nut)
+    a.parts.forEach(function (p) {
+      if (!p.dTop) return;
+      var at = (opt.together && p.a) ? p.a : p.e;
+      out += '<g class="mmp-part mmp-top' + (opt.hi === p.id ? " hi" : "") + (opt.sel === p.id ? " sel" : "") + '" data-part="' + esc(p.id) + '"' +
+        ' style="transform:translate(' + at[0] + 'px,' + at[1] + 'px)">' + p.dTop + '</g>';
+    });
     if (opt.badges && !opt.together) a.parts.forEach(function (p, i) {
       out += '<g class="mmp-badge' + (p.fixed ? " fixed" : "") + (opt.sel === p.id ? " sel" : "") + '" data-part="' + esc(p.id) + '" transform="translate(' + p.n[0] + ' ' + p.n[1] + ')"><circle r="9"/><text y="3.5">' + (i + 1) + '</text></g>';
     });
@@ -76,7 +83,7 @@
   }
   // one part on its own, for tiles; the viewBox is fitted after it is on screen (fitThumbs)
   function thumb(p) {
-    return '<svg class="mmp-svg mmp-thumb" viewBox="-50 -50 100 100" aria-hidden="true"><g class="mmp-part">' + p.d + '</g></svg>';
+    return '<svg class="mmp-svg mmp-thumb" viewBox="-50 -50 100 100" aria-hidden="true"><g class="mmp-part">' + p.d + (p.dTop || "") + '</g></svg>';
   }
   function fitThumbs(root) {
     Array.prototype.forEach.call(root.querySelectorAll(".mmp-thumb"), function (svg) {
