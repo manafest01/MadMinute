@@ -266,6 +266,14 @@ The quiz became a reusable engine that any subject can plug into.
 - **GROK_STARTER_PROMPT.md**: a ready-to-paste first message for Grok (or any AI) to pick up the project, with notes on where to run it and checking the service's terms before uploading.
 - README updated for the Shop Safety subject and links to both files. No app files changed, so no cache bump.
 
+## Stage 25 — Pick up where you left off + test history · 2026-11-12
+
+- **Pick up where you left off** (`shared/mm-resume.js`): the app saves your last practice round (subject, topic, when, score, misses). Come back an hour or more later and Home shows a card for it. Tap it for a "Welcome back" summary (your level, last round, what's left to fix, where you are on the shop path), then 3 untimed refresh questions (last round's misses first, then due reviews, then recent ones), then a normal practice round in that topic. "Skip to practice" goes straight in.
+- **Test history**: every Placement test and every Skills checkup is saved as its own snapshot (date, score, level per topic) instead of being overwritten. The Progress tab has a Test history card: a bar per attempt (skill score = average level, level 4 everywhere = 100) and, per attempt, each topic's level compared with the attempt before. A checkup you continue later stays one attempt; a retake starts a new one. A checkup taken before this stage is saved as attempt 1.
+- **Retaking Placement never lowers a level you earned in practice.** The snapshot still keeps that day's honest result.
+- New keys (nothing old renamed): `mmauto_resume`, `mmauto_tests`. Auto only for now; other apps can load the same two files.
+- Auto `mm-auto-v36`, `shared/mm-resume.css?v=1`, `shared/mm-resume.js?v=1`.
+
 ---
 
 ## Which app has what
@@ -283,6 +291,7 @@ The quiz became a reusable engine that any subject can plug into.
 | Flashcards button + hub (shared file) | ✓ | — | — | — | ✓ |
 | Symbol cards in series | ✓ | — | — | — | — |
 | Circuit Lab | ✓ | — | — | — | — |
+| Pick up where you left off, Test history (shared file) | ✓ | — | — | — | — |
 
 ## Ideas parked for later
 
