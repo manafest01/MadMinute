@@ -275,6 +275,17 @@ The quiz became a reusable engine that any subject can plug into.
 - Auto `mm-auto-v36`, `shared/mm-resume.css?v=1`, `shared/mm-resume.js?v=1`.
 - Fix (same day): with no saved round yet (practiced before this update), the card falls back to the last question answered in any subject, so it shows right away. Auto `mm-auto-v37`, `shared/mm-resume.js?v=2`.
 
+## Stage 26 — Every Auto subject's flashcards to 40 per topic + subject picker · 2026-11-13
+
+- **Subject picker in the Flashcards hub** (`shared/mm-flash.js`): chips across the top switch between every subject that has a vocab deck (Safety, Automotive, Maintenance, 12 V & 48 V, Networks, High Voltage) without changing the app's subject. Tapping one jumps to its words. Closing a deck returns to the same subject.
+- **"New" vs "to review"**: cards you've never studied are no longer counted as "due". Each deck shows "New deck", "12 new · 2 to review" or "All caught up"; the Home Flashcards button counts only real reviews.
+- **700 new cards** with `tools/flash-build/append_flash.py` (reusable: skips terms already in the pack, caps each topic at 40, rewrites the deck), every topic now at 40:
+  - 12 V & 48 V (+154, `content_e12.py`): 48 V mid-voltage first (P0–P2 layouts, ISG, DC-DC, 60 V DC line, ISO 21780), batteries, starting/charging, wiring, sensors/actuators, test tools.
+  - High Voltage (+161, `content_hv.py`): HVIL and isolation first (100 Ω/V DC and 500 Ω/V AC per SAE J1766 / FMVSS 305, bonding, megohmmeter use), contactors and pre-charge, battery and BMS, inverter/motor/charging (J1772, CCS, NACS/SAE J3400), NFPA 70E boundaries and PPE (Class 0 = 1,000 V AC / 1,500 V DC; OSHA 1910.137 daily inspection).
+  - Vehicle Networks (+216, `content_net.py`): CAN voltages and termination, frames and errors, diagnosis, LIN/FlexRay/MOST, OBD-II modes and UDS services (ISO 14229), automotive Ethernet (802.3bw/bp/cg), DoIP (ISO 13400).
+  - Automotive Technician (+169, `content_auto.py`): tires, brakes, steering/suspension, engine, fuel/ignition/emissions, cooling/lube, drivetrain, heating & A/C.
+- Auto `mm-auto-v38`: `shared/mm-flash.js?v=7`, `shared/mm-flash.css?v=5`, `flashcards/e12.js?v=2`, `hv.js?v=2`, `net.js?v=2`, `auto.js?v=3`. NETA `mm-neta-v16` (shared flash file).
+
 ---
 
 ## Which app has what

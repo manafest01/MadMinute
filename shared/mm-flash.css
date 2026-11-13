@@ -173,3 +173,10 @@ body.mmf-lock { overflow: hidden; }
 .mmf-actions .mmf-again { background: transparent; border: 1.5px solid var(--red); color: var(--red); }
 .mmf-actions .mmf-again:disabled, .mmf-actions .mmf-got:disabled { opacity: .35; }
 .mmf-hub-wide.mmf-lab-pill { width: 100%; }
+
+/* subject picker in the hub */
+.mmf-subjects { display: flex; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 2px 2px 6px; scrollbar-width: none; }
+.mmf-subjects::-webkit-scrollbar { display: none; }
+.mmf-subj { flex-shrink: 0; padding: 8px 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--panel); color: var(--text); font: 600 14px/1.2 inherit; font-family: inherit; cursor: pointer; }
+.mmf-subj.on { background: var(--amber); color: var(--amber-ink); border-color: var(--amber); }
+.mmf-due.fresh { color: var(--teal); }

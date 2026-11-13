@@ -53,6 +53,32 @@
     var now = Date.now();
     return cards.filter(function (c) { return isDue(mem[c.id], now); }).length;
   }
+  // "new" = never studied; "to review" = studied before and due again (unseen cards are not "due")
+  function newCount(cards, mem) { return cards.filter(function (c) { return !mem[c.id]; }).length; }
+  function reviewCount(cards, mem) {
+    var now = Date.now();
+    return cards.filter(function (c) { var r = mem[c.id]; return r && (isMiss(r) || r.due <= now); }).length;
+  }
+  function deckStatus(cards, mem) {
+    var n = newCount(cards, mem), r = reviewCount(cards, mem);
+    if (n === cards.length) return { text: "New deck", cls: "fresh" };
+    if (!n && !r) return { text: "All caught up", cls: "none" };
+    return { text: [n ? n + " new" : "", r ? r + " to review" : ""].filter(Boolean).join(" · "), cls: r ? "" : "fresh" };
+  }
+  // the hub can show any subject's words without switching the app's subject
+  var hubPick = null;
+  function packsWithDecks() {
+    return (typeof BUILTIN_PACKS !== "undefined" ? BUILTIN_PACKS : []).filter(function (x) { return Object.keys(decksOf(x)).length; });
+  }
+  function hubPack() {
+    var list = packsWithDecks();
+    return list.find(function (x) { return x.id === hubPick; }) || pack();
+  }
+  function topicNames(p) {
+    var out = (p.order || Object.keys(p.topics)).map(function (k) { return p.topics[k]; });
+    Object.keys(p.topics).forEach(function (k) { if (out.indexOf(p.topics[k]) < 0) out.push(p.topics[k]); });
+    return out;
+  }
   function shuffled(a) {
     a = a.slice();
     for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
@@ -238,7 +264,7 @@
 
   /* ---------- the Flashcards hub: everything in one place ---------- */
   function openHub() {
-    var p = pack();
+    var p = hubPack();
     removeOverlay();
     S = null;
     var o = el("div", "mmf-overlay");
@@ -250,6 +276,13 @@
       '<div class="mmf-title"><b>Flashcards</b><span>Symbols and words, on a spaced schedule</span></div></div>' +
       '<div class="mmf-hub">';
 
+    var subj = packsWithDecks();
+    if (subj.length > 1) {
+      html += '<div class="mmf-subjects" role="group" aria-label="Pick a subject">' + subj.map(function (x) {
+        return '<button type="button" class="mmf-subj' + (p && x.id === p.id ? " on" : "") + '" data-subj="' + esc(x.id) + '" aria-pressed="' + (p && x.id === p.id) + '">' +
+          esc(x.short || x.name) + '</button>';
+      }).join("") + '</div>';
+    }
     if (p && (OPT.circuitLab || []).indexOf(p.id) >= 0)
       html += '<button class="mmf-pill mmf-lab-pill mmf-hub-wide" type="button" data-hub="lab"><b>Circuit Lab</b><span>Tap the parts of a 12 V circuit, watch it work</span></button>';
     var circ = circuits();
@@ -273,19 +306,19 @@
     }
 
     var decks = p ? decksOf(p) : {};
-    var names = Object.keys(decks).length && typeof allTopics === "function" ? allTopics() : [];
+    var names = Object.keys(decks).length ? topicNames(p) : [];
     var topics = names.filter(function (t) { return cardsFor(p, t).length; });
     if (topics.length) {
       var mem = load(p);
       var misses = allCards(p).filter(function (c) { return isMiss(mem[c.id]); });
-      html += '<div class="mmf-hub-h"><b>Words: ' + esc(p.name || "this subject") + '</b><span>Vocab for every topic. Switch subjects on the home screen for other decks.</span></div>' +
+      html += '<div class="mmf-hub-h" id="mmfWords"><b>Words: ' + esc(p.name || "this subject") + '</b><span>Vocab for every topic. Pick a subject at the top for other decks.</span></div>' +
         '<button class="mmf-pill mmf-hub-wide" type="button" data-hub="miss"' + (misses.length ? "" : " disabled") + '><b>Drill my misses</b><span>' +
           (misses.length ? misses.length + (misses.length === 1 ? " vocab card" : " vocab cards") : "No missed cards yet") + '</span></button>';
       topics.forEach(function (t) {
-        var deck = cardsFor(p, t), due = dueCount(p, deck, mem);
+        var deck = cardsFor(p, t), st = deckStatus(deck, mem);
         html += '<button class="mmf-circ mmf-topicrow" type="button" data-topic="' + esc(t) + '">' +
           '<span class="mmf-circ-t"><b>' + esc(t) + '</b><span>' + deck.length + (deck.length === 1 ? ' card' : ' cards') + '</span></span>' +
-          '<span class="mmf-due' + (due ? "" : " none") + '">' + (due ? due + " due" : "All caught up") + '</span></button>';
+          '<span class="mmf-due' + (st.cls ? " " + st.cls : "") + '">' + esc(st.text) + '</span></button>';
       });
     }
     html += '</div>';
@@ -307,14 +340,23 @@
     var vm = o.querySelector('[data-hub="miss"]');
     if (vm) vm.onclick = function () {
       var m = load(p);
-      openDeck("My misses", allCards(p).filter(function (c) { return isMiss(m[c.id]); }), { fromHub: true });
+      openDeck("My misses", allCards(p).filter(function (c) { return isMiss(m[c.id]); }), { fromHub: true, p: p });
     };
     Array.prototype.forEach.call(o.querySelectorAll("[data-circ]"), function (b) {
       b.onclick = function () { openCircuit(circuits()[+b.getAttribute("data-circ")], true); };
     });
     Array.prototype.forEach.call(o.querySelectorAll("[data-topic]"), function (b) {
-      b.onclick = function () { var t = b.getAttribute("data-topic"); openDeck(t, cardsFor(p, t), { fromHub: true }); };
+      b.onclick = function () { var t = b.getAttribute("data-topic"); openDeck(t, cardsFor(p, t), { fromHub: true, p: p }); };
     });
+    Array.prototype.forEach.call(o.querySelectorAll("[data-subj]"), function (b) {
+      b.onclick = function () {
+        hubPick = b.getAttribute("data-subj"); openHub();
+        var w = document.getElementById("mmfWords");     // jump to that subject's words
+        if (w) w.scrollIntoView({ block: "start" });
+      };
+    });
+    var on = o.querySelector(".mmf-subj.on");
+    if (on) on.scrollIntoView({ block: "nearest", inline: "center" });
   }
 
   function flip() {
@@ -411,12 +453,12 @@
     }
     var everything = hasDecks ? allCards(p) : [];
     var misses = everything.filter(function (c) { return isMiss(mem[c.id]); });
-    var dueAll = hasDecks ? dueCount(p, everything, mem) : 0;
+    var dueAll = hasDecks ? reviewCount(everything, mem) : 0;
     // home keeps one Flashcards button; topic decks, Drill my misses and Circuit Lab live in the hub
     bar.innerHTML =
       '<button class="mmf-pill mmf-flash-pill" type="button" id="mmfHubBtn"><b>Flashcards</b><span>' +
-        (hasSyms ? "Symbols in series, words" : "Words for every topic") + (lab ? ", Circuit Lab" : "") + (dueAll ? " \u00b7 " + dueAll + " due" : "") + '</span></button>';
-    document.getElementById("mmfHubBtn").onclick = openHub;
+        (hasSyms ? "Symbols in series, words" : "Words for every topic") + (lab ? ", Circuit Lab" : "") + (dueAll ? " \u00b7 " + dueAll + " to review" : "") + '</span></button>';
+    document.getElementById("mmfHubBtn").onclick = function () { hubPick = null; openHub(); };
   }
   function refreshHome() {
     var home = document.getElementById("homeScreen");
