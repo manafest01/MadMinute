@@ -66,7 +66,7 @@ P: [
 };
 ```
 
-Aim for 40 cards per topic. Easy words first.
+Auto decks are at 80 cards per topic (Stage 27). Easy words first; new cards go at the end of each topic.
 
 **Symbol circuits** — `flashcards/sym-*.js` add to `window.MM_SYMBOLS`; each circuit lists parts in the
 order current meets them: `[symbolName, term, meaning, tip]`, or `[symbolName]` for a part already
@@ -126,7 +126,7 @@ All tools are plain Python 3 with no extra packages (icon makers need Pillow).
 | `tools/safety-build/append_safety.py <repo> content_p2` | Adds questions and flashcards from a content module to the Shop Safety subject |
 | `tools/safety-build/content_p1..p3.py` | The Shop Safety content and its sources |
 | `tools/flash-build/maint_add.py` | Added the Basic Maintenance flashcards |
-| `tools/flash-build/append_flash.py <repo> <pack> content_<pack>` | Adds vocab cards from a content module to any deck (skips duplicates, caps at 40 per topic) |
+| `tools/flash-build/append_flash.py <repo> <pack> content_<pack>` | Adds vocab cards from a content module to any deck (skips duplicates; caps each topic at 40, or `--max N`) |
 | `tools/dev-build/build_dev.py`, `tools/neta-build/build_neta.py` | Generate the Dev and NETA apps from the root app |
 | `tools/hub-build/make_icons.py`, `tools/neta-build/make_icons.py` | Make app icons |
 

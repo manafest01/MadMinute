@@ -286,6 +286,16 @@ The quiz became a reusable engine that any subject can plug into.
   - Automotive Technician (+169, `content_auto.py`): tires, brakes, steering/suspension, engine, fuel/ignition/emissions, cooling/lube, drivetrain, heating & A/C.
 - Auto `mm-auto-v38`: `shared/mm-flash.js?v=7`, `shared/mm-flash.css?v=5`, `flashcards/e12.js?v=2`, `hv.js?v=2`, `net.js?v=2`, `auto.js?v=3`. NETA `mm-neta-v16` (shared flash file).
 
+## Stage 27 — Every Auto deck to 80 cards per topic · 2026-11-13
+
+- **About 1,760 more vocab cards**: all 44 topics across the 6 Auto subjects now have 80 cards each (3,520 in all), built with `tools/flash-build/append_flash.py --max 80`. Shipped a subject at a time, in this order:
+  - High Voltage +240 (`content_hv2.py`): NFPA 70E boundaries, incident energy, glove class labels, 1,000 V tools, isolation math for 800 V, HVIL pins and latches, contactor and pre-charge faults, cell chemistry and aging, charging (J1772 pilot, ISO 15118, NEC 80% rule).
+  - 12 V & 48 V +240 (`content_e12b.py`): battery ratings (CCA vs CA vs MCA), charging stages, draw testing, starter and alternator diagnosis, series/parallel math, diagram reading, sensors, scopes and meters, the 48 V operating range (ISO 21780).
+  - Vehicle Networks +320 (`content_net2.py`, `content_net3.py`): CAN IDs and diagnostic addressing (0x7DF, +8 responses), physical-layer readings (60/120/40 Ω), error confinement (127/255), ISO-TP, J1939 (PGN/SPN/FMI), LIN frames, SENT/PSI5, FlexRay, OBD services and UDS NRCs, multi-gig and 10BASE-T1S Ethernet, DoIP and cybersecurity rules (UN R155/R156).
+  - Automotive Technician +320 (`content_auto2.py`), Basic Maintenance +241 (`content_maint2.py`, `content_maint3.py`), Shop Safety +320 (`content_safe2.py`, `content_safe3.py`; OSHA 1910.95/.132–.138/.147/.157/.177/.242/.1001/.1200, 1904.33/.39, NFPA 10, ANSI Z87.1/Z89.1, ASTM F2413).
+- Self-review changes before shipping: 48 V cable color and cell count reworded to avoid an unsupported claim; an HV "annual retraining" card corrected to NFPA 70E's three-year maximum; a brake-dust card changed to OSHA Appendix F's "equivalent method".
+- Auto `mm-auto-v44`: `flashcards/hv.js?v=3`, `e12.js?v=3`, `net.js?v=3`, `auto.js?v=4`, `maint.js?v=3`, `safe.js?v=3`.
+
 ---
 
 ## Which app has what
