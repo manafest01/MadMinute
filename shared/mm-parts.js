@@ -70,7 +70,7 @@
         ' style="transform:translate(' + at[0] + 'px,' + at[1] + 'px)">' + p.d + '</g>';
     });
     if (opt.badges && !opt.together) a.parts.forEach(function (p, i) {
-      out += '<g class="mmp-badge' + (opt.sel === p.id ? " sel" : "") + '" data-part="' + esc(p.id) + '" transform="translate(' + p.n[0] + ' ' + p.n[1] + ')"><circle r="9"/><text y="3.5">' + (i + 1) + '</text></g>';
+      out += '<g class="mmp-badge' + (p.fixed ? " fixed" : "") + (opt.sel === p.id ? " sel" : "") + '" data-part="' + esc(p.id) + '" transform="translate(' + p.n[0] + ' ' + p.n[1] + ')"><circle r="9"/><text y="3.5">' + (i + 1) + '</text></g>';
     });
     return out + '</svg>';
   }
@@ -175,6 +175,7 @@
     var misses = a.parts.filter(function (p) { var r = mem[cardId(a, p)]; return r && r.miss; }).length;
     var sel = a.parts.filter(function (p) { return p.id === V.sel; })[0];
     var b = loadBest(a);
+    var stays = a.parts.filter(function (p) { return p.fixed; }).map(function (p) { return p.name; });
     body.innerHTML =
       (a.explode ? '<div class="mmp-toggle" role="group" aria-label="View">' +
         '<button type="button" data-view="apart" aria-pressed="' + !V.together + '"' + (V.together ? "" : ' class="on"') + '>Taken apart</button>' +
@@ -182,14 +183,15 @@
       '<div class="mmf-svg-wrap mmp-wrap" id="mmpPic">' + drawing(a, { badges: true, tap: !V.together, together: V.together, sel: V.sel }) + '</div>' +
       '<div class="mmf-info mmp-info" aria-live="polite">' + (sel
         ? '<b>' + esc(sel.name) + ':</b> ' + esc(sel.meaning) + '<span class="mmp-tip"><b>In the shop:</b> ' + esc(sel.tip) + '</span>'
-        : (V.together ? "This is how it sits on the car. Tap <b>Taken apart</b> to see every piece." : "Tap any part, or its name below, to see what it does.")) + '</div>' +
+        : (V.together ? "This is how it sits on the car. Tap <b>Taken apart</b> to see every piece." : "Tap any part, or its name below, to see what it does." +
+          (stays.length ? " Gray numbers stay on the car during service: " + esc(stays.join(", ").toLowerCase()) + "." : ""))) + '</div>' +
       '<div class="mmp-modes">' +
         '<button class="mmf-pill mmp-mode" type="button" id="mmpName"><b>Name the part</b><span>' + a.parts.length + ' parts, beat the clock' + (b.name != null ? ' · best ' + b.name + '%' : "") + '</span></button>' +
         '<button class="mmf-pill mmp-mode" type="button" id="mmpOrder"><b>Put it in order</b><span>' + esc(a.orderTitle) + (b.order != null ? ' · best ' + b.order + '%' : "") + '</span></button>' +
         '<button class="mmf-pill mmp-mode mmp-wide" type="button" id="mmpCards"><b>Flashcards</b><span>Picture on the front, flip for the name' + (misses ? " · " + misses + " missed" : "") + '</span></button>' +
       '</div>' +
       '<div class="mmp-legend">' + a.parts.map(function (p, i) {
-        return '<button type="button" class="mmp-chip' + (V.sel === p.id ? " on" : "") + '" data-part="' + esc(p.id) + '"><i>' + (i + 1) + '</i>' + esc(p.name) + '</button>';
+        return '<button type="button" class="mmp-chip' + (p.fixed ? " fixed" : "") + (V.sel === p.id ? " on" : "") + '" data-part="' + esc(p.id) + '"><i>' + (i + 1) + '</i>' + esc(p.name) + '</button>';
       }).join("") + '</div>' +
       '<p class="mmf-foot">Training drawing, simplified and not to scale. Always follow the service information.</p>';
 

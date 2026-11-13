@@ -45,6 +45,8 @@
 .mmp-badge { cursor: pointer; }
 .mmp-badge circle { fill: var(--panel); stroke: var(--teal); stroke-width: 1.5; }
 .mmp-badge text { font-size: 10px; font-weight: 700; fill: var(--teal); text-anchor: middle; }
+.mmp-badge.fixed circle { stroke: var(--text-dim); }
+.mmp-badge.fixed text { fill: var(--text-dim); }
 .mmp-badge.sel circle { fill: var(--amber); stroke: var(--amber); }
 .mmp-badge.sel text { fill: var(--bg); }
 @media (prefers-reduced-motion: reduce) { .mmp-part { transition: none; } }
@@ -66,6 +68,7 @@
 .mmp-legend { display: flex; flex-wrap: wrap; gap: 6px; }
 .mmp-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--panel); border: 1px solid var(--line); border-radius: 999px; color: var(--text); font: inherit; font-size: 12px; padding: 5px 10px 5px 5px; cursor: pointer; }
 .mmp-chip i { font-style: normal; font-weight: 700; font-size: 11px; width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; border: 1px solid var(--teal); color: var(--teal); }
+.mmp-chip.fixed i { border-color: var(--text-dim); color: var(--text-dim); }
 .mmp-chip.on { border-color: var(--amber); }
 .mmp-chip.on i { background: var(--amber); border-color: var(--amber); color: var(--bg); }
 

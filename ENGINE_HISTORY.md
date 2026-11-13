@@ -307,6 +307,7 @@ The quiz became a reusable engine that any subject can plug into.
 - `shared/mm-flash.js`: picture cards (`c.pic`), a `back` option so another add-on's deck closes back to it, and the Exploded View button in the hub (only when `MMParts` is loaded, so NETA shows nothing new).
 - New keys (nothing old renamed): `mmparts_disc-corner`, `mmparts_brake-path` (best scores), `mmflash_parts` (card progress).
 - Auto `mm-auto-v45`: `shared/mm-flash.js?v=8`, `shared/mm-parts.css?v=1`, `shared/mm-parts.js?v=1`, `flashcards/parts-brakes.js?v=1`. NETA `mm-neta-v17` (shared flash file).
+- Fix (same day, from Thomas's review on his phone): the rotor was drawn backwards. Now the friction disc sits inboard by the dust shield and the hat faces out toward the wheel, over the hub flange. The knuckle, dust shield and hub stay on the car during a brake job, so they no longer move in the exploded view, have gray numbers, and are left out of Put it in order. The order is now rotor → caliper bracket → abutment clips → pads → caliper. Auto `mm-auto-v46`, `shared/mm-parts.css?v=2`, `shared/mm-parts.js?v=2`, `flashcards/parts-brakes.js?v=2`.
 
 ---
 
