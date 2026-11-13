@@ -273,6 +273,7 @@ The quiz became a reusable engine that any subject can plug into.
 - **Retaking Placement never lowers a level you earned in practice.** The snapshot still keeps that day's honest result.
 - New keys (nothing old renamed): `mmauto_resume`, `mmauto_tests`. Auto only for now; other apps can load the same two files.
 - Auto `mm-auto-v36`, `shared/mm-resume.css?v=1`, `shared/mm-resume.js?v=1`.
+- Fix (same day): with no saved round yet (practiced before this update), the card falls back to the last question answered in any subject, so it shows right away. Auto `mm-auto-v37`, `shared/mm-resume.js?v=2`.
 
 ---
 

@@ -40,14 +40,29 @@
   function shortDate(t) { return new Date(t).toLocaleDateString(undefined, { month: "short", day: "numeric" }); }
 
   /* ================= 1) pick up where you left off ================= */
+  // No saved round yet (practiced before this add-on existed)? Use the last question answered in any subject.
+  function fromHistory() {
+    var best = null;
+    BUILTIN_PACKS.forEach(function (p) {
+      var st = p.id === currentPack.id ? state : load(packStoreKey(p), null);
+      var seen = (st && st.seen) || {};
+      Object.keys(seen).forEach(function (id) {
+        if (seen[id].t && (!best || seen[id].t > best.at)) best = { pack: p, id: id, at: seen[id].t };
+      });
+    });
+    if (!best) return null;
+    var q = buildBank(best.pack).find(function (x) { return x.id === best.id; });
+    return q ? { pack: best.pack.id, topic: q.t, at: best.at, right: 0, total: 0, missed: [], derived: true } : null;
+  }
   function lastSession() {
-    var r = load(RESUME_KEY, null);
+    var r = load(RESUME_KEY, null) || fromHistory();
     if (!r || !r.topic || !packById(r.pack)) return null;
     var p = packById(r.pack);
     var names = (p.order || Object.keys(p.topics)).map(function (k) { return p.topics[k]; });
     return names.indexOf(r.topic) >= 0 ? r : null;
   }
   function stillMissed(r) {
+    if (r.derived) return allQuestions().filter(function (q) { return q.t === r.topic && state.missed[q.id]; }).length;
     return (r.missed || []).filter(function (id) { return state.missed[id] && byId(id); }).length;
   }
   function refreshQuestions(r) {
@@ -102,7 +117,7 @@
     var qs = refreshQuestions(r);
     var lines = [];
     if (r.total) lines.push("Last round: <b>" + r.right + " of " + r.total + " right</b>");
-    else lines.push("Last round wasn't finished");
+    else if (!r.derived) lines.push("Last round wasn't finished");
     if (miss || due) lines.push("To work on: " + [miss ? miss + " missed question" + (miss > 1 ? "s" : "") : "", due ? due + " review" + (due > 1 ? "s" : "") + " due" : ""].filter(Boolean).join(" · "));
     var pathLine = "";
     if (typeof SHOP_PATH !== "undefined" && typeof pathStepInfo === "function") {

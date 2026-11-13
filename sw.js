@@ -2,8 +2,8 @@
 // Bump VERSION whenever index.html changes so phones pick up the new copy.
 // The shared learning layer (shared/mm-learn.*), flashcards (shared/mm-flash.*, flashcards/*.js) are precached too;
 // bump their ?v= in index.html and here when they change.
-const VERSION = "mm-auto-v36";
-const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "shared/mm-learn.css?v=1", "shared/mm-learn.js?v=1", "shared/mm-home.css?v=3", "shared/mm-home.js?v=6", "shared/mm-goals.css?v=3", "shared/mm-goals.js?v=4", "shared/mm-settings.css?v=3", "shared/mm-settings.js?v=2", "shared/mm-resume.css?v=1", "shared/mm-resume.js?v=1",
+const VERSION = "mm-auto-v37";
+const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "shared/mm-learn.css?v=1", "shared/mm-learn.js?v=1", "shared/mm-home.css?v=3", "shared/mm-home.js?v=6", "shared/mm-goals.css?v=3", "shared/mm-goals.js?v=4", "shared/mm-settings.css?v=3", "shared/mm-settings.js?v=2", "shared/mm-resume.css?v=1", "shared/mm-resume.js?v=2",
   "shared/mm-flash.css?v=4", "shared/mm-flash.js?v=6", "shared/mm-symbols.js?v=2", "flashcards/sym-e12.js?v=2", "flashcards/sym-hv.js?v=1", "flashcards/sym-net.js?v=1",
   "flashcards/safe.js?v=2", "flashcards/auto.js?v=2", "flashcards/maint.js?v=2", "flashcards/e12.js?v=1", "flashcards/net.js?v=1", "flashcards/hv.js?v=1"];
 
