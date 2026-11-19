@@ -335,6 +335,13 @@ The quiz became a reusable engine that any subject can plug into.
 
 ---
 
+## Stage 32 — Security cleanup (S0) · 2026-11-19
+
+- Every app page (Auto, Biology, Music, Dev, NETA, Hub) now has a Content Security Policy: a rule in the page that only lets it load its own files plus Google Fonts, and blocks it from sending data anywhere else.
+- A small "© 2026 Mana Industries LLC · not for resale" line now sits at the bottom of every quiz screen, not just the home footer.
+- Dev and NETA were patched by hand this time: their build scripts are out of date with the root page (the NETA build fails, and the Dev build would pull in unrelated changes). Fix the scripts before the next rebuild.
+- Cache versions: mm-auto-v50, mm-bio-v13, mm-mus-v14, mm-dev-v14, mm-neta-v18, mm-hub-v2.
+
 ## Which app has what
 
 | Feature | Auto `/` | Biology | Music | Dev | NETA |
